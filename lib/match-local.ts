@@ -44,7 +44,12 @@ export async function vectorSearch(query: string, topK = config.vectorTopK): Pro
       regulation_content: String(pl.regulation_content ?? ""),
       hybrid_score: score,
       final_score: score,
-      importance: score > 0.55 ? "high" : score > 0.42 ? "medium" : "low",
+      importance:
+        score > config.vectorHighThreshold
+          ? "high"
+          : score > config.vectorMediumThreshold
+            ? "medium"
+            : "low",
       match_source: "vector",
     } as Candidate;
   });

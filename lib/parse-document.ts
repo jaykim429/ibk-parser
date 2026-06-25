@@ -32,9 +32,36 @@ export type ParsedDoc = {
   pageCount?: number;
   isImageBased: boolean;
   usedOcr: boolean;
+  /** 추출 품질 의심(텍스트층은 있으나 비정상적으로 빈약/깨짐) — silent하지 않게 표면화 */
+  lowQuality: boolean;
   title?: string;
   warnings: string[];
 };
+
+/**
+ * 추출 품질 게이트 — 텍스트 PDF인데 결과가 비정상적으로 빈약하거나(페이지당 글자 부족)
+ * 치환문자(�)가 과다하면 '의심'으로 표시한다. (스캔 PDF는 이미 OCR로 라우팅되므로 제외)
+ * 무음으로 깨진 텍스트가 흘러가지 않게 하기 위함. 향후 VLM 재OCR 승격의 트리거로도 사용 가능.
+ */
+function assessQuality(
+  markdown: string,
+  isImageBased: boolean,
+  pageCount?: number
+): { lowQuality: boolean; warning?: string } {
+  if (isImageBased) return { lowQuality: false }; // 스캔본은 이미 OCR 경로
+  const len = markdown.replace(/\s+/g, "").length;
+  const garbled = (markdown.match(/�/g) ?? []).length;
+  if (garbled > 0 && garbled / Math.max(1, markdown.length) > 0.01) {
+    return { lowQuality: true, warning: `깨진 문자(�) 과다 — 추출 품질 의심(${garbled}자)` };
+  }
+  if (pageCount && pageCount > 0 && len / pageCount < config.ocrMinCharsPerPage) {
+    return {
+      lowQuality: true,
+      warning: `페이지당 추출 글자수 부족(${Math.round(len / pageCount)}자/p < ${config.ocrMinCharsPerPage}) — 스캔/이미지 PDF일 수 있음`,
+    };
+  }
+  return { lowQuality: false };
+}
 
 const ERROR_MESSAGES: Record<string, string> = {
   EMPTY_INPUT: "빈 파일입니다.",
@@ -75,14 +102,22 @@ export async function parseDocument(
   const usedOcr = (result.warnings ?? []).some((w) => w.code === "OCR_FALLBACK")
     || (!!result.isImageBased);
 
+  const warnings = (result.warnings ?? []).map((w) => w.message);
+  const q = assessQuality(markdown, !!result.isImageBased, result.pageCount);
+  if (q.lowQuality && q.warning) {
+    warnings.push(q.warning);
+    console.warn(`[PARSE] 품질 의심: ${filename} — ${q.warning}`);
+  }
+
   return {
     markdown,
     fileType: result.fileType,
     pageCount: result.pageCount,
     isImageBased: !!result.isImageBased,
     usedOcr,
+    lowQuality: q.lowQuality,
     title: pickTitle(result.metadata?.title, markdown, filename),
-    warnings: (result.warnings ?? []).map((w) => w.message),
+    warnings,
   };
 }
 

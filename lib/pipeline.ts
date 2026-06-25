@@ -12,6 +12,7 @@ import { parseDocument } from "./parse-document";
 import {
   analyzeDocument,
   parseBill,
+  assessRelevance,
   detectItemType,
   detectDocNature,
   buildCanonicalQuery,
@@ -21,7 +22,7 @@ import {
 import { HybridRetriever } from "./retrieval";
 import { rerankCandidates } from "./rerank";
 import { judgeMatches } from "./judge";
-import { generateReport } from "./report";
+import { generateReport, buildOffDomainReport } from "./report";
 import { formatRegulationItemName } from "./regulation-format";
 import { hashBuffer, getCached, setCached } from "./cache";
 import { config } from "./config";
@@ -44,19 +45,40 @@ export class CompliancePipeline {
     const t0 = Date.now();
 
     // 캐시 (같은 파일 재업로드 시 즉시 반환)
+    // 키에 주요 튜닝값 시그니처를 포함 → config 변경 시 자동 무효화(버전 깜빡 방지).
     const fileHash = hashBuffer(buffer);
-    const key = `report-${config.cacheVersion}:${fileHash}`;
+    const cfgSig = [
+      config.subQueryMax,
+      config.canonicalTermMax,
+      config.matchTopK,
+      config.vectorTopK,
+      config.bm25TopK,
+      config.rrfK,
+      config.maxAnalyzeChars,
+    ].join("-");
+    const key = `report-${config.cacheVersion}-${cfgSig}:${fileHash}`;
     const cached = getCached<PipelineResult>(key);
     if (cached) return { ...cached, meta: { ...(cached.meta ?? {}), cached: true } };
 
+    const warnings: string[] = [];
+
     // 1) 파싱 (kordoc, 로컬)
     const doc = await parseDocument(buffer, fileName);
+    warnings.push(...doc.warnings);
+    if (doc.markdown.length > config.maxAnalyzeChars) {
+      const msg = `본문 ${doc.markdown.length}자 중 ${config.maxAnalyzeChars}자까지만 분석(이후 ${doc.markdown.length - config.maxAnalyzeChars}자 절단)`;
+      warnings.push(msg);
+      console.warn(`[PIPELINE] 절단 경고: ${fileName} — ${msg}`);
+    }
     const initialName = doc.title || fileName.replace(/\.[^.]+$/, "");
     const itemType = detectItemType(fileName, doc.markdown);
     const infoOnly = detectDocNature(fileName, doc.markdown) === "정보성";
 
-    // 2) analyze ∥ parse/bill (서버 읽기 전용, 병렬)
-    const [analyzeRes, parseRes] = await Promise.allSettled([
+    // 2) 관련성 게이트 ∥ analyze ∥ parse/bill (서버 읽기 전용, 병렬 — 게이트가 추가 지연 안 줌)
+    const [relRes, analyzeRes, parseRes] = await Promise.allSettled([
+      config.relevanceGateEnabled
+        ? assessRelevance({ title: initialName, documentText: doc.markdown })
+        : Promise.resolve({ relevant: true, domain: "", reason: "게이트 비활성" }),
       analyzeDocument({ lawName: initialName, documentText: doc.markdown, itemType }),
       parseBill({
         billId: `TEST-${fileHash}`,
@@ -65,6 +87,33 @@ export class CompliancePipeline {
         isPolicy: itemType === "policy",
       }),
     ]);
+
+    // 무관 문서면 매칭을 생략하고 '분석 대상 아님' 보고서로 단락(오탐 방지)
+    const rel = relRes.status === "fulfilled" ? relRes.value : { relevant: true, domain: "", reason: "" };
+    if (config.relevanceGateEnabled && !rel.relevant) {
+      console.log(`[PIPELINE] 도메인 게이트 차단: ${fileName} — ${rel.reason}`);
+      const offReport = buildOffDomainReport(initialName, rel.reason);
+      const seconds = Math.round((Date.now() - t0) / 1000);
+      const offResult: PipelineResult = {
+        success: true,
+        report: { markdown: offReport, title: initialName },
+        stats: [
+          { num: 0, label: "영향 내규" },
+          { num: "대상 아님", label: "판정" },
+          { num: `${seconds}초`, label: "처리 시간" },
+        ],
+        meta: {
+          fileType: doc.fileType,
+          offDomain: true,
+          relevanceReason: rel.reason,
+          relevanceDomain: rel.domain,
+          warnings,
+        },
+      };
+      setCached(key, offResult);
+      return offResult;
+    }
+
     const analysis: Analysis | undefined =
       analyzeRes.status === "fulfilled" ? analyzeRes.value : undefined;
     const provisions = parseRes.status === "fulfilled" ? parseRes.value.provisions ?? [] : [];
@@ -80,7 +129,8 @@ export class CompliancePipeline {
     );
     console.log(`[PIPELINE] canonicalQuery= ${query.slice(0, 300)}`);
 
-    const candidates = await this.retriever.retrieveMany(queries);
+    // 근거법령 앵커(M1): 입력 법령명을 넘겨 '근거법령이 일치하는 내규'를 직접 가점/주입
+    const candidates = await this.retriever.retrieveMany(queries, lawName);
     const srcMix = candidates.reduce(
       (acc, c) => ((acc[String(c.match_source)] = (acc[String(c.match_source)] ?? 0) + 1), acc),
       {} as Record<string, number>
@@ -128,6 +178,8 @@ export class CompliancePipeline {
       meta: {
         fileType: doc.fileType,
         usedOcr: doc.usedOcr,
+        lowQuality: doc.lowQuality,
+        warnings,
         itemType,
         infoOnly,
         lawDomain: analysis?.law_domain ?? null,

@@ -36,6 +36,12 @@ export const config = {
   embeddingTimeoutMs: num(env.EMBEDDING_TIMEOUT_MS, 60000),
   qdrantTimeoutMs: num(env.QDRANT_TIMEOUT_MS, 30000),
 
+  // ── 입력 문서 분석/청킹 ──
+  maxAnalyzeChars: num(env.MAX_ANALYZE_CHARS, 60000), // analyze/parseBill 본문 절단 한계
+  subQueryMax: num(env.SUBQUERY_MAX, 6), // 입력 문서 변경단위 서브쿼리 상한
+  canonicalTermMax: num(env.CANONICAL_TERM_MAX, 30), // 대표 쿼리 키워드+개념 상한
+  subQueryMinLen: num(env.SUBQUERY_MIN_LEN, 4), // 서브쿼리 본문 최소 길이
+
   // ── 검색/리랭크/판정 튜닝 ──
   matchTopK: num(env.MATCH_TOPK, 30), // RRF 융합 후 후보 수
   vectorTopK: num(env.VECTOR_TOPK, 40), // 벡터 1차 후보
@@ -45,9 +51,22 @@ export const config = {
   rrfK: num(env.RRF_K, 60),
   bm25K1: num(env.BM25_K1, 1.5),
   bm25B: num(env.BM25_B, 0.75),
+  vectorHighThreshold: num(env.VECTOR_HIGH_THRESHOLD, 0.55), // 코사인→importance high
+  vectorMediumThreshold: num(env.VECTOR_MEDIUM_THRESHOLD, 0.42), // 코사인→importance medium
+
+  // ── 도메인 관련성 게이트: 은행·금융 규제와 무관한 문서는 매칭 전 차단 ──
+  relevanceGateEnabled: (env.RELEVANCE_GATE_ENABLED ?? "true") !== "false",
+
+  // ── 근거법령 앵커(M1): 입력 법령 ↔ 내규 근거법령 직접 매칭 → 후보 가점/주입 ──
+  anchorEnabled: (env.ANCHOR_ENABLED ?? "true") !== "false", // 근거법령 앵커 사용
+  anchorBonus: num(env.ANCHOR_BONUS, 0.02), // 융합점수 가점(소프트 — 하드필터 아님)
+  anchorMax: num(env.ANCHOR_MAX, 10), // 의미검색이 놓친 앵커 후보 주입 상한
+
+  // ── 파서 품질 게이트 (의심 추출 감지) ──
+  ocrMinCharsPerPage: num(env.OCR_MIN_CHARS_PER_PAGE, 80), // 페이지당 최소 글자수(미만이면 의심)
 
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v14",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v18",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──

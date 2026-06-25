@@ -735,8 +735,17 @@ a {
   color: #334155;
 }
 
+/* 항목은 한국식 마커(가./1)/①)를 텍스트로 부여 → 기본 불릿 숨김, 마커만 노출 */
 .report-body ul {
-  padding-left: 22px;
+  list-style: none;
+  padding-left: 0;
+  margin: 6px 0;
+}
+
+/* 중첩 단계는 들여쓰기로 계층 표현 */
+.report-body ul ul {
+  padding-left: 1.4em;
+  margin: 3px 0;
 }
 
 .report-body li + li {

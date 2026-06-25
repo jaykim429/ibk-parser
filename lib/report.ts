@@ -37,6 +37,32 @@ export type ReportInput = {
   infoOnly?: boolean;
 };
 
+/**
+ * 도메인 무관 문서용 보고서 — 은행·금융 규제와 무관해 내규 매칭을 수행하지 않은 경우.
+ * (검색은 무조건 최근접 후보를 반환하므로, 무관 문서를 억지로 매칭하지 않고 명확히 '대상 아님'으로 보고)
+ */
+export function buildOffDomainReport(title: string, reason: string): string {
+  const date = formatKstDate();
+  return `# 규제변동 영향분석 보고서
+
+**분석 정보**
+
+- **분석 일자**: ${date}
+- **문서명**: ${title}
+- **판정**: 분석 대상 아님
+
+> ⚠️ **본 문서는 은행·금융 규제 또는 IBK 내규와 직접 관련이 없는 것으로 판단되어 내규 매칭을 수행하지 않음.**
+> 사유: ${reason || "금융·컴플라이언스 사안과 무관한 일반 문서로 분류됨."}
+
+## 1. 판정 근거
+- 가. 1차 분류 결과 금융규제·내규와의 직접 관련성 미확인.
+- 나. 무관 문서에 대해 내규를 억지로 매칭하면 오탐(가짜 영향)이 발생하므로 매칭 단계를 생략함.
+
+## 2. 안내
+- 가. 규제변동 문서(법률안·시행령·고시·규정 변경, 금융 보도자료·해석 등)를 업로드하면 정상 분석됨.
+- 나. 금융 관련 문서인데 무관으로 분류된 경우, 담당자가 직접 검토하거나 \`RELEVANCE_GATE_ENABLED=false\`로 게이트를 끌 수 있음.`;
+}
+
 const DOC_TYPE_LABEL: Record<string, string> = {
   bill: "법률안",
   policy: "입법예고/시행령 등",
@@ -47,13 +73,15 @@ type ArticleAnalysis = {
   comparison?: string;
   recommendation?: string;
 };
+/** 개조식 항목 — 문자열(잎) 또는 {text, children}(하위 보유). 깊이는 AI가 내용에 맞게 판단. */
+type OutlineItem = string | { text?: string; children?: OutlineItem[] };
 type LlmReport = {
   doc_stage?: string;
   certainty?: string;
-  overview_changes?: string[];
-  ibk_view?: string[];
+  overview_changes?: OutlineItem[];
+  ibk_view?: OutlineItem[];
   articles?: ArticleAnalysis[];
-  priority_actions?: string[];
+  priority_actions?: OutlineItem[];
 };
 
 export async function generateReport(input: ReportInput): Promise<string> {
@@ -135,15 +163,16 @@ ${articleBlock}
 {
   "doc_stage": "법률안(발의)|입법예고|규정변경예고|보도자료|공포·시행|기타 중 추정",
   "certainty": "확정|미확정",
-  "overview_changes": ["이번 규제변동의 핵심 변경점만 개조식 불릿 3~5개"],
-  "ibk_view": ["IBK 적용 관점(직접/은행/금융회사/공공기관/상장회사 적용 등) 2~3개. 공공기관성+은행성 함께"],
+  "overview_changes": [개조식 항목 3~5개. 각 항목은 문자열, 또는 하위 세부가 있으면 {"text":"상위","children":["하위1","하위2"]}],
+  "ibk_view": [IBK 적용 관점(직접/은행/금융회사/공공기관/상장회사 적용 등) 2~3개. 공공기관성+은행성 함께. 문자열 또는 중첩 객체],
   "articles": [
     { "index": 0, "comparison": "조문 원문과 규제변동의 일치/일부차이/미반영을 사실 기반 1~2문장(개조식)", "recommendation": "유지/보완/개정 중 구체 조치 1~2문장(개조식). 미확정 문서면 조건부 표현" }
   ],
-  "priority_actions": ["영향도 '높음' 항목 중심의 우선 조치 개조식 불릿. 높음 없으면 빈 배열"]
+  "priority_actions": [영향도 '높음' 항목 중심 우선 조치. 문자열 또는 중첩 객체. 높음 없으면 빈 배열]
 }
 
 규칙:
+- **계층 구조**: overview_changes·ibk_view·priority_actions 의 각 항목은 문자열, 또는 내용상 상·하위가 분명할 때만 {"text":..,"children":[..]} 로 중첩(children 도 같은 형식, 최대 3단). 번호/기호(가., 1), ① 등)는 절대 직접 붙이지 말 것 — 시스템이 자동 부여한다. 억지로 중첩하지 말고 단순하면 문자열로.
 - articles 는 위 [index] 전체(0..${relevant.length - 1})를 포함.
 - comparison 은 반드시 주어진 '조문 원문'을 근거로. 원문에 기준(금액·요건)이 이미 있으면 "반영됨"으로 판단.
 - **반영 일관성**: comparison 이 "이미 반영됨"이면 recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지). 반대로 "미반영/차이"면 보완·개정 권고.
@@ -171,9 +200,9 @@ function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmRepor
       : "";
   const sec1 = `## 1. 규제변동 개요
 ### 1.1 주요 변경 사항
-${bullets(changes, "- 변경 사항 식별 정보 부족")}
+${outline(changes, "- 변경 사항 식별 정보 부족")}
 ### 1.2 IBK 적용 관점
-${bullets(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
+${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
 
   // 2.1 영향 요약(결정적: 영향도별 집계)
   const levels: Array<["높음" | "중간" | "낮음", string]> = [
@@ -181,14 +210,14 @@ ${bullets(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
     ["중간", "보완 검토"],
     ["낮음", "현행 유지"],
   ];
-  const summaryLines = levels
+  const summaryItems: string[] = levels
     .map(([lv, note]) => {
       const items = relevant.filter((j) => j.verdict.impact === lv);
       if (!items.length) return "";
       const names = items
         .map((j) => `${shortRegName(j.regulation_name)} ${formatRegulationItemName(j)}`)
         .join(", ");
-      return `- **${lv}** (${note}) ${items.length}건: ${names}`;
+      return `**${lv}** (${note}) ${items.length}건: ${names}`;
     })
     .filter(Boolean);
 
@@ -213,11 +242,11 @@ ${bullets(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
             .map((l) => `  > ${l}`)
             .join("\n");
           return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact}
-- **현재 내규 원문**${isAttachment ? "(요약)" : ""}
+- 가. **현재 내규 원문**${isAttachment ? "(요약)" : ""}
 ${quoted}
-- **변경 비교**: ${a?.comparison || "원문과 직접 비교 정보 부족"}
-- **반영 여부**: ${reflectionOf(j, input.infoOnly)}
-- **권고**: ${a?.recommendation || "담당 부서 추가 검토 필요"}`;
+- 나. **변경 비교**: ${a?.comparison || "원문과 직접 비교 정보 부족"}
+- 다. **반영 여부**: ${reflectionOf(j, input.infoOnly)}
+- 라. **권고**: ${a?.recommendation || "담당 부서 추가 검토 필요"}`;
         })
         .join("\n\n")
     : input.infoOnly
@@ -226,7 +255,7 @@ ${quoted}
 
   const sec2 = `## 2. 내규 정합성 분석
 ### 2.1 영향 요약
-${summaryLines.length ? summaryLines.join("\n") : "- 영향 내규 없음"}
+${outline(summaryItems, "- 영향 내규 없음")}
 ### 2.2 조치 필요 조문 (높음·중간)
 ${details}`;
 
@@ -243,7 +272,7 @@ ${details}`;
     ? "- 해당 없음 (정보성 자료 — 동향 모니터링 대상)"
     : highItems.length === 0
       ? "- 해당 없음 (영향도 '높음' 항목 없음)"
-      : bullets((llm.priority_actions ?? []).filter(Boolean), "- 영향도 '높음' 항목 우선 조치 검토");
+      : outline((llm.priority_actions ?? []).filter(Boolean), "- 영향도 '높음' 항목 우선 조치 검토");
   const sec3 = `## 3. 조치 요약 및 권고
 ### 3.1 조치 요약표
 | 순번 | 내규명 | 조문명 | 영향도 | 반영 여부 | 권고 조치 |
@@ -274,6 +303,58 @@ function bullets(items: string[], fallback: string): string {
   return list.length ? list.join("\n") : fallback;
 }
 
+// 한국 공문서 계층 마커(깊이별). 섹션 번호(1/1.1/2.2.1)는 코드가 고정하고,
+// 그 아래 '항목'만 이 마커로 결정적으로 부여 → 일관성(번호 흔들림 방지) + AI는 '깊이'만 판단.
+const OUTLINE_MARKERS: string[][] = [
+  ["가.", "나.", "다.", "라.", "마.", "바.", "사.", "아.", "자.", "차.", "카.", "타.", "파.", "하."],
+  ["1)", "2)", "3)", "4)", "5)", "6)", "7)", "8)", "9)", "10)", "11)", "12)"],
+  ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩", "⑪", "⑫", "⑬", "⑭"],
+  ["가)", "나)", "다)", "라)", "마)", "바)", "사)", "아)", "자)", "차)"],
+];
+
+function normOutlineItem(x: OutlineItem): { text: string; children: OutlineItem[] } {
+  if (typeof x === "string") return { text: x, children: [] };
+  return {
+    text: String(x?.text ?? "").trim(),
+    children: Array.isArray(x?.children) ? x.children : [],
+  };
+}
+
+/**
+ * 개조식 항목을 한국식 계층(가/나/다 → 1)2)3) → ①②③)으로 렌더.
+ * 마크다운 중첩 리스트(`- ` + 마커)로 출력 → 웹(react-markdown)·HWPX 모두 들여쓰기 보존.
+ * (웹은 CSS list-style:none 으로 기본 불릿을 숨겨 마커만 보이게 함)
+ */
+function renderOutline(items: OutlineItem[], depth = 0): string {
+  const marks = OUTLINE_MARKERS[Math.min(depth, OUTLINE_MARKERS.length - 1)];
+  const indent = "    ".repeat(depth);
+  const lines: string[] = [];
+  let i = 0;
+  for (const raw of items ?? []) {
+    const it = normOutlineItem(raw);
+    // LLM이 이미 붙였을 수 있는 마커/불릿 제거(이중 마커 방지).
+    //  ⚠️ 불릿은 'dash/별 + 공백'일 때만 제거 — '**볼드**'의 첫 * 를 먹지 않도록.
+    const text = it.text
+      .replace(/^[-*]\s+/, "")
+      .replace(/^([가-힣]\.|[가-힣]\)|\(\d+\)|\d+\)|[①-⑳])\s+/, "")
+      .trim();
+    if (!text) continue;
+    lines.push(`${indent}- ${marks[i % marks.length]} ${text}`);
+    if (it.children.length) {
+      const sub = renderOutline(it.children, depth + 1);
+      if (sub) lines.push(sub);
+    }
+    i++;
+  }
+  return lines.join("\n");
+}
+
+/** renderOutline + 빈 경우 폴백 */
+function outline(items: OutlineItem[], fallback: string): string {
+  const s = renderOutline((items ?? []).filter((x) => normOutlineItem(x).text));
+  return s || fallback;
+}
+
 function shortRegName(name: string): string {
   return (name ?? "").replace(/\s+/g, " ").trim();
 }
@@ -296,23 +377,28 @@ function cleanText(content: string | undefined, max: number): string {
 // ── 4번 섹션(결정적) ───────────────────────────────────
 function buildAnalysisBasis(input: ReportInput, relevantCount: number): string {
   return `## 4. 검토 유의사항
-- 본 보고서는 업로드 문서와 현재 IBK 내규 후보를 비교한 AI 보조 검토 결과임.
-- 검토 후보 ${input.candidateCount}건 중 실무 검토 필요 항목 ${relevantCount}건 중심으로 정리.
-- 금액 기준·시행일·최종 확정 문구는 담당 부서가 원문과 최신 내규로 재확인 필요.`;
+${outline(
+    [
+      "본 보고서는 업로드 문서와 현재 IBK 내규 후보를 비교한 AI 보조 검토 결과임.",
+      `검토 후보 ${input.candidateCount}건 중 실무 검토 필요 항목 ${relevantCount}건 중심으로 정리.`,
+      "금액 기준·시행일·최종 확정 문구는 담당 부서가 원문과 최신 내규로 재확인 필요.",
+    ],
+    "- 유의사항 없음"
+  )}`;
 }
 
 function noMatchBody(input: ReportInput): string {
-  const changes = input.analysis?.core_summary
-    ? `\n### 1.1 주요 변경 사항\n- ${input.analysis.core_summary}`
-    : "\n### 1.1 주요 변경 사항\n- 업로드 문서에서 IBK 내규와 직접 연결되는 변경 사항 미식별.";
-  return `## 1. 규제변동 개요${changes}
+  const change = input.analysis?.core_summary || "업로드 문서에서 IBK 내규와 직접 연결되는 변경 사항 미식별.";
+  return `## 1. 규제변동 개요
+### 1.1 주요 변경 사항
+${outline([change], "- 변경 사항 미식별")}
 
 ### 1.2 IBK 적용 관점
-- 이번 규제변동과 직접 정합성 검토가 필요한 IBK 사내규정 미확인.
+${outline(["이번 규제변동과 직접 정합성 검토가 필요한 IBK 사내규정 미확인."], "- 적용 관점 없음")}
 
 ## 2. 내규 정합성 분석
 ### 2.1 영향 요약
-- 업로드 문서와 후보 내규 비교 결과, 실질적 정합성 검토가 필요한 IBK 사내규정 미식별.
+${outline(["업로드 문서와 후보 내규 비교 결과, 실질적 정합성 검토가 필요한 IBK 사내규정 미식별."], "- 영향 내규 없음")}
 
 ## 3. 조치 요약 및 권고
 | 순번 | 내규명 | 조문명 | 영향도 | 반영 여부 | 권고 조치 |

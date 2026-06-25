@@ -8,7 +8,8 @@ import {
   titleFromContent,
   pickTitle,
 } from "../lib/doc-text";
-import { detectDocNature, detectItemType } from "../lib/server";
+import { detectDocNature, detectItemType, buildSubQueries } from "../lib/server";
+import { baseLawName } from "../lib/retrieval";
 
 let pass = 0;
 let fail = 0;
@@ -83,6 +84,9 @@ const NORM: Array<[string, string]> = [
 ];
 for (const [name, fn] of NORM) eq(`규범: ${name}`, detectDocNature(fn, ""), "규범");
 
+// #5 회귀방지: 법안을 '다루는' 보도자료는 그 문서 자체가 비구속(정보성) — 전달형식 우선
+eq("보도자료(법안 언급)→정보성", detectDocNature("OO법 개정안 국무회의 통과 보도자료.hwp", ""), "정보성");
+
 console.log("\n── 정보성 문서 제목 추출 ──");
 eq("비조치의견서 제목", titleFromContent("제1차 AI 활용 테스트 참여기관 대상 비조치의견서\n발급 배경"),
   "제1차 AI 활용 테스트 참여기관 대상 비조치의견서");
@@ -93,6 +97,50 @@ console.log("\n── detectItemType ──");
 eq("법률안→bill", detectItemType("개정법률안.pdf", ""), "bill");
 eq("시행령→policy", detectItemType("시행령 일부개정령안.pdf", ""), "policy");
 eq("입법예고→policy", detectItemType("공고문.pdf", "입법예고 한다"), "policy");
+// #6 회귀방지: 규정/고시/지침류는 파일명만으로 policy 라우팅
+eq("규정→policy", detectItemType("금융투자업규정.hwpx", ""), "policy");
+eq("고시→policy", detectItemType("전자금융감독규정 개정고시.pdf", ""), "policy");
+eq("규정+법률안→bill(법안 우선)", detectItemType("규정 정비 개정법률안.pdf", ""), "bill");
+
+console.log("\n── buildSubQueries: 입력문서 청킹(#1 dedup, #2 중첩 objText) ──");
+// 긴 head(법령명+분야 60자↑) + 중첩 before/after 변경 3건 → 구버전은 head prefix로 1개 붕괴.
+const longAnalysis = {
+  success: true,
+  law_name: "금융회사부실자산 등의 효율적 처리 및 한국자산관리공사의 설립에 관한 법률",
+  law_domain: "금융 구조조정 자산관리 건전성 감독 정책 금융위원회 소관 업무",
+  core_summary: "",
+  summary: "",
+  change_overview: [],
+  search_keywords: [],
+  semantic_concepts: [],
+  provision_changes: [
+    { article: "제5조", before: { text: "자본금 요건 100억" }, after: { text: "자본금 요건 200억으로 상향" } },
+    { article: "제6조", before: { text: "이사회 보고 분기 1회" }, after: { text: "이사회 보고 월 1회로 강화" } },
+    { article: "제7조", before: { text: "외부감사 임의" }, after: { text: "외부감사 의무화" } },
+  ],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any;
+const head = `${longAnalysis.law_name} ${longAnalysis.law_domain}`;
+truthy(`#1 head 길이>60 전제(${head.length}자)`, head.length > 60);
+const subs = buildSubQueries(longAnalysis, []);
+truthy(`#1 긴 head에도 서브쿼리 붕괴X — 3건 유지(got ${subs.length})`, subs.length === 3);
+truthy("#2 중첩 before/after 텍스트 포함", subs.some((q) => q.includes("200억") && q.includes("자본금 요건")));
+truthy("#2 각 변경의 조문번호 보존", subs.some((q) => q.includes("제5조")) && subs.some((q) => q.includes("제7조")));
+
+console.log("\n── normalizeMarkdown: 머리말 처리(#10 시행일 보존) ──");
+const norm = normalizeMarkdown("의안 번호 : 12345\n시행 연월일 : 2026-01-01\n제1조(목적) 본문");
+truthy("#10 시행일 보존", norm.includes("시행 연월일"));
+truthy("#10 의안번호(노이즈) 제거", !norm.includes("의안 번호"));
+
+console.log("\n── baseLawName: 근거법령 앵커 정규화(M1) ──");
+eq("시행령+개정령안 제거", baseLawName("전자금융거래법 시행령 일부개정령안"), "전자금융거래법");
+eq("법률안 제거", baseLawName("공중협박자금조달금지법 일부개정법률안"), "공중협박자금조달금지법");
+eq("개정령(안) 제거", baseLawName("부정청탁 및 금품등 수수의 금지에 관한 법률 시행령 일부개정령(안)"),
+  "부정청탁및금품등수수의금지에관한법률");
+eq("순수 법명 보존", baseLawName("자본시장과 금융투자업에 관한 법률"), "자본시장과금융투자업에관한법률");
+// 완전일치 비교라 부분일치 오앵커가 안 생기는지(중소기업은행법 ≠ 은행법) 확인
+truthy("#M1 은행법≠중소기업은행법(오앵커 방지)", baseLawName("은행법") !== baseLawName("중소기업은행법"));
+truthy("#M1 동일 법령 정규화 일치", baseLawName("은행법 일부개정법률안") === baseLawName("은행법"));
 
 console.log(`\n결과: ${pass} PASS / ${fail} FAIL`);
 if (fail > 0) process.exit(1);
