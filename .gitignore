@@ -11,3 +11,5 @@ next-env.d.ts
 .DS_Store
 /uploads
 /scripts/_*.mjs
+
+**/.claude
