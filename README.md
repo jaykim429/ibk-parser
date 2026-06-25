@@ -40,6 +40,7 @@ docker save ibk-compliance-poc:latest | gzip > ibk-compliance-poc.tar.gz
 ```
 - `kordoc`는 저장소에 내재화돼 있어(소스+사전빌드 `dist/`) 빌드 중 오프라인 설치된다.
 - `pdfjs-dist`/`@hyzyla/pdfium`/`sharp` 등 네이티브 의존성도 `npm ci`로 linux 바이너리 설치 → 플랫폼 안전.
+- Pretendard 폰트는 `public/fonts/PretendardVariable.woff2`로 **self-host**(CDN `@import` 제거) → 외부 폰트 요청 0건.
 
 ### 2) 폐쇄망으로 반입·적재·실행
 ```bash

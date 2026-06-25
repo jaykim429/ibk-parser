@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { isValidElement, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const ACCEPT = ".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.txt";
@@ -26,6 +27,7 @@ type Job = {
   fileSize: number;
   status: JobStatus;
   step: number;
+  startedAt?: number;
   result?: PipelineResult;
 };
 
@@ -39,7 +41,7 @@ const STATUS_META: Record<JobStatus, { label: string; tone: string }> = {
   error: { label: "실패", tone: "error" },
 };
 
-const PAGE_TITLE = "영향분석 테스트";
+const PAGE_TITLE = "AI 영향분석 테스트 Lab";
 
 function humanSize(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;
@@ -93,7 +95,7 @@ export default function Home() {
   // 한 건 분석 (병렬 워커에서 호출).
   const processOne = useCallback(
     async (job: Job) => {
-      patchJob(job.id, { status: "processing", step: 0 });
+      patchJob(job.id, { status: "processing", step: 0, startedAt: Date.now() });
 
       const timers: ReturnType<typeof setTimeout>[] = [];
       timers.push(setTimeout(() => patchJob(job.id, { step: 1 }), 5000));
@@ -217,18 +219,18 @@ export default function Home() {
 
   return (
     <>
-      <header className="ibk-header">
-        <div className="ibk-header-inner">
-          <div className="brand">
+      <header className="cg-header">
+        <div className="cg-header-inner">
+          <a className="cg-brand" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/ibk-logo.png" alt="IBK기업은행" className="ibk-logo" />
-            <span className="brand-copy">
-              <small>참! 좋은 은행</small>
-              <strong>IBK기업은행</strong>
+            <img src="/CGinside.png" alt="CG INSIDE" className="cg-logo-img" />
+            <span className="cg-sys-name">
+              내규 기반 법령
+              <br />
+              리스크 모니터링 시스템
             </span>
-            <span className="service-name">AI 법규 모니터링 시스템</span>
-            <span className="test-badge">PoC Lab</span>
-          </div>
+          </a>
+          <span className="cg-page-badge">AI 영향분석 테스트 Lab</span>
         </div>
       </header>
 
@@ -237,8 +239,9 @@ export default function Home() {
           <section className="workspace">
             <div className="workspace-head">
               <div>
-                <p className="eyebrow">IBK Compliance Workbench</p>
+                <p className="eyebrow">규제변동 영향분석</p>
                 <h1>{PAGE_TITLE}</h1>
+                <p className="lede">규제변동 문서를 업로드하면 IBK 내규 영향 보고서를 생성합니다.</p>
               </div>
             </div>
 
@@ -286,6 +289,101 @@ function impactCount(job: Job): number | null {
   if (!stat) return null;
   const n = Number(stat.num);
   return Number.isFinite(n) ? n : null;
+}
+
+// ── 보고서 목차(TOC) ─────────────────────────────────
+function slugify(s: string): string {
+  return s
+    .toString()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w가-힣.-]/g, "")
+    .toLowerCase()
+    .slice(0, 80);
+}
+
+function nodeText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeText).join("");
+  if (isValidElement(node)) return nodeText((node.props as { children?: ReactNode }).children);
+  return "";
+}
+
+// 보고서 헤딩에 id 부여(목차 스크롤 앵커)
+const mdComponents: Components = {
+  h1: ({ children }) => <h1 id={slugify(nodeText(children))}>{children}</h1>,
+  h2: ({ children }) => <h2 id={slugify(nodeText(children))}>{children}</h2>,
+  h3: ({ children }) => <h3 id={slugify(nodeText(children))}>{children}</h3>,
+  h4: ({ children }) => <h4 id={slugify(nodeText(children))}>{children}</h4>,
+};
+
+// ── 분석 중 시각화 ───────────────────────────────────
+const STAGE_EMOJI = ["📄", "🔎", "🧩", "📝"];
+const PROC_TIPS = [
+  "문서를 표준 형식으로 변환하는 중…",
+  "조문·항·호 구조를 파싱하는 중…",
+  "5,000여 IBK 내규 조문에서 후보를 찾는 중 (BM25 + 벡터 RRF)…",
+  "관련도 리랭킹으로 노이즈를 거르는 중…",
+  "조문별 적합성·영향도를 판정하는 중…",
+  "근거 법령·업무영역을 대조하는 중…",
+  "보고서를 작성하는 중…",
+  "거의 다 왔어요 ☕ 조금만 기다려 주세요",
+];
+
+function ProcessingView({ job }: { job: Job }) {
+  const [now, setNow] = useState(() => Date.now());
+  const [tip, setTip] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    const m = setInterval(() => setTip((i) => (i + 1) % PROC_TIPS.length), 3500);
+    return () => {
+      clearInterval(t);
+      clearInterval(m);
+    };
+  }, []);
+  const elapsed = Math.max(0, Math.floor((now - (job.startedAt ?? now)) / 1000));
+  const mm = Math.floor(elapsed / 60);
+  const ss = String(elapsed % 60).padStart(2, "0");
+  const step = Math.max(0, Math.min(STEP_LABELS.length - 1, job.step));
+  const stageBase = (step / STEP_LABELS.length) * 100;
+  const pct = Math.min(96, Math.round(Math.max(stageBase, (elapsed / 240) * 100)));
+
+  return (
+    <div className="panel proc">
+      <div className="proc-hero">
+        <div className="proc-orb">
+          <span className="proc-orb-emoji">🤖</span>
+        </div>
+        <h2>AI가 규제변동을 분석하고 있어요</h2>
+        <p className="proc-file">{job.fileName}</p>
+      </div>
+
+      <div className="proc-pipeline">
+        {STEP_LABELS.map((label, i) => {
+          const state = i < step ? "done" : i === step ? "active" : "todo";
+          return (
+            <div className={`proc-stage ${state}`} key={label}>
+              <div className="proc-node">{i < step ? "✓" : STAGE_EMOJI[i]}</div>
+              <div className="proc-stage-label">{label}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="proc-bar">
+        <div className="proc-bar-fill" style={{ width: `${pct}%` }} />
+      </div>
+      <div className="proc-foot">
+        <span className="proc-pct">{pct}%</span>
+        <span className="proc-tip" key={tip}>
+          {PROC_TIPS[tip]}
+        </span>
+        <span className="proc-time">⏱ {mm}:{ss}</span>
+      </div>
+      <p className="proc-note">분석 중에도 완료된 다른 보고서를 눌러 확인할 수 있어요.</p>
+    </div>
+  );
 }
 
 function AnalysisView(props: {
@@ -509,27 +607,7 @@ function ReportDetail(props: {
   }
 
   if (job.status === "processing") {
-    return (
-      <div className="panel">
-        <div className="detail-head">
-          <h2>{job.fileName}</h2>
-          <p>AI가 문서를 분석하고 있습니다. 약 3~5분 소요됩니다.</p>
-        </div>
-        <div className="progress">
-          {STEP_LABELS.map((label, i) => {
-            const state = i < job.step ? "done" : i === job.step ? "active" : "";
-            return (
-              <div className={`step ${state}`} key={label}>
-                <span className="dot">{i < job.step ? "✓" : i + 1}</span>
-                <span>{label}</span>
-                {i === job.step ? <span className="spinner mini" /> : null}
-              </div>
-            );
-          })}
-          <div className="hint">분석 중에도 다른 완료 보고서를 눌러 확인할 수 있습니다.</div>
-        </div>
-      </div>
-    );
+    return <ProcessingView job={job} />;
   }
 
   const result = job.result;
@@ -563,16 +641,20 @@ function ReportDetail(props: {
       {downloadError && <div className="alert err">{downloadError}</div>}
       {result.stats && result.stats.length > 0 && (
         <div className="stats">
-          {result.stats.map((s, i) => (
-            <div className="stat" key={i}>
-              <div className="num">{s.num}</div>
-              <div className="label">{s.label}</div>
-            </div>
-          ))}
+          {result.stats
+            .filter((s) => s.label !== "처리 시간")
+            .map((s, i) => (
+              <div className="stat" key={i}>
+                <div className="num">{s.num}</div>
+                <div className="label">{s.label}</div>
+              </div>
+            ))}
         </div>
       )}
       <div className="report-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{result.report.markdown}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+          {result.report.markdown}
+        </ReactMarkdown>
       </div>
     </div>
   );
