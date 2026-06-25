@@ -1,0 +1,28 @@
+# IBK 규제변동 영향분석 PoC — docker-compose 스니펫
+#
+# 사용:
+#   docker compose -f docker-compose.poc.yml up -d        (단독 실행)
+#   또는 기존 사내 compose에 'compliance-poc' 서비스로 병합
+#
+# 폐쇄망: 먼저 이미지를 반입(README 참조)한 뒤 build 대신 image 사용.
+services:
+  compliance-poc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ibk-compliance-poc:latest
+    container_name: ibk-compliance-poc
+    restart: unless-stopped
+    env_file:
+      - .env.docker # 비밀값/엔드포인트 (.env.docker.example 참고하여 생성)
+    ports:
+      - "4000:4000"
+    networks:
+      - backend # core-ai·qdrant·opensearch 등이 있는 사내 네트워크
+
+# 사내 백엔드가 떠 있는 기존 네트워크에 연결(이름은 환경에 맞게 수정).
+# 기존 compose에 병합 시 이 networks 블록은 환경의 정의를 따른다.
+networks:
+  backend:
+    external: true
+    name: law-ai_default # ← 실제 사내 네트워크명으로 교체

@@ -7,6 +7,7 @@
 next-env.d.ts
 .env*.local
 .env
+.env.docker
 .DS_Store
 /uploads
 /scripts/_*.mjs
