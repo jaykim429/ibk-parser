@@ -1,0 +1,272 @@
+{
+  "regulationName": "내부통제위원회규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 이사회규정 제7조에 의한 내부통제위원회 (이하 “위원회”라 한다)의 구성 및 운영에 관한 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "위원회는 전무이사 및 이사회가 선임하는 사외이사 2인으로 구성한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "위원회의 위원장은 이사회에서 선임하는 사외이사 1인으로 하며, 위원장의 유고시에는 위원회 내 다른 사외이사가 그 직무를 대행한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제2조제3항",
+          "regulation_content": "위원장을 보좌하기 위하여 위원회의 간사를 두며, 간사는 준법감시인으로 한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(의결사항 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "위원회는 다음 각 호의 사항을 심의·의결한다.\n  1. 내부통제의 기본방침 및 전략 수립\n  2. 임직원의 직업윤리와 준법정신을 중시하는 조직문화의 정착방안 마련\n  3. 지배구조내부규범의 제정 및 개정\n  4. 내부통제규정의 제정 및 개정\n  5. 기타 법령, 감독규정, 내규 등에서 위원회에서 의결하도록 정한 사항\n  6. 기타 이사회 또는 위원회에서 필요하다고 인정하는 사항",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "위원회에 대한 보고사항은 다음 각 호로 한다.\n  1. 「금융회사의 지배구조에 관한 법률」 제30조의2 및 제30조의4에 따른 관리조치 및 보고 수행과 관련된 사항\n  2. 기타 법령, 감독규정, 내규 등에서 위원회에 보고하도록 정한 사항\n  3. 기타 이사회 또는 위원회에서 필요하다고 인정하는 사항",
+          "type": "항",
+          "jo": "3",
+          "hang": "2",
+          "related_laws": [
+            {
+              "law_name": "금융회사의 지배구조에 관한 법률",
+              "original_text": "「금융회사의 지배구조에 관한 법률」 제30조의2",
+              "jo": "30의2",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            },
+            {
+              "law_name": "금융회사의 지배구조에 관한 법률",
+              "original_text": "「금융회사의 지배구조에 관한 법률」 제30조의4",
+              "jo": "30의4",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "준법감시인은 필요시 위원회에 직접 보고할 수 있다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제3조제4항",
+          "regulation_content": "위원회는 「금융회사의 지배구조에 관한 법률」 제30조의2 및 제30조의4에 따른 관리조치 및 보고가 적절하게 수행되고 있는지 여부를 점검·평가하고, 미흡한 사항에 대해서는 개선 등 필요한 조치를 요구하여야 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "4",
+          "related_laws": [
+            {
+              "law_name": "금융회사의 지배구조에 관한 법률",
+              "original_text": "「금융회사의 지배구조에 관한 법률」 제30조의2",
+              "jo": "30의2",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            },
+            {
+              "law_name": "금융회사의 지배구조에 관한 법률",
+              "original_text": "「금융회사의 지배구조에 관한 법률」 제30조의4",
+              "jo": "30의4",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(소집)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "위원회는 위원장이 매반기 1회 소집하는 것을 원칙으로 하되, 필요한 경우 위원장이 개최시기를 조정할 수 있다. 다만, 위원장 또는 위원 2인 이상의 요청이 있을 때에는 수시로 소집할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "위원회의 소집은 회의의 일시, 장소 및 목적사항을 명시하여 회일 3일전까지 구성원에게 통지한다. 다만, 긴급을 요하는 사항 또는 모든 구성원의 동의가 있을 때에는 그러하지 아니한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(의결)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "위원회는 구성원 과반수의 출석으로 개회하고 구성원 과반수의 찬성으로 의결한다. 다만, 긴급을 요하는 사항 등은 서면결의에 의할 수 있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "위원회는 구성원의 전부 또는 일부가 직접 회의에 출석하지 아니하고 모든 구성원이 음성을 동시에 송수신하는 원격통신수단에 의하여 결의에 참가하는 것을 허용할 수 있다. 이 경우 당해 구성원은 위원회에 직접 출석한 것으로 본다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제5조제3항",
+          "regulation_content": "위원회의 구성원은 각각 1개의 의결권을 가진다. 다만, 의결사항과 특별한 이해관계가 있는 구성원은 회의에 출석하여 의견을 진술할 수 있으나 의결에는 참여할 수 없으며, 의결정족수 산정시 구성원의 수에 산입하지 아니한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(위원이 아닌 자의 출석)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "감사는 위원회에 참석하여 의견을 진술 할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "위원장이 필요하다고 인정하는 경우 임직원 또는 외부인사를 위원회에 출석시켜 의견을 들을 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(의사록 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "위원회의 의사에 관하여는 안건, 경과요령 및 그 결과, 반대하는 자와 그 반대사유를 기재한 의사록을 작성하고, 출석한 구성원이 기명날인 또는 서명하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "위원회는 결의한 사항을 각 구성원에게 통지하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(규정의 제·개정 및 폐지)",
+      "regulation_content": "이 규정을 제·개정 및 폐지 하고자 할 때에는 이사회의 의결을 받아야 한다. 다만, 법령 등의 변경으로 인한 개정이나 자구의 변경 등 경미한 사항은 제외한다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(활동내역의 공시)",
+      "regulation_content": "은행은 위원회의 활동내역을 지배구조연차보고서를 통하여 공시하여야 한다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2015.12.29.>",
+      "regulation_content": "이 규정은 2015년 12월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2017.1.16.>",
+      "regulation_content": "이 규정은 2017년 1월 17일부터 시행한다. (2017년 상반기 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.1.15.>",
+      "regulation_content": "이 규정은 2018년 1월 15일부터 시행한다. (2018년 상반기 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.7.26.>",
+      "regulation_content": "이 규정은 2018년 7월 26일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2019.11.19.>",
+      "regulation_content": "이 규정은 2019년 11월 19일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.5.25.>",
+      "regulation_content": "이 규정은 2020년 5월 26일부터 시행한다. (금융소비자보호그룹 신설 관련 직제규정 개정에 따른 일괄 개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2021.3.11.>",
+      "regulation_content": "이 규정은 2021년 3월 11일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.10.28.>",
+      "regulation_content": "이 규정은 2022년 10월 31일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.10.31.>",
+      "regulation_content": "이 규정은 2024년 10월 31일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

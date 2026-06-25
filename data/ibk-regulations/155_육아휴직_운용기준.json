@@ -1,0 +1,183 @@
+{
+  "regulationName": "육아휴직 운용기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 직원의 육아휴직 사용에 관한 세부사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(신청대상)",
+      "regulation_content": "직원이 다음 각호 1에 해당하는 경우에는 육아휴직을 신청할 수 있다.<개정 2012.1.2., 2014.2.6.>\n  1. 임신여직원\n  2. 만 8세 이하 또는 초등학교 2학년 이하의 자녀(입양한 자녀 포함)를 가진 직원",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(신청방법)",
+      "regulation_content": "직원이 육아휴직을 신청하고자 하는 경우에는 다음 증빙서류 중 하나를 첨부한 휴직원을 인사부 또는 관할 지역본부에 제출하여야 한다.<개정 2012.1.2., 2012.12.31.>\n  1. 임신확인을 위한 의사의 진단서(임신여직원의 경우)\n  2. 자녀 출생증명서, 주민등록등본 등 가족관계증명서\n  3. 입양관계증명서\n  4. 초등학교 2학년 이하 자녀임을 증명할 수 있는 서류",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(임신여직원의 육아휴직 신청)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "임신여직원이 육아휴직을 신청하고자 하는 경우에는 임신 16주부터 출산예정일 전일까지 출산전후휴가 및 육아휴직기간에 대하여 1회에 일괄하여 신청하여야 한다.<개정 2012.12.31., 2014.11.19.>",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "제1항에 불구하고, 의사 소견서 등에 의하여 임신여직원의 건강보호를 위하여 불가피하다고 인정되는 경우에는 임신확인시점부터 육아휴직을 신청할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(남자직원의 육아휴직 신청)",
+      "regulation_content": "남자직원의 육아휴직은 배우자(여자)의 출산 이후 또는 자녀의 입양 이후 신청할 수 있다.<개정 2012.1.2., 2014.2.6., 2020.2.25.>\n  1. 삭제<2020.2.25.>\n  2. 삭제<2020.2.25.>",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(육아휴직의 분할 및 연장 신청)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "직원이 다음 각호의 1에 해당하는 경우에는 육아휴직을 3회에 한하여 분할하여 신청할 수 있다.<개정 2012.1.2., 2022.5.10., 2025.2.21.>\n  1. 만 8세 이하 자녀의 양육\n  2. 임신으로 인한 질병치료를 목적으로 하는 경우(진단서 첨부)",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "삭제<2019.6.14.>",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(육아휴직 사용의 제한)",
+      "regulation_content": "임신여직원이 출산 전에 육아휴직을 신청하였더라도 사산인 경우에는 출산 후 육아휴직은 사용할 수 없다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조",
+      "regulation_content": "삭제<2012.12.31.>",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(준용규정)",
+      "regulation_content": "이 기준에서 정하지 아니하는 사항에 대하여는 「남녀고용평등과 일·가정 양립 지원에 관한 법률」및 동법 시행령 등 관련 법령을 준용한다.",
+      "type": "조",
+      "jo": "9",
+      "related_laws": [
+        {
+          "law_name": "남녀고용평등과 일·가정 양립 지원에 관한 법률",
+          "original_text": "「남녀고용평등과 일·가정 양립 지원에 관한 법률」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "동법 시행령",
+          "original_text": "동법 시행령",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2010.7.30.>",
+      "regulation_content": "이 기준은 2010. 8. 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2012.1.2.>",
+      "regulation_content": "이 기준은 2012년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2012.12.31.>",
+      "regulation_content": "이 기준은 2013년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2014.2.6.>",
+      "regulation_content": "이 기준은 2014년 1월 14일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2014.11.19.>",
+      "regulation_content": "이 기준은 2014년 10월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2016.9.12.>",
+      "regulation_content": "이 기준은 2016년 9월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2019.6.14.> 제1조(시행일)",
+      "regulation_content": "이 기준은 2019년 7월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부 칙<2019.6.14.> 제2조(기존 자녀 보유 직원에 대한 특례)",
+      "regulation_content": "2019년 7월 1일 개정한 「복무규정」 개정부칙 제3조에 따라 육아휴직을 신청하는 경우, 「육아휴직 운용기준」 제6조 제1항에도 불구하고 1회에 한하여 추가로 분할 신청할 수 있다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부 칙<2020.2.25.>",
+      "regulation_content": "이 기준은 2020년 2월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.5.10.> 제1조(시행일)",
+      "regulation_content": "이 기준은 2022년 5월 10일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2022.5.10.> 제2조(경과조치)",
+      "regulation_content": "2019년 7월 1일 개정한 「복무규정」 개정부칙 제3조에 따라 육아휴직을 신청하는 경우, 종전규정을 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙",
+      "regulation_content": "<2025.2.21.>\n\n\n이 기준은 2025년 2월 23일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

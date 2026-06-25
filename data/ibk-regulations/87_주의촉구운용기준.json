@@ -1,0 +1,62 @@
+{
+  "regulationName": "주의촉구운용기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(조치기준 )",
+      "regulation_content": "주의촉구는 직원의 위규, 부당취급 등 비위사실에 대한 \n비위 정도가 경미하여 문책조치 하기에는 부적절하거나 정상을 참작하\n여 주의를 촉구할 필요가 있는 경우에 조치한다 .",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(조치절차 )",
+      "regulation_content": "소관부서장이 은행장 또는 감사의 결재를 받아 조치한다 . \n다만, 금융감독원의 문책 및 조치의뢰 요구사항에 대하여 주의촉구 조치\n할 경우에는 인사위원회 심의·의결을 거쳐 은행장이 결정한다 .",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(조치자 명의)",
+      "regulation_content": "주의촉구는 은행장 또는 감사가 조치할 수 있다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(조치효과 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "1년에 3회의 주의촉구를 받은 자는 견책 조치한다 .",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "주의촉구를 받고 6월이 경과하지 않은 직원은 표창(특별승급표창 및 \n은행장표창 ) 대상에서 제외한다 . 다만, 은행장이 필요하다고 인정하는 \n경우에는 예외로 할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(사후관리 )",
+      "regulation_content": "주의촉구를 조치한 부서장은 동 내용을 인사부에 통보하\n고 인사부에서는 주의촉구자 명단을 기록, 관리한다 .",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2012.5.31> 제2조(다른 내규의 폐지)",
+      "regulation_content": "이 기준의 시행과 동시에 기존의 「주의촉구 운용\n기준」은 폐지한다 .",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

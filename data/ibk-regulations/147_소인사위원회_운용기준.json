@@ -1,0 +1,161 @@
+{
+  "regulationName": "소인사위원회 운용기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 소인사위원회(이하'위원회'라 한다)의 설치, 운영에 관한 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "위원회는 경영지원그룹장, 인사부장, 전략기획부장, 기업고객부장, 개인고객부장, 여신관리부장, 외환사업부장으로 구성한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "삭제<2024.1.30.>",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제2조제3항",
+          "regulation_content": "의장은 경영지원그룹장이 되며 의장이 유고시에는 인사부장이 그 직무를 대행한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제2조제4항",
+          "regulation_content": "간사는 인사부 담당소팀장으로 하고 소인사위원회의 의사록, 기타 필요한 처리에 관한 사항을 담당한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(의결사항)",
+      "regulation_content": "위원회는 다음 사항을 심의·의결한다.<개정 2017.4.11., 2024.1.30.>\n  1. 징계기록 말소\n  2. 인사위원회의 의결을 거치지 않은 대외표창의 가점평정 결정\n  3. 삭제<2024.1.30.>\n  4. 기타 은행장이 필요하다고 인정하는 사항",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(소집 및 의결방법)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "위원회는 필요에 따라 의장이 이를 소집한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "위원회의 의결은 위원과반수의 출석과 출석위원과반수의 찬성으로 행한다. 다만, 가부동수인 때에는 의장이 이를 결정한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "긴급을 요하는 경우 등 필요한 경우에는 서면결의 방법으로 의결할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(참여 제한)",
+      "regulation_content": "위원회의 부의 의안에 직접 이해관계가 있는 위원은 그 회의에 참여할 수 없다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조",
+      "regulation_content": "삭제<2024.1.30.>",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조",
+      "regulation_content": "삭제<2024.1.30.>",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조",
+      "regulation_content": "삭제<2024.1.30.>",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조",
+      "regulation_content": "삭제<2024.1.30.>",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조",
+      "regulation_content": "삭제<2024.1.30.>",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(준용)",
+      "regulation_content": "이 기준에 규정되지 않은 사항에 대하여는 인사위원회규정 등 내규를 준용한다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2016.8.1.> 제1조(시행일)",
+      "regulation_content": "이 기준은 2016년 8월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부 칙<2016.8.1.> 제2조(다른 내규의 폐지)",
+      "regulation_content": "이 기준의 시행과 동시에 기존의「소인사위원회운용기준」은 폐지한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부 칙<2017.1.16.>",
+      "regulation_content": "이 기준은 2017년 1월 17일부터 시행한다. (2017년 상반기 직제규정 개정에 따른 일괄 개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2017.4.11.>",
+      "regulation_content": "이 기준은 2017년 4월 11일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.1.30.>",
+      "regulation_content": "이 기준은 2024년 1월 30일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

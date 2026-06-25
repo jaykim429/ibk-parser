@@ -1,0 +1,157 @@
+{
+  "regulationName": "운영위원회규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 이사회규정 제7조에 의한 운영위원회(이하 “위원회”라 한다)의 구성 및 운영에 관한 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(역할)",
+      "regulation_content": "위원회는 다음 각호의 역할을 수행한다.\n  1. 이사회 운영의 효율화 및 기능의 활성화\n  2. 주주 및 이해관계인 접촉과 의견수렴",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "위원회는 이사회의장, 전무이사, 상임이사 1인 이내 및 이사회가 선임하는 사외이사 3인 이내로 구성한다.<개정 2003.4.29, 2010.8.27, , 2011.6.10>",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "위원회의 위원장은 이사회의장으로 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "위원장의 유고시에는 위원회에서 정한 순위에 따라 그 직무를 대행한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(의결사항)",
+      "regulation_content": "위원회는 다음 각호의 사항을 심의ㆍ의결한다.<개정 2008.7.15, 2010.8.27, 2011.6.10, 2017.7.13, 2019.11.29>\n  1. 이사회 및 이사회내 위원회의 운영 및 절차에 대한 개선방안\n  2. 은행장이 금융위원회에 제청할 사외이사후보의 추천\n  3. 은행장이 추천하는 집행간부 선임안\n  4. 집행간부 및 준법감시인 운용규정의 제정·개정 및 폐지. 다만, 법령 등의 변경으로 인한 개정이나 자구의 변경 등 경미한 사항은 제외한다.\n  5. 주주가치 제고 및 이해관계인의 이익 보호방안\n  6. 기타 이사회가 필요하다고 인정하는 사항",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(소집)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "위원회는 위원장이 매분기 1회 소집하는 것을 원칙으로 하되, 필요한 경우 위원장이 개최시기를 조정할 수 있다. 다만, 위원장 또는 위원 2인 이상의 요청이 있을 때에는 수시로 소집할 수 있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "위원회의 소집은 회의의 일시, 장소 및 목적사항을 명시하여 회일 3일전까지 구성원에게 통지한다. 다만, 보고·토의를 요하지 아니하거나 긴급을 요하는 사항 또는 모든 구성원의 동의가 있을 때에는 그러하지 아니하다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(의결)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "위원회는 구성원 과반수의 출석으로 개회하고 구성원 과반수의 찬성으로 의결한다. 다만, 보고·토의를 요하지 아니하거나 긴급을 요하는 사항 등은 서면결의에 의할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "위원회의 구성원은 각각 1개의 의결권을 가진다. 다만, 의결사항과 특별한 이해관계가 있는 구성원은 회의에 출석하여 의견을 진술할 수 있으나 의결에는 참여할 수 없으며, 의결정족수 산정시 구성원의 수에 산입하지 아니한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(의사록 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "위원회의 의사에 관하여는 안건, 경과요령 및 그 결과, 반대하는 자와 그 반대사유를 기재한 의사록을 작성하고, 출석한 구성원이 기명날인 또는 서명하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "위원회는 결의한 사항을 각 이사에게 통지하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<2002.03.28>",
+      "regulation_content": "이 규정은 2002년 3월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2003.04.29>",
+      "regulation_content": "이 규정은 2003년 4월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2008.07.15>",
+      "regulation_content": "이 규정은 2008년 7월 15일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2010.8.27>",
+      "regulation_content": "이 규정은 2010년 8월 27일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.6.10>",
+      "regulation_content": "이 규정은 2011년 6월 9일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2017.7.13>",
+      "regulation_content": "이 규정은 2017년 7월 13일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2019.11.29>",
+      "regulation_content": "이 규정은 2019년 11월 29일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

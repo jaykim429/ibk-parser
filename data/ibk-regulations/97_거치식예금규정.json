@@ -1,0 +1,463 @@
+{
+  "regulationName": "거치식예금규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 거치식예금의 업무처리 방법 및 절차를 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(용어정의)",
+      "regulation_content": "거치식예금(이하 “이 예금”이라 한다)이란 정기예금, 양도성예금증서, 표지어음 등과 같이 거래를 시작할 때 맡긴 예금을 만기에 찾는 예금을 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(준용)",
+      "regulation_content": "이 규정에서 정하지 아니한 사항은 예금규정을 준용한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(거래대상자)",
+      "regulation_content": "이 예금의 거래대상자는 제한을 두지 아니한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(입금액)",
+      "regulation_content": "입금액은 1건당 10,000원이상으로 한다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(계약기간)",
+      "regulation_content": "1월이상으로 하며 연, 월, 일 단위로 정한다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(이자계산)",
+      "regulation_content": "정기예금의 이자계산은 다음에 의한다.<개정 2006.12.21, 2012.12.27>\n  1. 이자지급방식이 만기지급방식이거나 따로 정하지 않은 경우\n   원금×연이율×예치일수/365\n  2. 이자지급방식이 월지급, 연지급 방식이거나 연금형 정기예금 또는 회전 정기예금인 경우\n   원금×연이율×월수/12\n  3. 개별상품에서 이자계산 방식을 따로 정하는 경우 그에 따른다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(이자지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "월불이자는 매월 계약 응당일이후에 지급한다. 다만, 응당일이 공휴일 또는 토요휴무일인 때에는 전영업일에 지급할 수 있다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "이미 지급된 이자액이 중도해지이자보다 많을 때에는 그 차액을 원금에서 환입 처리한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제8조제3항",
+          "regulation_content": "만기후이자는 해지시 일괄 지급한다. 다만, 만기후 1년이내에 한하여 월불이자를 지급할 수 있다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조의2(계좌분할)",
+      "regulation_content": "계좌를 분할하고자 할 때에는 다음 절차에 의한다.\n  1. 분할계좌의 계약자명의, 예금종류, 계약기간, 이율, 이자지급방법은 분할전 계좌와 같아야 한다.\n  2. 증서식일 경우에는 증서를 재발행하고 구증서는 회수하여 예금규정 제13조제3항에 따라 처리한다.",
+      "type": "조",
+      "jo": "8조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(장기의 예금으로 계약변경 요건)",
+      "regulation_content": "계약변경은 다음 각호의 요건을 갖추어야 한다.\n  1. 기명식 일반정기예금에 한한다.\n  2. 만기일 도래전에만 가능하다.\n  3. 계약변경기간은 최초약정기간보다 장기로 약정하여야 한다.\n  4. 계약변경전의 금액과 계약변경후의 금액은 동일하여야 한다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(장기의 예금으로 계약변경시 적용이율)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "최초 예입일부터 계약변경 전일까지의 예입기간에 대하여는 최초약정이율을 적용한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "계약변경 신청일부터 계약변경후 만기일 전날까지의 예입기간에 대하여는 계약변경 신청일의 약정이율을 적용한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(장기의 예금으로 계약변경후 중도해지시 이자계산)",
+      "regulation_content": "계약변경후 중도해지 요청이 있는 때에는 최초 계약일로부터 계약변경후 해지전일까지의 중도해지이자를 산출하고 기지급이자를 차감하여 지급 또는 환입 처리한다.\n  \n<표>",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조",
+      "regulation_content": "삭제<2006.12.21>",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조",
+      "regulation_content": "삭제<2006.12.21>",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(용어정의)",
+      "regulation_content": "자유만기정기예금이란 신규 입금할 때 만기일을 정하지 아니하고 거치기간과 최장예치기일만 정하여 계좌를 개설하고, 거치기일 경과후 최장예치기일 이내에서 예금주의 지급요청이 있는 날을 만기일로 하며, 3회에 한하여 분할 지급이 가능한 예금을 말한다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(거치기간, 거치기일, 최장예치기일)",
+      "regulation_content": "자유만기정기예금의 거치기간, 거치기일 및 최장예치기일은 다음과 같다.\n  \n<표>",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(만기일)",
+      "regulation_content": "만기일은 거치기간 경과후 최장예치기일내에서 예금주의 지급 요청이 있는 날로 한다. 다만, 최장예치기일까지 예금주의 지급요청이 없으면 최장예치기일을 만기일로 한다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(분할지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "분할지급은 최종 지급회차를 포함하여 3회까지 할 수 있다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "분할지급은 거치기간이 경과하고 최장예치기일이 경과하지 아니한 경우에 한한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제17조제3항",
+          "regulation_content": "예금주가 분할지급을 청구할 때에는 분할지급액 및 동 이자의 합계금액에 대한 청구서를 받는다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제17조제4항",
+          "regulation_content": "분할지급할 때에는 증서에 분할지급일자 및 금액을 기재하고 책임자가 검인한 후 동 증서는 예금주에게 다시 교부한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제17조제5항",
+          "regulation_content": "최종지급할 때에는 동 증서를 회수하여 대용전표로 사용한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "5"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(이자지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": [
+        {
+          "regulation_name": "제18조제1항",
+          "regulation_content": "만기이자는 약정한 거치기간에 따라 입금일 당시 영업점에 게시한 예치기간별 이율로 셈하여 거치기간이후 원금과 함께 지급한다. 다만, 거래처의 요청이 있으면 월별로 이자를 지급할 수 있다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제18조제2항",
+          "regulation_content": "중도해지이자는 거치기간전에 원금을 지급청구할 때 입금일부터 지급일 전날까지 기간에 대해 입금일 당시 영업점에 게시한 중도해지이율로 셈하여 지급하며, 이미 지급한 이자는 지급할 금액에서 뺀다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제18조제3항",
+          "regulation_content": "만기후 이자는 최장예치기일후 지급청구할 때에는 최장예치기일부터 지급일 전날까지 기간에 대해 입금일 당시 영업점에 게시한 만기후 이율로 셈한 이자를 더하여 지급한다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제19조(최저발행금액)",
+      "regulation_content": "최저발행금액은 은행장이 따로 정하는 바에 의한다.",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제20조(발행형식)",
+      "regulation_content": "무기명할인식 양도가능증서로 발행한다.",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제21조(만기일)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": [
+        {
+          "regulation_name": "제21조제1항",
+          "regulation_content": "만기일은 30일이상으로 한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제21조제2항",
+          "regulation_content": "공휴일 또는 토요휴무일은 만기일로 정할 수 없다. 다만, 기발행된 양도성예금증서의 만기일이 임시공휴일로 지정된 경우에는 매출당시 할인율로 이자를 지급할 수 있다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제21조제3항",
+          "regulation_content": "중도해지는 할 수 없다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제22조(할인료 등)",
+      "regulation_content": "할인료 및 할인매출액은 다음에 의한다.\n  1. 할인료 = 만기지급액(액면가) × 할인이율 × 매출일수/365\n  2. 할인매출액 = 만기지급액(액면가) - 할인료",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(만기전 매입)",
+      "regulation_content": "당행이 발행한 양도성예금증서는 만기전에 이를 매입할 수 없다.",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(만기후 이자)",
+      "regulation_content": "만기후 이자는 해지시 일괄지급한다.",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조(양도)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": [
+        {
+          "regulation_name": "제25조제1항",
+          "regulation_content": "양도성예금증서는 증서의 교부만으로 양도할 수 있다.",
+          "type": "항",
+          "jo": "25",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제25조제2항",
+          "regulation_content": "은행법에 의한 금융기관을 상대로 발행된 양도성예금증서는 은행법에 의한 금융기관이외의 자에 대하여 양도할 수 없다.",
+          "type": "항",
+          "jo": "25",
+          "hang": "2",
+          "related_laws": [
+            {
+              "law_name": "은행법",
+              "original_text": "은행법",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "regulation_name": "제26조(용어정의)",
+      "regulation_content": "표지어음이란 당행이 할인하여 보유중인 상업어음 또는 무역어음을 분할 또는 통합하여 매입인 앞으로 새로이 발행하는 약속어음을 말한다.",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제27조(최저발행금액)",
+      "regulation_content": "최저발행금액은 은행장이 따로 정하는 바에 의한다.",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조(발행형식)",
+      "regulation_content": "당행을 발행인으로 한 할인식 발행으로 한다.",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제29조(만기일)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": [
+        {
+          "regulation_name": "제29조제1항",
+          "regulation_content": "만기일은 30일이상으로 한다.",
+          "type": "항",
+          "jo": "29",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제29조제2항",
+          "regulation_content": "공휴일 또는 토요휴무일은 만기일로 정할 수 없다. 다만, 기발행된 표지어음의 만기일이 임시공휴일로 지정된 경우에는 매출당시 할인율로 이자를 지급할 수 있다.",
+          "type": "항",
+          "jo": "29",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제29조제3항",
+          "regulation_content": "중도해지는 할 수 없다.",
+          "type": "항",
+          "jo": "29",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제30조(할인료 등)",
+      "regulation_content": "할인료 및 할인매출액은 제22조를 준용한다.",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(중도환매 및 할인)",
+      "regulation_content": "표지어음은 중도환매할 수 없으며, 할인대상어음에서 제외한다.",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제32조(만기후 이자)",
+      "regulation_content": "표지어음에 대하여는 만기후 이자를 지급하지 아니한다.",
+      "type": "조",
+      "jo": "32",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제33조(양도)",
+      "regulation_content": "표지어음은 배서방식에 의하여 양도할 수 있다.",
+      "type": "조",
+      "jo": "33",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2000.5.2>",
+      "regulation_content": "이 요령은 2000년 5월 3일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2001.7.26>",
+      "regulation_content": "이 요령은 2001년 7월 27일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2002.6.25>",
+      "regulation_content": "이 요령은 2002년 7월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.3.27>",
+      "regulation_content": "이 요령은 2006년 3월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.5.22>",
+      "regulation_content": "이 규정은 2006년 5월 22일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.12.21> 제1조(시행일)",
+      "regulation_content": "이 규정은 2007년 1월 2일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2006.12.21> 제2조(경과조치)",
+      "regulation_content": "이 규정 시행일 이전에 기 발행된 무기명정기예금은 종전 규정에 의한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2012.12.27>",
+      "regulation_content": "이 규정은 2013년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2016.9.20> 제1조(시행일)",
+      "regulation_content": "이 규정은 2016년 9월 21일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2016.9.20> 제2조(적용례)",
+      "regulation_content": "시행일 이후 신규 계좌부터 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

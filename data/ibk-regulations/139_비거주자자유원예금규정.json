@@ -1,0 +1,146 @@
+{
+  "regulationName": "비거주자자유원예금규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 외국환거래법(동법 시행령, 외국환거래 관련규정을 포함한다. 이하 같다)이 정하는 범위내에서 비거주자자유원예금(이하 “예금”이라 한다) 업무취급에 필요한 사항을 규정함을 목적으로 한다.<개정 2001.2.9, 2006.5.22>",
+      "type": "조",
+      "jo": "1",
+      "related_laws": [
+        {
+          "law_name": "외국환거래법 시행령",
+          "original_text": "외국환거래법(동법 시행령, 외국환거래 관련규정을 포함한다. 이하 같다)",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(거래대상자)",
+      "regulation_content": "이 예금의 거래대상자는 외국환거래법에서 정한 비거주자로 한다.",
+      "type": "조",
+      "jo": "2",
+      "related_laws": [
+        {
+          "law_name": "외국환거래법",
+          "original_text": "외국환거래법에서",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(취급점)",
+      "regulation_content": "이 예금의 취급점은 본부, 국내 외국환영업점 및 국외영업점(현지법인 등 포함)으로 한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(예금종류)",
+      "regulation_content": "이 예금은 당좌예금, 보통예금, 저축예금, 기업자유예금, 정기예금으로 구분한다.<개정 2001.2.9, 2006.5.22>",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(예금의 입금 및 지급)",
+      "regulation_content": "이 예금의 입금 및 지급은 외국환거래법이 정하는 바에 의한다.",
+      "type": "조",
+      "jo": "5",
+      "related_laws": [
+        {
+          "law_name": "외국환거래법",
+          "original_text": "외국환거래법이",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(양도 및 질권설정 금지)",
+      "regulation_content": "이 예금은 타인에게 양도하거나 질권을 설정할 수 없다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(구분계리)",
+      "regulation_content": "이 예금은 일반원화예금 및 비거주자원화예금과 구분하여 계리한다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(당좌대출)",
+      "regulation_content": "외국환거래법이 정하는 바에 따라 당좌예금거래자에 한하여 당좌대출을 허용할 수 있다.",
+      "type": "조",
+      "jo": "8",
+      "related_laws": [
+        {
+          "law_name": "외국환거래법",
+          "original_text": "외국환거래법이",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(위임사항)",
+      "regulation_content": "이 예금의 취급에 필요한 세부사항은 은행장이 별도로 정한다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(준용규정)",
+      "regulation_content": "이 규정에서 정하지 아니한 사항은 외국환거래법, 예금 및 여신관련 제규정을 준용한다.<개정 2001.2.9, 2006.5.22>",
+      "type": "조",
+      "jo": "10",
+      "related_laws": [
+        {
+          "law_name": "외국환거래법",
+          "original_text": "외국환거래법,",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<1996.9.1>",
+      "regulation_content": "이 요령은 1996년 9월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2001.2.9>",
+      "regulation_content": "이 요령은 2001년 2월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.5.22>",
+      "regulation_content": "이 요령은 2006년 5월 22일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

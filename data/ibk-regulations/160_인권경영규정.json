@@ -1,0 +1,443 @@
+{
+  "regulationName": "인권경영규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 임직원과 이해관계자의 인권보호·증진에 관한 정책의 수립 및 시행에 대하여 필요한 사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(정의)",
+      "regulation_content": "이 규정에서 사용하는 용어의 뜻은 다음과 같다.\n  1. “인권”이란 헌법 및 법률에서 보장하거나 대한민국이 가입·비준한 국제인권조약 및 국제관습법에서 인정하는 인간으로서의 존엄과 가치 및 자유와 권리를 말한다.\n  2. “인권경영”이란 기업경영에 있어서 인간으로서의 존엄과 가치를 중시하고 인권을 보호하려는 경영을 말한다.\n  3. “인권침해”란 제2장 인권경영 일반원칙을 위배하여 인간으로서의 존엄과 가치를 침해하는 것을 말한다.\n  4. “임직원”이란 은행에 근무하는 임원과 직원(계약직 포함)을 말한다.\n  5. “이해관계자”란 은행의 경영활동과 관하여 직·간접적인 이해관계를 맺고 있는 모든 법인 또는 개인을 말한다.\n  6. “협력사”란 은행과 사업관계를 맺고 있는 회사로서, 자회사, 출자회사, 고객사 등을 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(고용상의 차별금지)",
+      "regulation_content": "은행은 직원을 고용함에 있어서 성별, 종교, 장애, 나이, 사회적 신분, 출신 지역, 국적 등을 이유로 차별하지 않는다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(결사 및 단체교섭의 자유보장)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "은행은 직원들이 자유롭게 노동조합을 결성하는 것을 허용하며, 노동조합의 가입이나 활동을 이유로 부당한 대우를 하지 않는다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "은행은 직원들이 노동조합의 대표를 통해 단체교섭할 권리를 보장한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(강제노동 및 아동노동 금지)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "은행은 직원들의 자유의사에 어긋나는 강제노동을 강요하지 않는다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "은행은 15세 미만의 아동을 고용하지 않는다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(안전 및 보건)",
+      "regulation_content": "은행은 안전하고 건강한 근무여건을 조성하여 임직원의 보건을 증진하기 위해 노력한다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(고객 인권보호)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "은행은 고객의 성별, 인종, 종교 등에 따른 차별적 서비스를 제공하지 않는다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "은행은 고객의 안전, 개인정보 보호 등 고객의 인권보호를 위해 노력한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(주주 및 투자자 인권보호)",
+      "regulation_content": "은행은 관련 법령 등에 따라 주주와 투자자가 필요한 정보를 공정하게 제공한다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(책임있는 협력사 관리)",
+      "regulation_content": "은행은 모든 협력사를 공정하게 대우하고 인권경영을 실천할 수 있도록 지원한다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(현지주민 인권보호)",
+      "regulation_content": "은행은 사업활동이 일어나는 지역사회 구성원의 인권이 침해되지 않도록 노력한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(환경권 보장)",
+      "regulation_content": "은행은 국내외 환경관련 법령을 준수하고, 환경보호와 오염방지를 위해 노력한다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(인권경영 선언)",
+      "regulation_content": "은행은 모든 경영활동에서 인간의 존엄과 가치를 중시하고 인권을 보호하기 위하여 인권경영을 선언하며, 임직원은 인권경영 선언문을 인권경영의 행동규범 및 가치판단 기준으로 삼고 실천한다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(전담조직)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": [
+        {
+          "regulation_name": "제13조제1항",
+          "regulation_content": "은행은 인권경영을 위한 정책 개발과 집행, 교육 등을 체계적으로 시행하기 위해 인권경영 전담조직(이하 “주관부서”라 한다)을 지정한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제13조제2항",
+          "regulation_content": "주관부서의 업무는 다음 각 호와 같다.\n  1. 인권경영계획의 수립 및 이행\n  2. 인권교육의 시행에 관한 사항\n  3. 인권영향평가의 시행에 관한 사항\n  4. 인권침해사건에 대한 접수 및 처리\n  5. 그 밖에 인권경영과 관련한 업무",
+          "type": "항",
+          "jo": "13",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조(인권교육)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "은행은 임직원의 인권의식을 높이기 위한 인권교육을 실시한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "은행은 인권존중 문화를 확산시키기 위하여 이해관계자를 대상으로 하는 인권교육을 실시할 수 있다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제15조(협력사 등의 인권보호 활동 지원)",
+      "regulation_content": "은행은 협력사, 인권관련 기관 또는 단체, 이해관계자 등이 수행하는 인권보호 활동을 지원할 수 있다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(설치)",
+      "regulation_content": "은행은 인권경영의 효율적 추진을 위하여 인권경영위원회(이하 “위원회”라 한다)를 설치한다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "위원회는 위원장 1인을 포함하여 7인 이상의 위원으로 구성한다.<개정 2020.6.16., 2024.6.25.>",
+          "type": "항",
+          "jo": "17",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "내부위원은 전무이사, 경영전략그룹장, 경영지원그룹장, 금융소비자보호그룹장, 준법감시인으로 구성한다.<개정 2020.6.16., 2024.6.25.>",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제17조제3항",
+          "regulation_content": "전무이사가 위원장이 되며 부득이한 사유로 직무를 수행할 수 없는 경우, 위원장이 사전에 지명한 자가 그 직무를 대행한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제17조제4항",
+          "regulation_content": "노동조합이 추천하는 1인을 위원으로 구성한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제17조제5항",
+          "regulation_content": "외부위원은 다음 각 호의 어느 하나에 해당하는 사람 중에서 위원장이 위촉한다.\n  1. 인권 관련 지식과 경험이 풍부한 사람\n  2. 이해관계자의 권리를 대변할 수 있는 사람\n  3. 위원장이 인권경영 추진을 위해 필요하다고 인정하는 사람",
+          "type": "항",
+          "jo": "17",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제17조제6항",
+          "regulation_content": "외부위원의 임기는 2년으로 하되 2회 연임할 수 있으며, 내부위원의 임기는 해당 직위 재임기간으로 한다.<종전 제6항은 제7항으로 이동 2024.6.25.>",
+          "type": "항",
+          "jo": "17",
+          "hang": "6"
+        },
+        {
+          "regulation_name": "제17조제7항",
+          "regulation_content": "위원회의 사무에 관한 사항을 처리하기 위하여 준법감시인을 간사로 둔다. <제6항에서 이동 2024.6.25.>",
+          "type": "항",
+          "jo": "17",
+          "hang": "7"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(심의사항)",
+      "regulation_content": "위원회는 다음 각 호의 사항을 심의한다.\n  1. 인권경영 기본계획 수립에 관한 사항\n  2. 인권경영 관련 제도 및 정책에 관한 사항\n  3. 인권영향평가를 포함한 인권실천·점검의무에 관한 사항\n  4. 인권침해 접수사건에 대한 구제 조치에 관한 사항\n  5. 그 밖에 인권보호 및 증진을 위해 필요한 사항",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(회의 및 의결정족수)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": [
+        {
+          "regulation_name": "제19조제1항",
+          "regulation_content": "위원회는 재적위원 과반수의 출석으로 개최하고, 출석위원 과반수의 찬성으로 의결한다, 단 가부 동수인 경우에는 위원장이 결정권을 갖는다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제19조제2항",
+          "regulation_content": "위원회 회의는 소집회의를 원칙으로 하되, 의결사항의 내용이 경미하거나 긴급을 요하는 경우 서면심의에 의하여 의결할 수 있다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제20조(중요사항 보고)",
+      "regulation_content": "위원회는 회의안건 중 인권경영상 중요하다고 판단되는 사항은 은행장에게 보고할 수 있다.\n[본조신설 2024.6.25.][종전 제20조는 제21조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제21조(소집)",
+      "regulation_content": "위원회는 연 2회 정기회의를 개최하며, 위원장이 필요하다고 인정하는 때 또는 재적위원 1/3 이상의 요구가 있을 때 임시회의를 소집한다.\n[제20조에서 이동, 종전 제21조는 제22조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제22조(의견청취 및 자료제출 요구)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": [
+        {
+          "regulation_name": "제22조제1항",
+          "regulation_content": "위원회는 필요한 경우 회의안건의 신고인·피해자·피신고인(이하\"당사자\"라 한다) 또는 관련자를 출석하게 하여 의견을 청취할 수 있다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제22조제2항",
+          "regulation_content": "위원회는 필요한 경우 회의안건의 당사자 또는 관련자에게 자료제출을 요구할 수 있다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제22조제3항",
+          "regulation_content": "위원회는 필요한 경우 회의안건 관련 부서장을 참석하게 하여 의견을 청취할 수 있다.\n[제21조에서 이동, 종전 제22조는 제23조로 이동 2024.6.25.]",
+          "type": "항",
+          "jo": "22",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제23조(비밀엄수)",
+      "regulation_content": "위원회에 참석한 자는 회의를 통해 습득한 비밀을 누설해서는 안 된다.\n[제22조에서 이동, 종전 제23조는 제24조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(이익충돌 회피)",
+      "regulation_content": "위원회는 특정 안건과 이해관계에 있는 위원을 해당 안건 심의 시 배제해야 한다.\n[제23조에서 이동, 종전 제24조는 제25조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조(위원의 해촉)",
+      "regulation_content": "위원장은 위원이 다음 각 호의 어느 하나에 해당하는 때에는 임기만료 전이라도 해당위원을 해촉할 수 있다.\n  1. 직무를 성실히 수행하지 아니한 때\n  2. 직무상 알게 된 비밀을 누설한 때\n  3. 인권침해에 연루된 경우\n  4. 질병 등의 사유로 직무를 수행하기 어려운 때\n  5. 그 밖에 품위 손상 등으로 직무수행이 적합하지 않다고 판단되는 때\n[제24조에서 이동, 종전 제25조는 제26조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제26조(인권영향평가)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": [
+        {
+          "regulation_name": "제26조제1항",
+          "regulation_content": "은행은 특정 정책이나 사업을 대상으로 인권영향평가를 실시할 수 있다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제26조제2항",
+          "regulation_content": "인권영향평가에 대한 세부 절차와 방법은 사안에 따라 별도 계획을 수립하여 실시한다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제26조제3항",
+          "regulation_content": "위원회는 인권영향평가의 결과에 따라 해당부서에 필요한 조치를 권고할 수 있다.\n[제25조에서 이동, 종전 제26조는 제27조로 이동 2024.6.25.]",
+          "type": "항",
+          "jo": "26",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제27조",
+      "regulation_content": "삭제<2020.6.16.>\n[제26조에서 이동, 종전 제27조는 제28조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조",
+      "regulation_content": "삭제<2020.6.16.>\n[제27조에서 이동, 종전 제28조는 제29조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제29조",
+      "regulation_content": "삭제<2020.6.16.>\n[제28조에서 이동, 종전 제29조는 제30조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조",
+      "regulation_content": "삭제<2020.6.16.>\n[제29조에서 이동, 종전 제30조는 제31조로 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조의2(인권상담센터)",
+      "regulation_content": "인권경영을 담당하는 주관부서 내 인권침해 신고사건의 상담 및 접수, 처리를 담당하는 인권상담센터를 설치하여 운영한다.\n[본조신설 2020.6.16.][제29조의2에서 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "30조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조의3(인권침해 구제절차)",
+      "regulation_content": "인권침해 신고사건의 상담 및 접수, 처리의 세부절차는「인권침해구제지침」을 따른다.\n[본조신설 2020.6.16.][제29조의3에서 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "30조의3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(기타)",
+      "regulation_content": "이 규정에서 정하지 아니한 사항은 관련 법령 및 내규에서 정하는 바에 따른다.\n[제30조에서 이동 2024.6.25.]",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2019.1.18.>",
+      "regulation_content": "이 규정은 2019년 1월 4일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.6.16.>",
+      "regulation_content": "이 규정은 2020년 6월 16일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.6.25.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2024년 6월 25일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2024.6.25.> 제2조(적용례)",
+      "regulation_content": "시행일 이전 위촉된 외부위원의 연임 가능횟수는 시행일 이후부터 기산하여 2회로 한다.",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

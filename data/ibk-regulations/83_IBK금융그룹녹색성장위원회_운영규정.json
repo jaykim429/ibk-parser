@@ -1,0 +1,134 @@
+{
+  "regulationName": "IBK금융그룹녹색성장위원회 운영규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은IBK금융그룹녹색성장위원회」(이하“위원회”라\n한다)의구성및운영에필요한사항을규정함으로써녹색성장관련사\n업을효율적으로추진하기위함을목적으로한다.<개정2014.4.18>",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(위원회의구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "위원회는은행장,전무이사,각그룹장,자회사\n부사장으로구성한다.<개정2015.7.14>",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "위원장은은행장이되며,위원장부재시전무이사가그직무를대행\n한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제2조제3항",
+          "regulation_content": "위원회의제반사무를처리하고의결사항을관리하기위하여위원회\n에간사1명을두며,간사는녹색성장지원단부단장으로한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(위원회의기능)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "위원회는다음각호의사항을심의․의결한다.\n1.IBK(자회사포함)녹색성장정책방향\n2.녹색성장관련실행과제에대한주요사항\n3.기타위원장이필요하다고인정하는사항",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "삭제<2014.4.18>",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(소집)",
+      "regulation_content": "위원회는필요에따라위원장이이를소집한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(의결)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "위원회는위원과반수의출석과출석위원과반수의찬성으\n로의결한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "위원장은필요한경우서면으로의결하도록할수있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제5조제3항",
+          "regulation_content": "간사는위원회의의결사항에대하여회의록을작성한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제5조제4항",
+          "regulation_content": "위원회에서의결된사항은위임전결규정에 따라전결권자의결재를2009.10.29 제정\n2011.2.14제1차개정\n2014.4.18제2차개정\n2015.7.14제3차개정\n득한후시행한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조",
+      "regulation_content": "삭제<2014.4.18>",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2009.10.29>",
+      "regulation_content": "이규정은2009년10월29일부터시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.2.14>",
+      "regulation_content": "이규정은2011년2월11일부터시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.4.18>",
+      "regulation_content": "이규정은2014년4월18일부터시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2015.7.14>",
+      "regulation_content": "이규정은2015년7월14일부터시행한다.(2015년7월14일직제규정개정\n에따른일괄개정)",
+      "type": "부칙"
+    }
+  ]
+}

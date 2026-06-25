@@ -1,0 +1,284 @@
+{
+  "regulationName": "비대면 금융사고 책임분담 배상협의체 운영기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 '23. 10.5. 금융감독원과 은행권이 합의한 「비대면 금융사고 책임분담기준」에 따른 합리적인 배상금액 결정을 위한 비대면 금융사고 책임분담 배상협의체(이하 “협의체”)의 운영에 관한 사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용대상)",
+      "regulation_content": "이 기준은 다음 각 호에 적용함을 원칙으로 한다.\n  1. 「전기통신 금융사기 피해 방지 및 피해금 환급에 관한 특별법」 제2조 제2호 나목의 전기통신금융사기에 해당함과 동시에 「전자금융거래법」 제9조 제1항 제1호 또는 제3호에 해당하는 전자금융거래 사고의 손해배상 책임비율 심사 및 배상금액의 결정\n  2. 그 밖에 위원장이 필요하다고 인정하는 사안",
+      "type": "조",
+      "jo": "2",
+      "related_laws": [
+        {
+          "law_name": "전기통신 금융사기 피해 방지 및 피해금 환급에 관한 특별법",
+          "original_text": "「전기통신 금융사기 피해 방지 및 피해금 환급에 관한 특별법」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "전자금융거래법",
+          "original_text": "「전자금융거래법」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "협의체는 금융소비자보호그룹장, 금융소비자지원부장, 개인디지털사업부장, 정보보호총괄부장, 리스크총괄부장, 준법지원부장으로 구성한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "위원장은 금융소비자보호그룹장이 되며, 위원장이 부득이한 사유로 직무를 수행할 수 없을 때에는 금융소비자지원부장이 그 직무를 대행한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "간사는 금융소비자지원부장이 담당하고, 안건에 따라 위원장이 해당 업무소관 부서장으로 지정할 수 있다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제3조제4항",
+          "regulation_content": "위원장은 내부변호사를 출석시켜 자문을 구할 수 있으며, 필요 시 안건 관련 업무 담당 부서장 등을 추가하여 구성할 수 있다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(심의·의결사항)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "협의체는 다음 각 호의 사항을 심의·의결한다.\n  1. 동 기준 제2조 적용대상 중 은행이 직접 부담하는 금액기준 10백만원을 초과하는 배상금액 결정\n  2. 비대면 금융사고 책임분담 관련 주요 사항 협의 등\n  3. 기타 위원장이 필요하다고 인정하는 사항",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "위원장은 간사에게 심의·의결사항에 필요한 사실조사 자료의 제출을 요구하거나 기타 필요한 사항에 관하여 진술하게 할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(회의소집)",
+      "regulation_content": "협의체는 위원장이 필요하다고 인정하는 경우 수시로 개최할 수 있다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(부의절차)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "심의·의결사항에 대한 부의는 금융소비자지원부에서 한다. 다만, 위원장이 필요하다고 인정하는 경우에는 해당 업무소관 부서에서 부의할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "간사는 회의안건 및 일시를 회의 개최 5영업일 전까지 각 위원에게 통지하여야 한다. 다만, 위원장이 긴급을 요하는 것으로 인정하는 경우에는 예외로 할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "안건에 대한 설명은 간사가 하는 것을 원칙으로 하며, 필요시 위원장이 따로 지정할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(의결방법)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "협의체는 재적위원 3분의 2이상의 출석으로 개최하고 출석위원 3분의 2이상의 찬성으로 의결한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "협의체는 필요한 경우 서면에 의해 의결할 수 있다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(보고 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "부의 안건 중 중대한 사안 등의 사유로 위원장이 인정하는 경우 경영진에 사전 보고 후 의결한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "본 협의체 의결사항 중 주요사항은 「금융소비자보호 내부통제위원회」에 사후 보고한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(재심의 처리)",
+      "regulation_content": "안건 관련 새로운 사실이 확인되거나, 금융감독원의 권고가 있는 경우 또는 위원장이 재심의가 필요하다고 인정한 경우 협의체에서 재심의 처리할 수 있다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(비대면 금융사고 책임분담 배상실무협의체)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "신속한 비대면 금융사고 조사 및 배상비율 심사 등을 위해 협의체 산하 비대면 금융사고 책임분담 배상실무협의체(이하“실무협의체”)를 두어 운영한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "실무협의체는 다음 각 호의 역할을 수행한다.\n  1. 비대면 금융사고 책임분담기준 배상신청 건에 대한 사고내용 공유\n  2. 비대면 금융사고 책임분담기준 배상신청 건에 대한 배상비율 및 배상금액 산정내용 심사\n  3. 비대면 금융사고 대응방안 협의 및 프로세스 점검\n  4. 비대면 금융사고 중 중대한 현안 및 이슈사항 정보 공유\n  5. 그 밖에 위원장이 필요하다고 인정하는 사항",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제10조제3항",
+          "regulation_content": "실무협의체의 위원은 금융소비자지원부, 개인디지털사업부, 정보보호총괄부 책임자급 실무자로 구성한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제10조제4항",
+          "regulation_content": "실무협의체의 위원장은 금융소비자지원부장으로 한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제10조제5항",
+          "regulation_content": "실무협의체의 간사는 금융소비자지원부 내 해당업무 담당 팀장으로 한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제10조제6항",
+          "regulation_content": "위원장은 내부변호사를 출석시켜 자문을 구할 수 있으며, 필요 시 안건 관련 업무 담당 실무자 등을 추가하여 구성 할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "6"
+        },
+        {
+          "regulation_name": "제10조제7항",
+          "regulation_content": "그 밖에 실무협의체 운영에 관한 사항은 본 지침 각 조의 사항을 준용한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "7"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(준용규정)",
+      "regulation_content": "이 기준에서 정하지 아니한 사항은 금융감독원과 은행이 합의한 「비대면 금융사고 책임분담기준」, 「비대면 금융사고 책임분담기준 세부 운영기준」, 은행권 공동의 업무방법서인 「비대면 금융사고 책임분담기준 금융회사 표준 업무방법서」를 따른다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2024.9.9.> 제1조(시행일)",
+      "regulation_content": "이 기준은 2024년 9월 9일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2025.1.16.>",
+      "regulation_content": "이 규정은 2025년 1월 16일부터 시행한다. (2025년 상반기 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "별지서식1",
+      "type": "별지서식",
+      "jo": "1",
+      "regulation_content": "<표>\n\n  ( 심의일자 : 202X. XX. XX. )\n\n□ 심의번호 : 202X – 비금협 – XX\n\n□ 의    안 : ○○○에 대한 손해배상 책임비율 및 분담금액 결정 \n\n□ 내    용 : \n\n<표>\n\n\n□ 심의결과 : \n\n\n<표>"
+    },
+    {
+      "regulation_name": "별지서식2",
+      "type": "별지서식",
+      "jo": "2",
+      "regulation_content": "<표>\n\n  ( 심의일자 : 202X. XX. XX. )\n\n□ 심의번호 : 202X – 비금협 – XX\n\n□ 내    용 : \n\n<표>\n\n\n<표>"
+    },
+    {
+      "regulation_name": "별지서식3",
+      "type": "별지서식",
+      "jo": "3",
+      "regulation_content": "<표>\n\n  ( 심의일자 : 202X. XX. XX. )\n\n□ 심의번호 : 202X – 비금실협 – XX\n\n□ 의    안 : ○○○에 대한 손해배상 책임비율 및 분담금액 심사 \n\n□ 내    용 : \n\n<표>\n\n\n□ 심의결과 :  \n\n\n<표>"
+    },
+    {
+      "regulation_name": "별지서식4",
+      "type": "별지서식",
+      "jo": "4",
+      "regulation_content": "<표>\n\n  ( 심의일자 : 202X. XX. XX. )\n\n□ 심의번호 : 202X – 비금실협 – XX\n\n□ 내    용 : \n\n<표>\n\n\n<표>"
+    }
+  ]
+}

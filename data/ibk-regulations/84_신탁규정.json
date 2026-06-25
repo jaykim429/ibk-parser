@@ -1,0 +1,176 @@
+{
+  "regulationName": "신탁규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적 )",
+      "regulation_content": "이 규정은 신탁업무에 관한 기본적인 사항을 규정함을 \n목적으로 한다 .",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(정의 )",
+      "regulation_content": "이 규정에서 신탁이라 함은 신탁설정자 (이하 “위탁\n자”라 한다 )가 신탁을 인수하는 자(이하 “당행 ”이라 한다 )와의 \n특별한 신임관계에 의하여 위탁자의 특정 재산권을 당행에게 \n이전하거나 기타의 처분을 하고 당행으로 하여금 일정한 자(이하 \n“수익자 ”라 한다)의 이익을 위하여 또는 특정의 목적을 위하여 그 \n재산권을 관리 ,처분하게 하는 법률관계를 말한다 .",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(신탁종류 )",
+      "regulation_content": "신탁의 종류는 취급방법에 따라 다음 각호와 같\n이 구분한다 .\n1.금전신탁\n2.금전신탁 이외의 금전의 신탁\n3.유가증권의 신탁\n4.금전채권의 신탁\n5.동산의 신탁\n6.토지 및 그 정착물의 신탁\n7.지상권 ,전세권 또는 토지 임차권의 신탁\n8.무체재산권 (지적재산권을 포함한다 )의 신탁\n9.종합재산신탁",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(부수업무 )",
+      "regulation_content": "당행은 제3조의 신탁업무에 부수하는 다음의 업\n무를 겸영한다 .\n1.유언집행 및 상속재산의 정리 및 분배\n2.재산관리 대리업무\n3.건축물의 분양에 관한 법률에 의한 대리사무\n4.부동산 매매 및 임차의 중개",
+      "type": "조",
+      "jo": "4",
+      "related_laws": [
+        {
+          "law_name": "건축물의 분양에 관한 법률",
+          "original_text": "건축물의 분양에 관한 법률에 의한 대리사무",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(분별관리 및 구분계산 )",
+      "regulation_content": "신탁재산은 당행의 고유재산과 분별 \n관리하고 신탁재산별로 구분계산하여야 한다 .다만 ,불특정금전\n신탁으로서 신탁재산의 운용방법과 운용조건이 같은 것은 합동\n운용할 수 있다 .",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(위탁자 )",
+      "regulation_content": "위탁자는 신탁재산의 소유자로서 처분할 능력이 있는 \n자로 한다 .",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(수익자 )",
+      "regulation_content": "수익자는 위탁자가 지정하며 ,수익자를 지정하지 아니\n한때에는 위탁자를 수익자로 본다 .",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(신탁재산의 종류 )",
+      "regulation_content": "신탁으로 수탁할 수 있는 신탁재산은 다음 \n각호와 같다 .\n1.금전\n2.유가증권\n3.금전채권\n4.동산\n5.토지 및 그 정착물\n6.지상권 ,전세권 및 토지임차권\n7.무체재산권 (지적재산권 포함 )",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(신탁의 설정 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "신탁은 위탁자와 당행간의 계약 또는 위탁자\n의 유언에 의하여 설정할 수 있다 .",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "신탁을 설정할 때에는 이를 서면으로 하여야 한다 .",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(특약사항 또는 계약조항변경의 신청 )",
+      "regulation_content": "다음 각호의 사유로 특\n약사항을 체결하여 일반약관 일부를 변경하고자 할 때에는 미리 \n은행장의 승인을 얻어 처리한다 .\n1.위탁자의 특약신청이 있을 때\n2.당행의 필요에 의해 특정 위탁자에게 별도 약관을 적용하고자 \n할 때",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(신탁의 종료 )",
+      "regulation_content": "다음 각호의 사유가 발생한 때에는 신탁이 \n종료된다 .\n1.신탁행위로 정한 사유가 발생한 때\n2.신탁의 목적을 달성하였거나 달성할 수 없게 된 때\n3.신탁을 중도해지한 때",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(원본교부일의 산정 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "신탁기간을 월 또는 연으로 정하였을 \n때에는 그 기간 최종월의 수탁응당일을 원본교부일로 한다 .다만 ,\n최종월에 응당일이 없을 때에는 그 월의 말일을 원본교부일로 \n한다 .",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "일로써 기간을 정하였을 때에는 수탁일로부터 기산하여 일수 \n해당일의 다음날을 원본교부일로 한다 .",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제12조제3항",
+          "regulation_content": "원본교부일이 공휴일 또는 토요휴무일에 해당할 때에는 그 \n다음 첫 영업일에 원본을 교부한다 .",
+          "type": "항",
+          "jo": "12",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조(신탁보수 및 수탁금액 )",
+      "regulation_content": "신탁보수 및 수탁금액은 따로 정하\n는 바에 의한다 .",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(시행세칙 )",
+      "regulation_content": "이 규정의 시행에 필요한 세부사항은 신탁종류\n별 업무세칙으로 정하는 바에 의한다 .",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(준용규정 )",
+      "regulation_content": "이 규정에서 정하지 아니한 사항은 관계법령 ,\n신탁업 관련 감독규정 (또는 금융투자업규정 )및 은행 내규를 준\n용한다 .",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙",
+      "regulation_content": "<1998.6.9>\n이 규정은 1998년 6월 9일부터 시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙 제1조(시행일 )",
+      "regulation_content": "이 규정은 2002년 7월 1일부터 시행한다 .",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙 제2조(경과조치 )",
+      "regulation_content": "제12조제 3항의 규정에도 불구하고 2002. 6.30.이\n전 신규․입금분으로서 원본교부일이 토요휴무일인 경우에는 \n직전 영업일에 원본을 교부할 수 있다 .",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

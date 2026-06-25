@@ -1,0 +1,196 @@
+{
+  "regulationName": "임원퇴직금규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은상임임원(이하“임원”이라한다)의퇴직금지급에\n관한사항을규정함을목적으로한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(지급사유)",
+      "regulation_content": "퇴직금은다음각호의1에해당하는사유가발생하였을\n때지급한다.<개정2011.4.1>\n1.임기만료로인한퇴임\n2.의원해직\n3.당연해직\n4.파면,해임권고,징계면직등으로인한퇴임",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(지급액)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "퇴직금은기본연봉에1/12을곱한금액을매해당연도말\n에적립한다.단,직위를달리하여계속근속하는경우각각의재임기\n간에따라구분하여계산한다.<개정2007.3.23,2011.4.1,2015.3.27>",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "국외점포에재임중퇴직하는본국임원의퇴직금은제1항을적용하여\n적용하여산출한다.<개정2007.3.23>",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "삭제<2011.4.1>",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제3조제4항",
+          "regulation_content": "삭제<2015.3.27>",
+          "type": "항",
+          "jo": "3",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(근속기간의계산)",
+      "regulation_content": "근속기간의계산은다음에의한다.\n1.1년미만은월단위로산정한다.\n2.1월미만은1월로한다.\n3.재직중사망으로퇴직한자에대하여는제1호및제2호의규정에불1991.11.29 제정\n1999.3.3제1차개정\n2000.3.7제2차개정\n2001.3.30제3차개정\n2007.3.23제4차개정\n2011.4.1제5차개정\n2015.3.27제6차개정\n구하고1년으로한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(퇴직금지급의특례)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "삭제<2015.3.27>",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "삭제<2015.3.27>",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제5조제3항",
+          "regulation_content": "업무와관련하여고의또는중대한과실에의한불법행위로금고이상\n의형을받거나감독기관장에의하여파면,해임권고,징계면직등으로\n인한퇴임결정통보를받은자에대하여는퇴직금의반액을감액하여\n지급한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제5조제4항",
+          "regulation_content": "제3항의형벌이나처분의귀책사유가있다고추정되는임원이퇴직하\n는때에는수사의종결이나판결의확정또는감독기관장의결정이있\n을때까지퇴직금의2분의1에상당하는금액의지급을유보한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제5조제5항",
+          "regulation_content": "삭제<2015.3.27>",
+          "type": "항",
+          "jo": "5",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제5조제6항",
+          "regulation_content": "삭제<2015.3.27>",
+          "type": "항",
+          "jo": "5",
+          "hang": "6"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(사망자의퇴직금수령)",
+      "regulation_content": "사망으로인한퇴직자의퇴직금은근로기준\n법상유족보상에준하여유족에게지급한다.",
+      "type": "조",
+      "jo": "6",
+      "related_laws": [
+        {
+          "law_name": "근로기준법",
+          "original_text": "근로기준법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(기타)",
+      "regulation_content": "이규정의시행을위하여필요한사항은은행장이따로정한\n다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<1999.3.3>",
+      "regulation_content": "①(시행일)이규정은1999년1월1일부터시행한다.\n②(경과조치)이규정시행일이전에근속한기간에대한퇴직금의계산은\n종전규정을적용한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2000.3.7>",
+      "regulation_content": "이규정은2000년2월28일부터시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2001.3.30> 제1조(시행일)",
+      "regulation_content": "이규정은2001년1월1일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2001.3.30> 제2조(경과조치)",
+      "regulation_content": "이규정시행일전에근속한기간에대한퇴직금의계산\n은종전규정을적용한다.이경우“월평균임금”은2000년12월31일이\n전1년간(근속기간1년미만인경우에는그기간)지급액의월평균금액을\n말한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2007.3.23> 제1조(시행일)",
+      "regulation_content": "이규정은2007년3월22일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2007.3.23> 제2조(업적연봉에관한적용례)",
+      "regulation_content": "업적연봉은2006년업적분부터적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2011.4.1> 제1조(시행일)",
+      "regulation_content": "이규정은2011년4월1일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2011.4.1> 제2조(경과조치)",
+      "regulation_content": "이규정시행일전에근속한기간에대한퇴직금의계산\n은종전규정을적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2015.3.27> 제1조(시행일)",
+      "regulation_content": "이규정은2014년10월31일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2015.3.27> 제2조(경과조치)",
+      "regulation_content": "제3조제1항의개정규정에도불구하고시행일현재재임\n중인임원은2014년10월31일까지근속한기간에대한업적연봉은종전\n규정대로퇴직금산정시포함하여계산한다.",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

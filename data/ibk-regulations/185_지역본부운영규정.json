@@ -1,0 +1,132 @@
+{
+  "regulationName": "지역본부운영규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 지역본부의 운영에 관한 세부사항을 정함으로써 각 지역본부 관할지역내 점포의 유기적이고 효율적인 업무신장을 도모함을 목적으로 한다.<개정 2004.7.5., 2005.1.10.>",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(관할점포)",
+      "regulation_content": "각 지역본부의 관할점포는 은행장이 따로 정하는 바에 따른다.<개정 2004.7.5., 2005.1.10.>",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(지역본부장의 권한)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "지역본부장(이하 “본부장”이라 한다)은 소관업무를 통할하고 소속직원 및 관할점포 직원을 지휘감독한다.<개정 2004.7.5., 2005.1.10.>",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "본부장의 전결권한은 위임전결규정에서 정하는 바에 따른다.\n[제목개정 2004.7.5., 2005.1.10.]",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(계리)",
+      "regulation_content": "지역본부는 독립계리를 하되, 기표는 대체거래 방식으로 하고 현금거래는 지역본부가 설치되는 영업점을 통한 환거래 방식에 의한다.<개정 2004.7.5., 2005.1.10.>",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(본부와의 관계)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "본부장은 관할점포에 관련된 중요사항에 대하여는 소관 사업본부장 또는 전무이사를 경유하여 은행장에게 수시로 보고하여야 한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "본부 부서장은 지역본부의 관할점포에 관련된 중요사항은 본부장과 협의하여야 한다.<개정 2004.7.5., 2005.1.10.>",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제5조제3항",
+          "regulation_content": "관할점포에 대한 본부 부서의 중요방침 시달은 지역본부를 경유하여야 한다.<개정 2004.7.5., 2005.1.10.>",
+          "type": "항",
+          "jo": "5",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(관할점포와의 관계)",
+      "regulation_content": "관할점포는 해당 지역본부 관장사항 이외의 업무와 대본부 건의, 중요보고를 한 경우에도 본부장에게 보고하여야 한다.<개정 2004.7.5., 2005.1.10.>",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(지구모점 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "은행장은 필요한 경우 동일 지역본부 관할점포중 수개의 점포를 권역화하여 특정 영업점을 지구모점으로 운용하거나 별도의 금융지원센터를 설치할 수 있다.<개정 2004.7.5., 2005.1.10.>",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "지구모점 등의 업무 및 전결권한 등은 은행장이 따로 정하는 바에 의한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<1999.8.4.>",
+      "regulation_content": "이 규정은 1999년 8월 10일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2000.7.26.>",
+      "regulation_content": "이 규정은 2000년 8월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2001.7.31.>",
+      "regulation_content": "이 규정은 2001년 7월 31일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2004.7.5.>",
+      "regulation_content": "이 규정은 2004년 하반기 부점장 정기 인사발령일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.1.10.>",
+      "regulation_content": "이 규정은 2005년 상반기 부점장 정기 인사발령일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "regulationName": "외국환규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 외국환업무취급에 관한 기본적 사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": [
+        {
+          "regulation_name": "제1조의2제1항",
+          "regulation_content": "임직원은 본인의 사적인 이해가 업무수행 과정에 객관성을 유지하지 못하도록 영향을 미치는 행위를 하여서는 아니된다.",
+          "type": "항",
+          "jo": "1조의2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제1조의2제2항",
+          "regulation_content": "임직원의 행위나 의사결정으로 인하여 그 권익에 영향을 받는 개인, 법인, 기타단체 등의 직무 상대방이 기업은행임직원행동강령 제8조에서 정한 사적이해관계 신고 대상인 경우 해당 임직원은 의사결정에 관여하지 않는다.\n[본조신설 2020.12.28.][제목개정 2022.5.24.]",
+          "type": "항",
+          "jo": "1조의2",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제1조의2(이해충돌행위의 금지)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "1조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "외국환업무는 따로 정하는 것 이외에는 이 규정이 정하는 바에 의한다. 다만, 정부·금융통화운영위원회 및 한국은행 등의 관련 제규정은 이 규정에 우선하여 적용한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(국제규약 등의 준수)",
+      "regulation_content": "외국환업무취급시에는 화환신용장에 관한 통일규칙(Uniform Customs and Practice for Documentary Credits), 추심에 관한 통일규칙(Uniform Rules for Collections), 국제팩토링 관련 규약 및 기타 제반 국제규약 등을 준수한다.<개정 2002.2.28., 2008.2.4., 2011.2.14.>",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(외국환영업점)",
+      "regulation_content": "외국환영업점은 외국환거래법령 등에서 정하는 바에 따라 외국환은행으로 신고된 부점을 말한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(외국환거래관계약정서 및 약관운용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "다음 각호의 1에 해당하는 약정서는 각호에서 정하는 거래에 적용하며, 최초거래시 받음을 원칙으로 한다.<개정 2002.2.28., 2006.6.30., 2007.6.28., 2008.2.4., 2011.2.14., 2014.2.11.>\n  1. 외국환거래약정서 : 수출, 수입, 내국신용장 발행, 내국 신용장 “판매대금 추심의뢰서”등 매입(추심)거래, 선적통지부 사후송금방식 수출거래에 의한 수출대금채권 매입거래\n  2. 국제팩토링거래약정서 : 국제팩토링",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "외환거래기본약관은 다음 각호의 1에 해당하는 거래에 적용하며 영업점창구에 항상 비치하여 거래처의 열람 및 교부청구에 응하도록 한다.\n  1. 외화송금\n  2. 외국통화매입\n  3. 외화수표 등의 매입(추심)\n  4. 기타 제1호 내지 제3호에 준하는 거래",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(거래용 인감사용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "외국환거래약정서, 국제팩토링거래약정서, 여신거래약정서, 어음 등 채권관계 서류이외의 서류에는 거래용인감을 사용할 수 있다.<개정 2002.2.28., 2007.6.28., 2008.2.4., 2011.2.14.>",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "거래용인감을 사용하고자 하는 경우에는 본인이 서명날인한 인감(서명감)신고서를 받는다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(서명에 의한 외국환거래)",
+      "regulation_content": "다음 각호의 1에 해당하는 외국환거래는 서명에 의하여 할 수 있다.\n  1. 당발송금환의 취결 및 퇴결\n  2. 타발송금환의 지급\n  3. 외화수표 등의 추심\n  4. 여행자수표 매도\n  5. 외국통화 매매",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(외국환용 직인)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "다음 각호의 1에 해당하는 서류에는 은행장직인을 날인한다.\n  1. 외국환거래법 등 관계법령에 의하여 외국환은행의 장에게 위임된 신고수리서, 증명서 등\n  2. 기타 외국환업무 수행상 필요하다고 인정되는 서류",
+          "type": "항",
+          "jo": "8",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "외국환거래법",
+              "original_text": "외국환거래법",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "외국환용직인 날인시에는 인감날인대장 기록을 생략한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(전신암호)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "자금이체, 신용장 또는 지급보증서의 발행 및 조건변경통지 등 대외지급채무를 수반하는 전신에는 암호를 사용하여야 한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "상대은행으로부터 암호를 사용한 전신을 받은 경우에는 담당책임자가 암호의 일치여부를 확인하여야 하며 암호가 일치하지 않을 때에는 상대은행에 조회하여야 한다. 다만, 전산기기를 통하여 자동검증된 암호의 확인은 생략할 수 있다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(준용 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "이 규정에서 정하지 아니한 사항은 현금의 수납 및 지급업무 규정, 금고관리지침, 자금의 현수송 및 어음교환업무 규정, 계산업무규정, 여신규정, 여신관리규정 등 관련규정을 준용한다.<개정 2002.2.28., 2007.6.28., 2014.4.4.>",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "이 규정의 시행에 필요한 세부적인 업무처리기준은 은행장이 따로 정한 바에 의한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<1999.6.9.>",
+      "regulation_content": "이 규정은 1999년 6월 30일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2002.2.28.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2002년 3월 2일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2002.2.28.> 제2조(폐지규정)",
+      "regulation_content": "이 규정의 시행과 동시에 국제팩토링업무취급요령은 이를 폐지한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2006.6.30.>",
+      "regulation_content": "이 규정은 2006년 6월 30일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.6.28.>",
+      "regulation_content": "이 규정은 2007년 7월 2일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2008.2.4.>",
+      "regulation_content": "이 규정은 2008년 2월 4일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.2.14.>",
+      "regulation_content": "이 규정은 2011년 2월14일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.2.11.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2014년 2월 14일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2014.2.11.> 제2조(경과규정)",
+      "regulation_content": "내국신용장 업무와 관련하여 물품수령증명서가 2014년2월13일까지 서류로 발급된 경우에 한정하여 내국신용장 환어음을 이용해 서류교환방식으로 2014년2월24일까지 내국신용장을 결제할 수 있다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2014.4.4.>",
+      "regulation_content": "이 규정은 2014년 4월 2일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.12.28.>",
+      "regulation_content": "이 규정은 2020년 12월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.5.24.>",
+      "regulation_content": "이 규정은 2022년 5월 24일부터 시행한다. (기업은행임직원행동강령 개정에 따른 일괄개정)",
+      "type": "부칙"
+    }
+  ]
+}

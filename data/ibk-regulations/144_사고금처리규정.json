@@ -1,0 +1,214 @@
+{
+  "regulationName": "사고금처리규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 사고로 인하여 은행의 재산상 손실이 발생하였을 경우 이에 대한 정리 및 사고관련 직원에 대한 변상판정을 공정히 처리하기 위하여 그 절차를 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "이 규정은「하자대출에 대한 부책규정」에서 정하고 있는 하자대출 이외의 사고금에 대하여 적용한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(용어의 정의)",
+      "regulation_content": "이 규정에서 사용하고 있는 용어의 정의는 다음과 같다.<개정 2006.4.25., 2016.7.15., 2022.11.11.>\n  1. “사고”라 함은 「감사업무세칙」 제41조에서 규정한 사고를 말한다.\n  2. “사고금”이라 함은 사고로 인한 은행의 금전상 손실을 말한다.\n  3. “사고관련 직원”이라 함은 사고행위를 한 직원과 이를 직·간접적으로 방조한 직원 및 사고발생업무와 관련된 결재자 등을 말한다.\n  4. “업무소관부서”라 함은 사고가 발생한 주업무를 관장하는 부서를 말한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(사고금의 관리)",
+      "regulation_content": "사고금에 대한 관리는 사고발생 부점장이 관리한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(사고금 처리원칙)",
+      "regulation_content": "사고금처리의 원칙은 다음 각호와 같다.\n  1. 직원의 고의 또는 중대한 과실 등으로 인한 사고금은 원칙적으로 사고관련 직원이 변상책임을 진다.\n  2. 천재지변 또는 불가항력으로 인한 사고 및 책임소재가 불명확한 사고금은 은행의 손실로 처리한다.\n  3. 제3자의 행위로 인한 사고금은 별도의 회수대책을 강구하여야 한다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(처리절차)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "검사부장은 사고내용을 조사하여 감사에게 보고하고 변상사항이 있을 경우에는 인사부장에게 필요한 조치를 요구하여야 한다.<개정 2006.4.25., 2007.1.30.>",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "인사부장은 제1항의 요구를 받았을 경우에는 “인사위원회”에 부의하여야 한다.<개정 2006.4.25., 2007.1.30.>",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "외부감독기관 또는 수사기관에서 조사 중이거나 법원에 계류 중인 사안에 대하여는 변상절차 진행을 유예할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(변상판정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "사고관련 직원에 대한 변상판정 시에는 고의·중과실의 정도, 당해사고와 관련된 징계처분 및 평소의 근태상황, 근무성적, 과거 상벌관계 등을 참작하여 결정한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "변상책임이 있다고 판정하였을 때에는 변상책임이 있는 직원, 변상금액, 변상사유 및 변상조건 등을 명확히 하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(변상통보)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "인사부장은 제6조제2항에 의한 변상결정 사항을 사고발생 부점장 및 관련 직원 소속 부점장에게 통보한다.<개정 2006.4.25., 2007.1.30.>",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "제1항의 통보를 접수한 관련직원의 소속 부점장은 변상의무자에게 이를 즉시 통지하여 변상기한 내에 변상토록 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(보고)",
+      "regulation_content": "사고발생 부점장은 변상의 이행여부를 인사부장에게 즉시 보고하여야 한다.<개정 2006.4.25., 2007.1.30.>",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(변상 불이행시의 처리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "사고발생 부점장은 변상금액 구상을 위한 조치를 강구하여야 한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "인사부장은 변상 불이행시 “인사위원회”의 의결을 거쳐 면직처리 등 필요한 조치를 할 수 있다.<개정 2006.4.25., 2007.1.30.>",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제10조제3항",
+          "regulation_content": "준법지원부장은 사고발생 부점장의 민사소송 요청에 대해 소송 수행 등 법률지원을 할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제10조제4항",
+          "regulation_content": "여신관리부장은 민사소송의 결과에 따라 채권추심 절차를 지원할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(사고금의 정리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "사고발생 부점장은 제반 법적절차 또는 변상의 종료 등으로 더 이상의 회수가 불가능하다고 판단되는 사고금에 대하여 업무소관부서의 승인을 받아 손실처리 하되, 위임전결규정에서 정한 직위별 전결기준에 따라 정리한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "삭제<2006.4.25.>",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<1995.12.5.>",
+      "regulation_content": "이 요령은 1995년 12월 15일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.4.25.>",
+      "regulation_content": "이 요령은 2006년 4월 25일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.6.29.>",
+      "regulation_content": "이 규정은 2006년 6월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.1.30.>",
+      "regulation_content": "이 규정은 2007년 1월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2016.7.15.>",
+      "regulation_content": "이 규정은 2016년 7월 15일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2021.5.14.>",
+      "regulation_content": "이 규정은 2021년 5월 14일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.11.11.>",
+      "regulation_content": "이 규정은 2022년 11월 11일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

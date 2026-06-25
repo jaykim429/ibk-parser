@@ -1,0 +1,95 @@
+{
+  "regulationName": "방카슈랑스업무규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은방카슈랑스업무를취급함에있어필요한기본\n적인사항을정함을목적으로한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "방카슈랑스업무는법령등기타특별히정함이있는\n것외에는이규정에서정하는바에의한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(실명거래)",
+      "regulation_content": "보험거래의계약자,피보험자및수익자는실명으로\n하여야한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(비밀보장)",
+      "regulation_content": "계약자로부터서면상의요구나동의를받지아니하고\n는그보험거래의내용에대한정보또는자료를타인에게제공하\n거나누설하여서는아니된다.다만,법률에근거한때에는그러하지\n아니하다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(청약서부본및약관의교부)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "보험계약청약서는 보험계약자,\n피보험자의자필서명을받고그부본을교부하여야한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "보험판매창구에는 보험약관을비치하여야하며약관의중요내용\n을보험계약자에게설명하여야한다.<개정2005.6.17>",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(불공정행위의금지등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "금융기관이용자의권익을부당하게\n침해하거나건전한금융거래질서를 문란케할우려가있는다음각\n호의행위를하여서는아니된다.<개정2005.6.17>\n1.차주의의사에반하여보험료납입방법등보험대리점으로서 판\n매하는보험상품의계약조건등을변경하는행위\n2.보험상품판매시예금금리의특별우대등당해금융기관상품과2003.12.4제정\n2005.6.17제1차개정\n관련된특별이익을제공하는행위\n3.대출과관련하여보험계약의체결을요구하는행위",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "방카슈랑스업무처리와관련하여보험관련법규에서 정하는금지\n행위및준수사항을준수하여보험관계자의이익을보호하고건전\n한보험모집질서를확립하기위해노력한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(기타)",
+      "regulation_content": "이규정의시행에필요한세부사항은따로정하는바에\n의한다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2003.12.4>",
+      "regulation_content": "이규정은2003년9월3일부터시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.6.17>",
+      "regulation_content": "이규정은2005년6월17일부터시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

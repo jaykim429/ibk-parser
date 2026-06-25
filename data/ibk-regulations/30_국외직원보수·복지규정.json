@@ -1,0 +1,330 @@
+{
+  "regulationName": "국외직원보수·복지규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 국외점포(사무소 및 주재원을 포함한다. 이하 같다)에 근무하는 임직원에 대한 보수 및 복지에 관한 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(용어의 정의)",
+      "regulation_content": "이 규정에서 사용되는 용어의 정의는 다음과 같다.<개정 2011.1.13., 2024.2.29.>\n  1. “보수”라 함은 국내보수에 연동한 외화보수 및 제수당을 말한다.\n  2. \"제수당\"은 국외근무수당 , 조정수당, 자녀수당을 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(보수지급의 기준)",
+      "regulation_content": "보수는 가처분소득액을 기준으로 지급함을 원칙으로 한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(외화보수)",
+      "regulation_content": "“외화보수”라 함은 성과연봉제규정과 보수규정에 의하여 지급되는 보수 중 시간외근무수당, 자격수당을 제외한 보수를 외화로 환산한 보수를 말한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(국외근무수당)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "국외근무수당은 국내외간의 물가수준 및 생활여건 등의 차이에 대한 보전으로 지급되는 수당을 말한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "제1항의 국외근무수당에는 본국직원이 취업규칙상의 근무시간을 초과하여 은행업무와 관련하여 영업시업전 또는 종업후에 포괄적, 단체적으로 행하는 연장시간근무와 휴일근무에 대한 근로기준법 제56조의 규정에 의한 보수가 포함된 것으로 보며, 은행은 이 연장시간근무 및 휴일근무에 대한 별도의 보수지급 의무를 면한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2",
+          "related_laws": [
+            {
+              "law_name": "근로기준법",
+              "original_text": "근로기준법 제56조",
+              "jo": "56",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제5조제3항",
+          "regulation_content": "본국 임직원의 국외근무수당은 은행장이 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제5조제4항",
+          "regulation_content": "국외근무수당은 매월 급여지급일에 현지 점포장이 지급한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(특수근무지역)",
+      "regulation_content": "근무조건이 불리한 별표 제1호 해당지역을 특수근무지역이라 한다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(조정수당)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "본국 임직원이 소득세(부가세 및 기타 제세를 포함한다)의 납부로 인하여 보수액에 부족분이 발생하는 경우에는 그 부족분에 해당하는 조정수당을 지급한다. 다만, 국내보수를 기준으로 산출한 국내소득세(기타 제세 포함) 부담으로 인한 부족분에 대하여는 조정수당을 지급하지 아니한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "조정수당은 제1항의 원칙에 따라 은행장이 별도로 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조의2(자녀수당)",
+      "regulation_content": "다음 각 호의 자녀가 있는 본국 임직원에 대하여 별표 제3호에 의하여 자녀수당을 지급한다.\n  1. 본인 및 배우자의 19세 미만의 자녀\n  2. 19세 이상의 자녀 중 장애가 있는 사람\n[본조신설 2024.2.29.]",
+      "type": "조",
+      "jo": "7조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(보수의 선급)",
+      "regulation_content": "해외로 전근 발령을 받은 본국 임직원이 임지에 착임한 경우에는 3월분내에서 국외근무수당을 선급할 수 있다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조",
+      "regulation_content": "삭제<2011.1.13.>",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(사회보장보험가입 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "본국 임직원의 복지후생을 위하여 필요한 경우에는 다음 각호의 1에 해당하는 보험에 가입시킬 수 있다.\n  1. 본국 임직원 및 그 가족에 대한 현지 의료보험\n  2. 현지법령 등에 의하여 그 가입이 강제되어 있는 제보험\n  3. 현지의 전시 또는 이에 준하는 비상사태를 대비한 국내재해보상보험",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "제1항 각호의 보험에 가입한 경우 소요보험료중 은행의 부담비율에 관하여는 현지사정을 고려하여 은행장이 별도로 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(요양)",
+      "regulation_content": "본국 임직원 및 그 가족이 부상 또는 질병으로 인하여 가료를 요할 때에는 별표 제2호에 의한 요양비를 지급할 수 있다. 다만, 다음 각호의 1에 해당하는 경우에는 요양비를 지급하지 아니한다.\n  1. 제10조제1항제1호의 규정에 의하여 의료보험에 가입된 경우\n  2. 은행장이 별도로 정하는 부상 및 질병에 직접 관련이 없는 신체이상에 대한 치료 등\n  3. 요양비 총액이 미화 100불 또는 그 상당액 미만인 경우",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(주택대여)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "본국 임직원에 대하여는 당행 소유주택이나 임차주택을 대여할 수 있다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "주택임차기준은 현지생활수준, 주택사정 및 물가수준 등을 감안하여 은행장이 별도 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조",
+      "regulation_content": "삭제<2023.9.21.>",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(장학금 지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "국외근무직원에 대한 자녀학자금 부담을 지원하기 위하여 다음에 정하는 바에 따라 장학금을 지원할 수 있다.<개정 2009.10.20., 2011.1.13., 2014.11.19., 2022.12.29.>\n  1. 지원대상\n    가. 삭제<2022.12.29.>\n    나. 국외 취학 : 유치원 및 초·중·고등학생 자녀\n  2. 지원범위\n    가. 자녀의 수업료(입학금 제외)\n    나. 자녀의 학교운영지원비(육성회비)",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "삭제<2022.12.29.>",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제15조(현지채용직원의 보수 등)",
+      "regulation_content": "현지채용직원의 보수, 복지 및 퇴직금에 대하여는 현지의 법령, 관례 및 실정을 감안하여 은행장이 정하는 바에 따른다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(보수관계 제규정의 준용)",
+      "regulation_content": "이 규정에 규정된 이외의 사항에 대하여는 국내 보수규정 및 복지규정을 준용한다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(시행세칙)",
+      "regulation_content": "이 규정 시행에 필요한 세칙은 은행장이 따로 정한다.",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조제1항제1호",
+      "type": "조",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<1999.8.26.>",
+      "regulation_content": "이 규정은 1999년 8월 26일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2004.1.2.>",
+      "regulation_content": "이 규정은 2004년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.10.25.>",
+      "regulation_content": "이 규정은 2005년 10월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.2.28.>",
+      "regulation_content": "이 규정은 2006년 2월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.6.30.>",
+      "regulation_content": "이 규정은 2006년 6월 30일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.10.1.>",
+      "regulation_content": "이 규정은 2007년 10월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2008.8.12.>",
+      "regulation_content": "이 규정은 2008년 7월 17일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2009.1.29.>",
+      "regulation_content": "이 규정은 2009년 1월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2009.10.20.>",
+      "regulation_content": "이 규정은 2009년 10월 19일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.1.13.>",
+      "regulation_content": "이 규정은 2010년 1월 13일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2013.4.30.>",
+      "regulation_content": "이 규정은 2013년 4월 30일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.11.19.>",
+      "regulation_content": "이 규정은 2014년 10월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.12.29.>",
+      "regulation_content": "이 규정은 2022년 12월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.9.21.>",
+      "regulation_content": "이 규정은 2023년 9월 21일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.2.29.>",
+      "regulation_content": "이 규정은 2024년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "별표1",
+      "type": "별표",
+      "jo": "1",
+      "regulation_content": "특수근무지역<개정 2011.1.13, 2013.4.30>\n특  수  근  무  지  역\n\n<표>"
+    },
+    {
+      "regulation_name": "별표2",
+      "type": "별표",
+      "jo": "2",
+      "regulation_content": "요양비지급한도표<개정 2011.1.13>\n요 양 비 지 급 한 도 표\n\n<표>"
+    },
+    {
+      "regulation_name": "별표3",
+      "type": "별표",
+      "jo": "3",
+      "regulation_content": "자녀수당표<신설 2024.2.29.>\n자녀수당표\n\n\n<표>\n\n   주) 동일인의 사유로 지급 대상 직원이 2인이상일 때에는 그 중 1인에게만 수당을 지급한다."
+    }
+  ]
+}

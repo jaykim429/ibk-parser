@@ -1,0 +1,164 @@
+{
+  "regulationName": "퇴직금시행세칙",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "퇴직금규정(이하 “규정”이라 함)의 시행에 필요한 세부적인 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조",
+      "regulation_content": "삭제",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(평균임금의 산정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "기본급, 직무급, 본봉, 직급수당, 직책수당, 시간외근무수당, 자격수당 , 격지근무수당 및 당직비는 퇴직사유가 발생한 날 이전 3월간 지급액을 3월로 나눈 금액을 평균임금으로 한다.<개정 2010.12.31., 2012.9.17., 2020.9.4.>",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "평가성과급, 상여금, 성과상여금, 업적성과급, 연차휴가보상금은 퇴직일 이전 1년간 지급액을 12월로 나눈 금액을 평균임금으로 한다.<개정 2010.12.31., 2012.9.17., 2021.9.16.>",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조",
+      "regulation_content": "삭제",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조",
+      "regulation_content": "삭제",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(월평균임금의 산정)",
+      "regulation_content": "규정 제8조제3항에 적용할 월평균임금은 기본급, 직무급, 평가성과급, 본봉, 직급수당, 직책수당, 시간외근무수당, 자격수당, 격지근무수당, 상여금, 성과상여금, 연차휴가보상금, 당직비의 퇴직일 이전 1년간 지급액을 12월로 나눈 금액으로 한다.<개정 2010.12.31., 2020.9.4., 2021.9.16.>",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(퇴직금 최저지급액)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "퇴직금은 반드시 규정 제4조에 의거 산출하고 산출된 금액과 규정 제9조에 의한 금액과를 비교하여 많은 금액으로 지급한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "보수지급이 전액 중지된 자 및 통상임금보다 적게 지급된 자의 평균임금은 통상임금으로 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제7조제3항",
+          "regulation_content": "근로기준법에 의한 근속기간중 1년미만 월계산방법에 있어 월미만일수는 1월로 계산한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "3",
+          "related_laws": [
+            {
+              "law_name": "근로기준법",
+              "original_text": "근로기준법에",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(승격직원의 퇴직금산정)",
+      "regulation_content": "승격으로 인하여 행원이상이 된 자에 대하여는 승격전 근속연수와 승격후 근속연수를 합산한 연수를 근속연수(1년미만 단수 포함)로 하여 퇴직금을 산정한다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조",
+      "regulation_content": "삭제<2019.10.24.>",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(퇴직금계산)",
+      "regulation_content": "퇴직금은 퇴직금규정 및 동 시행세칙에 의거 계산한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2000.12.30.>",
+      "regulation_content": "이 요강은 2001년 1월 2일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2003.2.28.>",
+      "regulation_content": "이 요강은 2003년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2006.6.30.>",
+      "regulation_content": "이 세칙은 2006년 6월 30일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2010.12.31.>",
+      "regulation_content": "이 세칙은 2011년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2012.9.17.>",
+      "regulation_content": "이 세칙은 2012년 7월 26일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2019.10.24.>",
+      "regulation_content": "이 세칙은 2019년 10월 24일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.9.4.>",
+      "regulation_content": "이 세칙은 2020년 7월 30일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2021.9.16.>",
+      "regulation_content": "이 세칙은 2021년 6월 24일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

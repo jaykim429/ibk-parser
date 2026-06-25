@@ -1,0 +1,272 @@
+{
+  "regulationName": "사료관리규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 당행의 사료관리에 관한 제반사항을 규정함으로써 당행의 역사와 관련된 실증자료를 계속적으로 보존관리하여 기은문화 창달에 기여함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(사료의 정의)",
+      "regulation_content": "사료라 함은 당행의 역사를 개관, 저명하는데 필요한 제자료중 보존 및 연구가치가 있다고 인정되어 지정된 자료를 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(사료의 관리자)",
+      "regulation_content": "사료는 IBK경제연구소장(이하 “주무부서장”이라 한다)이 총괄 관리하며 각 부점에 보관중인 사료는 해당 부점장이 관리토록 한다.<개정 2006.6.26., 2010.5.18.>",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(수집대상 자료)",
+      "regulation_content": "수집대상자료는 다음 각호의 대상물중 사료로서 가치가 있다고 인정되는 것으로 한다.\n  1. 중요문서류\n   설립관련 문서, 차관관련협정서, 각종 계약서, 제도제정 관련문서, 결산서류, 경영관계서류 등\n  2. 증서 및 장표류\n   원장, 통장, 수표, 증서, 전표 등\n  3. 집기류\n   사무기기, 비품, 간판 등\n  4. 간행물\n   규정집, 정기간행물, 조사연구보고서, 기업지도 및 업무관련 책자, 홍보용책자 등\n  5. 인사, 교육관계물\n   직원명부, 사령장, 제증명서, 연수관계자료 등\n  6. 홍보물\n   리프렛(예금, 대출관계안내 등), 포스타, 기념품, 사은품 등\n  7. 시상관계물\n   상장, 상패, 트로피, 감사패, 우승기 등\n  8. 사진류\n   주요인사 사진, 회의 사진, 점포 및 연수관련 사진, 각종행사 관련 사진 및 영상 등\n  9. 기타\n   기타 사료로서 보존가치가 있다고 판단되는 자료",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(부점자료 송부)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "각 부점에서는 제4조의 수집대상자료를 수시로 주무부서에 통보하고 주무부서가 지정한 자료는 자료목록과 함께 송부하여야 한다. 다만, 원본의 송부가 곤란한 경우 해당자료의 사진 또는 복사본을 대신 송부할 수 있으며 후일 송부가 가능하게 될 때 이를 주무부서장에게 송부하여야 한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "비밀에 속하는 문서는 비밀취급의 뜻을 표시하여 주무부서장 앞으로 송부하여야 한다. 다만, 비밀유지상 송부가 곤란한 자료는 자료의 작성일자, 문서번호, 문서건명을 우선 통지하고 후일 송부가 가능하게 될 때 이를 주무부서장에게 송부하여야 한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제5조제3항",
+          "regulation_content": "주무부서장은 수집대상자료가 있음을 발견하였을 때 해당자료의 송부를 각 부점장에게 요청할 수 있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(외부자료의 수집)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "주무부서장은 신문, 관보, 잡지 등에 보도된 당행 관련 기사중 사료로서 가치가 있다고 인정되는 자료를 수집하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "주무부서장은 개인 또는 연고자가 소장하고 있는 자료중 사료적 가치가 있다고 인정되는 것은 대가를 지불하고 수집할 수 있다.<개정 1997.11.29., 2006.6.26.>",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(자료의 접수)",
+      "regulation_content": "수집된 자료는 일련번호를 부번하여 자료접수대장에 접수한다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(사료의 지정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "주무부서장은 수집된 자료를 검토하여 사료로서의 가치가 있다고 인정되는 것은 사료로 지정할 수 있다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "사료로 지정된 자료에 대해서는 해당부점에 지정사실을 통보하며 제5조제1항 단서에 의해 원본 송부가 곤란한 경우의 해당자료는 해당부점에 보관사실을 확인한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제8조제3항",
+          "regulation_content": "주요사료로 인정된 사료대상물이 보존되어 있지 않았거나 복원이 필요한 경우 이를 복원하여 사료로 지정할 수 있다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(사료의 등록)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "지정된 사료는 고유번호를 부여하여 사료등록대장에 등록한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "원본을 수집하지 못하고 각 부점에 보관중인 사료는 사료등록대장에 보관부점, 사료내용, 발생연대 등을 기재하여 소재를 명확히 하여야 한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(사료의 분류)",
+      "regulation_content": "사료의 분류는 열람에 편리하도록 내용별, 유형별로 분류한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(사료의 보존)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "사료는 분실, 훼손, 변질을 방지할 수 있도록 예방조치를 강구하여 영구 보존토록 한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "사료는 원형을 유지하여야 하며 원형을 변형시키지 아니하는 범위내에서 적절히 편집, 제본하여 보존할 수 있다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제11조제3항",
+          "regulation_content": "지정된 사료에 대해서는 지정번호, 지정년월일을 표시하고 보존관리에 철저를 기한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(점검 및 보수)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "주무부서는 연1회이상 사료등록대장과 현물을 대조하여 분실 및 훼손여부를 점검하여야 한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "사료가 훼손, 변경되어 원형유지가 곤란하다고 인정될 때에는 이를 보수하거나 적절한 관리조치를 취하여야 한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조(열람)",
+      "regulation_content": "사료의 열람은 주무부서장의 승낙을 받아 할 수 있다.",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(사료의 폐기)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "주무부서장은 다음 각호의 사유가 발생할 때에는 해당 사료를 폐기할 수 있다.\n  1. 분실되었거나 훼손되었을 때\n  2. 원본이나 실물이 수집되었을 때\n  3. 동종의 사료가 수종 있을 경우 그 중 사료적 가치가 적은 것",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "폐기된 사료는 사료등록대장에 폐기사유를 주기하여야 한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제15조(사료실)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": [
+        {
+          "regulation_name": "제15조제1항",
+          "regulation_content": "사료의 전시 및 보관, 관리를 위하여 사료실을 설치 운영한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제15조제2항",
+          "regulation_content": "사료실은 공개함을 원칙으로 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<1991.6.17.>",
+      "regulation_content": "이 요령은 1991년 6월 17일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<1997.11.29.>",
+      "regulation_content": "이 요령은 1997년 11월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.6.26.>",
+      "regulation_content": "이 규정은 2006년 6월 26일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2010.5.18.>",
+      "regulation_content": "이 규정은 2010년 5월 18일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

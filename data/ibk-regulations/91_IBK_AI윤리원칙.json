@@ -1,0 +1,53 @@
+{
+  "regulationName": "IBK AI윤리원칙",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(인간중심 활용)",
+      "regulation_content": "인간존엄과 권리존중을 AI의 최우선 가치로 삼아 금융서비스를 혁신하고 고객만족을 더욱 강화하여야 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(투명성 및 책임성 강화)",
+      "regulation_content": "AI에 의한 의사결정 과정을 투명하고 합리적으로 설계하고, 그 결과에 대한 책임도 충실히 이행하여야 한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(차별금지 및 다양성 존중)",
+      "regulation_content": "AI가 성별, 인종, 연령, 장애 여부 등에 따라 고객을 차별하지 않고 다양성을 존중하도록 해야 한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(고객 프라이버시 보호)",
+      "regulation_content": "고객 정보를 엄격히 보호하고, 데이터 활용은 고객동의와 법적기준을 철저히 준수하여야 한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(사회적 가치 제고)",
+      "regulation_content": "AI를 통해 사회적 가치와 공익을 증진하고, 금융 포용성을 확대하도록 해야 한다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(안전성 확보)",
+      "regulation_content": "AI로 인해 고객과 은행에 위험이 발생하지 않도록 안전하고 견고하게 운영하여야 한다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2024.1.12.>",
+      "regulation_content": "이 원칙은 2024년 1월 12일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

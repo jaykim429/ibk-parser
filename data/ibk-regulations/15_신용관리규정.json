@@ -1,0 +1,151 @@
+{
+  "regulationName": "신용관리규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은여신건전성유지에필요한기본적사항을정함\n을목적으로한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "신용관리업무는 은행법등의제법령및은행업감독\n업무시행세칙등감독기관의정함이있는경우와따로정한것이\n외에는이규정이정하는바에의한다.",
+      "type": "조",
+      "jo": "2",
+      "related_laws": [
+        {
+          "law_name": "은행법",
+          "original_text": "은행법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "여신담당자는여신의취급시점부터회수시점까지\n여신의건전성관리를위한신용관리업무가 원활히수행되도록노력\n하여야한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "신용관리업무를 통할하는주무부서와신용관리업무를 수행하는\n실무부서는그역할이유기적으로이루어지도록상호협조하여야\n한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(용어의정의)",
+      "regulation_content": "이규정에서사용하는용어의정의는다음과같\n다.\n1.“신용관리업무”란여신취급시점부터 회수시점까지여신고객의부\n실가능성을면밀하게점검․관리하여여신건전성을제고하는업\n무를말한다.\n2.“주무부서”란신용관리업무를 통할․조정하는ControlTower기\n능을담당하는부서로서여신기획부를말한다.2010.5.7제정\n3.“실무부서”란주무부서이외에신용관리업무를 수행하는영업점,\n여신심사부․여신심사센터등을말한다.\n4.“신용관리업무담당자 ”란주무부서의조기경보담당자 및영업점,\n여신심사부․여신심사센터의 심사역등실무부서의여신업무취급\n자를말한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(신용관리업무의범위)",
+      "regulation_content": "신용관리업무의범위는다음과같다.\n1.중․장기여신정책에부합하는은행전체의여신건전성부문 목표\n설정․관리\n2.여신건전성관련주요여신제도의기획및적정성검토\n3.여신건전성관련주요정보의분석\n4.여신고객의신용위험변동가능성에대한모니터링및분석\n5.조기경보및Watchlist기업점검제도의기획및관리\n6.Change-up을통한정상화가능여부검토및선정의뢰\n7.한계기업의선정및관리\n제2장신용관리업무의 통할및관리",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(주무부서)",
+      "regulation_content": "주무부서는신용관리업무를 통할․조정하는Control\nTower체제를확립하며다음과같은역할을수행한다.\n1.여신건전성부문목표설정및관리방안수립\n2.여신건전성관련실무부서의통할․조정\n3.연체대출금,부도현황분석및관리방안수립\n4.여신건전성관련대․내외주요정보수집및경영진보고\n5.조기경보(WarningSign)전파및Watchlist기업선정\n6.여신건전성관련관리방안시행결과에대한상시Feedback\n7.신규부도및연체발생기업에대한보고",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(실무부서)",
+      "regulation_content": "실무부서는다음과같은역할을수행한다.\n1.여신고객에대한정보수집및등록\n2.여신고객의신용위험변동가능성에대한모니터링\n3.부도기업발생,이상징후동향등에대한주무부서와정보공유\n4.조기경보및Watchlist기업점검업무수행",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(신용관리협의회)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "사전적여신건전성관리를위해“신용관리\n협의회”를운영한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "협의회는여신기획부장,여신기획부신용관리팀장,실무부서부서\n장,실무부서팀장으로구성하며협의회의장은여신기획부장,간사\n는신용관리팀장으로 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제8조제3항",
+          "regulation_content": "협의회는여신기획부장이 필요시개최하며,은행전체의여신건전\n성부문목표를설정하고관리방안을수립하기위해주무부서와실무\n부서간의상호정보를공유한다.\n제3장기타",
+          "type": "항",
+          "jo": "8",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(기밀유지)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "신용관리업무담당자는 업무처리과정에서알게된\n여신고객에대한정보와관련자료를다른목적으로사용하거나이\n를다른사람에게누설하여서는아니된다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "신용분석보고서 등기업신용위험과 관련된자료를열람한자는\n이를다른목적에사용하거나행외에유출하여서는아니된다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(포상)",
+      "regulation_content": "주무부서장은여신고객의신용위험변화의조기발견과\n신용관리업무의 성실한수행으로부실예방에기여한직원을포상\n추천할수있다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(사후관리)",
+      "regulation_content": "주무부서장은업무상고의또는중대한과실로인해신용관리업무를\n소홀히하여부실화가확대된경우점검결과보고서사본을검사\n부에송부할수있다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2010.5.7>",
+      "regulation_content": "이규정은2010년5월10일부터시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

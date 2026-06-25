@@ -1,0 +1,293 @@
+{
+  "regulationName": "임원연봉규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 임원의 연봉에 관한 사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(연봉)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "상임임원에 대한 연봉은「기본연봉」과 「업적연봉」의 연간 지급액을 말한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "사외이사의 연봉은 은행장이 별도로 정한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(한도)",
+      "regulation_content": "이 규정에 의하여 지급되는 연봉 총액은 주주총회에서 승인된 보수한도를 초과 할 수 없다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(기본연봉)",
+      "regulation_content": "기본연봉은 별표 1과 같다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "기본연봉의 12분의 1을 매월 21일에 지급한다. 다만, 지급일이 휴일인 때에는 그전 영업일에 지급한다. 이 경우 기본연봉에는 월 20만원의 중식비가 포함된 것으로 본다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "기본연봉은 임원 선임일과 퇴임일을 기준으로 일할 계산한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(업적연봉)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "업적연봉은 평가대상연도 기본연봉에 지급률을 곱한 금액으로 한다. 다만, 지급 최고한도는 평가대상연도 기본연봉에 별표 2의 지급률 곱한 금액을 초과할 수 없다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "업적연봉 지급은 보수위원회의 결의로 정한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "업적연봉의 평가대상기간은 매 회계연도 초일부터 말일까지로 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "업적연봉의 지급은 금융공공기관 경영실적 평가 확정 이후 1개월이내 지급 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "업적연봉은 선임일과 퇴임일을 기준으로 일할 계산한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제7조제3항",
+          "regulation_content": "상임임원의 직위 변동의 경우 업적연봉은 각 직위별 재임기간에 따라 구분하여 계산하되, 월 미만 단수는 차상위직 재임기간에 합산하여 지급한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(상임임원에 대한 준용규정)",
+      "regulation_content": "이 규정 시행을 위하여 필요한 경우 보수규정 및 복지규정을 준용할 수 있다. 다만, 복지규정 제11조, 제12조, 제16조, 제21조 내지 제24조의 규정은 제외한다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2000.8.2.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2000년 1월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2000.8.2.> 제2조(폐지규정)",
+      "regulation_content": "이 규정 시행과 동시에 「임원보수규정」은 이를 폐지한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2000.8.2.> 제3조(경과조치)",
+      "regulation_content": "1998년 12월 31일까지의 임원퇴직금 산정시 적용할 “퇴직당시의 월본봉”은 1998년 12월 31일 현재의 월본봉으로 한다.",
+      "type": "부칙",
+      "jo": "3"
+    },
+    {
+      "regulation_name": "부칙<2001.3.31.>",
+      "regulation_content": "이 규정은 2001년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2002.4.9.>",
+      "regulation_content": "이 규정은 2002년 3월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2003.4.9.>",
+      "regulation_content": "1. (시행일) 이 규정은 2003년 1월 1일부터 시행한다.\n  2. (적용례) 이 규정은 2002년도 평가분부터 적용한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.5.2.>",
+      "regulation_content": "이 규정은 2005년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2008.12.31.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2009년 1월 1일부터 시행한다. 다만, 2008년 6월 1일 이후 선임된 감사에 대하여는 선임 일부터 적용한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2008.12.31.> 제2조(적용례)",
+      "regulation_content": "이 규정은 2008년도분 업적 평가부터 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2010.12.31.>",
+      "regulation_content": "이 규정은 2011년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.3.25.>",
+      "regulation_content": "이 규정은 2011년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2012.1.30.>",
+      "regulation_content": "이 규정은 2012년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2013.1.28.>",
+      "regulation_content": "이 규정은 2013년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.3.21.>",
+      "regulation_content": "이 규정은 2014년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2015.3.27.>",
+      "regulation_content": "이 규정은 2015년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2016.12.29.>",
+      "regulation_content": "이 규정은 2016년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2017.5.12.>",
+      "regulation_content": "이 규정은 2017년 5월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2017.12.7.>",
+      "regulation_content": "이 규정은 2017년 1월 1일부터 시행한다. 단, 2017년 12월 31일까지는 종전의 규정에 따라 연봉을 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.2.28.>",
+      "regulation_content": "이 규정은 2018년 1월 1일부터 시행한다. 단, 2018년 12월 31일까지는 2017년도 기본연봉에서 2.0% 인상된 기본연봉을 적용하여 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.12.31.>",
+      "regulation_content": "이 규정은 2018년 12월 31일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2019.2.28.>",
+      "regulation_content": "이 규정은 2019년 1월 1일부터 시행한다. 단, 2019년 12월 31일까지는 전년도 상한에 따른 기본연봉을 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.3.4.>",
+      "regulation_content": "이 규정은 2020년 1월 1일부터 시행한다. 단, 2020년 12월 31일까지는 전년도 상한에 따른 기본연봉을 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2021.3.3.>",
+      "regulation_content": "이 규정은 2021년 1월 1일부터 시행한다. 단, 2021년 12월 31일까지는 전년도 상한에 따른 기본연봉을 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.2.25.>",
+      "regulation_content": "이 규정은 2022년 1월 1일부터 시행한다. 단, 2022년 12월 31일까지는 전년도 상한에 따른 기본연봉을 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.2.23.>",
+      "regulation_content": "이 규정은 2023년 1월 1일부터 시행한다. 단, 2023년 12월 31일까지는 전년도 상한에 따른 기본연봉을 지급한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.12.28.>",
+      "regulation_content": "이 규정은 2023년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.2.29.>",
+      "regulation_content": "이 규정은 2024년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2025.2.27.>",
+      "regulation_content": "이 규정은 2025년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "별표1",
+      "type": "별표",
+      "jo": "1",
+      "regulation_content": "기본연봉표<개정 2010.12.31., 2011.3.25., 2012.1.30., 2013.1.28., 2014.3.21., 2015.3.27., 2016.12.29., 2017.12.7., 2018.2.28., 2019.2.28., 2020.3.4., 2021.3.3., 2022.2.25., 2023.2.23., 2024.2.29., 2025.2.27.>\n\n\n기 본 연 봉 표\n\n\n<표>"
+    },
+    {
+      "regulation_name": "별표2",
+      "type": "별표",
+      "jo": "2",
+      "regulation_content": "업적연봉 지급 최고한도<개정 2014.3.21., 2022.2.25.>\n\n업적연봉 지급 최고한도\n\n\n<표>"
+    }
+  ]
+}

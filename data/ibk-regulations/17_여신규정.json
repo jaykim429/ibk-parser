@@ -1,0 +1,368 @@
+{
+  "regulationName": "여신규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은여신업무취급에관한기본적사항을정함을목적\n으로한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "여신업무는은행법등제법령,금융통화운영위원회 및\n감독기관등의정함이있는경우와따로정하는것이외에는이규정이\n정하는바에의한다.",
+      "type": "조",
+      "jo": "2",
+      "related_laws": [
+        {
+          "law_name": "은행법",
+          "original_text": "은행법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(여신취급자행위기준)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "여신취급자는기은윤리강령을철저히준수\n하여야하며,불건전한여신취급을하여서는아니된다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "여신취급자는올바른금융관행과건전한상식에의한합리적판단에\n따라선량한관리자의주의의무를다하여여신을취급하여야한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "여신취급자는여신업무를수행하는과정에서고객으로부터습득한\n정보를외부에누설하거나제공하여서는아니된다.다만,본인이동의하\n는경우와관계법령에의거제공하는경우에는그러하지아니하다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(여신운용방향)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "여신은국민경제의균형적발전,기업의기술개발\n및생산성향상촉진과국민생활의안정에기여하도록운용한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "여신은여신정책에부합되고자금배분이효율적으로될수있도록1993.4.15제정\n2002.3.20제15차개정\n(전면개정)\n2003.3.3제16차개정\n2004.3.8제17차개정\n2004.4.27제18차개정\n2006.3.29제19차개정\n2008.2.19제20차개정\n(전면개정)\n2011.7.8제21차개정\n2014.9.11제22차개정\n운용한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "여신을취급할때에는고객의재무상태,금융거래상황,사업전망등\n종합적인신용분석및신용평가를실시하고자금의용도,소요자금,소\n요기간및상환능력등을검토하여적정성및건전성을바탕으로수익\n성을제고하여야한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제4조제4항",
+          "regulation_content": "사업성이양호하고신용이확실하다고인정되는고객에대하여는다\n음각호의방법으로신용여신을적극지원한다.\n1.여신업무취급세칙에의거선정된우선지원기업및기업여신한도기업\n에대한신용여신취급\n2.기업여신상품취급세칙및가계대출상품취급세칙등개별상품에서정\n한신용여신취급\n3.후취담보적격시설자금대출에 의한신용취급\n4.고객별신용도를감안한개별신용여신취급\n5.따로정한바에의한신용여신취급",
+          "type": "항",
+          "jo": "4",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제4조제5항",
+          "regulation_content": "제4항의규정에의거신용취급한여신에대하여는사후에부실화된\n경우에도그취급상고의나중과실이없는한,신용취급을사유로취급\n직원의책임을묻지아니한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "5"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(여신대상자)",
+      "regulation_content": "여신대상자는다음과같이구분한다.\n1.당행법제2조에의한중소기업자\n2.당행법제57조에의한중소기업자이외의자",
+      "type": "조",
+      "jo": "5",
+      "related_laws": [
+        {
+          "law_name": "중소기업은행법",
+          "original_text": "당행법제2조",
+          "jo": "2",
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(자금의용도)",
+      "regulation_content": "대출금은여신대상자에따라용도별로다음과같이구\n분․운용한다.\n1.기업에대한운전및시설자금\n2.개인에대한가계자금\n3.지방자치단체등에대한공공및기타자금",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(여신비율)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "소요자금에대한여신비율은다음과같다.\n1.운전자금:소요자금범위내\n2.시설자금:소요자금의80%범위내",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "제1항에불구하고다음각호의경우에는예외로한다.\n1.여신비율을따로정한대출\n2.여신전액을예금또는지급보증서로담보하는시설자금대출\n3.여신전액을80%이상부분신용보증서(해지조건부제외)로담보하는\n시설자금대출\n4.본부의승인을받은대출",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(동일인에대한대출한도)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "「업무방법서」제8조제1호에의한중소\n기업자에대한동일인당운전자금대출한도는400억원(우선지원기업은\n450억원)으로한다.<개정2014.9.11>",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "제1항에의한운전자금대출한도 산정시「업무방법서」제8조제4호\n각목에해당하는대출은제외한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(대출형식)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "대출은그형식에따라증서대출,당좌대출및할인어\n음등으로구분한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "당좌대출및할인어음을제외한기업대출과가계대출은증서대출로\n취급함을원칙으로한다.\n제2장여신의취급",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(여신취급점)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "기업에대한여신은고객의주사무소(법인은본사,\n개인은사업장기준)소재지인근영업점에서취급함을원칙으로한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "가계에대한여신은고객의직장소재지또는거주지인근영업점에\n서취급함을원칙으로한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제10조제3항",
+          "regulation_content": "제1항및제2항에불구하고다음각호의1에해당하는경우에는예\n외로할수있다.\n1.예․적금등수신연계대출인경우\n2.거래중소기업임직원에대한대출인경우\n3.스피드전자서명대출을 취급하는경우\n4.영업점장이부득이하다고인정하는경우\n5.따로정한경우",
+          "type": "항",
+          "jo": "10",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(여신상담및결정)",
+      "regulation_content": "고객과여신상담을하는경우에는여신대상자\n의자격여부,사업성,신용도,채권보전,자금용도및타당성등을종합\n적으로검토하여위임전결규정등에서정한바에따라전결권자가결정\n한다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(채권보전)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "여신을취급할때에는따로정한바에따라물적담보\n를취득하거나신용취급금액및고객신용을감안하여연대보증인을입\n보하는등채권보전조치를취하여야한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "제1항에불구하고따로정한경우에는연대보증인입보를생략할수\n있다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조(여신기간및상환방법)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": [
+        {
+          "regulation_name": "제13조제1항",
+          "regulation_content": "여신기간은고객의신용도,상환능력,자\n금의회전기간,자금용도등을종합적으로감안하여적정한기간범위내\n에서운용한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제13조제2항",
+          "regulation_content": "대출금의상환방법은차주의상환계획및상환능력,자금의회전기간\n등을감안하여일시상환,원금균등분할상환 ,원리금균등분할상환 및수\n시상환등으로구분․운용한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조(이자및지연배상금)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "대출금의이자는고객의신용도,상환능력,\n상환방법,자금용도및대출기간등을감안하여결정하며이자의율,계\n산및수입방법등은따로정한바에따른다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "원금및이자등이기일에상환되지않은여신(은행여신거래기본약관\n에의거기한의이익이상실된여신포함)에대하여는지연배상금을받\n으며지연배상금의율,계산및수입방법등은따로정한바에따른다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제15조(여신약정)",
+      "regulation_content": "여신약정은은행여신거래기본약관 ,거래별약정서,담보관\n계약정서및추가약정서등에의하여체결하되,여신약정시에는 주요내\n용을채무관계자에게 충분히설명하고관련약관및약정서사본을교부\n한다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(비용부담)",
+      "regulation_content": "근저당권설정및담보물평가를위한비용은은행부담,\n기타비용은고객부담으로함을원칙으로한다.<개정2011.7.8>\n제3장사후관리",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(사후관리)",
+      "regulation_content": "여신의건전성제고를위하여고객의신용도및담보물\n변동상황,사업성,거래상황등에대하여정기․수시로관리하고,필요한\n경우에는적절한조치를취한다.",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제18조(여신의회수)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": [
+        {
+          "regulation_name": "제18조제1항",
+          "regulation_content": "여신은기일내에회수되도록노력하며,기일내회\n수되지아니한연체채권에대하여는조기회수에필요한조치를취한다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제18조제2항",
+          "regulation_content": "여신및이와관련된채권은가지급금이자,가지급금,지연배상금,이\n자,원금의순으로회수한다.다만,따로정한경우에는그러하지아니하\n다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<2008.2.19> 제1조(시행일)",
+      "regulation_content": "이규정은2008년2월25일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2008.2.19> 제2조(경과조치)",
+      "regulation_content": "이규정시행일이전여신상담이완료된경우에는종전\n규정을적용할수있다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2011.7.8> 제1조(시행일)",
+      "regulation_content": "이규정은2011년7월1일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2011.7.8> 제2조(경과조치)",
+      "regulation_content": "이규정시행일이전여신상담이완료된경우에는종전\n규정을적용할수있다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2014.9.11>",
+      "regulation_content": "이규정은2014년9월12일부터시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

@@ -1,0 +1,819 @@
+{
+  "regulationName": "감사직무규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은 「중소기업은행법 」 및「공공감사에관한법률」 등\n관련법령에따라감사의직무수행기준과절차를정함으로써내부통제제도\n의내실화 , 금융관련리스크최소화 , 금융소비자보호, 은행의경영합리화등1997.11.27.         제정\n2001. 7. 2.   제1차 개정\n2001.12.31.   제2차 개정\n2002. 8. 5.   제3차 개정\n            (전부개정 )\n2004. 8.30.   제4차 개정\n2005. 3. 7.   제5차 개정\n2005. 6.10.   제6차 개정\n2007.12.24.   제7차 개정\n2011. 6.30.   제8차 개정\n2011. 9. 5.   제9차 개정\n2012. 5.29.  제10차 개정\n2012. 7. 6.  제11차 개정\n2013. 3.22.  제12차 개정\n2013. 8.22.  제13차 개정\n2013.12.27.  제14차 개정\n2014. 7. 1.  제15차 개정\n2015. 7.14.  제16차 개정\n2016. 7.15.  제17차 개정\n2018. 7. 2.  제18차 개정\n2019. 5.28.  제19차 개정\n2019.10.17.  제20차 개정\n2020. 6. 1.  제21차 개정\n2020. 8.26.  제22차 개정\n2020.12.31.  제23차 개정\n2021.11.18.  제24차 개정\n2022.11.11.  제25차 개정\n(전부개정 )\n2023. 8. 7.  제26차 개정\n2024. 3.29.  제27차 개정에기여하여정책금융기관으로서 국민의신뢰를제고함을목적으로한다.",
+      "type": "조",
+      "jo": "1",
+      "related_laws": [
+        {
+          "law_name": "중소기업은행법",
+          "original_text": "「중소기업은행법 」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "공공감사에관한법률",
+          "original_text": "「공공감사에관한법률」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(정의)",
+      "regulation_content": "이규정에서사용하는용어의뜻은다음과같다.\n  1. “감사인 ”이란감사의지시또는위임을받아감사업무를수행하는자를\n말한다 .\n  2. “대외기관 ”이란당행을관리ㆍ감독ㆍ지원ㆍ감사하는정부기관으로국회, 감\n사원, 기획재정부 , 금융위원회 , 중소벤처기업부 , 금융감독원등을말한다 .\n  3. “경영진 ”이란은행장 , 전무이사 , 이사, 집행간부등을말한다 .",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(대상)",
+      "regulation_content": "감사대상은다음각호와같다.\n  1. 「정관」에따른중소기업은행\n  2. 「출자기업체관리규정 」에따른은행출자기업체\n  3. 「국외현지법인금융기관규정 」에따른은행출자국외현지법인금융기관",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(독립의원칙)",
+      "regulation_content": "감사는은행의의결기관및집행기관으로부터 독립된위\n치에서그직무를수행하여야한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(관계법령등의적용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "이규정에서정하지않는사항은 「중소기업은행\n법」, 「공공감사에관한법률」, 「공공기관의운영에관한법률」, 「금융회\n사의지배구조에관한법률」 등관계법령에따른다 .",
+          "type": "항",
+          "jo": "5",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "중소기업은행법",
+              "original_text": "「중소기업은행법」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            },
+            {
+              "law_name": "공공감사에관한법률",
+              "original_text": "「공공감사에관한법률」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            },
+            {
+              "law_name": "공공기관의운영에관한법률",
+              "original_text": "「공공기관의운영에관한법률」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            },
+            {
+              "law_name": "금융회사의지배구조에관한법률",
+              "original_text": "「금융회사의지배구조에관한법률」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "다른내규가이규정과상충되는경우에는이규정을우선해서적용\n한다.\n제2장감사",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(직무)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "감사는내부통제제도를내실화하기위해독립적이고객관적인검증\n또는컨설팅등감사업무를통할하고은행의가치제고를위해노력한다 .",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "제1항에따른감사가수행할직무는다음각호와같다. \n  1. 감사계획의수립, 집행, 평가\n  2. 내부통제시스템에 대한점검및개선방안제시\n  3. 감사의실시, 결과조치등감사업무수행에관한사항\n  4. 경영현안등에대한현상진단및대안제시\n  5. 외부감사인의선정및감사활동에대한평가\n  6. 자금세탁방지업무, 내부회계관리제도에대한점검\n  7. 감사인의보직, 전보등인사시사전협의및근무평정\n  8. 금융사고근절을위한예방활동\n  9. 기타감사업무수행에관한사항",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "경영진에게보고또는결재를받은중요문서가있을경우해당부서\n는이를감사가사후공람토록하여야한다. 다만, 사전에감사를실시하\n는일상감사문서는제외한다 .",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제6조제4항",
+          "regulation_content": "감사는제2항에대한운영을따로정하여검사부장에게위임할수있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제6조제5항",
+          "regulation_content": "제2항제5호의외부감사인선정에필요한사항은따로정한다 .",
+          "type": "항",
+          "jo": "6",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제6조제6항",
+          "regulation_content": "감사가휴가, 출장등의사유로감사직무를수행할수없는경우에는검사\n부장이그직무를대행한다 .제7조(권한)",
+          "type": "항",
+          "jo": "6",
+          "hang": "6"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(의무)",
+      "regulation_content": "감사는감사를행함에있어다음각호의사항을이행하여야한다.\n  1. 공과사를엄격히구별하고공정하게감사하여야한다.\n  2. 직무상알게된기밀을정당한이유없이누설하거나직무목적이외로사\n용할수없다.\n  3. 직무수행에있어관련법령등에따라사실과증거에의하여그직무를  행\n하여야하며, 감사사항에대하여는충분한기록과입증자료를확보하여야\n한다.\n  4. 디지털화등변화하는금융환경을지속적으로반영하여선도적인감사\n를할수있도록감사체계의선진화를위해노력하여야한다. \n제3장감사기구\n제1절감사전담기구및감사인",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(감사전담기구 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "감사는직무수행을위하여감사직속으로감사전담\n기구인검사부를두고감사인을배치한다 .",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "감사는감사업무를효율적으로수행할수있는적정규모의인원및예\n산을확보하여야하며은행장에게필요한지원을요구할수있다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제9조제3항",
+          "regulation_content": "「예산규정 」제3조에따른예산관리자는감사활동에관한예산을편성\n할때에는검사부의독립성을최대한존중하여야한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제9조제4항",
+          "regulation_content": "검사부에는감사업무수행에필요한전문감사인력을충분히보유하여야한다. \n전문감사인력이라함은공인회계사 (CPA), 공인내부감사사 (CIA),정보시스템감사\n사(CISA),공인정보시스템보안전문가 (CISSP), 국제공인재무분석가 (CFA), 자금세\n탁방지전문가 (CAMS), 변호사 , 박사학위소지자등을말한다 .",
+          "type": "항",
+          "jo": "9",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제9조제5항",
+          "regulation_content": "제4항의전문감사인력과 IT·리스크등의전문분야감사인은해당분야의감사\n를수행하는것을원칙으로한다. 다만, 감사가인정하는경우예외적으로운영할수\n있다. <신설2023.8.7.><종전제5항은제6항으로이동2023.8.7.>",
+          "type": "항",
+          "jo": "9",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제9조제6항",
+          "regulation_content": "감사는다음각호의1에해당하는경우외부전문가등을특임감사인으로임명하여특별감사 , 특정감사등을수행하게할수있다.<제5항에서이동2023.8.7.>\n  1. 고도의전문성이필요하여기존감사인력으로감사수행이어렵다고감\n사가인정하는경우\n  2. 이해관계충돌등으로인해공정성 , 객관성 , 중립성이요구되는경우",
+          "type": "항",
+          "jo": "9",
+          "hang": "6"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(감사인의자격)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "감사는근무성적이양호한다음각호의1에해당\n되는자를감사인으로임명한다 . 다만, 다음각호에도불구하고검사부장\n과수석검사역은검사, 회계, 준법및위험관리등감사유관부서에 2년\n이상근무한경력이있는자를임명할수있다.\n  1. 4급이상책임자로서여신심사 , 외환, 자금운용 , 리스크관리 , IT,  기타\n해당업무분야에 3년이상근무한경력이있는자\n  2. 제9조제4항에서규정하는전문공인자격증소지자\n  3. 감사원 , 금융연수원등을통해감사관련전문교육을이수한자\n  4. 감독기관파견등을통해감사업무를 6개월이상습득한자\n  5. 검사부가주관하는각종공모에서포상을받은자\n  6. 기타감사가감사인으로적합하다고인정하는자",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "다음각호에해당하는자는감사인이될수없다. \n  1. 견책이상의문책을받은날로부터 3년이경과되지않은자\n  2. 기타감사가부적격자로인정하는자",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제10조제3항",
+          "regulation_content": "감사는공모절차등을통해전문성이있는감사인을선발ㆍ임명한다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(감사인의의무)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "감사인은독립된위치에서제7조에정한감사의  권\n한을위임받아감사업무를수행하며감사업무모범규준을 준수하여야한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "제1항의감사업무모범규준은 감사가별도로정하며 , 그효력은규정\n에준한다 .",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제11조제3항",
+          "regulation_content": "감사인은본인의사적인이해등으로인해감사수행과정에서객관성을잃\n어서는안된다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(감사인의전문성 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "감사는감사인의감사역량향상을위해연간단\n위교육계획을수립하여야한다. 다만, 감사수행등으로필요시  감사는\n교육계획을수정ㆍ보완할수있다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "감사인은제1항에따라개인별교육계획을수립하고  이행하도록노력\n하여야한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제12조제3항",
+          "regulation_content": "감사는업무상필요한인적자원확보를위해서감사인에게특정한전\n문교육을이수하게할수있고, 이를위한교육훈련비등은은행의비용으\n로충당할수있다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제12조제4항",
+          "regulation_content": "감사는감사업무의발전을위해우수감사기법을연구ㆍ개발을할수있\n도록검사부에감사기법연구팀을 운영할수있다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조(감사인의인사및대우)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": [
+        {
+          "regulation_name": "제13조제1항",
+          "regulation_content": "감사인의보직및전보는감사의서면요청\n에의하여은행장이지체없이행한다 . 다만, 지체없이조치할수없는경\n우, 은행장은그사유를감사에게서면으로통보하여야한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제13조제2항",
+          "regulation_content": "감사인은 5년이내이동을제한함을원칙으로한다. 다만, 승진또는 \n인사관리상필요에의해이동될경우은행장은감사인의의사를우선적으\n로고려하여야한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제13조제3항",
+          "regulation_content": "은행장은감사인에대하여근무평정우대기준을운영하여야하고감사\n는은행발전에뛰어난공로가있는감사인을승진, 전보등의 대상자로추천할수있다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제13조제4항",
+          "regulation_content": "은행장은감사인이라는사유로승진, 전보등에있어부당한대우를하\n지않아야한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제13조제5항",
+          "regulation_content": "은행은감사인의감사활동에필요한국내외여비등실비를지급할수있다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제13조제6항",
+          "regulation_content": "감사는필요한경우외부로부터전문성이있다고인정되는자를충원\n한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "6"
+        },
+        {
+          "regulation_name": "제13조제7항",
+          "regulation_content": "감사는적법한감사업무수행과정에서감사인에게형사고소, 고발또\n는손해배상이청구된경우변호사조력및소송비용등을은행에요구한\n다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "7"
+        },
+        {
+          "regulation_name": "제13조제8항",
+          "regulation_content": "감사인은법령위반또는그직무를성실하게수행하지아니한경우\n를제외하고는신분상불리한처분을받지않는다 .\n제2절감사보조기구",
+          "type": "항",
+          "jo": "13",
+          "hang": "8"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조(자회사감사업무실무협의회 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "검사부장은자회사감사관련업무계획\n의수립, 중요사항협의, 정보공유및보고등을위하여감사인과자회사\n감사담당부서장으로구성된자회사감사업무실무협의회를  구성하여운\n영할수있다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "자회사에대한감사업무및자회사감사업무실무협의회의 등세부사항\n은별도로정한다 .",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제15조(감사자문위원 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": [
+        {
+          "regulation_name": "제15조제1항",
+          "regulation_content": "감사는전문가의지속적인자문이필요할경우감\n사자문위원을임명할수있다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제15조제2항",
+          "regulation_content": "감사는감사활동의실효성과감사결과의품질향상등을제고하기위하\n여감사계획수립, 감사판단기준의설정, 감사중점사항발굴, 감사실시방\n법및감사결과처리방향등에관하여자문위원에게자문을  의뢰할수있\n다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제15조제3항",
+          "regulation_content": "제7조제3항에따라은행의비용으로감사자문위원들에게일정금액의수\n당을지급할수있다.\n제4장감사의유형및감사제도",
+          "type": "항",
+          "jo": "15",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제16조(감사의유형)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": [
+        {
+          "regulation_name": "제16조제1항",
+          "regulation_content": "감사는목적별 , 기능별, 방법별로구분하여실시한다 .",
+          "type": "항",
+          "jo": "16",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제16조제2항",
+          "regulation_content": "감사는목적별로종합감사 , 특정감사 , 특별감사 , 상시감사 , 일상감사 , 상\n각감사 , 성과감사로구분한다 .",
+          "type": "항",
+          "jo": "16",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제16조제3항",
+          "regulation_content": "감사는기능별로재무감사 , 준법감사 , 프로세스감사 , 경영감사 , IT감사, 복\n무감사로구분한다 .",
+          "type": "항",
+          "jo": "16",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제16조제4항",
+          "regulation_content": "감사는실시방법에따라대면감사및서면감사로구분한다 .",
+          "type": "항",
+          "jo": "16",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제17조(감사제도 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "감사는적극업무처리에대한면책제도 , 사전컨설팅제\n도, 신문고제도를운영한다 .",
+          "type": "항",
+          "jo": "17",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "적극업무처리에대한면책제도는감사를받는임직원이공공의  이익\n을위하여고의나중대한과실없이업무를적극적으로처리한경우에는\n책임을묻지아니하는제도이다 .",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제17조제3항",
+          "regulation_content": "사전컨설팅제도는 임직원이적극업무를추진하는과정에서관련법령및\n내규의해석상어려움등으로인해의사결정에장애를겪고있는경우사전에감사에게관련법령및내규의해석등에대한의견을  구하는제도이다 .",
+          "type": "항",
+          "jo": "17",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제17조제4항",
+          "regulation_content": "신문고제도는금융사고예방및도덕적해이방지를위해업무취급\n시발생할수있는위법․부당행위등을제보하는제도이다 .",
+          "type": "항",
+          "jo": "17",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제17조제5항",
+          "regulation_content": "제2항부터제4항까지의세부사항은별도로정한다 .\n제5장감사운영",
+          "type": "항",
+          "jo": "17",
+          "hang": "5"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(연간감사계획의수립)",
+      "regulation_content": "감사는회계연도종료전다음회계연도감사\n계획을수립하여야한다.",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(감사의준비)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": [
+        {
+          "regulation_name": "제19조제1항",
+          "regulation_content": "감사는체계적이고효과적인감사수행을위하여감\n사계획을수립하여야한다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제19조제2항",
+          "regulation_content": "감사는감사대상의사전정보수집및감사에필요한자료제출등의요구\n를한다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제20조(본감사 )",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": [
+        {
+          "regulation_name": "제20조제1항",
+          "regulation_content": "감사를실시할때는피감사인에게사전통보를원칙으로\n한다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제20조제2항",
+          "regulation_content": "감사결과를입증하기위하여관련서류등증빙자료를철저히보관한다 .",
+          "type": "항",
+          "jo": "20",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제20조제3항",
+          "regulation_content": "감사인은감사종료후적시성 , 완전성 , 간결성 , 논리성, 정확성 , 공정\n성을원칙으로감사보고서를작성한다 .",
+          "type": "항",
+          "jo": "20",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제21조(감사결과의통보및이행)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": [
+        {
+          "regulation_name": "제21조제1항",
+          "regulation_content": "감사는감사결과를경영진에게  통보\n한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제21조제2항",
+          "regulation_content": "제1항의감사결과를통보받은경영진은신의성실하게이행한다 .",
+          "type": "항",
+          "jo": "21",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제21조제3항",
+          "regulation_content": "제2항에도불구하고제1항의감사결과가정당하게이행되지않는경우\n감사는 「자체감사활동의지원및대행ㆍ위탁감사에관한규칙」제8조에\n따라감사원과협의할수있다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제22조(감사결과처리및이의신청 )",
+      "regulation_content": "감사는감사결과위법ㆍ부당한사항등\n이발견된때는징계등의처분을경영진에게요구하고 , 이의가있을경우\n경영진은감사에게이의신청을할수있다.",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(사후관리 )",
+      "regulation_content": "제22조및대외기관의감사에의하여감사결과를처리를요\n구받은경영진은미정리사항을조기에정리토록철저히관리한다 .",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(금융사고보고등)",
+      "regulation_content": "경영진은부정또는중대한과실이발생하였거나, 발\n생할우려가있다고판단될때에는지체없이감사에게보고하고 , 필요시\n감사는감사원 , 금융감독원등대외기관에보고한다 .\n  \n제6장기타",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조(외부감사인과의 연계)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": [
+        {
+          "regulation_name": "제25조제1항",
+          "regulation_content": "감사는감사목적을달성하기위하여외\n부감사인의감사계획ㆍ결과등을활용할수있다.",
+          "type": "항",
+          "jo": "25",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제25조제2항",
+          "regulation_content": "감사는감사업무상필요한경우외부감사인을출석토록하여관련자료\n제출및의견진술을요구할수있다.",
+          "type": "항",
+          "jo": "25",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제25조제3항",
+          "regulation_content": "감사는외부감사인이그직무를수행함에있어경영진의직무수행에  관\n하여부정행위또는법령이나정관에위반되는중대한사실을발견한때에는이를감사에게통보하도록요구하여야한다.",
+          "type": "항",
+          "jo": "25",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제26조(대외재무보고의의견첨부)",
+      "regulation_content": "대외주요재무보고는감사의사전검토\n를거쳐감사의의견을첨부하여야한다.",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제27조(감사전담기구간의협조)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": [
+        {
+          "regulation_name": "제27조제1항",
+          "regulation_content": "감사는감사업무에필요한경우 타공\n공기관등의감사전담기구에 업무협조를요청할수있다.",
+          "type": "항",
+          "jo": "27",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제27조제2항",
+          "regulation_content": "감사는타공공기관등의감사전담기구에서 업무요청을하는경우협조\n하도록노력한다 .",
+          "type": "항",
+          "jo": "27",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제28조(제재)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": [
+        {
+          "regulation_name": "제28조제1항",
+          "regulation_content": "감사는위법ㆍ부당한업무처리등이이루어진경우 경영\n진에게징계등의제재조치를요구한다 .",
+          "type": "항",
+          "jo": "28",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제28조제2항",
+          "regulation_content": "제재에관한세부사항은감사가별도로정하는바에의한다 .",
+          "type": "항",
+          "jo": "28",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제29조(기타)",
+      "regulation_content": "이규정의세부사항은세칙등에서별도로정한다 .",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조",
+      "type": "조",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<2002.8.5.>",
+      "regulation_content": "이규정은 2002년8월5일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2004.8.30.>",
+      "regulation_content": "이규정은 2004년8월31일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.3.7.>",
+      "regulation_content": "이규정은 2005년3월10일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.12.24.>",
+      "regulation_content": "이규정은 2007년12월27일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.6.30.>",
+      "regulation_content": "이규정은 2011년7월1일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.9.5.>",
+      "regulation_content": "이규정은 2011년9월5일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2012.5.29.>",
+      "regulation_content": "이규정은 2012년6월1일부터시행한다 .부칙<2012.7.6.>\n이규정은 2012년7월9일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2013.3.22.>",
+      "regulation_content": "이규정은 2013년3월22일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2013.8.22.>",
+      "regulation_content": "이규정은 2013년8월26일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2013.12.27.>",
+      "regulation_content": "이규정은 2013년12월27일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.7.1.>",
+      "regulation_content": "이규정은 2014년7월1일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2015.7.14.>",
+      "regulation_content": "이규정은 2015년7월14일부터시행한다 . (2015년7월14일직제규정개\n정에따른일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2016.7.15.>",
+      "regulation_content": "이규정은 2016년7월15일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.7.2.>",
+      "regulation_content": "이규정은 2018년7월2일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2019.5.28.>",
+      "regulation_content": "이규정은 2019년5월28일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2019.10.17.>",
+      "regulation_content": "이규정은 2019년10월17일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.6.1.>",
+      "regulation_content": "이규정은 2020년6월1일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.8.26.>",
+      "regulation_content": "이규정은 2020년8월26일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.12.31.>",
+      "regulation_content": "이규정은 2020년12월31일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2021.11.18.>",
+      "regulation_content": "이규정은 2021년11월18일부터시행한다 .부칙<2022.11.11.>\n이규정은 2022년11월11일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.8.7.>",
+      "regulation_content": "이규정은 2023년8월7일부터시행한다 .",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.3.29.>",
+      "regulation_content": "이규정은 2024년4월1일부터시행한다 .",
+      "type": "부칙"
+    }
+  ]
+}

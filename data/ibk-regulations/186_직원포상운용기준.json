@@ -1,0 +1,626 @@
+{
+  "regulationName": "직원포상운용기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 직원(이하 준정규직 및 계약직원 포함)에 대한 포상 운용기준을 정함으로써 직원에게 은행 경영 및 업적 신장에의 자발적이고 적극적인 참여 동기를 부여하고, 이를 통해 능력 중심 인사관리체계를 확립함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(포상부문)",
+      "regulation_content": "포상은 시기 및 내용에 따라 다음 각 호와 같이 구분한다.\n  1. “정기포상”은 근무태도와 업무공적이 우수한 직원에게 매년 정기적으로 실시하는 포상을 말한다.\n  2. “수시포상”은 특별한 업무 공적을 거양한 직원에게 수시로 실시하는 포상을 말한다.\n  3. “자랑스런IBK인”은 기반확대 등 은행 발전을 위해 필요하다고 미리 정한 부문에 대해 성과에 따라 실시하는 포상을 말한다.\n  4. “기은최고인”은 연간 가장 뛰어난 업적을 거양한 직원에게 실시하는 포상을 말한다.\n  5. “특별포상가점 Quota제”는 업적이 우수한 부점장에게 포상을 실시하고 소속 직원에 대한 인사고과 상 가점 권한을 부여하는 것을 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(포상종류 및 대상)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "직원의 포상은 공적 정도에 따라 특별승급표창, 은행장표창, 은행장격려상, 부점장포상으로 구분하며, 대상은 다음 각 호와 같다.\n  1. 특별승급표창 : 근무태도가 우수하고 평가기간 중 업무공적이 탁월하여 당행 업적 신장에 크게 기여한 자\n  2. 은행장표창 : 근무태도가 우수한 자로서 평가기간 중 업무공적이 우수한 자\n  3. 은행장격려상 : 그룹 및 지역본부( 이하 사업본부 포함) 주관 추진 사업 등 주요 사업 실적 우수자\n  4. 부점장포상 : 4급 이하 직원으로서 각 부점에서 주관하는 주요 사업 실적 우수자",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "특별승급표창, 은행장표창, 격려상은 공적에 따라 1 내지 3등급으로 구분하며, 특별승급표창의 등급별 내용은 다음과 같다.\n  \n<표>",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "특별승급표창을 2회 이상 받은 경우, 최대 승급기간은 동일 직급에서 1년 이내로 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(포상효과)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "일반직원의 포상은 「종합근무평정규정」에 의거 인사고과에 가점 반영한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "준정규직의 포상은 「준정규직 종합근무평정 기준」에 의거 인사고과에 가점 반영한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "계약직원의 포상은 재계약시 우대하고 별도로 정한 경우에는 평가에 가점 반영할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제4조제4항",
+          "regulation_content": "은행장이 필요하다고 인정하는 경우에는 특별휴가, 부상을 줄 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(포상심사)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "포상대상자에 대한 공적사항 심사 및 포상등급 결정은 인사위원회에서 의결한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "포상대상자의 성과 검증, 추천순위 결정 등을 위해 필요한 경우 부문별로 심사기구를 구성하여 운영할 수 있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(포상제한)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "다음 각호의 어느 하나에 해당하는 직원은 은행장표창 대상에서 제외한다. 다만, 은행장이 필요하다고 인정하는 경우에는 예외로 할 수 있다.\n  1. 「직원상벌규정」에 의하여 징계를 받고 1년이 경과하지 않았거나 주의촉구를 받고 6개월이 경과하지 않은 직원\n  2. 벌금형 이상의 형사처벌을 받아 당행에 통보되고 1년이 경과하지 않은 직원\n  3. 수사 중이거나 형사사건으로 기소되어 당행에 통보되고 해당사건이 종결되지 않은 직원\n  4. 징계절차가 진행 중이거나 외부감독기관에서 감사진행 중 문제소지가 있다고 판단되는 직원. 다만, 외부감독기관의 감사가 종결되어 문제가 없다고 판단되는 직원은 해당하지 않음",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "포상을 받은 직원이 공적기간 이후에 승진 및 신규 보임한 경우 해당 포상에 대한 가점 부여를 제외한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(포상계획 수립 및 변경)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "인사부장은 그룹별 포상계획 등을 반영하여 연간 종합포상계획을 수립하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "종합포상계획에는 연간 포상인원(부점장포상 제외), 포상종류별 포상기준, 배정기준 등을 포함하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제7조제3항",
+          "regulation_content": "포상은 종합포상계획 범위 내에서 시행한다. 다만, 확정된 포상규모를 초과하거나 종합포상계획에 없는 포상을 정기포상에 포함하여 실시하고자 할 경우에는 인사부장의 합의를 거쳐 은행장 결재를 받아 시행한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제7조제4항",
+          "regulation_content": "조직개편, 경영목표 변경 등 포상인원과 기준을 조정할 필요가 있는 경우 인사부장은 종합포상계획을 변경하여 실시할 수 있다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(포상인원)",
+      "regulation_content": "포상인원은 매년 다음 각 호의 범위 내에서 각 그룹 및 지역본부의 경영성과, 사업계획, 사업의 중요도, 본·지점간의 인원 등 제반요인을 감안하여 합리적으로 산정한다.\n  1. 특별승급표창 : 50명 수준\n  2. 은행장표창 : 직원의 10% 수준\n  3. 은행장격려상 : 직원의 25% 수준\n  4. 부점장포상 : 4급 이하 직원의 40% 수준",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(포상배분)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "은행장표창은 등급에 따라 다음 각 호와 같이 배분한다.\n  1. 1등급 : 포상인원의 10% 내외\n  2. 2등급 : 포상인원의 30% 내외\n  3. 3등급 : 포상인원의 60% 내외",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "은행장격려상은 등급에 따라 다음 각 호와 같이 배분한다.\n  1. 1등급 : 포상인원의 20% 내외\n  2. 2등급 : 포상인원의 30% 내외\n  3. 3등급 : 포상인원의 50% 내외",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제9조제3항",
+          "regulation_content": "부점장포상의 부점별 배정인원은 부점당 평균인원 등을 감안하여 인사부장이 합리적으로 산정한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(포상시기)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "은행장표창 및 격려상의 정기포상은 상·하반기 연 2회 실시한다. 다만, 은행장표창 1등급에 대한 정기포상은 연 1회 실시할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "부점장포상은 연 2회, 매 반기 말 실시를 원칙으로 하며, 직원의 공적이 있는 경우 배정된 포상인원 범위 내에서 연도 중 수시로 포상할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(포상운용기준)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "그룹장·지역본부장·부점장은 매년 경영목표 등을 반영한 포상운용기준을 수립하여 직원에게 통보하여야 한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "포상대상자 추천 시에는 통보된 포상운용기준에 따라 개인별 업적을 평가·심의하여 추천하여야 한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(포상추천)",
+      "regulation_content": "포상대상자는 각 부점 포상추천위원회 및 부점장의 추천을 받아야 한다. 다만, 포상주관 그룹 및 지역본부에서 객관적인 포상기준을 사전에 예고한 경우에는 추천을 생략할 수 있다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(포상추천위원회 구성 및 운영)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": [
+        {
+          "regulation_name": "제13조제1항",
+          "regulation_content": "포상추천위원회는 부점장을 제외한 각 직급별 1명 이상의 직원으로 구성(준정규직 포함, 최소 3명 이상)하되, 해당 직급에 노조 분회장이 있는 경우 가급적 노조 분회장을 참여토록 한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제13조제2항",
+          "regulation_content": "포상추천위원회 의장은 서무담당 팀장 또는 서무담당 책임자로 하고, 의장은 가부동수인 경우 의결결정권을 행사한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제13조제3항",
+          "regulation_content": "포상추천위원회는 직원들의 업무공적을 심의하여 포상대상자를 배수추천하고, 부점장은 추천순위를 최종 결정한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제13조제4항",
+          "regulation_content": "기타 포상추천위원회 구성 및 운영에 관한 세부사항은 부점에서 자율적으로 결정한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조(공적조서 작성)",
+      "regulation_content": "공적조서는 “별지서식(공적조서)”의 양식에 따라 포상추천위원회 의장이 작성하고, 본인 및 부점장의 확인을 받아야 한다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(포상통보)",
+      "regulation_content": "그룹장·지역본부장·부점장은 포상실시 후 수상자명단과 수상등급을 인사부장에게 통보하여야 한다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(포상대상)",
+      "regulation_content": "특별한 업무 공적을 거양하는 등 당행 발전에 기여한 공이 큰 직원에 대해서는 정기포상과 별도로 포상 할 수 있다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(포상추천)",
+      "regulation_content": "그룹장·지역본부장은 특별한 공적을 거양한 직원을 수시포상 대상자로 추천할 수 있다.",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제18조(포상부문)",
+      "regulation_content": "자랑스런IBK인의 포상부문은 분야에 따라 다음 각 호와 같이 구분한다.<개정 2018.3.13., 2020.6.29., 2021.10.29., 2023.10.10., 2024.5.9.>\n  1. 마케팅 분야\n    가. IBK건전성관리왕\n    나. IBK디지털금융왕\n    다. IBK예금왕\n    라. IBK외환왕\n    마. IBK고객유치왕\n    바. IBK카드왕\n    사. IBK퇴직연금왕\n    아. IBK자산관리왕\n  2. 마케팅 외 분야\n    가. 삭제<2020.6.29.>\n    나. IBK혁신상\n    다. IBK CS왕\n    라. IBK마일리지왕",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(포상주기)",
+      "regulation_content": "포상의 주기는 반기로 한다. 단, 제18조 제2호 라목의 IBK마일리지왕은 연간으로 한다.<개정 2020.6.29., 2024.5.9.>",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제20조(포상대상)",
+      "regulation_content": "포상의 대상은 다음 각 호와 같다.<개정 2020.6.29., 2024.5.9.>\n  1. 제18조 제1호 가목∼아목, 제2호 가목∼다목 : 부문별 평가실적 1∼3위 직원\n  2. 제18조 제2호 라목 : 부문별 평가실적 1∼6위 직원",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제21조(포상시기)",
+      "regulation_content": "포상은 반기별로 실시한다. 다만, 따로 정하는 경우 그에 따른다.",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제22조(포상내용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": [
+        {
+          "regulation_name": "제22조제1항",
+          "regulation_content": "포상대상자에게는 특별승급표창 또는 은행장표창과 함께 포상금을 지급하며, 대상자별 표창등급, 포상금은 “별표 2”에 따른다.<개정 2020.6.29., 2023.10.10., 2024.4.4., 2024.5.9.>\n  1. 삭제<2024.5.9.>\n  2. 삭제<2024.5.9.>\n  3. 삭제<2024.5.9.>",
+          "type": "항",
+          "jo": "22",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제22조제2항",
+          "regulation_content": "삭제<2020.6.29.>",
+          "type": "항",
+          "jo": "22",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제23조(포상기준)",
+      "regulation_content": "부문별 실적에 대한 포상 심사기준은 실적 담당 부서에서 인사부와 협의를 거쳐 시행하는 실적평가기준에 따른다.",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(포상심사위원회)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": [
+        {
+          "regulation_name": "제24조제1항",
+          "regulation_content": "포상후보자의 성과에 대한 원활한 심사를 위해 각 부문별로 포상심사위원회를 구성하여 운영한다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제24조제2항",
+          "regulation_content": "포상심사위원회의 구성 및 운영에 관한 사항은 부문별 담당 부서장이 인사부장과 협의를 거쳐 결정한다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제24조제3항",
+          "regulation_content": "포상심사위원회는 다음 각 호의 사항을 심의·의결한다.\n  1. 실적의 본인유치 여부 검증\n  2. 기타 포상대상 선정과 관련된 사항",
+          "type": "항",
+          "jo": "24",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제24조제4항",
+          "regulation_content": "포상심사위원회는 위원 과반수의 출석과 출석위원 과반수의 찬성으로 의결하며, 가부 동수인 경우 위원장이 의결권을 행사한다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제25조",
+      "regulation_content": "삭제<2020.6.29.>",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제26조",
+      "regulation_content": "삭제<2020.6.29.>",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제27조",
+      "regulation_content": "삭제<2020.6.29.>",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조(포상대상)",
+      "regulation_content": "기은최고인은 매년 부점장, 팀장, 팀원 각 1명을 심사를 통해 선정하며, 심사대상 직원은 다음 각 호와 같다.\n  1. 부점장 및 팀장 : 「인사마일리지제 운용기준」에 의한 인사마일리지 우수 부점장 및 팀장\n  2. 팀원 : 탁월한 업무 공적으로 그룹장·지역본부장의 추천을 받은 팀원",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제29조(포상내용)",
+      "regulation_content": "특별승급표창 1등급을 포상하며, 포상대상자가 부점장인 경우 제6장에 따른 특별포상가점 권한을 부여한다.",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조(포상추천)",
+      "regulation_content": "그룹장·지역본부장은 뛰어난 공적을 거양한 팀원급 직원을 기은최고인 포상대상자로 추천할 수 있다.",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(포상대상)",
+      "regulation_content": "특별포상가점 Quota제 포상 대상은 다음 각 호와 같다.<개정 2019.8.12., 2021.10.29.>\n  1. 획기적 이익개선 · 시현, 열악한 점포환경에서 안정적 수익기반 구축, 연체대출금의 획기적 감축, 적자점포에서 흑자전환 등 경영개선 실적이 탁월한 영업점장\n  2. 삭제<2021.10.29.>\n  3. 「인사마일리지제 운용기준」에 의한 골든마일리지상 수상자\n  4. 「IBK名品지점」영업점장\n  5. 삭제<2021.10.29.>",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제32조(포상내용)",
+      "regulation_content": "은행장표창 1등급을 포상하고, 소속 팀장급 이하 직원에 대한 특별포상가점(이하 가점이라 한다) 권한을 부여한다.",
+      "type": "조",
+      "jo": "32",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제33조(가점 운용한도)",
+      "regulation_content": "부점별 가점 운용한도는 팀장급 이하 직원 수에 0. 15점을 곱한 범위 내로 한다.",
+      "type": "조",
+      "jo": "33",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제34조(가점 배분방법)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "34",
+      "sub_articles": [
+        {
+          "regulation_name": "제34조제1항",
+          "regulation_content": "가점은 평가대상기간 중 부점의 경영성과에 대한 소속 직원의 공헌도, 노력도 등을 평가하여 개인별로 차등하여 배분한다.",
+          "type": "항",
+          "jo": "34",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제34조제2항",
+          "regulation_content": "가점 대상자는 현 소속과 관계없이 평가대상 기간 중 3개월 이상 근무한 팀장급 이하 직원으로 한다. 다만, 「IBK명품지점」은 1년 이상 근무한 직원으로 한다.",
+          "type": "항",
+          "jo": "34",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제34조제3항",
+          "regulation_content": "가점 배분은 최저 0. 05점부터 0.05점 단위로 하되, 개인별 최고한도는 0.3점을 초과하지 못한다. 다만, 소속 직원 중 공헌도, 노력도 등이 현저하게 떨어지는 경우 가점대상에서 제외할 수 있다.",
+          "type": "항",
+          "jo": "34",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제35조(가점내역 통보)",
+      "regulation_content": "부점장은 가점대상자 명단, 가점내용, 공적내용 및 가점배분기준 등을 인사부로 통보하여야 한다.",
+      "type": "조",
+      "jo": "35",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제36조(가점운용)",
+      "regulation_content": "특별포상가점은 개인별 포상가점한도에 포함하여 운용한다.",
+      "type": "조",
+      "jo": "36",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제37조(위임)",
+      "regulation_content": "이 기준에서 정하지 아니한 구체적인 시행방법·추천절차 등은 인사부장이 결정하여 시행한다.",
+      "type": "조",
+      "jo": "37",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제1조",
+      "type": "조",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조",
+      "type": "조",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2007.11.27.>",
+      "regulation_content": "이 기준은 2007년 11월 27일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2012.5.3.>",
+      "regulation_content": "이 기준은 2012년 5월 3일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2014.11.19.>",
+      "regulation_content": "이 기준은 2014년 11월19일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2015.7.14.>",
+      "regulation_content": "이 기준은 2015년 7월 14일부터 시행한다. (2015년 7월 14일 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2017.4.17.> 제1조(시행일)",
+      "regulation_content": "이 기준은 2017년 1월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부 칙<2017.4.17.> 제2조(다른 내규의 폐지)",
+      "regulation_content": "이 기준의 시행과 동시에「수시표창 운영방안」, 「IBK마케팅왕 포상운용기준」, 「특별포상가점 Quota제」는 폐지한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부 칙<2018.3.13.>",
+      "regulation_content": "이 기준은 2018년 3월 13일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2019.5.31.>",
+      "regulation_content": "이 기준은 2019년 5월 31일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2019.6.24.>",
+      "regulation_content": "이 기준은 2019년 6월 24일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2019.8.12.>",
+      "regulation_content": "이 기준은 2019년 8월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.6.29.>",
+      "regulation_content": "이 기준은 2020년 6월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2021.10.29.>",
+      "regulation_content": "이 세칙은 2021년 10월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.6.27.>",
+      "regulation_content": "이 기준은 2023년 6월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.10.10.>",
+      "regulation_content": "이 세칙은 2023년 10월 10일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.4.4.>",
+      "regulation_content": "이 기준은 2024년 4월 4일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.5.9.>",
+      "regulation_content": "이 기준은 2024년 5월 9일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "별표1",
+      "type": "별표",
+      "jo": "1",
+      "regulation_content": "삭제<2020.6.29.>"
+    },
+    {
+      "regulation_name": "별표2",
+      "type": "별표",
+      "jo": "2",
+      "regulation_content": "자랑스런IBK인 표창등급 및 포상금액(제22조 관련)<신설 2023.10.10., 2024.5.9.>\n\n자랑스런IBK인 표창등급 및 포상금액\n\n<표>\n\n\n단, 포상시기가 연간으로 운영되는 IBK마일리지왕은 다음과 같다.\n\nIBK마일리지왕 표창등급 및 포상금액\n\n<표>\n\n[별지서식] 공적조서 양식(제14조 관련)<신설 2017.4.17>\n공 적 조 서\n\n\n1. 대상자\n  \n<표>\n\n\n2. 공적사항(대상자 본인이 작성)\n  \n<표>\n\n\n3. 작 성 자  부점포상추천위원회 의장    직 :           성  명 :            (인)\n\n4. 확 인 자  표   창   대  상  자 .  직 :           성  명 :            (인)\n             부        점        장    직 :           성  명 :            (인)"
+    }
+  ]
+}

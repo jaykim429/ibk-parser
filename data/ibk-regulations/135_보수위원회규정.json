@@ -1,0 +1,180 @@
+{
+  "regulationName": "보수위원회규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 이사회규정 제7조에 의한 보수위원회(이하 “위원회”라 한다)의 구성 및 운영에 관한 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(역할)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "위원회는 제5조에서 정하는 보수, 성과평가 및 복리후생에 관한 사항을 심의·의결한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "위원회는 「금융회사의 지배구조에 관한 법률」에서 정하는 임원(이하 “임원”이라 한다) 및 금융투자업무담당직원이 과도한 위험을 부담하지 않도록 보수체계를 마련하여야 한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2",
+          "related_laws": [
+            {
+              "law_name": "금융회사의 지배구조에 관한 법률",
+              "original_text": "「금융회사의 지배구조에 관한 법률」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "위원회는 사외이사 4인 이내로 구성한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "위원회의 위원장 및 위원은 이사회의 결의로 선임한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "위원장의 유고시에는 위원회에서 정한 순위에 따라 그 직무를 대행한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(감사의 의견)",
+      "regulation_content": "감사는 의견을 진술할 수 있다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(의결사항)",
+      "regulation_content": "위원회는 다음 각 호의 사항을 심의·의결한다.\n  1. 임원 및 금융투자업무담당직원의 보수체계에 관한 사항\n    가. 보수의 결정 및 지급방식에 관한 사항\n    나. 보수지급에 관한 연차보고서의 작성 및 공시에 관한 사항\n    다. 보수체계의 설계·운영 및 그 설계·운영의 적정성 평가 등에 관한 사항\n    라. 보수정책에 대한 의사결정 절차와 관련된 사항\n    마. 그 밖에 보수체계와 관련된 사항\n  2. 임원의 성과평가 및 복리후생에 관한 사항\n    가. 경영성과에 대한 평가\n    나. 복리후생제도의 검토 및 승인\n  3. 기타 법령이나 감독규정에서 보수위원회 의결로 정한 사항\n  4. 기타 이사회가 필요하다고 인정하는 사항",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(소집)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "위원회는 위원장이 매반기 1회 소집하는 것을 원칙으로 하되, 필요한 경우 위원장이 개최시기를 조정할 수 있다. 다만, 위원장 또는 위원 2인 이상의 요청이 있을 때에는 수시로 소집할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "위원회의 소집은 회의의 일시, 장소 및 목적사항을 명시하여 회일 3일전까지 구성원에게 통지한다. 다만, 보고·토의를 요하지 아니하거나 긴급을 요하는 사항 또는 모든 구성원의 동의가 있을 때에는 그러하지 아니하다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(의결)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "위원회는 구성원 과반수의 출석으로 개회하고 구성원 과반수의 찬성으로 의결한다. 다만, 보고·토의를 요하지 아니하거나 긴급을 요하는 사항 등은 서면결의에 의할 수 있다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "위원회의 구성원은 각각 1개의 의결권을 가진다. 다만, 의결사항과 특별한 이해관계가 있는 구성원은 회의에 출석하여 의견을 진술할 수 있으나 의결에는 참여할 수 없으며, 의결정족수 산정시 구성원의 수에 산입하지 아니한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(의사록 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "위원회의 의사에 관하여는 안건, 경과요령 및 그 결과, 반대하는 자와 그 반대사유를 기재한 의사록을 작성하고, 출석한 구성원이 기명날인 또는 서명하여야 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "위원회는 결의한 사항을 각 이사에게 통지하여야 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<2002.03.28.>",
+      "regulation_content": "이 규정은 2002년 3월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2009.01.02.>",
+      "regulation_content": "이 규정은 2008년 7월 15일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2011.6.10.>",
+      "regulation_content": "이 규정은 2011년 6월 9일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2017.5.12.>",
+      "regulation_content": "이 규정은 2017년 5월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.8.18.>",
+      "regulation_content": "이 규정은 2023년 8월 18일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

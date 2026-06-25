@@ -1,0 +1,1241 @@
+{
+  "regulationName": "회계규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이규정은회계업무에관한주요기준과절차를규정함을목적\n으로한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "회계업무는관계법령등에특별히정한경우를제외\n하고는이규정이정하는바에따른다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "이규정과관련한세부사항은「회계처리지침」에서정하는바에\n따르며,회계처리지침에서 정하지아니한사항또는구체적인회계처리\n방법은「IFRS실무기준」에따른다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(회계연도)",
+      "regulation_content": "당행의회계연도는중소기업은행법 및정관에서정하는\n바에따른다.",
+      "type": "조",
+      "jo": "3",
+      "related_laws": [
+        {
+          "law_name": "중소기업은행법",
+          "original_text": "중소기업은행법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(회계단위)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "회계단위는총계정원장설치부점으로한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "각회계단위의회계는본부에소속된회계단위에서총괄한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "제1항에서규정한회계단위이외의부속회계는직제에따라소속된\n회계단위에서관장한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제4조제4항",
+          "regulation_content": "회계단위간의거래는본지점계정을두어처리한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(회계관계업무의 위임)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "회계에관한사무는소속직원에게위임할\n수있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "제1항의규정에따른사무의위임은그직을지정함으로써이에갈음1997.11.29 제정\n1998.12.23제1차개정\n2000.1.3제2차개정\n(전부개정)\n2002.6.21제3차개정\n2010.12.6제4차개정\n(전부개정)\n할수있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(회계담당)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "각회계단위에다음각호의회계담당을둔다.\n1.예산담당\n예산에관한사무를처리하는예산관리자․부문예산관리자 및예산담\n당자\n2.출납담당\n현금의수입및지출을담당하는자\n3.계산담당\n각회계단위의제계정을종합집계하는사무및결산에관한사무를\n담당하는자\n4.자산관리담당\n고정자산,물품및부외자산의관리를담당하는자\n5.유가증권담당\n유가증권의관리에관한사무를담당하는자\n6.계약담당\n매매,대차,도급및기타계약에관한사무를담당하는자",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "제1항의회계담당외에별도담당의설치가필요한경우에는그\n담당자를둘수있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "제1항및제2항의회계담당에관하여필요하다고인정하는때에는\n따로취급자를지정하여그사무의전부를대리하게하거나일부를분장\n하게할수있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(회계처리의일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "회계처리에관하여이규정에서정하는것\n외에는한국채택국제회계기준 ,금융위원회가정하는은행관련회계처리\n기준등의외규를준용한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "회계처리에적용되는기준은매회계연도에계속하여적용하여야하며\n정당한사유없이이를변경하여서는안된다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제7조제3항",
+          "regulation_content": "회계처리는신뢰할수있도록객관적인자료와증거에따라공정하게\n처리하여야한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제7조제4항",
+          "regulation_content": "한국채택국제회계기준에 따라금융상품등자산및부채에대해\n공정가치평가를적용한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(회계업무의인계인수)",
+      "regulation_content": "회계업무의인계인수는문서의내용을확인하\n여인계자및인수자가기명날인또는서명하여야한다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(회계관계직원의 책임)",
+      "regulation_content": "회계관계직원은 관계법령및규정이정하는\n바에따라성실하게그직분에따른회계처리를하여야한다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(회계서류의보관등)",
+      "regulation_content": "회계서류의보관․열람․보존․편철․대출및\n복사에관하여는은행장이별도정하는바에따른다.\n제2장회계관리",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(회계통제)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "각부점장은다음각호에해당하는업무가적절한\n승인등정당한절차를통해이루어지도록하여야한다.\n1.소관업무에대한회계정책및회계업무처리절차의수립\n2.중요한회계처리\n3.기타중요하다고판단되는회계관련업무",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "각부점장은소관업무와관련된계정잔액에대하여정기적으로계정의\n적정성여부를검토하고,관련원장등과의일치여부를검증하여야한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제11조제3항",
+          "regulation_content": "회계주무부서장은 은행의전계정과목과연결계정과목에대하여\n정기적으로적정성여부를검토하여야한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(신상품등에대한회계처리)",
+      "regulation_content": "각부점장은신상품등새로운업무나\n제도를개발하여시행하고자할경우에는회계처리방법등에대하여\n회계주무부서장과 사전협의를하여야한다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(회계유관사항에대한사전협의)",
+      "regulation_content": "각부점장은외규또는내규의변\n경등으로인한업무처리기준이나전산시스템의변경이재무제표의작\n성,회계처리방법등에영향을미칠것으로판단되는경우회계주무부\n서장과사전에협의하여시행하여야한다.",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(회계처리의조정)",
+      "regulation_content": "회계주무부서장은 동일또는유사한거래에대한\n회계처리기준및방법이은행의부서및자회사간에상이하거나이견이\n생길경우이를조정할수있다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(회계시스템등에대한통제)",
+      "regulation_content": "회계주무부서장은 회계정보기록의 유\n지와자산의보호등을위하여필요한통제조치를취할수있다.\n제3장회계장표\n제1절통칙",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(장표에따른회계처리)",
+      "regulation_content": "회계는전표․장부․증빙서․기타서류에따\n라처리하여야한다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(전산화에따른회계장표의생략)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "회계업무의전산화에따라이\n규정에따른장표의비치등은이를생략할수있다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "제1항의규정에따라장표의비치를생략한경우에도감독기관이나\n이해관계자의요구가있으면회계장표와내용이동일한대용장표를\n신속히제공할수있는필요한조치를취하여야한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제17조제3항",
+          "regulation_content": "제1항의규정에따라생략할수있는장표의종류는온라인으로\n처리하는업무에관한원장으로한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(회계장표의양식)",
+      "regulation_content": "장표의양식과규격은은행장이별도정하는바에\n따른다.",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(회계장표의정정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": [
+        {
+          "regulation_name": "제19조제1항",
+          "regulation_content": "회계장표를정정할때에는정정부분에정정의\n표시를하고정정자가날인또는서명하여야한다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제19조제2항",
+          "regulation_content": "금액은그일부만을정정할수없다.\n제2절전표",
+          "type": "항",
+          "jo": "19",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제20조(전표의내용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": [
+        {
+          "regulation_name": "제20조제1항",
+          "regulation_content": "전표에는계정과목을표시하여야한다.다만,증\n빙서를대용전표로사용하는경우에있어서증빙서의제목등으로보아\n쉽게판단할수있을때에는계정과목을표시하지아니할수있다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제20조제2항",
+          "regulation_content": "전표의합계금액은이를정정하지못한다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제21조(전표의대용)",
+      "regulation_content": "증빙서는전표로대용할수있으며,전표의대용범위는\n은행장이별도정하는바에따른다.이경우증빙서의서식에는전표의\n기능이포함되어야한다.",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제22조(전표의작성․정리)",
+      "regulation_content": "전표의작성및정리등에관하여는은행장이\n별도정하는바에따른다.\n제3절장부",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(회계장부의종류)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": [
+        {
+          "regulation_name": "제23조제1항",
+          "regulation_content": "회계장부는주요부와보조부로구분한다.",
+          "type": "항",
+          "jo": "23",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제23조제2항",
+          "regulation_content": "주요부는전표철과총계정잔액장으로 하고보조부는각계정원장및\n명세장으로한다.",
+          "type": "항",
+          "jo": "23",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제24조(기장사무의분리)",
+      "regulation_content": "주요부와보조부는그기장사무의담당자를달\n리하여야한다.다만,회계단위의규모,업무의성질에따라예외로할\n수있다.",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조(장부의작성)",
+      "regulation_content": "장부의기입․마감․이월․폐쇄등에관하여는은\n행장이별도정하는바에따른다.\n제4절증빙서",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제26조(증빙서의범위)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": [
+        {
+          "regulation_name": "제26조제1항",
+          "regulation_content": "증빙서는거래사실의경위를입증하며기장의\n증거가되는서류로서그범위는제27조각호의서류를말한다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제26조제2항",
+          "regulation_content": "제1항의규정에따라정하지아니한증빙서라할지라도특히필요하\n다고인정되는경우에는이를증빙서로첨부하여야한다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제26조제3항",
+          "regulation_content": "증빙서의부기증명을요하는사항은관계증빙서의여백에주기하고\n날인또는서명한다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제27조(증빙서의작성)",
+      "regulation_content": "증빙서는다음각호에따라작성하여야한다.\n1.지출결의서\n가.지출결의서의지출금액은정정하지못한다.\n나.적요란에는지급의뜻,사업또는거래명칭,품명및수량,산출내\n역,부분지급내용과지급회수․선급금및개산금의표시등필요한\n사항을명기하여야한다.\n2.영수증서\n가.영수증서는정당한수령인이지출결의서의영수란에기명날인또는\n서명하거나합계금액의정정이없는별지영수서에기명날인또는\n서명한것이어야한다.\n나.수령인또는수령인이지명하는자가지정하는예금계좌또는우편\n대체계좌를통하여지급하는경우에는금융기관이발행하는입금증명\n또는체신관서가발행하는영수증을영수증서로본다.\n다.신용카드를사용하는사업체에지급하는접대비성경비는원칙적으로\n신용카드를사용하여야하며카드이용대금의결제에따른영수증서는\n위나목에따른경우와같다.\n3.청구서\n가.청구서의합계금액은정정하지못한다.\n나.청구서의명세는계약서등다른관계서류와그내용이서로부합\n하여야한다.\n4.계약서\n가.계약서의합계금액은정정하지못한다.\n나.계약서와그부속서류는다른관계서류의명세와일치하여야한다.\n5.기타증빙서\n기타증빙서및그작성에관하여필요한사항은은행장이별도정하는\n바에따른다.",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조(증빙서의비치)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": [
+        {
+          "regulation_name": "제28조제1항",
+          "regulation_content": "증빙서는원본으로구비하여야한다.다만,원\n본에의하기곤란한경우에는그사본으로갈음하고원본대조자가이에\n확인표시를하여야한다.",
+          "type": "항",
+          "jo": "28",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제28조제2항",
+          "regulation_content": "증빙서가다른부문에필요하거나2개부문이상에공통됨으로인하여\n원본을구비할수없는때에는증빙서소재증명으로써대용할수있다.",
+          "type": "항",
+          "jo": "28",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제29조(증빙서의생략)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": [
+        {
+          "regulation_name": "제29조제1항",
+          "regulation_content": "오기정정또는결산시계정간대체등과같이\n단순히계산적조작의필요에따라발생한준거래에있어서는그전표\n로써증빙서에갈음할수있다.이경우에는전표의적요란에그사유\n및산출내역을기재하여야한다.",
+          "type": "항",
+          "jo": "29",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제29조제2항",
+          "regulation_content": "임직원에대한인건비및이에준하는경비의지출,본지점간역환에\n따른비용의지출등과같이증빙서를첨부하기곤란한경우에는지출\n결의서의적요란에대조필을기재함으로써증빙서에갈음할수있다.\n제4장현금회계\n제1절통칙",
+          "type": "항",
+          "jo": "29",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제30조(현금거래의방법)",
+      "regulation_content": "현금의수입및지출은전표에따라처리하여야\n한다.다만,무인자동예금회계기 (ATM및CD)의경우에는그러하지\n아니하다.",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(출납마감)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": [
+        {
+          "regulation_name": "제31조제1항",
+          "regulation_content": "현금의출납은당일자로마감함을원칙으로한다.다\n만,부득이한경우에는그러하지아니하다.",
+          "type": "항",
+          "jo": "31",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제31조제2항",
+          "regulation_content": "특별히공휴일에영업하는경우에는그공휴일거래분은다음영업\n일자거래분으로본다.",
+          "type": "항",
+          "jo": "31",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제32조(현금의보관)",
+      "regulation_content": "현금은금고실내의현금금고에보관하여야하며,출\n장소․무인자동예금회계기 (ATM및CD)등의경우에는은행장이별도\n정하는바에따른다.다만,영업중일때에는출납업무집행장소에보관\n할수있다.",
+      "type": "조",
+      "jo": "32",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제33조(현금의과부족처리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "33",
+      "sub_articles": [
+        {
+          "regulation_name": "제33조제1항",
+          "regulation_content": "현금의부족을발견하였을때에는지체없이\n해당금액을가지급금으로처리하고그원인을규명하여조속히정리하\n여야하며가지급후1월이경과하여도그원인을발견하지못하였을때\n에는취급자가변상조치한다.",
+          "type": "항",
+          "jo": "33",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제33조제2항",
+          "regulation_content": "현금의과여를발견한때에는지체없이가수금으로처리하고그원\n인을조사하여야하며가수금처리후3월이경과하여도그내용이판명\n되지아니한때에는영업외수익으로처리한다.다만,자동화기기에따른\n출납과잉금은별도로구분계리하고5년이경과하여도그내용이판명되지\n아니한때에영업외수익으로처리한다.\n제2절수입및지출",
+          "type": "항",
+          "jo": "33",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제34조(과오납의처리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "34",
+      "sub_articles": [
+        {
+          "regulation_name": "제34조제1항",
+          "regulation_content": "수입금이정당한금액을초과하여수입된사실을\n확인한때에는지체없이환급조치하여야한다.",
+          "type": "항",
+          "jo": "34",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제34조제2항",
+          "regulation_content": "수입금이정당한금액에모자라는사실을확인한때에는지체없이\n필요한조치를취하여야한다.",
+          "type": "항",
+          "jo": "34",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제35조(납입지체에대한조치)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "35",
+      "sub_articles": [
+        {
+          "regulation_name": "제35조제1항",
+          "regulation_content": "수입금의납입기한이경과하여도납입되\n지아니하는납입의무자에대하여는독촉하고,독촉한후에도수입금이\n수납되지않는경우에는법적절차등필요한조치를취하여야한다.",
+          "type": "항",
+          "jo": "35",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제35조제2항",
+          "regulation_content": "제1항의독촉및필요한조치에관하여는은행장이별도정하는바에\n따른다.",
+          "type": "항",
+          "jo": "35",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제36조(지출의방법)",
+      "regulation_content": "지출은수령인이지정하는은행계좌에입금함을원\n칙으로한다.다만,다음각호의어느하나에해당하는경우에는그러하\n지아니할수있다.\n1.영업거래에서발생하는예금등의지급\n2.인건비․여비기타은행장이정하는상용의경비를지출하는경우\n3.은행장이정하는소액지출의경우\n4.전도금\n5.기타계좌입금에의하여지급하는것이특별히곤란하다고인정되는\n경우",
+      "type": "조",
+      "jo": "36",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제37조(지출원인행위의 준칙)",
+      "regulation_content": "지출원인행위는 배정된예산범위내에서 하\n여야한다.",
+      "type": "조",
+      "jo": "37",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제38조(지출원인행위결의서의 작성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "38",
+      "sub_articles": [
+        {
+          "regulation_name": "제38조제1항",
+          "regulation_content": "지출원인행위를할때에는지출원인\n행위결의서를작성하여야한다.다만,지출원인행위결의서에따르기\n곤란한경우에는내부결재문서로서 이에갈음할수있다.",
+          "type": "항",
+          "jo": "38",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제38조제2항",
+          "regulation_content": "다음각호의경비를지출하는경우에는지출원인행위결의서또는\n내부결재문서의작성을생략할수있다.\n1.공공요금․제세공과금․협회비․인건비․여비\n2.법령․규정등일정한기준에따른경비\n3.기타정례적인확정경비",
+          "type": "항",
+          "jo": "38",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제39조(지출원인행위의 증감․취소)",
+      "regulation_content": "지출원인행위자는 계약의해제,계약\n금액의변경등으로인하여그지출원인행위액을 증감하거나취소하고자\n할때에는당초의지출원인행위를소급하여정정또는취소하지아니하고\n따로지출원인행위증감결의서또는지출원인행위취소결의서를작성하\n여야한다.",
+      "type": "조",
+      "jo": "39",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제40조(전도금)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "40",
+      "sub_articles": [
+        {
+          "regulation_name": "제40조제1항",
+          "regulation_content": "업무의성질상현금으로지급하지아니하면업무수행에\n지장을초래할우려가있는경우에한하여자금을전도할수있으며그\n범위와교부한도는은행장이별도정하는바에따른다.",
+          "type": "항",
+          "jo": "40",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제40조제2항",
+          "regulation_content": "전도금을교부한때에는가지급금으로처리하고전도금정산후\n가지급금을정리하여야한다.",
+          "type": "항",
+          "jo": "40",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제41조(선급금과개산금의지급)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "41",
+      "sub_articles": [
+        {
+          "regulation_name": "제41조제1항",
+          "regulation_content": "업무의성질상선급하는것이효율적\n으로처리하는데필요하거나개산지급하지않으면처리하기가곤란하다고\n인정되는경우에는선급금또는개산금으로지급할수있다.",
+          "type": "항",
+          "jo": "41",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제41조제2항",
+          "regulation_content": "선급금또는개산금의지급에따른업무가완료되면지체없이정산\n하여선급금또는개산금을정리하여야한다.\n제5장계정과목유지관리",
+          "type": "항",
+          "jo": "41",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제42조(계정과목체계)",
+      "regulation_content": "계정과목은사용목적에따라다음각호와같이분\n류한다.\n1.별도재무제표작성을위한계정과목\n2.연결재무제표작성을위한계정과목",
+      "type": "조",
+      "jo": "42",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제43조(계정과목설정기준)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "43",
+      "sub_articles": [
+        {
+          "regulation_name": "제43조제1항",
+          "regulation_content": "회계처리를위한계정은재무상태표계정과\n포괄손익계산서계정으로구분한다.",
+          "type": "항",
+          "jo": "43",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제43조제2항",
+          "regulation_content": "계정과목은중요성의원칙에따라설정하고,명료성,계속성,비교\n가능성이유지되어야한다.",
+          "type": "항",
+          "jo": "43",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제43조제3항",
+          "regulation_content": "계정과목은회계연도중에는특별한경우를제외하고는변경할수\n없다.",
+          "type": "항",
+          "jo": "43",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제44조(계정과목의유지관리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "44",
+      "sub_articles": [
+        {
+          "regulation_name": "제44조제1항",
+          "regulation_content": "계정과목의신설,개정및폐지등유지\n관리업무는회계주무부서장이 총괄한다.",
+          "type": "항",
+          "jo": "44",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제44조제2항",
+          "regulation_content": "회계관련부점장은 필요시세과목의신설,개정및폐지등을회계\n주무부서장에게요청할수있다.\n제6장재무제표\n제1절통칙",
+          "type": "항",
+          "jo": "44",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제45조(재무제표및부속명세서)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "45",
+      "sub_articles": [
+        {
+          "regulation_name": "제45조제1항",
+          "regulation_content": "재무제표는재무상태표․포괄손익계\n산서․자본변동표․현금흐름표와주석으로한다.",
+          "type": "항",
+          "jo": "45",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제45조제2항",
+          "regulation_content": "잉여금명세서\n영업경비명세서 기타필요한명세서는부속명세서로\n작성하여재무제표에첨부하여야한다.",
+          "type": "항",
+          "jo": "45",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제46조(재무제표작성원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "46",
+      "sub_articles": [
+        {
+          "regulation_name": "제46조제1항",
+          "regulation_content": "재무제표는해당회계연도분과직전회계연\n도분을비교하는형식으로작성하여야한다.",
+          "type": "항",
+          "jo": "46",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제46조제2항",
+          "regulation_content": "재무제표에는이를이용하는자에게충분한회계정보를제공하도록\n중요한회계방침등필요한사항을주석에기재하여야한다.",
+          "type": "항",
+          "jo": "46",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제46조제3항",
+          "regulation_content": "재무제표는예상가능한기간동안영업을계속할것이라는계속\n기업의가정하에작성한다.",
+          "type": "항",
+          "jo": "46",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제46조제4항",
+          "regulation_content": "재무제표는거래나사건의영향을발생한기간에인식하며해당기간의\n장부에기록하고재무제표에표시하는발생기준을적용하여작성한다.",
+          "type": "항",
+          "jo": "46",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제46조제5항",
+          "regulation_content": "한국채택국제회계기준에 따라연결재무제표를주재무제표로작성하며\n연결재무제표에추가하여별도재무제표를작성한다.",
+          "type": "항",
+          "jo": "46",
+          "hang": "5"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제47조(계정과목의통합및구분)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "47",
+      "sub_articles": [
+        {
+          "regulation_name": "제47조제1항",
+          "regulation_content": "계정과목의성격이나금액이중요하지\n않은경우유사한과목에통합하여기재할수있다.",
+          "type": "항",
+          "jo": "47",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제47조제2항",
+          "regulation_content": "별도의기존계정과목이없고성격이나금액이중요한경우에는그\n내용을가장잘나타낼수있는과목으로구분하여기재한다.\n제2절재무상태표",
+          "type": "항",
+          "jo": "47",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제48조(재무상태표작성일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "48",
+      "sub_articles": [
+        {
+          "regulation_name": "제48조제1항",
+          "regulation_content": "재무상태표는재무상태를명확히나\n타내기위하여재무상태표일현재의모든자산,부채및자본을적정하\n게표시하여야한다.",
+          "type": "항",
+          "jo": "48",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제48조제2항",
+          "regulation_content": "자산,부채및자본은총액으로계상함을원칙으로하며자산의항목과\n부채또는자본의항목을상계함으로써그전부또는일부를재무상태표\n에서제외하여서는아니된다.",
+          "type": "항",
+          "jo": "48",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제48조제3항",
+          "regulation_content": "재무상태표에기재하는자산과부채의대분류과목은상대적으로\n유동성이높은순서대로배열함을원칙으로하고,대분류과목내의계정\n과목은업무의특성과중요도등을감안하여배열한다.",
+          "type": "항",
+          "jo": "48",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제49조(자산의인식기준)",
+      "regulation_content": "자산은미래경제적효익이유입될가능성이높고\n원가를신뢰성있게측정할수있을때재무상태표에인식한다.",
+      "type": "조",
+      "jo": "49",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제50조(부채의인식기준)",
+      "regulation_content": "부채는미래경제적효익이유출될가능성이높고\n결제될금액을신뢰성있게측정할수있을때재무상태표에인식한다.",
+      "type": "조",
+      "jo": "50",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제51조(자본의인식기준)",
+      "regulation_content": "자본은자산에서부채를차감한순자산으로서,\n자산에대한소유주의잔여청구권을자본으로표시한다.\n제3절포괄손익계산서",
+      "type": "조",
+      "jo": "51",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제52조(포괄손익계산서작성일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "52",
+      "sub_articles": [
+        {
+          "regulation_name": "제52조제1항",
+          "regulation_content": "수익은실현시기를기준으로계\n상하고미실현수익은당기의손익에산입하지아니함을원칙으로하며,\n비용은발생사실에따라인식하고계상한다.다만,따로정한경우에는\n그에따른다.",
+          "type": "항",
+          "jo": "52",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제52조제2항",
+          "regulation_content": "포괄손익계산서는경영성과를명확히보고하기위하여회계기간에\n속하는모든수익과이에대응하는모든비용을적정하게표시하여야\n한다.",
+          "type": "항",
+          "jo": "52",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제52조제3항",
+          "regulation_content": "수익과비용은그발생원천에따라명확하게분류하고각수익항목과\n이에관련되는비용항목을대응표시하여야한다.",
+          "type": "항",
+          "jo": "52",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제52조제4항",
+          "regulation_content": "수익과비용은총액으로기재함을원칙으로하고수익항목과비용\n항목을직접상계함으로써그전부또는일부를포괄손익계산서에서\n제외하여서는아니된다.",
+          "type": "항",
+          "jo": "52",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제53조(수익의인식기준)",
+      "regulation_content": "수익은자산의증가나부채의감소와관련하여\n미래경제적효익이증가하고이를신뢰성있게측정할수있을때\n포괄손익계산서에인식한다.",
+      "type": "조",
+      "jo": "53",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제54조(비용의인식기준)",
+      "regulation_content": "비용은자산의감소나부채의증가와관련하여\n미래경제적효익이감소하고이를신뢰성있게측정할수있을때\n포괄손익계산서에인식한다.\n제4절자본변동표",
+      "type": "조",
+      "jo": "54",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제55조(자본변동표작성일반원칙)",
+      "regulation_content": "자본변동표는자본의각항목별로기\n초잔액,변동사항,기말잔액을구분하여표시한다.\n제5절현금흐름표",
+      "type": "조",
+      "jo": "55",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제56조(현금흐름표작성일반원칙)",
+      "regulation_content": "현금흐름표는현금및현금성자산(이하\n“현금”이라한다)의변동내용을명확하게보고하기위하여해당회계\n기간에속하는현금의유입과유출내용을적정하게표시하여야한다.",
+      "type": "조",
+      "jo": "56",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제57조(현금흐름표의구분)",
+      "regulation_content": "현금흐름표는해당회계기간동안발생한현\n금흐름을영업활동,투자활동및재무활동으로구분하여표시하고이에\n기초의현금을가산하여기말의현금을산출하는형식으로표시한다.\n제6절중간재무제표",
+      "type": "조",
+      "jo": "57",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제58조(중간재무제표작성일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "58",
+      "sub_articles": [
+        {
+          "regulation_name": "제58조제1항",
+          "regulation_content": "중간재무제표는한회계연도보다\n짧은기간을대상으로작성하는재무제표로재무상태표,포괄손익계산서,\n자본변동표,현금흐름표및주석을포함한다.",
+          "type": "항",
+          "jo": "58",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제58조제2항",
+          "regulation_content": "중간재무제표는연차재무제표와달리요약재무제표와선별적주석으로\n작성할수있다.",
+          "type": "항",
+          "jo": "58",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제59조(대상기간및비교형식)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "59",
+      "sub_articles": [
+        {
+          "regulation_name": "제59조제1항",
+          "regulation_content": "재무상태표는해당중간기간말과직전\n회계연도말을비교하는형식으로작성한다.",
+          "type": "항",
+          "jo": "59",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제59조제2항",
+          "regulation_content": "포괄손익계산서는해당중간기간과누적중간기간을직전회계연도의\n동일기간과비교하는형식으로작성한다.",
+          "type": "항",
+          "jo": "59",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제59조제3항",
+          "regulation_content": "자본변동표및현금흐름표는해당누적중간기간을직전회계연도의\n동일기간과비교하는형식으로작성한다.",
+          "type": "항",
+          "jo": "59",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제60조(인식과측정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "60",
+      "sub_articles": [
+        {
+          "regulation_name": "제60조제1항",
+          "regulation_content": "중간재무제표는 연차재무제표에적용하는것과동\n일한회계정책을적용하여작성하며회계정책의변경이있는경우에변\n경된회계정책을적용한다.",
+          "type": "항",
+          "jo": "60",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제60조제2항",
+          "regulation_content": "중간재무제표의 작성을위한측정은해당누적중간기간을기준으로\n한다.\n제7절연결재무제표",
+          "type": "항",
+          "jo": "60",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제61조(연결재무제표의 정의)",
+      "regulation_content": "연결재무제표는 지배회사와그종속회사(자\n회사)로구성되는경제적실체의재무상태와경영성과및현금흐름등에\n관한재무정보를회계정보의이용자에게제공하기위하여지배회사가\n작성하는재무제표를말한다.",
+      "type": "조",
+      "jo": "61",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제62조(연결재무제표의 구분)",
+      "regulation_content": "연결재무제표는 연결재무상태표,연결포괄손\n익계산서,연결자본변동표,연결현금흐름표및주석으로구성된다.\n제7장결산\n제1절통칙",
+      "type": "조",
+      "jo": "62",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제63조(결산의목적)",
+      "regulation_content": "결산은회계기간의경영성과와재무상태를명확하게\n표시할수있도록하여야한다.",
+      "type": "조",
+      "jo": "63",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제64조(결산의종류및기준일)",
+      "regulation_content": "결산은분기및회계연도말을기준으로실\n시하며,회계연도중매월말일은간이결산을실시한다.",
+      "type": "조",
+      "jo": "64",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제65조(결산단위)",
+      "regulation_content": "결산은회계단위별로실시하고회계주무부서장이 총괄하\n여결산서류를작성한다.",
+      "type": "조",
+      "jo": "65",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제66조(결산지침)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "66",
+      "sub_articles": [
+        {
+          "regulation_name": "제66조제1항",
+          "regulation_content": "회계주무부서장은 미리결산에관한기준과절차를\n정한지침을통지하여야한다.",
+          "type": "항",
+          "jo": "66",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제66조제2항",
+          "regulation_content": "제1항의결산지침에는회계관련부점의결산자료(주석을포함하며이하\n같다)제출내용과보고내용등을포함하여야한다.",
+          "type": "항",
+          "jo": "66",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제67조(결산의검증및자료제출)",
+      "regulation_content": "회계관련부점장은 소관업무에대한결\n산을완료하고정확성을검증한후,제66조제2항에따른결산자료를회\n계주무부서장에게 제출하여야한다",
+      "type": "조",
+      "jo": "67",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제68조(결산승인)",
+      "regulation_content": "결산승인에관한사항은관계법령및정관이정하는바에\n따른다.",
+      "type": "조",
+      "jo": "68",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제69조(결산서류의비치․공시․공고)",
+      "regulation_content": "결산서류의비치․공시및공고에\n관한사항은관계법령및정관이정하는바에따른다.\n제2절결산정리및실시",
+      "type": "조",
+      "jo": "69",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제70조(결산정리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "70",
+      "sub_articles": [
+        {
+          "regulation_name": "제70조제1항",
+          "regulation_content": "결산에앞서자산․부채및자본과손익에관련되는\n항목중결산에필요한사항을정리하여야한다.",
+          "type": "항",
+          "jo": "70",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제70조제2항",
+          "regulation_content": "결산시에는연도이월이불가피한사항을제외하고는모든미결산\n계정을정리하여야한다.",
+          "type": "항",
+          "jo": "70",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제70조제3항",
+          "regulation_content": "회계단위간의거래에서생긴내부손익은이를공제하고미달거래를\n정리하여야한다.",
+          "type": "항",
+          "jo": "70",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제71조(불확정채권․채무의정리)",
+      "regulation_content": "불확정채권은귀속의사유가확정되지\n아니하는한계상하지아니하고불확정채무는면책의사유가확정되지\n아니하는한계상하여야한다.",
+      "type": "조",
+      "jo": "71",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제72조(장부의마감및이월)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "72",
+      "sub_articles": [
+        {
+          "regulation_name": "제72조제1항",
+          "regulation_content": "결산정리후의총계정원장에따라합계잔액\n시산표를작성하여제장부를마감한다.",
+          "type": "항",
+          "jo": "72",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제72조제2항",
+          "regulation_content": "결산정리후의총계정원장의각잔액은신장부에이월한다.",
+          "type": "항",
+          "jo": "72",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제73조(이익잉여금의처분)",
+      "regulation_content": "이익잉여금의처분은관계법령및정관에서정\n하는바에따라처분한다.\n제8장자회사회계관리",
+      "type": "조",
+      "jo": "73",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제74조(자회사회계관리일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "74",
+      "sub_articles": [
+        {
+          "regulation_name": "제74조제1항",
+          "regulation_content": "자회사는당행이실질적으로지배함\n으로써연결범위에포함되는기업체로써당행의연결재무제표작성을\n위하여당행의「회계규정」및「회계처리지침」을준수하여야한다.",
+          "type": "항",
+          "jo": "74",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제74조제2항",
+          "regulation_content": "당행은미리연결결산에관한기준과절차를정한지침을자회사에\n통지하여야한다.",
+          "type": "항",
+          "jo": "74",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제74조제3항",
+          "regulation_content": "제2항의연결결산지침에는 자회사결산자료(주석을포함하며이하같\n다)제출내용과보고내용등을포함하여야한다.",
+          "type": "항",
+          "jo": "74",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제74조제4항",
+          "regulation_content": "자회사는결산을완료하고정확성을검증한후,제3항에따른결산\n자료를당행에제출하여야한다.",
+          "type": "항",
+          "jo": "74",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제75조(자회사회계정보요구)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "75",
+      "sub_articles": [
+        {
+          "regulation_name": "제75조제1항",
+          "regulation_content": "당행은연결재무제표작성을위하여자\n회사의회계에관한장부와서류를열람또는등사하거나회계에관한\n자료의제출을요구할수있으며필요한경우자회사의업무와재산\n상태를조사할수있다.",
+          "type": "항",
+          "jo": "75",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제75조제2항",
+          "regulation_content": "자회사는특별한사유가없는한제1항에따른당행의요구에응하\n여야한다.",
+          "type": "항",
+          "jo": "75",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙<1997.11.29>",
+      "regulation_content": "이규정은1997년11월29일부터시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2000.1.3> 제1조(시행일)",
+      "regulation_content": "이규정은1999년12월31일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2000.1.3> 제2조(경과조치)",
+      "regulation_content": "비교표시에관한경과조치,자산․부채의평가에관한경과\n조치및채권재조정의회계처리에관한적용례등은은행업회계처리준칙\n및기업회계기준의규정을준용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2002.6.21> 제1조(시행일)",
+      "regulation_content": "이규정은2002년7월1일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2002.6.21> 제2조(적용례)",
+      "regulation_content": "이규정은시행일현재가수금으로계리되어있는자동화기기\n출납과잉금에대해서도적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2010.12.6> 제1조(시행일)",
+      "regulation_content": "이규정은2011년1월1일부터시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2010.12.6> 제2조(적용례)",
+      "regulation_content": "이규정은비교표시되는2010년도개시재무상태표,분․반기\n및연간재무제표에대해서도적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

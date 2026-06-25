@@ -1,0 +1,394 @@
+{
+  "regulationName": "준정규직 인사관리기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 준정규직의 인사관리에 관한 제반 사항을 정하여 효율적인 인력운용을 도모함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(준정규직의 구분)",
+      "regulation_content": "준정규직은 계약기간의 정함이 없는 직원으로 직무에 따라 다음 각호와 같이 구분한다.\n  1. “일반준정규직”은 창구텔러, 전화상담원, 사무지원 등의 직무를 수행하는 직원을 말한다.\n  2. “전문준정규직”은 일반준정규직의 직무 외에 전문적 지식이나 기술 등이 요구되는 직무를 수행하는 직원을 말한다.\n  3. “시간선택제준정규직”은 일반준정규직의 직무를 수행하는 직원 중 1주 동안의 근로시간이 40시간 미만인 직원을 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(채용방법)",
+      "regulation_content": "준정규직의 채용방법은「인사규정」을 준용한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(채용의 전결권)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "준정규직의 채용은 은행장이 전결한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "전문준정규직의 보수, 담당직무 등 근로조건변경은 일반직원의 책임자에 준하는 경우 전무이사 전결로 하며, 행원에 준하는 경우 해당 그룹장 전결로 한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(채용의 제한)",
+      "regulation_content": "「인사규정」의 채용의 제한에 해당하는 자는 채용하지 아니한다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(받을서류)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "준정규직을 채용하는 경우 다음 각호의 서류를 받는다. \n  1. 지원서 또는 이력서\n  2. 근로계약서\n  3. 서약서\n  4. 각서\n  5. 주민등록초본(남자의 경우 병적사항 포함)\n  6. 기본증명서\n  7. 경력증명서(상·벌사항 포함, 해당자에 한함)\n  8. 임직원과 친인척관계 확인서\n  9. 기타 필요하다고 인정하는 서류",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "제1항제2호의 근로계약서는 근로계약을 체결하고자 하는 준정규직과 개별적으로 작성하여야 하며, 다음 각호의 내용이 명시되어야 한다.\n  1. 담당직무\n  2. 계약기간\n  3. 근무시간·휴게에 관한 사항\n  4. 근무장소\n  5. 보수에 관한 사항\n  6. 휴가·휴일에 관한 사항",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조의2(친인척공개)",
+      "regulation_content": "임직원과 친인척관계 확인서를 통해 다음 각호의 정보를 수집하여 해당분기의 익월말까지 채용별로 은행홈페이지에 공개한다.\n  1.채용명, 입행일\n  2.채용별 신규채용 인원수\n  3.재직 중인 임직원과 친인척 관계가 있는 신규채용 직원수\n[본조신설 2019.6.24]",
+      "type": "조",
+      "jo": "6조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(근무장소 및 근무지 변경)",
+      "regulation_content": "준정규직의 근무장소는 발령에 의하며, 필요한 경우 일반직원에 준하여 이동·배치할 수 있다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(담당직무)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "일반준정규직 및 시간선택제준정규직의 담당직무별 업무내용은 “별표”에서 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "전문준정규직의 담당직무는 개별 근로계약서에서 정하는 바에 따르며, 소속부점장은 전문준정규직이 수행할 직무에 대하여 “직무기술서”를 작성하여야 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제8조제3항",
+          "regulation_content": "제2항의 직무기술서는 전문준정규직의 채용, 평가, 목표설정, 보수책정 등에 활용한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(경력가산)",
+      "regulation_content": "준정규직 중 호봉제 적용 대상직무(창구텔러, 전화상담원, 사무지원)를 수행하는 직원에 대하여는 군복무기간(최장 3년)을 초임호봉(1호봉)에 가산할 수 있다. 다만, 은행장이 부득이하다고 인정하는 경우 예외적으로 입행 전 경력 등을 가산할 수 있다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(직위 및 승진)",
+      "regulation_content": "준정규직의 직위는 다음 각호에 따라 운용하며, 직원운용상 필요한 경우 일반직원에 준하는 적절한 직위 및 전결권을 부여할 수 있다. 다만, 업무수행상 필요한 경우 직위와 호칭을 달리하여 운용할 수 있다.\n  1. 일반준정규직 및 시간선택제준정규직의 직위는 계장·대리·과장으로 구분하며 다음 각호의 기준에 따라 직위를 부여한다.\n    가. 계장 : 준정규직 입행일 또는 발령일로부터 근속기간이 5년이 경과하지 않은 직원\n    나. 대리 : 준정규직 입행일 또는 발령일로부터 근속기간이 5년이 경과한 직원\n    다. 과장 : 대리 발령일로부터 근속기간이 5년이 경과한 직원 중 별도의 승진심사에 의해 선발된 직원. 다만, 업무역량 및 성과가 우수하여 은행장이 특별히 인정하는 직원의 경우 최소 근속기간에 불구하고 승진 임용할 수 있다.\n  2. 전문준정규직은 채용 및 근로조건변경시 직책과 담당직무를 감안하여 직위를 부여한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(수습기간)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "준정규직에 대하여는 3개월 이내의 수습기간을 둘 수 있다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "소속부점장은 수습준정규직에 대하여 근무평가 등을 실시할 수 있다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제11조제3항",
+          "regulation_content": "수습기간 중 담당직무수행에 부적합하다고 판단되는 경우에는 근로계약을 해지한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제11조제4항",
+          "regulation_content": "수습기간은 근속연수 및 승급소요기간에 통산한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(일반직원 전환)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "은행장은 준정규직을 별도의 절차를 거쳐 일반직원으로 전환시킬 수 있다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "전환의 대상, 요건, 기준, 절차 등 전환 전반에 관한 사항과 전환 이후 처우조건 등은 사전에 정하여 실시한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제12조제3항",
+          "regulation_content": "제1항에 의하여 전환된 직원의 직급기간은 일반직원 임용일로부터 가산한다.\n[본조신설 2019.6.24]",
+          "type": "항",
+          "jo": "12",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조(복무자세 등)",
+      "regulation_content": "준정규직의 복무자세, 근무시간과 휴식시간, 시간외 근무, 공휴일, 복장 및 변상책임에 관한 사항은 「취업규칙」을 준용한다.",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(근무관리 등)",
+      "regulation_content": "준정규직의 근무관리, 출장에 관한 사항은 「복무규정」을 준용한다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(연수)",
+      "regulation_content": "준정규직의 연수에 관한 사항은 「연수규정」을 준용한다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(평가)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": [
+        {
+          "regulation_name": "제16조제1항",
+          "regulation_content": "준정규직의 평가는 「준정규직 종합근무평정 기준」에 따른다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제16조제2항",
+          "regulation_content": "평가결과는 승진심사, 일반직원 전환 등에 활용할 수 있다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제17조(전문준정규직의 평가)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "전문준정규직으로 선발된 직원은 소속부점장과 1년 단위로 “성과목표관리서”를 작성하여야 한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "소속부점장은 전문준정규직의 성과목표관리를 위하여 반기별로 수행한 업무성과 등에 대해 중간점검 및 평가를 실시하여야 한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제17조제3항",
+          "regulation_content": "성과평가의 공정성 및 전문성 확보, 합리적인 성과급 지급 등을 위해 별도의 “성과평가협의회”를 둘 수 있다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(휴가)",
+      "regulation_content": "준정규직의 휴가에 관한 사항은「휴가규정」을 준용한다.",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(휴직)",
+      "regulation_content": "준정규직의 휴직 및 복직에 관한 사항은 「복무규정」을 준용한다.",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제20조(해직의 구분)",
+      "regulation_content": "준정규직의 해직은 「인사규정」을 준용한다. 다만, 정년해직에 관한 사항은 이 기준에서 별도로 정한다.",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제21조(정년해직)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": [
+        {
+          "regulation_name": "제21조제1항",
+          "regulation_content": "준정규직의 정년은 만 60세로 한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제21조제2항",
+          "regulation_content": "만 57세 이후부터는 별도로 정하는「임금피크제운영규정」에 따라 임금피크제를 적용한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제21조제3항",
+          "regulation_content": "준정규직이 정년에 달하였을 때에는 그 해당월말에 해직한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제22조(보수 및 복지)",
+      "regulation_content": "준정규직의 보수 및 복지에 관한 사항은 따로 정하는 기준에 따른다.",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(포상 및 징계)",
+      "regulation_content": "준정규직의 포상 및 징계에 관한 사항은 「직원상벌규정」을 준용한다.",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(준용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": [
+        {
+          "regulation_name": "제24조제1항",
+          "regulation_content": "이 기준에서 정하지 아니한 사항은 관계법령 및 다른 내규를 준용할 수 있다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제24조제2항",
+          "regulation_content": "이 기준에서 정하지 아니한 사항은 경영지원그룹장 전결로 처리한다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제25조(대우)",
+      "regulation_content": "준정규직의 업무 범위가 일반직원에 준하는 경우 따로 정하는 바에 따라 일반직원의 대우를 할 수 있다.\n[본조신설 2018.3.23]",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부  칙<2013.10.10>",
+      "regulation_content": "이 기준은 2013년 9월 25일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부  칙<2015.7.14>",
+      "regulation_content": "이 기준은 2015년 7월 14일부터 시행한다.(2015년 7월 14일 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부  칙<2015.10.6>",
+      "regulation_content": "이 기준은 2016년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부  칙<2018.3.23>",
+      "regulation_content": "이 기준은 2018년 3월 23일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부  칙<2019.6.24>",
+      "regulation_content": "이 기준은 2019년 6월 24일부터 시행한다.\n\n\n\n\n[별표] 일반준정규직 및 시간선택제준정규직의 직무별 업무내용(제8조 관련)<개정 2015.7.14, 2018.3.23>\n\n일반준정규직 및 시간선택제준정규직의 직무별 업무내용\n\n<표>",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "별표",
+      "type": "별표"
+    }
+  ]
+}

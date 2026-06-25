@@ -1,0 +1,120 @@
+{
+  "regulationName": "출근시간 선택근무 운용기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 일과 가정의 조화를 통한 가족친화경영을 실천하고 영유아 및 초등학교 저학년 자녀를 가진 직원들의 고충 해소를 위한 “출근시간 선택근무”에 관한 세부사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(신청대상)",
+      "regulation_content": "만 9세 이하 또는 초등학교 3학년 이하 자녀를 가진 직원 중 자녀를 돌볼 가족이 없는 등 필요한 경우 출근시간 선택근무를 신청할 수 있다. 다만, 사내 결혼직원은 1명만 신청할 수 있다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(신청 및 승인)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "출근시간 선택근무를 신청하고자 하는 경우에는 매월 20일까지 주민등록등본, 재학증명서 등 자녀가 만 9세 이하 또는 초등학교 3학년 이하임을 증명할 수 있는 서류를 소속 부점장에게 제출하여야 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "대상자는 부점노사발전협의회에서 추천하고 부점장이 선정한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "부점당 사용인원은 1명을 원칙으로 한다. 다만, 신청직원이 다수인 경우 부점 인원수, 담당업무 등을 고려하여 업무공백이 발생하지 않는 범위내에서 그룹․지역본부와 협의하여 추가 선정할 수 있다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(승인예외)",
+      "regulation_content": "다음 각호의 1에 해당하는 경우에는 출근시간 선택근무를 승인하지 아니할 수 있다.\n  1. 근속기간이 1년 미만인 경우\n  2. 소속부점에서 다른 직원이 출근시간 선택근무를 하고 있는 경우\n  3. 정상적인 업무수행에 중대한 지장을 초래하는 경우",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(선택근무 종료)",
+      "regulation_content": "출근시간 선택근무를 예정월보다 조기에 종료하고자 하는 경우에는 종료월 10일까지 부점장의 승인을 득하여야 한다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(사용기간)",
+      "regulation_content": "출근시간 선택근무는 세대 기준으로 최대 1년 이내에서 1개월 단위로 사용하여야 하며, 1회에 한하여 분할 사용할 수 있다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(근무시간)",
+      "regulation_content": "출근시간 선택근무 기간 중 근무시간은 10시부터 18시까지(법정근로시간의 7/8, 휴게시간 1시간 포함)로 한다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(연장근무)",
+      "regulation_content": "출근시간 선택근무 기간 중 근무시간을 초과하여 연장근무를 하는 경우「취업규칙」,「보수규정」및「휴가규정」에 따른다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(보수)",
+      "regulation_content": "출근시간 선택근무 직원의 월급여, 상여금 및 성과급 등은 근무시간에 비례하여 지급한다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(휴가)",
+      "regulation_content": "출근시간 선택근무 직원의 휴가는 정상근무 직원과 동일하게 운용한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(기타사항)",
+      "regulation_content": "이 기준에서 정하지 않은 사항에 대해서는 인사, 보수 및 복지 관련 내규에서 정하는 바에 따른다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부  칙<2013.11.5>",
+      "regulation_content": "이 기준은 2013년 11월 5일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부  칙<2015.7.14>",
+      "regulation_content": "이 기준은 2015년 7월 14일부터 시행한다.(2015년 7월 14일 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부  칙<2017.1.31>",
+      "regulation_content": "이 기준은 2017년 2월 1일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "regulationName": "경영공시규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 「은행법」 및 「은행업감독규정」에 명시되어 있는 “경영공시” 업무를 원활히 수행하기 위하여 필요한 사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "related_laws": [
+        {
+          "law_name": "은행법",
+          "original_text": "「은행법」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "“경영공시”업무는 「은행법」 및 「은행업감독규정」 등에서 특별히 정한 경우 이외에는 이 규정에 정하는 바에 의한다.",
+      "type": "조",
+      "jo": "2",
+      "related_laws": [
+        {
+          "law_name": "은행법",
+          "original_text": "「은행법」",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(용어의 정의)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "“경영공시”란 「은행법」 및 「은행업감독규정」에서 정한 경영공시를 말한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "은행법",
+              "original_text": "「은행법」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "“은행 경영공시 및 대출가산금리 비교공시 운영기준” 이란 「은행법」제2조제1항제2호 및 「은행업감독규정」제41조의 적용을 받는 금융기관이 통일된 기준으로 공시하기 위하여 금융감독원장이 공시항목 및 방법에 대해 정한 것을 말한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2",
+          "related_laws": [
+            {
+              "law_name": "은행법",
+              "original_text": "「은행법」제2조제1항제2호",
+              "jo": "2",
+              "hang": "1",
+              "ho": "2",
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제3조제3항",
+          "regulation_content": "“공시담당부서”라 함은 「업무분장규정」에 의거 당행의 “경영공시” 업무를 담당하는 부서를 말한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제3조제4항",
+          "regulation_content": "“각부서”라 함은 “경영공시”업무와 관련된 공시 정보를 “공시담당부서“에 제공하는 부서를 말한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(정기공시)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "“은행 경영공시 및 대출가산금리 비교공시 운영기준”에 의하여 작성한 공시자료를 사업연도 종료일로부터 3개월 이내에 공시하여야 한다. 다만, 상반기 또는 분기 공시자료는 분·반기 결산일로부터 2개월 이내에 공시한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "제1항의 공시자료를 주주, 금융소비자 및 기타 이해관계자가 각 영업점에서 용이하게 열람할 수 있도록 공시일로부터 2년간(상반기 또는 분기 공시자료의 경우 당해 회계연도 결산결과 공시일까지) 비치하거나 또는 고객전용 단말기 등을 통해 열람할 수 있도록 조치하며, 동 공시자료는 전국은행연합회 홈페이지와 당행 홈페이지에 공시한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "구체적인 공시항목 및 공시사항의 작성방법은 금융감독원장이 정하는 “은행 경영공시 및 대출가산금리 비교공시 운영기준”에 따른다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(수시공시)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "다음 각 호의 사항이 발생한 경우 즉시 「은행법」 및 「은행업감독규정」 등에서 정하는 바에 따라 공시하여야 한다. 다만, 제5호부터 제11호까지의 경우 「공시정보관리규정」에 의해 공시하는 경우에는 이를 생략할 수 있다. \n  1. 「은행업감독규정」에 의한 동일계열기업군별(계열기업군 소속기업체가 아닌 경우 개별기업체별)로 은행의 전월말 현재 자기자본 총계의 100분의 10에 상당하는 금액을 초과하는 무수익여신이 발생한 경우. 다만, 그 금액이 40억원 이하인 경우는 제외\n  2. 「은행업감독규정」에 따라 민사소송 패소 등의 사유로 은행의 전월말 현재 자기자본 총계의 100분의 1에 상당하는 금액을 초과하는 손실이 발생한 경우. 다만, 그 금액이 10억원 이하인 경우는 제외\n  3. 「은행업감독규정」 제34조부터 제38조까지의 규정에 따라 경영개선권고 등의 조치를 받은 경우\n  4. 「은행업감독규정」 제26조제1항제2호에서 정하는 유동성커버리지비율 및 같은 조 같은 항 제3호에 따른 원화예대율을 위반한 경우\n  5. 재무구조에 중대한 변동을 초래하는 사항이 발생한 때\n  6. 은행 경영환경에 중대한 변동을 초래하는 사항이 발생한 때\n  7. 재산 등에 대규모 변동을 초래하는 사항이 발생한 때\n  8. 채권채무관계에 중대한 변동을 초래하는 사항이 발생한 때\n  9. 투자 및 출자관계에 중대한 변동을 초래하는 사항이 발생한 때\n  10. 손익구조에 중대한 변동을 초래하는 사항이 발생한 때\n  11. 기타 은행 경영에 중대한 영향을 미칠 수 있는 사항이 발생한 때",
+          "type": "항",
+          "jo": "5",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "은행법",
+              "original_text": "「은행법」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "제1항에 따른 공시를 하는 경우 금융감독원장에게 그 내용을 지체없이 보고하여야 한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(각부서)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "각부서는 “은행 경영공시 및 대출가산금리 비교공시 운영기준”에서 정한 공시대상을 작성하고, 공시정보의 적정 여부를 검토 후 “공시담당부서”에 제출하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "각부서는 제5조에 해당하는 사항이 발생하는 경우 즉시 “공시담당부서”에 그 내용을 제출하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "각부서는 “은행 경영공시 및 대출가산금리 비교공시 운영기준”에서 정한 공시관련업무의 수행 과정에서 필요한 제반절차를 수행하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(공시담당부서)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "공시담당부서는 공시업무 수행을 위해 필요한정보 및 조치사항을 각부서에 요구할 수 있다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "공시담당부서는 제6조 제1항 및 제2항에 따라 제출받은 공시정보에 대하여 공시사항 해당여부를 검토하고, 해당시 관련법령 및 「은행업감독규정」등에서 정하는 바에 따라 공시하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부 칙<2016.12.12>",
+      "regulation_content": "이 규정은 2016년 12월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2018.3.29>",
+      "regulation_content": "이 규정은 2018년 1월 31일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

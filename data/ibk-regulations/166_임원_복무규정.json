@@ -1,0 +1,190 @@
+{
+  "regulationName": "임원 복무규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 상임임원의 성실한 직무수행, 권리 보장 등을 위해 복무에 관한 사항을 규정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용대상)",
+      "regulation_content": "이 규정의 적용대상은 상시․지속적으로 은행업무를 수행하는 상임임원(이하 “임원”이라 한다)인 은행장, 전무이사, 상임이사 및 감사를 대상으로 한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(근무일 및 근무시간)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "임원의 근무일 및 근무시간에 관한 사항은 「취업규칙」제14조 및 제15조를 준용한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "제1항에도 불구하고, 긴급한 현안업무 수행 등 은행장이 필요하다고 인정하는 경우 탄력적으로 근무일 및 근무시간을 운영할 수 있다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(근무장소)",
+      "regulation_content": "임원의 근무장소는 본부가 위치한 곳으로 한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(기본원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "임원의 국내출장에 관한 사항은「복무규정」제9조 내지 제12조 및「위임전결규정」을 따르되, 감사는 업무의 독립성을 감안하여 은행장에 준하여 기준을 적용한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "출장자는 출장목적 달성을 위해 최선을 다해야 하며, 출장 중 사적 용무 등에 시간을 소비하지 않도록 유의하여야 한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(근무상황기록부 관리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "임원의 출장신고는 문서나 전산시스템 등을 활용하고 출장목적, 장소, 시간 등을 명확히 기록하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "제1항에도 불구하고, 임원이 행내 전산시스템 상 “임원동정”에 출장내용을 사전에 공개함으로써 출장신고에 갈음할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(출장여비)",
+      "regulation_content": "임원이 업무를 위하여 국내여행 할 때의 여비지급에 관한 사항은「여비지급규정」을 따른다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(기본원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "임원의 국외출장에 관한 사항은「공무국외여행관리규정」및「위임전결규정」을 따르되, 감사는 업무의 독립성을 감안하여 은행장에 준하여 기준을 적용한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "출장자는 현지 규범·관습 등을 존중하고, 임원으로서의 품위를 유지하여야 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(출장여비)",
+      "regulation_content": "임원이 업무를 위하여 국외여행 할 때의 여비지급에 관한 사항은「여비지급규정」을 따른다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(휴가의 종류)",
+      "regulation_content": "임원의 휴가는 연차휴가, 청원휴가, 인병휴가, 공가, 특별휴가로 구분한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(연차휴가)",
+      "regulation_content": "임원의 연차휴가 부여는「휴가규정」제3조제1항을 준용한다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(청원휴가)",
+      "regulation_content": "임원의 청원휴가는「휴가규정」제4조를 준용한다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(인병휴가)",
+      "regulation_content": "임원의 인병휴가는「휴가규정」제5조를 준용하되, 임원 직위의 특수성 등을 고려해 엄격하게 운영한다.",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(공가)",
+      "regulation_content": "임원의 공가는「휴가규정」제6조를 준용한다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(특별휴가)",
+      "regulation_content": "임원의 특별휴가는「휴가규정」제7조를 준용한다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(휴가승인)",
+      "regulation_content": "임원의 휴가승인은「위임전결규정」을 따르되, 감사는 업무의 독립성을 감안하여 은행장에 준하여 기준을 적용한다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(기본원칙)",
+      "regulation_content": "임원의 외부강의에 관한 사항은「기업은행임직원행동강령」에서 정한 바에 따른다.",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2019.6.28>",
+      "regulation_content": "이 규정은 2019년 6월 28일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

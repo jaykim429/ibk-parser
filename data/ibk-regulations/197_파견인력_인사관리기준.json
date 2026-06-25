@@ -1,0 +1,236 @@
+{
+  "regulationName": "파견인력 인사관리기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 파견인력의 고용․관리에 관한 제반 사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(용어 정의)",
+      "regulation_content": "이 기준에서 “파견인력”이라 함은 근로자파견계약에 따라 기간을 정하여 은행에 근로를 제공하는 자를 말한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(담당직무)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "파견인력이 담당할 수 있는 직무는 「파견근로자 보호 등에 관한 법률」에서 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "파견근로자 보호 등에 관한 법률",
+              "original_text": "「파견근로자 보호 등에 관한 법률」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "파견인력의 해당 직무별 구체적인 업무내용은 근로자파견회사와 체결한 근로자파견계약서에서 정하는 바에 따른다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(계약체결 및 배치)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "소관부점장은 파견인력에 대하여 근로자파견회사와 근로파견계약을 체결하고, 파견인력이 필요한 부점장의 요청에 따라 해당인력을 배치한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "파견인력에 대한 복무관리 등 제반 사항은 근로자파견회사와의 계약에 따른다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(근무기간)",
+      "regulation_content": "근로자파견회사로부터 배치된 파견인력에 대하여는 1년 이내의 기간을 단위로 근무토록 하되, 최장 2년을 초과하여 근무하게 할 수 없다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(인력관리)",
+      "regulation_content": "파견인력의 인력관리는 근로자파견회사에서 관리한다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(복무관리)",
+      "regulation_content": "파견인력의 복무관리는 소속부점장이 행한다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(복무자세)",
+      "regulation_content": "파견인력은 근로자파견계약서상의 담당직무를 성실히 수행하여야 하며, 「계약인력 인사관리기준」제11조 각호의 사항을 준수하여야 한다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(근무시간과 휴게시간)",
+      "regulation_content": "파견인력의 근무시간 및 휴게시간은 근로자파견계약서에서 정하는 바에 따르되, 「계약인력 인사관리기준」제12조를 준용할 수 있다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(출장)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": [
+        {
+          "regulation_name": "제10조제1항",
+          "regulation_content": "업무수행상 필요한 경우에는 소속부점장은 파견인력에 대하여 국내외 출장을 명할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제10조제2항",
+          "regulation_content": "출장여비는 일반직원의 「여비지급규정」을 준용하여 지급할 수 있다.",
+          "type": "항",
+          "jo": "10",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제11조(휴일)",
+      "regulation_content": "휴일은 다음 각호와 같다.\n  1. 토요일\n  2. 「관공서의 공휴일에 관한 규정」(대통령령)에서 정하는 공휴일\n  3. 근로자의 날\n  4. 기타 정부 및 은행이 따로 지정하는 경우",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(휴가)",
+      "regulation_content": "파견인력의 휴가에 관한 사항은 근로자파견계약서에서 정하는 바에 따르되, 계약서에 명시되지 아니한 사항에 대하여는 「계약인력 인사관리기준」제4절을 준용할 수 있다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(근무성적평가)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": [
+        {
+          "regulation_name": "제13조제1항",
+          "regulation_content": "파견인력의 근무성적평가는 「계약인력 인사관리기준」제51조를 준용할 수 있다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제13조제2항",
+          "regulation_content": "근무성적 평가결과가 미흡하여 업무수행에 부적합하다고 판단되는 파견인력에 대하여는 파견회사에 복귀를 요청할 수 있다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조(보수)",
+      "regulation_content": "파견인력에 대한 보수는 근로자파견계약서에 따라 지급한다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(파견인력의 교체)",
+      "regulation_content": "파견인력이 다음 각호 1에 해당하여 소속부점장으로부터 교체요청이 있는 경우에는 소관부점장은 해당인력을 파견회사로 복귀토록 하고, 대체인력 충원 등 제반 조치를 취한다.\n  1. 근무상태가 불량하여 업무수행에 지장을 초래하는 경우\n  2. 연중 통산하여 15일 이상 무단결근 하였을 때\n  3. 정신 또는 신체의 이상으로 업무수행에 부적합한 경우\n  4. 사회적 물의를 일으켜 은행의 명예를 훼손한 경우\n  5. 기타 은행의 제 규정 및 법령을 위반한 경우",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(준용)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": [
+        {
+          "regulation_name": "제16조제1항",
+          "regulation_content": "이 기준에서 명시하지 아니한 사항은 「근로기준법」, 「파견근로자 보호 등에 관한 법률」등 관계법규와 은행의 관련 내규를 준용할 수 있다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "근로기준법",
+              "original_text": "「근로기준법」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            },
+            {
+              "law_name": "파견근로자 보호 등에 관한 법률",
+              "original_text": "「파견근로자 보호 등에 관한 법률」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제16조제2항",
+          "regulation_content": "이 기준에서 정하지 아니한 사항에 대하여는 인사부장 전결로 처리한다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부 칙<2007.8.31.> 제1조(시행일)",
+      "regulation_content": "이 기준은 2007년 8월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부 칙<2007.8.31.> 제2조(경과조치)",
+      "regulation_content": "이 기준 시행일 이전에 고용된 파견인력은 이 기준에 의하여 고용된 것으로 본다.",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "regulationName": "IT업무규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 Information Technology(이하 “IT”라 한다)업무를 수행하기 위한 필요한 사항을 정함으로써, IT조직의 효과적인 관리 및 정보시스템의 안정적인 운영을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": [
+        {
+          "regulation_name": "제1조의2제1항",
+          "regulation_content": "임직원은 본인의 사적인 이해가 업무수행 과정에 객관성을 유지하지 못하도록 영향을 미치는 행위를 하여서는 아니된다.",
+          "type": "항",
+          "jo": "1조의2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제1조의2제2항",
+          "regulation_content": "임직원의 행위나 의사결정으로 인하여 그 권익에 영향을 받는 개인, 법인, 기타단체 등의 직무 상대방이 기업은행임직원행동강령 제8조에서 정한 사적이해관계 신고 대상인 경우 해당 임직원은 의사결정에 관여하지 않는다.\n[본조신설 2020.12.29.][제목개정 2022.5.24.]",
+          "type": "항",
+          "jo": "1조의2",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제1조의2(이해충돌행위의 금지)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "1조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용범위)",
+      "regulation_content": "이 규정은 IT업무의 기획, 개발, 운영, 보안 및 관리 등 업무 전반에 적용된다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(용어의 정의)",
+      "regulation_content": "이 규정에서 사용하는 용어의 정의는 다음 각호와 같다.\n  1. 정보시스템 : 정보의 수집, 가공, 저장, 검색, 송신·수신 및 그 활용과 관련되는 하드웨어(HARDWARE, 이하 “H/W”라 한다)와 소프트웨어(SOFTWARE, 이하 “S/W”라 한다)의 조직화된 체계를 말한다.\n  2. 삭제<2012.12.4.>\n  3. 삭제<2012.12.4.>\n  4. 삭제<2012.12.4.>\n  5. 삭제<2012.12.4.>\n  6. 삭제<2012.12.4.>\n  7. 삭제<2012.12.4.>\n  8. 삭제<2006.10.9.>\n  9. 삭제<2006.10.9.>",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(관련법령과의 관계)",
+      "regulation_content": "ITA를 도입·운영하거나 정보시스템을 구축 ·운영시 정보화 관련법령을 준수하고, 지침·표준을 참조하여야 한다. 다만, 관련법령에서 명시하지 않은 사항은 별도의 내규에 따른다.\n[본조신설 2006.10.9.][종전 제4조는 삭제 2006.10.9.]",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(정보의 누설 및 자료의 유출금지)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "IT업무와 관련하여 지득한 정보는 타인에게 누설하여서는 아니된다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "각종 프로그램 및 전산자료 등은 임의로 외부에 유출하여서는 아니된다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(계획수립)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "IT그룹 소속부서장(이하 \"IT부서장\"이라 한다)은 IT업무를 효율적으로 추진하기 위하여 중장기 및 연도별 업무계획을 수립하여야 한다.<개정 2006.10.9., 2008.10.21., 2009.11.9., 2012.12.4., 2020.12.29.>",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "제1항의 계획에는 사업내용, IT인원, IT기기, 예산 등이 포함되어야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(정보화사업)",
+      "regulation_content": "정보화추진사업과 관련한 사전 타당성검토, 시스템구축, 기기도입 등 중요사항은 따로 정하는 바에 따른다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(개발대상업무)",
+      "regulation_content": "개발대상업무는 다음 각호와 같다.\n  1. IT업무계획 수립시 개발대상으로 선정된 업무\n  2. 업무소관부서의 요청업무\n  3. 기타 은행장이 필요하다고 인정하는 업무",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(IT업무 개발의뢰)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "각 부서장은 업무의 정보화가 필요한 경우 IT부서장이 따로 정한 의뢰절차에 따라 개발을 의뢰하여야 한다.<개정 2006.10.9., 2009.11.9.>",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "제1항의 규정에 불구하고 각 부서장은 필요한 경우 IT업무에 관한 제반 규정에 따라 자체적으로 개발·운영할 수 있다.\n[제목개정 2006.10.9.]",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(소관부서의 협조)",
+      "regulation_content": "IT개발 대상업무의 소관부서장은 다음 각호의 사항에 적극 협조하여야 한다.\n  1. 관련정보 또는 제반 자료제출\n  2. 개발대상업무 담당직원의 참여\n  3. 기타 필요한 사항",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(업무내용 변경통보)",
+      "regulation_content": "개발중이거나 운영중인 업무내용이 변경될 경우에 그 소관부서장은 상당기간전에 IT부서장에게 그 변경내용을 통보하여야 한다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(개발절차)",
+      "regulation_content": "IT업무의 개발절차는 IT부서장이 따로 정하는 바에 의한다.<개정 2006.10.9., 2009.11.9.>",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(적용실시)",
+      "regulation_content": "IT업무개발이 완료되어 적용실시하고자 할 때에는 전결권자의 결재를 받아 실시하되 필요한 경우 일정기간 병행처리할 수 있다.",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(프로그램 등록관리)",
+      "regulation_content": "IT업무개발이 완료된 프로그램은 IT부서장이 따로 정하는 바에 의하여 등록 관리한다.<개정 2006.10.9., 2009.11.9.>",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(문서화)",
+      "regulation_content": "IT업무 개발내용은 업무별로 문서화하여 사무의 인수인계 및 직원 연수 등에 활용할 수 있도록 유지관리하여야 한다.",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제16조(표준화)",
+      "regulation_content": "IT업무의 효율적 개발, 운영, 유지보수 및 IT업무처리의 생산성향상을 위하여 필요한 사항을 표준화하여야 한다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(외부개발)",
+      "regulation_content": "업무의 정보화에 있어 필요한 경우에는 외부에 용역을 의뢰하여 개발하거나 소프트웨어 패키지를 도입하여 이용할 수 있다.",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제18조(적용실시통지)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": [
+        {
+          "regulation_name": "제18조제1항",
+          "regulation_content": "업무의 신설이나 변경된 내용을 적용실시할 경우에 IT부서장은 정보처리 방법 등을 당해 업무소관부서장에게 통지하고 그 소관부서장은 각 부점장에게 정보화 적용 실시내용을 통지한다. 다만, 정보처리중인 업무의 내용 변경없이 정보처리방법만이 변경되는 경우에는 IT부서장이 그 변경된 내용을 각 부점장에게 통지한다.<개정 2006.10.9., 2009.11.9.>",
+          "type": "항",
+          "jo": "18",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제18조제2항",
+          "regulation_content": "각 부점의 정보처리는 「IT경영관리지침」, 「IT내부통제지침」, 「IT운영관리지침」, 「IT개발관리지침」 등에 의거 정확히 처리하여야 한다.<개정 2006.10.9., 2012.12.4., 2024.2.29.>",
+          "type": "항",
+          "jo": "18",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제19조(정보처리의뢰)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": [
+        {
+          "regulation_name": "제19조제1항",
+          "regulation_content": "정보처리되고 있는 업무에 대하여 전산자료출력 및 일괄처리 등을 의뢰할 경우에는 IT부서장에게 전자결재 또는 서면으로 의뢰하여야 한다.<개정 2006.10.9., 2009.11.9., 2012.12.4.>",
+          "type": "항",
+          "jo": "19",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제19조제2항",
+          "regulation_content": "제1항에 대한 처리는 IT부서장이 따로 정하는 바에 의한다.\n[제목개정 2006.10.9.]",
+          "type": "항",
+          "jo": "19",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제20조(전산원장 수정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": [
+        {
+          "regulation_name": "제20조제1항",
+          "regulation_content": "단말기조작상의 오류 등으로 전산원장의 수정사유가 발생하였을 때에는 전산원장수정거래로 수정하되, 해당부점에서 처리할 수 없는 경우에는 부점장 전자결재 후 IT부서장에게 수정을 의뢰한다.<개정 2009.11.9., 2012.12.4.>",
+          "type": "항",
+          "jo": "20",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제20조제2항",
+          "regulation_content": "제1항에 대한 처리는 IT부서장이 따로 정하는 바에 의한다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제21조(온라인장애 발생시 처리)",
+      "regulation_content": "온라인장애가 발생하여 조속한 회복이 불가능할 경우에는 각 부점은 다음에 의하여 처리하여야 한다.<개정 2006.10.9., 2009.11.9.>\n  1. 부득이한 경우에 수작업처리한다.\n  2. 타점계좌의 제신고 등 개설점거래에 영향을 미치는 사항은 개설점에 통지하여야 한다.\n  3. 당일 영업마감시까지 장애가 회복되지 아니한 때에는 IT부서장의 조치에 따라 처리한다.",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제22조(온라인장애 회복시 처리)",
+      "regulation_content": "온라인장애 회복시에는 다음에 의하여 처리한다.\n  1. 장애발생시 조작중이던 거래의 성립여부를 확인한다.\n  2. 온라인장애중의 수작업처리분부터 우선 처리한다.",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(정보처리중단 및 제한)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": [
+        {
+          "regulation_name": "제23조제1항",
+          "regulation_content": "정보처리중인 업무를 중단하고자할 때에는 은행장의 승인을 얻어야 한다. 다만, 업무폐지 및 기타 경미하다고 인정되는 경우에는 IT부서장이 중단할 수 있다.<개정 2006.10.9., 2009.11.9.>",
+          "type": "항",
+          "jo": "23",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제23조제2항",
+          "regulation_content": "IT부서장은 거래량 폭주 등 필요한 경우 정보처리를 일부 제한할 수 있다.<개정 2006.10.9., 2009.11.9.>\n[제목개정 2006.10.9.]",
+          "type": "항",
+          "jo": "23",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제24조(IT센터시설 및 운영관리)",
+      "regulation_content": "IT센터의 시설 및 운영관리는 IT부서장이 따로 정하는 바에 따른다.",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조",
+      "regulation_content": "삭제<2012.12.4.>",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제26조(업무인증카드 관리)",
+      "regulation_content": "업무인증카드관리는 IT부서장이 따로 정하는 바에 따른다.<개정 2006.10.9., 2009.11.9.>",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제27조(시스템운영관리)",
+      "regulation_content": "IT부서장은 시스템운영에 관한 각 업무별 관리지침을 제정하여 정보시스템의 안정화, 효율성제고 및 생산성향상을 기하여야 한다.<개정 2006.10.9., 2009.11.9., 2020.12.29.>\n[제목개정 2006.10.9.]",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조(자체감사실시)",
+      "regulation_content": "IT업무처리에 따른 사고의 예방, 시스템의 오류방지 및 IT업무처리절차의 이행여부 등을 감사하기 위하여 IT부서장은 감사담당자를 명하여 자체감사를 실시하여야 한다.<개정 2006.10.9., 2009.11.9.>",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제29조(컴퓨터실 운영관리)",
+      "regulation_content": "컴퓨터실 운영관리에 필요한 사항은 IT부서장이 따로 정하는 바에 따른다.\n[본조신설 2006.10.9.]",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조(자산관리)",
+      "regulation_content": "IT자산관리는 IT부서장이 따로 정하는 바에 따른다.\n[본조신설 2006.10.9.]",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(업무연속성 관리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": [
+        {
+          "regulation_name": "제31조제1항",
+          "regulation_content": "재난 발생시 최소한의 업무수행기능과 업무연속성을 유지할 수 있도록 비상계획을 수립하고 운용하여야 한다.",
+          "type": "항",
+          "jo": "31",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제31조제2항",
+          "regulation_content": "조직의 변경, 중요한 업무프로세스 또는 정보시스템의 변경 등의 경우에 비상계획의 유효성이 상실되지 않도록 적시에 갱신이 이루어지도록 한다.",
+          "type": "항",
+          "jo": "31",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제31조제3항",
+          "regulation_content": "비상계획의 수립, 운영, 테스트, 유지관리 등 세부내용은 IT부서장이 따로 정하는 바에 따른다.\n[본조신설 2006.10.9.]",
+          "type": "항",
+          "jo": "31",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제32조(요원)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "32",
+      "sub_articles": [
+        {
+          "regulation_name": "제32조제1항",
+          "regulation_content": "IT요원은 그 직무에 따라 아래와 같이 구분한다.\n  1. IT전략기획, 구매 및 자산관리, IT인력 및 아웃소싱관리\n  2. 시스템·네트워크·데이터베이스의 운영 및 관리\n  3. 컴퓨터실 운영관리\n  4. 프로그램 개발 및 운영\n  5. IT보안관리\n  6. IT감사업무\n  7. 기타",
+          "type": "항",
+          "jo": "32",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제32조제2항",
+          "regulation_content": "요원에 대하여는 직무수행에 필요한 교육을 실시한다.",
+          "type": "항",
+          "jo": "32",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제32조제3항",
+          "regulation_content": "요원에 대하여 필요하다고 인정될 때에는 주직무에 지장이 없는 범위내에서 타 직무를 겸임시킬 수 있다.\n[본조신설 2006.10.9.]",
+          "type": "항",
+          "jo": "32",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제33조(IT보안)",
+      "regulation_content": "IT보안업무에 관한 사항은 「정보보호규정」 및 「IT보안업무지침」을 따른다.\n[본조신설 2012.12.4.]",
+      "type": "조",
+      "jo": "33",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<1994.7.27.>",
+      "regulation_content": "이 요강은 1994년 8월 2일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2006.10.9.>",
+      "regulation_content": "이 규정은 2006년 10월 9일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2008.10.21.>",
+      "regulation_content": "이 규정은 2008년 10월 21일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2009.11.9.>",
+      "regulation_content": "이 규정은 2009년 11월 9일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2012.12.4.>",
+      "regulation_content": "이 규정은 2012년 12월 5일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2020.12.29.>",
+      "regulation_content": "이 규정은 2020년 12월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.5.24.>",
+      "regulation_content": "이 규정은 2022년 5월 24일부터 시행한다. (기업은행임직원행동강령 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.2.29.>",
+      "regulation_content": "이 규정은 2024년 2월 29일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

@@ -1,0 +1,800 @@
+{
+  "regulationName": "복무규정",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 규정은 직원의 복무에 관한 사항을 규정함으로써 기강을 확립하고 사무의 능률을 기함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(적용)",
+      "regulation_content": "이 규정은 고문에 대하여는 원칙적으로 적용하지 아니한다.",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(출근)",
+      "regulation_content": "직원은 업무준비에 지장이 없도록 영업개시시각전에 출근하여야 한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(결근)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "직원은 질병 기타사유로 결근하고자 할 때에는 그 사유를 소속부점장에게 사전에 신고하여 허가를 받아야 한다. 다만, 부득이한 경우에는 사후에 신고할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "소속부점장의 허가(사후허가 포함)를 받아 출근하지 아니한 경우에는 결근으로 처리한다. 다만, 이 경우에 직원은 연차휴가처리로 청구할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "소속부점장의 허가없이 결근한 경우에는 무단결근으로 처리한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(지각, 조퇴)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "직원이 지각 또는 조퇴하고자 할 때에는 그 사유를 소속부점장에게 사전에 신고하여 허가를 받아야 한다. 다만, 부득이한 경우에는 사후에 신고할 수 있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "지각 및 조퇴는 해당일 근무시간의 1/2이상 근무한 자에 한하여 인정한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(무단이석, 외출의 금지)",
+      "regulation_content": "직원은 근무시간중 상사의 사전허가없이 이석 또는 외출하여서는 아니된다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(신상내용보고)",
+      "regulation_content": "부점장은 직원의 轉居, 轉籍, 가족사항 기타 신상관계에 변동이 있을 경우에는 즉시 관계증빙서류를 첨부하여 인사부장에게 보고하여야 한다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(특수업무종사직원)",
+      "regulation_content": "특수업무 종사자의 직무와 준수사항은 諸章에 규정된 사항외에 별표에서 정한 바와 같다.",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제9조(출장)",
+      "regulation_content": "업무처리 또는 업무상의 연락은 문서로써 함을 원칙으로 하되 기밀 또는 부득이한 용무에 한하여 출장으로 처리할 수 있다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(출장의 변경 및 취소)",
+      "regulation_content": "업무형편에 의하여 출장의 명령을 변경·취소하고자 할 때에는 명령자의 승인을 받아야 한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(복명)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "출장용무를 마치고 귀임하였을 때에는 3일이내에 명령자에게 복명서를 제출하여야 한다. 다만, 기밀을 요하는 용무 또는 간이한 용무는 구두로써 복명할 수 있다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "당일귀임출장의 경우에도 용무가 중요한 것은 복명서를 제출하여야 한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(출장비용)",
+      "regulation_content": "출장에는 이에 소요되는 출장비용을 지급하되 출장비용은 따로 정하는「여비지급규정」에 의한다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(신분증명서)",
+      "regulation_content": "신분증명서는 업무상 또는 기타 필요한 직원에 한하여 은행장 명의로 발급한다.",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(휘장패용)",
+      "regulation_content": "직원은 휘장을 패용하여야 한다.",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(근무관리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": [
+        {
+          "regulation_name": "제15조제1항",
+          "regulation_content": "직원의 근무상황은 근무상황기록부에 의하여 관리한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제15조제2항",
+          "regulation_content": "근무관리자는 소속직원의 출근상황을 조사하여 근무상황기록부에 기록하고 동 내용의 전산입력을 확인하여야 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제15조제3항",
+          "regulation_content": "근무관리자는 각 부점의 서무담당 3급 직원으로 한다. 다만, 서무담당 3급 직원의 유고시에는 서무담당 4급 직원으로 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제15조제4항",
+          "regulation_content": "연수, 파견 및 주재근무 직원의 근무상황은 관련 부점의 근무상황을 통보받아 각 부점에서 정리한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제16조(근무상황기록부 정리)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": [
+        {
+          "regulation_name": "제16조제1항",
+          "regulation_content": "근무상황기록부는 다음 각호의 표시로써 정리한다.\n  1. 공휴 : 토요일, 일요일, 국경일, 법정공휴일 및 기타 휴일\n  2. 연휴 : 연차 휴가일\n  3. 청휴 : 청원휴가일\n  4. 병휴 : 인병휴가일\n  5. 공가 : 공가일\n  6. 특휴 : 특별휴가일\n  7. 삭제\n  8. 결근 : 결근일\n  9. 무단결근 : 무단결근일\n  10. 휴직 : 질병 및 기타사유로 인한 인병휴직과 청원, 육아 및 명령휴직일\n  11. 정직 : 징계에 의한 정직기간\n  12. 출장 : 업무를 위한 출장일\n  13. 파견 : 타 기관 또는 해외에 파견하였을 때의 기간\n  14. 주재 : 타 부점에 주재근무한 기간\n  15. 지각 : 영업개시시각후에 출근하였을 때\n  16. 조퇴 : 영업종료시각전에 업무 이외의 용건으로 퇴근하였을 때",
+          "type": "항",
+          "jo": "16",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제16조제2항",
+          "regulation_content": "제1항제10호 내지 제14호 기간중인 공휴일은 동일표시로 정리한다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제17조(사용기간)",
+      "regulation_content": "근무상황기록부의 사용기간은 1월 1일부터 12월 31일까지로 하고 매년 이를 갱신한다.",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제18조(해직자에 대한 근무상황보고)",
+      "regulation_content": "해직자에 대하여는 해직일까지의 근무상황을 지체없이 인사부장에게 보고하여야 한다.",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(총칙)",
+      "regulation_content": "직원의 휴가에 관한 사항은 따로 정하는「휴가규정」에 의한다.",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제20조(휴직의 종류)",
+      "regulation_content": "휴직은 청원휴직, 육아휴직, 인병휴직, 입영휴직, 명령휴직으로 구분한다.",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제21조(청원휴직)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": [
+        {
+          "regulation_name": "제21조제1항",
+          "regulation_content": "직원이 조부모, 부모(배우자의 부모 포함), 배우자, 자녀, 손자녀의 질병, 사고, 노령으로 인한 가족돌봄을 위하여 계속 출근이 불가능한 경우에는 휴직원에 의하여 1년 이내(재직기간 중 총 3년이내)에서 가족돌봄휴직을 명할 수 있다. 다만, 다음 각 호의 1에 해당하는 경우에는 가족돌봄휴직을 허가하지 아니할 수 있다.\n  1. 근속기간이 6개월 미만인 경우\n  2. 부모(배우자의 부모 포함), 배우자, 자녀를 돌보기 위해 휴직을 신청한 경우 해당 직원 외에 돌봄이 필요한 가족을 돌볼 수 있는 다른 가족 등이 있는 경우\n  3. 조부모 또는 손자녀를 돌보기 위해 휴직을 신청한 경우 해당 직원 외에 조부모의 직계비속 또는 손자녀의 직계존속이 있는 경우 (조부모의 직계비속 또는 손자녀의 직계존속이 질병, 노령, 장애, 미성년 등으로 해당 직원이 돌볼 수 밖에 없는 경우는 제외)\n  4. 대체인력 채용이 불가능한 경우\n  5. 정상적인 사업 운영에 중대한 지장을 초래하는 경우",
+          "type": "항",
+          "jo": "21",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제21조제2항",
+          "regulation_content": "가족돌봄휴직은 분할하여 사용할 수 있으며, 1회의 기간은 30일 이상으로 한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제21조제3항",
+          "regulation_content": "「휴가규정」제7조제7항의 가족돌봄휴가의 사용기간은 가족돌봄휴직 기간에 포함하여 운용한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제21조제4항",
+          "regulation_content": "직원이 국제기구 또는 외국기관에 임시로 고용될 경우에는 고용기간 동안 휴직을 명할 수 있다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제21조제5항",
+          "regulation_content": "직원이 해외유학을 하게 된 경우에는 3년 이내에서 휴직을 명할 수 있다. 다만, 부득이한 경우에는 2년 이내에서 연장할 수 있다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제21조제6항",
+          "regulation_content": "외국에서 근무, 유학하는 배우자를 동반하게 된 경우에는 3년 이내에서 휴직을 명할 수 있다. 다만, 부득이한 경우에는 2년 이내에서 연장할 수 있다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "6"
+        },
+        {
+          "regulation_name": "제21조제7항",
+          "regulation_content": "직원이 자기개발을 위하여 학습 등을 하게 된 경우에는 휴직을 명할 수 있으며, 세부사항은 따로 정하는 「자기개발휴직 운영기준」에 의한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "7"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제22조(육아휴직)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": [
+        {
+          "regulation_name": "제22조제1항",
+          "regulation_content": "임신중이거나 만 8세 이하 또는 초등학교 2학년 이하의 자녀(입양한 자녀 포함)를 가진 직원이 그 자녀의 양육을 위하여 휴직을 신청하는 경우에는 출산전후휴가기간을 포함하여 3년 이내의 육아휴직을 허용하며, 세부사항은 따로 정하는 「육아휴직운용기준」에 의한다. 다만, 다음 각호의 1에 해당하는 경우에는 6개월 이내에서 추가로 육아휴직을 사용할 수 있다.\n  1. 부모 모두 육아휴직을 3개월 이상 사용한 부 또는 모\n  2. 「한부모가족지원법」에 따른 부 또는 모\n  3. 고용노동부령에 따른 장애아동의 부 또는 모",
+          "type": "항",
+          "jo": "22",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "한부모가족지원법",
+              "original_text": "「한부모가족지원법」",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제22조제2항",
+          "regulation_content": "삭제",
+          "type": "항",
+          "jo": "22",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제22조제3항",
+          "regulation_content": "제1항의 육아휴직기간 종료후 동일한 영아를 위하여 연속해서 제21조제1항의 가족돌봄휴직을 사용할 수 없다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제22조제4항",
+          "regulation_content": "은행은 직원의 육아휴직을 이유로 불리한 처우를 하여서는 아니된다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제22조의2(육아기 근로시간 단축)",
+      "regulation_content": "육아휴직을 신청할 수 있는 직원은 육아휴직 대신 근로시간의 단축을 신청할 수 있으며, 세부사항은 따로 정하는「육아기 근로시간단축근무 운용기준」에 의한다.\n[본조신설 2012.12.31.]",
+      "type": "조",
+      "jo": "22조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(인병휴직)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": [
+        {
+          "regulation_name": "제23조제1항",
+          "regulation_content": "직원이 업무상 부상 또는 질병(결핵성폐질환 포함)으로 인하여 계속 출근이 불가능한 경우에는 휴직원에 의하여 3년 이내에서 인병휴직을 명할 수 있다. 다만, 의학적 소견 등을 고려하여 2년 이내에서 연장 할 수 있다.",
+          "type": "항",
+          "jo": "23",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제23조제2항",
+          "regulation_content": "제1항 이외의 부상 또는 질병, 난임치료로 인하여 계속 출근이 불가능한 경우에는 의사의 진단서 등을 첨부한 휴직원에 의하여 1년 이내에서 인병휴직을 명할 수 있다. 다만, 부득이한 경우에는 1년 이내에서 연장할 수 있다.",
+          "type": "항",
+          "jo": "23",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제23조제3항",
+          "regulation_content": "제1항 및 제2항에 따른 휴직횟수의 제한은 없으나 동일 사유로 5년(제2항에 따른 휴직의 경우에는 2년)을 초과할 수 없다.",
+          "type": "항",
+          "jo": "23",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제24조(입영휴직)",
+      "regulation_content": "직원이 병역법에 의한 병역복무를 위하여 징집 또는 소집되었을 경우에는 제대후 복귀일까지 휴직을 명한다.",
+      "type": "조",
+      "jo": "24",
+      "related_laws": [
+        {
+          "law_name": "병역법",
+          "original_text": "병역법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조(명령휴직)",
+      "regulation_content": "직원이 다음 각호의 1에 해당하는 경우에는 소정기간동안 휴직을 명할 수 있다.\n  1. 천재지변 또는 전시 사변이나 기타 사유로 인하여 소재가 불명하게 된 때에는 3월이내\n  2. 삭제\n  3. 삭제\n  4. 업무와 관련하여 형사사건으로 고소 또는 고발되어 입건, 재판에 회부되었을 때에는 필요한 기간이내\n  5. 삭제",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제26조(휴직의 목적 외 사용금지 등)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": [
+        {
+          "regulation_name": "제26조제1항",
+          "regulation_content": "휴직자는 휴직기간 중 당초 휴직사유와 달리 휴직을 사용함으로써 휴직의 목적 달성에 현저히 위배되는 행위를 하여서는 아니 된다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제26조제2항",
+          "regulation_content": "휴직중인 자는 직원으로서의 신분을 계속 보유하며 신상에 변동이 있을 때는 지체없이 인사부장에게 신고하여야 한다.",
+          "type": "항",
+          "jo": "26",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제27조(휴직사유의 소멸)",
+      "regulation_content": "휴직기간중 그 사유가 소멸되었을 때에는 지체없이 복직을 명한다.",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조(휴직기간의 만료)",
+      "regulation_content": "휴직기간의 만료가 예상되는 직원은 제25조제1호의 경우를 제외하고는 복직원에 의한 본인의 출원에 의하여 복직한다.",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제29조(입영휴직자의 의무)",
+      "regulation_content": "입영휴직자는 제대의 명을 받은 날로부터 7일이내에 복직원을 인사부장에게 제출하여야 한다.",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조(휴직기간중의 보수)",
+      "regulation_content": "휴직기간중 보수에 관한 사항은 따로 정하는「보수규정」에 의한다.",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(휴직기간중의 근속기간계산)",
+      "regulation_content": "휴직기간은 이를 근속기간에 산입하지 아니한다. 다만, 다음 각호의 1에 해당하는 경우에는 예외로 한다.\n  1. 입영휴직기간\n  2. 전염성 B형간염으로 인한 휴직기간(최초발병일로부터 1년이내에 한함)\n  3. 업무상 부상 또는 질병(결핵성폐질환 포함)으로 인한 휴직기간\n  4. 은행의 필요에 따른 학술연수를 위한 국외유학으로 인한 휴직기간\n  5. 육아휴직기간(자녀당 출산전후휴가기간을 포함하여 최초사용일로부터 누적 2년이내에 한함. 다만, 셋째 이후 자녀에 대한 육아휴직은 3년이내의 기간을 근속기간에 산입)\n  6. 삭제\n  7. 가족돌봄휴직기간",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제32조(직권정지 및 집무정지)",
+      "regulation_content": "직원이 다음 각호의 1에 해당할 때에는 4급이상의 직원에 대하여는 職權停止를, 5급이하의 직원에 대하여는 執務停止를 명한다.\n  1. 중대한 부정, 불상사고가 발생한 경우 사건의 수습을 위하여 필요할 때\n  2. 부정사고행위자 또는 관련자가 증거인멸 또는 피해를 증가시킬 우려가 있을 때",
+      "type": "조",
+      "jo": "32",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제33조(직권 또는 집무정지 명령)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "33",
+      "sub_articles": [
+        {
+          "regulation_name": "제33조제1항",
+          "regulation_content": "직권정지는 은행장이, 집무정지는 인사부장(영업점은 영업점장)이 이를 명한다. 그러나 영업점장이 집무정지를 명할 수 없을 때는 인사부장이 이를 명한다.",
+          "type": "항",
+          "jo": "33",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제33조제2항",
+          "regulation_content": "영업점장이 집무정지를 명하였을 때에는 즉시 은행장에게 보고하여야 한다.",
+          "type": "항",
+          "jo": "33",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제34조(직권 및 집무정지조치의 해제)",
+      "regulation_content": "제32조 각호의 사유가 소멸되었다고 인정될 때에는 직권 또는 집무정지조치를 해제할 수 있다.",
+      "type": "조",
+      "jo": "34",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제35조(주재근무상신)",
+      "regulation_content": "직권정지 또는 집무정지조치로 인하여 원활한 업무수행이 곤란한 경우에는 소속부점장은 은행장에게 직원주재근무상신을 할 수 있다.",
+      "type": "조",
+      "jo": "35",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제36조(신원보증)",
+      "regulation_content": "직원은 신원보증인 2명을 연대입보하거나 당행을 피보험자로 하는 신원보증보험에 가입하여야 한다. 다만, 3급이상 직원에 대하여는 이를 면제할 수 있다.",
+      "type": "조",
+      "jo": "36",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제37조(신원보증인의 자격)",
+      "regulation_content": "신원보증인은 독립생계를 영위하고 있는 성년자로서 신원이 확실하고 상당한 재산이 있는 자라야 한다.",
+      "type": "조",
+      "jo": "37",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제38조(제출서류)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "38",
+      "sub_articles": [
+        {
+          "regulation_name": "제38조제1항",
+          "regulation_content": "신원보증인을 세울 때에는 다음 서류를 제출하여야 한다.\n  1. 신원보증서\n  2. 보증인의 인감증명서\n  3. 보증인의 재산세납세증명서, 재산증명서 또는 기타 재산정도를 증명할 수 있는 서류",
+          "type": "항",
+          "jo": "38",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제38조제2항",
+          "regulation_content": "신원보증보험에 가입하는 자는 피보험자, 보험계약자, 보험금액 및 보험기간이 명시된 보험증권을 제출하여야 한다.",
+          "type": "항",
+          "jo": "38",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제39조(신원보증승낙조회)",
+      "regulation_content": "인사부장은 신원보증 사실여부를 신원보증인에게 조회 확인하여야 한다.",
+      "type": "조",
+      "jo": "39",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제40조(신원보증기간과 갱신)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "40",
+      "sub_articles": [
+        {
+          "regulation_name": "제40조제1항",
+          "regulation_content": "신원보증인의 보증기간은 보증한 일자부터 만 5년으로 한다.",
+          "type": "항",
+          "jo": "40",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제40조제2항",
+          "regulation_content": "제1항의 기간이 만료될 때에는 기간만료 30일전에 제37조 및 제38조에 의거 갱신하여야 한다. 종전의 신원보증인이 계속하여 보증하고자 할 때에도 같다.",
+          "type": "항",
+          "jo": "40",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제40조제3항",
+          "regulation_content": "신원보증보험계약의 갱신은 보험계약기간 만료일이전에 하여야 한다.",
+          "type": "항",
+          "jo": "40",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제41조(신원보증인의 교체)",
+      "regulation_content": "다음 각호의 1에 해당하는 경우에는 신원보증인을 교체하여야 한다.\n  1. 신원보증인이 사망한 때\n  2. 신원보증인으로부터 신원보증해제의 통지를 받았을 때\n  3. 신원보증인의 신용 및 재산상태가 현저히 악화되어 신원을 보증할 수 없다고 인정되었을 때",
+      "type": "조",
+      "jo": "41",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제42조(보관)",
+      "regulation_content": "신원보증서는 인사부에서 보관하고 인사부장이 관리한다.",
+      "type": "조",
+      "jo": "42",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제43조(직원의 신상통지)",
+      "regulation_content": "인사부장은 직원의 직무 및 근무처의 이동이 있을 때에는 지체없이 신원보증인에게 내용증명우편으로 통지하여야 한다.",
+      "type": "조",
+      "jo": "43",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<1998.7.14.>",
+      "regulation_content": "이 규정은 1998년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2001.11.7.>",
+      "regulation_content": "이 규정은 2001년 11월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2003.10.24.>",
+      "regulation_content": "이 규정은 2003년 8월 25일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2004.8.24.> 제1조(시행일)",
+      "regulation_content": "이 요강은 2004년 8월 24일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2004.8.24.> 제2조(타 규정의 개정)",
+      "regulation_content": "(생 략)",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2005.1.13.>",
+      "regulation_content": "이 규정은 2005년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.12.27.>",
+      "regulation_content": "이 규정은 2006년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.3.7.>",
+      "regulation_content": "이 규정은 2007년 3월 7일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.4.25.>",
+      "regulation_content": "이 규정은 2006년 10월 27일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.6.5.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2007년 6월 5일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2007.6.5.> 제2조(경과규정)",
+      "regulation_content": "이 규정 시행일 현재 제23조제2항의 적용을 받는 인병휴직을 사용하고 있는 직원에 대하여는 개정규정을 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2007.12.31.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2008년 1월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2007.12.31.> 제2조(육아휴직 신청대상 확대에 따른 경과조치)",
+      "regulation_content": "제22조의 개정 규정 중 육아휴직 신청대상 확대는 2008년 1월 1일 이후 출생한 영아부터 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2008.8.29.>",
+      "regulation_content": "이 규정은 2008년 8월 29일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2009.8.6.>",
+      "regulation_content": "이 규정은 2009년 8월 6일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2010.7.30.> 제1조(시행일)",
+      "regulation_content": "이규정은 2010년 8월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2010.7.30.> 제2조(적용례)",
+      "regulation_content": "① 제22조 제1항의 개정규정은 2008년 1월 1일 이후 출생 또는 입양한 자녀를 가진 직원부터 적용한다.\n  ② 제23조 제2항의 개정규정은 이 규정 시행일 현재 인병휴직 중에 있는 직원에 대해서도 인병휴직일로부터 기산하여 개정규정을 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2012.1.2.>",
+      "regulation_content": "이 규정은 2012년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2012.12.31.>",
+      "regulation_content": "이 규정은 2013년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.2.6.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2014년 1월 14일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2014.2.6.> 제2조(적용례)",
+      "regulation_content": "제22조 제1항의 개정규정은 시행일 이후 육아휴직을 신청한 직원부터 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2014.11.19.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2014년 10월 1일부터 시행한다. 다만, 제25조 및 제31조는 2014년 11월 19일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2014.11.19.> 제2조(불임휴직에 대한 특례)",
+      "regulation_content": "종전규정에 의해 불임휴직을 사용한 기간은 제23조제2항의 인병휴직 기간에 포함한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2016.9.12.>",
+      "regulation_content": "이 규정은 2016년 9월 12일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.10.25.>",
+      "regulation_content": "이 규정은 2018년 10월 25일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2019.6.14.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2019년 7월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2019.6.14.> 제2조(적용례)",
+      "regulation_content": "제22조 제1항의 개정규정은 시행일 이후 출생 또는 입양한 자녀를 가진 직원부터 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2019.6.14.> 제3조(기존 자녀 보유 직원에 대한 특례)",
+      "regulation_content": "시행일 현재 자녀(입양한 자녀 포함)를 가진 직원에 대한 제22조 제1항의 개정규정 적용은 자녀가 초등학교 1학년 재학기간에 한정한다.",
+      "type": "부칙",
+      "jo": "3"
+    },
+    {
+      "regulation_name": "부칙<2019.6.14.> 제4조(미숙아·장애아 출산 직원에 대한 경과조치)",
+      "regulation_content": "① 이 규정 시행일 이전에 종전규정 제22조 제2항에 따라 미숙아, 장애아 출산 직원에게 육아휴직을 추가로 부여한 경우에는 종전규정을 적용한다. 다만, 이 경우에도 육아휴직 기간은 총 3년을 초과하지 못한다.\n ② 전항의 경우 규정 제31조 5호에도 불구하고 추가로 부여한 육아휴직기간은 근속기간에 산입한다.",
+      "type": "부칙",
+      "jo": "4"
+    },
+    {
+      "regulation_name": "부칙<2020.2.25.>",
+      "regulation_content": "이 규정은 2020년 2월 25일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.11.8.>",
+      "regulation_content": "이 규정은 2022년 11월 8일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2023.10.20.>",
+      "regulation_content": "이 규정은 2023년 10월 20일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2024.6.20.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2024년 7월 1일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2024.6.20.> 제2조(적용례)",
+      "regulation_content": "제31조 제5호의 개정규정은 시행일 현재 육아휴직을 사용하고 있는 직원에 대해서도 적용하되, 근속기간은 2024년 7월 1일 이후 기간부터 산입한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2025.2.21.> 제1조(시행일)",
+      "regulation_content": "이 규정은 2025년 2월 23일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙<2025.2.21.> 제2조(적용례)",
+      "regulation_content": "제22조제1항의 개정규정은 종전의 규정에 따른 육아휴직을 사용하였거나 사용 중인 직원에게도 적용한다.\n[별표] 특수업무종사직원의 직무\n특수업무종사직원의 직무\n\n<표>\n\n\n<표>",
+      "type": "부칙",
+      "jo": "2"
+    }
+  ]
+}

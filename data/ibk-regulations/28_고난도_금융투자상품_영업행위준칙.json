@@ -1,0 +1,802 @@
+{
+  "regulationName": "고난도 금융투자상품 영업행위준칙",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 준칙은 「자본시장과 금융투자업에 관한 법률」(이하 󰡒자본시장법󰡓이라 한다) 제37조, 제44조, 제50조, 「금융소비자 보호에 관한 법률」(이하󰡒금소법󰡓이라 한다) 제17조, 제19조, 제21조 등에 따라 금융투자상품(이 준칙 상 금융투자상품은 자본시장법 시행령 제2조제7호에 따른 고난도 금융투자상품을 의미한다)의 제조, 판매, 사후관리 등 일련의 업무과정에서 임직원이 투자자 보호를 위하여 준수하여야 할 구체적인 업무의 방법과 절차를 정하는 것을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "related_laws": [
+        {
+          "law_name": "자본시장과 금융투자업에 관한 법률",
+          "original_text": "「자본시장과 금융투자업에 관한 법률」(이하 󰡒자본시장법󰡓이라 한다)",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "금융소비자 보호에 관한 법률",
+          "original_text": "「금융소비자 보호에 관한 법률」(이하󰡒금소법󰡓이라 한다)",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "자본시장법 시행령",
+          "original_text": "자본시장법 시행령 제2조제7호",
+          "jo": "2",
+          "hang": null,
+          "ho": "7",
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(용어의 정의)",
+      "regulation_content": "이 준칙에서 사용하는 용어의 정의는 다음과 같다. 다만, 이 준칙에서 정하지 아니한 용어는 자본시장법, 동법 시행령, 금소법, 금소법 시행령 및 시행규칙, 금융위원회의 금융투자업규정 및 한국금융투자협회의 규정 등(이하 “관계법령등”이라 한다)에서 정하는 바에 따른다.\n  1. “제조회사”란 금융투자상품을 제조하는 금융투자회사를 말한다.\n  2. “판매회사”란 금융투자상품을 판매하는 금융투자회사를 말하며 제조회사가 동시에 판매회사에도 해당할 수 있다.\n  3. “목표시장”이란 금융투자회사가 제조·판매하는 상품의 특성, 위험도 등을 종합적으로 고려하여 판매에 적합한 대상 고객범위를 금융상품별로 설정한 기준으로 제조회사가 설정하는 잠재적 목표시장과 판매회사가 설정하는 구체적 목표시장으로 구분한다.\n  4. “상품 소관부서”란 고난도 금융투자상품의 소관부서를 말한다.",
+      "type": "조",
+      "jo": "2",
+      "related_laws": [
+        {
+          "law_name": "자본시장법",
+          "original_text": "자본시장법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "자본시장법 시행령",
+          "original_text": "동법 시행령",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "금소법",
+          "original_text": "금소법",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "금소법 시행령",
+          "original_text": "금소법 시행령",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "금소법 시행규칙",
+          "original_text": "금소법 시행규칙",
+          "jo": null,
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제3조(일반원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "당행은 금융투자상품의 제조 및 사후관리 과정에서 자본시장법 제37조(신의성실원칙) 등에 따라 고객의 이익을 최우선에 두고 업무를 수행하여야 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "자본시장법",
+              "original_text": "자본시장법 제37조",
+              "jo": "37",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "당행은 금융투자상품 제조 및 사후관리 관련 업무수행 과정의 기록을 충실히 유지하고 감독기관의 요청이 있는 경우 이를 제출할 수 있어야 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(금융투자상품 제조 관리체계)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "당행은 금융투자상품 제조 및 사후관리 관련 업무과정별 정책을 수립·통제하기 위하여 「비예금상품위원회」 등을 운영한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "당행은 「비예금상품위원회」 등의 상품승인절차를 통하여 금융투자상품 목표시장의 적정성, 목표시장 설정관련 위험평가의 충분성, 목표시장과 판매전략의 부합여부 등 상품의 제조과정 전반에 대하여 심의· 의결한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "「비예금상품위원회」는 금융투자상품의 특성, 목표시장 등을 고려하여 이미 승인받은 금융투자상품과 동일성이 인정되고 목표시장이 동일하거나 축소되는 경우에는 상품승인절차를 일부 축소 또는 생략할 수 있다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제4조제4항",
+          "regulation_content": "상품 소관부서는 판매회사와 금융투자상품 관리체계에 관한 원활한 정보교환체계를 구축·운영하여야 한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(복수회사의 금융투자상품 제조)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "상품소관부서는 다른 제조회사와 금융투자상품을 협업으로 제조(설계, 개발, 발행 등 제조에 관여하는 일체의 행위 포함)하는 경우 하나의 목표시장을 설정한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "다른 제조회사와 금융투자상품을 협업으로 제조 시 상호 업무 및 책임 범위를 설정하여야 한다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(목표시장 및 판매전략 설정)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "상품 소관부서는 고객의 니즈, 특성과 목표 등을 충분히 고려하여 금융투자상품을 설계·제조하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "상품 소관부서는 목표시장 설정을 위해 금융투자상품의 특성 및 위험구조 등을 충분히 분석·평가하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제6조제3항",
+          "regulation_content": "제2항에 따른 분석·평가한 결과와 금융투자상품에 대한 이론적 지식과 경험 등을 종합적으로 고려하여 '잠재적 목표시장'을 설정하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제6조제4항",
+          "regulation_content": "목표시장 설정 시 고객유형, 지식과 경험, 손실감내능력, 위험 추구성향 및 투자기간 등을 구체화하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제6조제5항",
+          "regulation_content": "상품 소관부서는 제4항에 따라 목표시장을 구체화하는 경우 상품의 특성에 따라 설정기준 중 일부를 생략하거나 설정기준 세부항목을 복수로 선택할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제6조제6항",
+          "regulation_content": "상품 소관부서는 목표시장을 참고하여 고객의 니즈, 특성 및 목표 등에 금융투자상품이 부합하는지 여부를 확인하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "6"
+        },
+        {
+          "regulation_name": "제6조제7항",
+          "regulation_content": "상품 소관부서는 제조상품이 목표시장 내에서 판매되도록 판매전략을 수립하여야 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "7"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(금융투자상품 테스트)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "당행은 금융투자상품의 위험구조와 특성을 감안해 금융시장 요인별로 발생가능한 손실위험에 대한 시나리오 분석을 실시하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "당행은 금융투자상품 제조 관련 비용구조가 목표시장에 적합한지 여부와 투명한 수수료 부과체계를 유지하고 있는지 여부 등을 점검하여야 한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(판매회사에 대한 정보제공)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "상품 소관부서는 판매회사가 금융투자상품의 적절한 판매기준으로 활용할 수 있도록 해당 상품에 관한 충분한 정보를 제공하여야 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "상품 소관부서는 판매회사와 원활한 정보교환이 이루어 질수 있도록 적절한 체계를 구축·운영하여야 한다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(금융투자상품 점검)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": [
+        {
+          "regulation_name": "제9조제1항",
+          "regulation_content": "상품 소관부서는 금융투자상품 출시 후 해당 상품의 목표시장에 영향을 미칠 수 있는 사항에 대한 점검과 모니터링을 연 1회 이상 수행하여야 한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제9조제2항",
+          "regulation_content": "동일한 금융투자상품을 추가로 제조하거나 다시 제조하는 경우에도 사전에 해당 상품에 영향을 미칠 수 있는 잠재적 위험요소를 점검하여야 한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제9조제3항",
+          "regulation_content": "상품 소관부서는 고객의 수익에 영향을 미칠 수 있는 중대한 사안이 발생하는 경우 기존 목표시장, 판매전략 등을 재설정하는 등 적절한 조치를 취하고 동 결과를 판매회사에 제공하여야 한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제9조제4항",
+          "regulation_content": "상품 소관부서는 비적정 감사의견, 금융투자상품 관련 환매 연기, 소송 또는 금융사고 등 중요사항 발생 시 지체 없이 판매회사에 알려야한다.",
+          "type": "항",
+          "jo": "9",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제10조(이해상충방지 체계)",
+      "regulation_content": "당행은 금융투자상품 제조과정에서 이해상충을 관리할 수 있는 절차를 확립하고 이를 유지하여야 한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(감독체계 및 임직원 자격요건)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": [
+        {
+          "regulation_name": "제11조제1항",
+          "regulation_content": "당행은 이 준칙에 따른 운영체계를 마련하여 이를 효율적으로 통제·관리하여야 한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제11조제2항",
+          "regulation_content": "준법감시인은 제1항에 따른 운영체계를 비예금상품 관련 점검절차에 따라 주기적으로 점검하여야 한다.",
+          "type": "항",
+          "jo": "11",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제11조제3항",
+          "regulation_content": "금융투자상품 제조에 관여하는 임직원은 해당 상품의 구조와 위험을 이해할 수 있도록 다음 각 호의 어느 하나에 해당하는 자격요건을 갖추어야 한다.\n  1. 금융관련 석사 이상 학위\n  2. 파생결합증권 등 금융투자상품 설계·개발 경력 2년 이상\n  3. CFA, FRM, 투자자산운용사, 파생상품투자권유자문인력 등 관련 자격증 보유",
+          "type": "항",
+          "jo": "11",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제12조(점검보고서)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": [
+        {
+          "regulation_name": "제12조제1항",
+          "regulation_content": "준법감시인은 비예금상품 관련 점검절차에 따라 운영체계를 주기적으로 점검하고 그에 따른 점검결과를 이사회에 보고하여야 한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제12조제2항",
+          "regulation_content": "이사회는 준법감시인에게 임직원의 이 준칙 준수여부를 확인할 수 있는 권한을 부여한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제12조제3항",
+          "regulation_content": "당행은 감독기관이 점검보고서의 제출을 요청하는 경우 이를 즉시 제공하여야 한다.",
+          "type": "항",
+          "jo": "12",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제13조(일반 원칙)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": [
+        {
+          "regulation_name": "제13조제1항",
+          "regulation_content": "당행은 금융투자상품의 판매 및 사후관리 과정에서 자본시장법 제37조(신의성실원칙) 등에 따라 고객의 이익을 최우선에 두고 업무를 수행하여야 한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "자본시장법",
+              "original_text": "자본시장법 제37조",
+              "jo": "37",
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제13조제2항",
+          "regulation_content": "당행은 금융투자상품 판매 및 사후관리 관련 업무수행 과정의 기록을 충실히 유지하고 감독 기관의 요청이 있는 경우 이를 제출할 수 있어야 한다.",
+          "type": "항",
+          "jo": "13",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조(금융투자상품 판매 관리체계)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "당행은 금융투자상품 판매 및 사후관리 관련 업무과정별 정책을 수립·통제하기 위하여 「비예금상품위원회」 등을 운영한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "당행은 「비예금상품위원회」 등의 상품승인절차를 통하여 금융투자상품 목표시장의 적정성, 판매전략, 목표시장과 판매전략의 부합여부 등 상품의 기획·선정 전반에 대하여 심의·의결한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제14조제3항",
+          "regulation_content": "금융투자상품의 판매여부는 이사회의 위임에 따라 「비예금상품위원회」의 의결로 결정한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제14조제4항",
+          "regulation_content": "제3항에도 불구하고 「비예금상품위원회 규정」 제9조 제3항에 따른 서면에 의한 의결은 적용하지 아니한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "4"
+        },
+        {
+          "regulation_name": "제14조제5항",
+          "regulation_content": "「비예금상품위원회」는 금융투자상품의 특성, 목표시장 등을 고려하여 이미 승인받은 금융투자상품과 동일성이 인정되고 목표시장이 동일하거나 축소되는 경우에는 상품승인절차를 일부 축소 또는 생략할 수 있다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "5"
+        },
+        {
+          "regulation_name": "제14조제6항",
+          "regulation_content": "상품 소관부서는 제조회사와 원활한 정보교환 체계를 구축·운영하여야 한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "6"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제15조(판매업무 일반)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": [
+        {
+          "regulation_name": "제15조제1항",
+          "regulation_content": "당행은 고객에게 판매하고자 하는 금융투자상품의 특성, 위험도 등을 충분히 이해하여야 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제15조제2항",
+          "regulation_content": "상품 소관부서는 제조회사가 설정한 목표시장 고객을 참고로 해당 상품이 고객의 니즈를 충족하고 있는지 여부를 평가하여야 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제15조제3항",
+          "regulation_content": "상품 소관부서는 해당 상품이 고객의 최선의 이익에 부합하도록 고객의 자산상황, 포트폴리오 등을 충분히 고려하여야 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제16조(제조회사로부터 정보수령)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": [
+        {
+          "regulation_name": "제16조제1항",
+          "regulation_content": "상품 소관부서는 금융투자상품의 적절한 판매기준으로 활용할 수 있도록 제조회사로부터 금융투자상품 내용, 목표시장 설정, 금융투자상품 테스트 등과 관련한 충분한 정보를 확보할 수 있어야 한다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제16조제2항",
+          "regulation_content": "상품 소관부서는 이 준칙이 적용되지 않는 제조회사가 제조한 금융투자상품을 판매하는 경우에도 제1항에 따른 정보를 확보하도록 하여야 한다.",
+          "type": "항",
+          "jo": "16",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제17조(목표시장 및 판매전략)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "상품 소관부서는 제조회사로부터 수령한 정보와 고객에 대한 정보를 바탕으로 구체적인 목표시장 및 판매전략을 설정한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "상품 소관부서는 목표시장과 판매전략 설정 시 금융투자상품의 성질, 리스크 수준 및 고객의 니즈와 비용부담 요소 등을 충분히 고려하여야 한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제17조제3항",
+          "regulation_content": "당행은 금융투자상품을 목표시장과 판매전략에 부합하게 판매하여야 한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(목표시장 설정과 관련 정보 제공)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": [
+        {
+          "regulation_name": "제18조제1항",
+          "regulation_content": "금융투자상품의 목표시장 설정은 판매회사의 금융투자상품 판매 시 적합성 판단과 별개로 이루어진다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제18조제2항",
+          "regulation_content": "상품 소관부서는 해당 상품의 특성과 손실위험에 대한 시나리오 분석결과, 목표시장의 내용 및 그 근거를 투자자가 쉽게 이해할 수 있도록 요약한 설명서를 투자자에게 제공하여야 한다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제18조제3항",
+          "regulation_content": "당행은 금융투자상품 판매로 취득하는 전체 수수료 내역, 관계법령 및 자체적으로 정한 기준에 따른 유사상품의 수익률 등을 투자자에게 제공하여야 한다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제18조제4항",
+          "regulation_content": "당행은 금융투자상품 판매 시 이 준칙과 여타 자본시장 법령 및 규정상 판매와 관련한 규제를 동시에 준수하여야 한다.",
+          "type": "항",
+          "jo": "18",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제19조(감독체계 및 임직원 자격요건)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": [
+        {
+          "regulation_name": "제19조제1항",
+          "regulation_content": "당행은 이 준칙에 따른 효율적인 운영체계를 구축하여 이를 통제·관리하여야 한다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제19조제2항",
+          "regulation_content": "준법감시인은 제1항에 따른 운영체계를 비예금상품 관련 점검절차에 따라 주기적으로 점검하여야 한다.",
+          "type": "항",
+          "jo": "19",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제19조제3항",
+          "regulation_content": "금융투자상품 판매에 관여하는 임직원은 해당 상품의 구조와 위험을 이해할 수 있도록 다음 각 호의 자격요건을 갖추어야 한다.\n  1. 파생결합증권 및 파생상품\n    가. 파생상품투자권유자문인력\n  2. 집합투자증권\n    가. 펀드투자권유자문인력\n    나. 파생상품투자권유자문인력",
+          "type": "항",
+          "jo": "19",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제19조제4항",
+          "regulation_content": "제3항에도 불구하고 3급 이상 임직원(판매담당 직원은 제외한다)은 다음 각 호의 어느 하나에 해당하는 자격요건을 갖출 경우에는 제3항에 따른 자격요건을 적용하지 아니한다.\n  1. CFA, FRM, 투자자산운용사 자격증 소지자\n  2. 고난도 금융투자상품(파생결합증권 등) 설계·개발 경력 2년 이상 보유자\n  3. 금융관련 석사 학위 이상, 외부 전문기관 관련 연수경력 이수자",
+          "type": "항",
+          "jo": "19",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제20조(점검보고서)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": [
+        {
+          "regulation_name": "제20조제1항",
+          "regulation_content": "준법감시인은 비예금상품 관련 점검절차에 따라 운영체계를 주기적으로 점검하고 그에 따른 점검결과를 이사회에 보고하여야 한다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제20조제2항",
+          "regulation_content": "이사회는 준법감시인에게 임직원의 이 준칙 준수여부를 확인할 수 있는 권한을 부여한다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제20조제3항",
+          "regulation_content": "당행은 감독기관이 점검보고서의 제출을 요청하는 경우 이를 즉시 제공하여야 한다.",
+          "type": "항",
+          "jo": "20",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제21조(판매 후 점검)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": [
+        {
+          "regulation_name": "제21조제1항",
+          "regulation_content": "상품 소관부서는 금융투자상품 판매 이후 목표시장 및 판매전략 설정 등의 운영 실태를 연 1회 이상 점검하여야 한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제21조제2항",
+          "regulation_content": "상품 소관부서는 판매상품이 목표시장과 판매전략에 부합하고 있는지 여부 등을 확인하기 위해 해당 상품 판매실적, 투자자의 피드백 등을 분석한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제21조제3항",
+          "regulation_content": "상품 소관부서는 제2항에 따른 분석과정에서 목표시장 설정 오류 확인, 판매상품이 더 이상 목표시장에 부합하지 않게 되는 경우 등 문제점을 인식하는 경우 목표시장 재설정 등 필요한 조치를 취하여야 한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제21조제4항",
+          "regulation_content": "상품 소관부서는 관계법령 및 자체적으로 정한 기준에 따라 금융투자상품 판매 이후에도 고객이 투자판단에 참고할 수 있도록 수익률 또는 손실률 등의 정보를 적시에 제공하여야 한다.",
+          "type": "항",
+          "jo": "21",
+          "hang": "4"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제22조(제조회사에 대한 정보제공)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": [
+        {
+          "regulation_name": "제22조제1항",
+          "regulation_content": "상품 소관부서는 목표시장 및 판매전략 설정에 관한 자료를 제조회사에게 제공하여야 한다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제22조제2항",
+          "regulation_content": "상품 소관부서는 금융투자상품 판매정보와 판매현황 분석자료(목표시장 외 판매현황 포함) 등을 제조회사에 제공하여야 한다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제22조제3항",
+          "regulation_content": "상품 소관부서는 제조회사가 목표시장과 관련한 사후 분석 등 점검에 활용할 수 있도록 정보를 제공하여야 한다.",
+          "type": "항",
+          "jo": "22",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제23조(제조 및 판매에 관한 금지행위)",
+      "regulation_content": "당행 임직원은 금융투자상품 제조 및 판매과정에서 다음의 어느 하나에 해당하는 행위를 하여서는 아니 된다.\n  1. 이 준칙에서 정하고 있는 금융투자상품의 제조, 판매, 사후관리 등 일련의 업무과정별 정책과 관련한 업무방법과 절차를 이행하지 않는 행위\n  2. 금융투자상품의 제조 및 판매와 관련하여 투자자의 이익을 해하면서 자기 또는 제3자의 이익을 추구하는 행위\n  3. 금융투자상품별 목표시장을 설정하지 않고 금융투자상품을 제조하거나 판매하는 행위\n  4. 금융투자상품의 내용, 투자위험 및 이에 대한 시나리오 분석결과와 목표시장 내용 및 설정근거를 요약한 설명서를 교부하지 않는 행위\n  5. 손실위험 시나리오 분석을 하지 않거나 자기 또는 제3자와의 이해상충이 있다는 사실을 은닉하고 금융투자상품을 제조하거나 판매하는 행위\n  6. 금소법 제17조 제3항의 기준을 회피할 목적으로 부정한 수단, 계획 또는 기교를 사용하는 행위\n  7. 자본시장법 제119조의 증권신고서 제출을 회피할 목적으로 부정한 수단, 계획 또는 기교를 사용하는 행위\n  8. 집합투자증권의 판매회사가 집합투자업자의 집합투자재산 운용에 개입하는 행위\n  9. 복수의 제조회사가 금융투자상품 제조에 참여(설계, 개발, 발행 등 제조에 관여하는 일체의 행위를 포함) 하는 경우 상호 업무 및 책임범위를 설정하지 않는 행위",
+      "type": "조",
+      "jo": "23",
+      "related_laws": [
+        {
+          "law_name": "금소법",
+          "original_text": "금소법 제17조 제3항",
+          "jo": "17",
+          "hang": "3",
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        },
+        {
+          "law_name": "자본시장법",
+          "original_text": "자본시장법 제119조",
+          "jo": "119",
+          "hang": null,
+          "ho": null,
+          "mok": null,
+          "byeolpyo": null
+        }
+      ],
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(준칙의 개폐)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": [
+        {
+          "regulation_name": "제24조제1항",
+          "regulation_content": "이 준칙의 개정 및 폐지는 이사회 결의에 의한다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제24조제2항",
+          "regulation_content": "제1항에도 불구하고 관계법령과 감독기관 규정 등 상위규정의 변경에 따른 개폐와 단순 자구수정 및 보완은 「내규관리규정」을 준용한다.",
+          "type": "항",
+          "jo": "24",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "부칙 제1조(시행일)",
+      "regulation_content": "이 준칙은 2021년 6월 15일부터 시행한다.",
+      "type": "부칙",
+      "jo": "1"
+    },
+    {
+      "regulation_name": "부칙 제2조(경과조치)",
+      "regulation_content": "이 준칙 시행 이전에 제조하거나 판매한 금융투자상품에 대하여도 이 준칙 시행일 이후 추가 제조 또는 판매하는 경우에는 이 준칙을 적용한다.",
+      "type": "부칙",
+      "jo": "2"
+    },
+    {
+      "regulation_name": "부칙<2021.10.28.>",
+      "regulation_content": "이 준칙은 2021년 10월 28일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "별표1",
+      "type": "별표",
+      "jo": "1",
+      "regulation_content": "목표시장 및 판매전략(예시)\n(상품번호 :                  )   (상품명 :                            )\n\n<표>"
+    },
+    {
+      "regulation_name": "별표2",
+      "type": "별표",
+      "jo": "2",
+      "regulation_content": "제조회사가 판매회사에 제공하는 정보(예시)\n\n<표>\n\n* 중대한 사안이 발생하여 목표시장을 재설정하는 경우"
+    },
+    {
+      "regulation_name": "별표3",
+      "type": "별표",
+      "jo": "3",
+      "regulation_content": "판매회사가 제조회사에 제공하는 정보(예시)\n\n<표>\n\n* 예) 판매기간이 있는 경우 판매기간 종료일부터 15일 이내\n      상시 판매되는 경우 반기의 말일부터 15일 이내"
+    }
+  ]
+}

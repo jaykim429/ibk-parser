@@ -1,0 +1,461 @@
+{
+  "regulationName": "취업규칙",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(적용원칙)",
+      "regulation_content": "직원의 취업은 법령·정관으로써 정하여진 것외에 이「취업규칙」과 이에 의하여 제정된 제규정이 정하는 바에 의한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(복무자세)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "직원은 업무, 관리, 운영의 기본이 되는 법령, 정관, 제규정 및 상직자의 정당한 직무상 명령을 충실히 준수하여야 한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "직원은 성실히 집무하며 항상 맡은 바 직책을 신속 정확하게 수행하여야 한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(자기계발)",
+      "regulation_content": "직원은 항상 인격도야와 지식향상을 위한 자기계발에 노력하고 상호 융화하여 업무발전에 기여하여야 한다.",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제4조(품위의 유지)",
+      "regulation_content": "직원은 항시 자기의 신분과 지위를 인식하고 언행을 조심하여 당행의 신용과 명예를 손상하는 일이 없도록 하여야 한다.",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제5조(근무태도)",
+      "regulation_content": "직원은 항상 검소를 본지로 하여 복장 및 용모를 단정히 함은 물론 예절과 규율을 존중하고 고객에게 친절하여야 한다.",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제6조(비밀누설의 금지)",
+      "regulation_content": "직원은 업무수행상 지득한 당행 및 거래처 기타의 비밀을 누설하여서는 아니된다.",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제7조(겸직금지)",
+      "regulation_content": "직원은 은행장의 허가없이 영리사업을 영위하거나 다른 직업에 종사하여서는 아니된다.",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제8조(청렴의 의무)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "직원은 업무와 관련하여 직접 또는 간접을 불문하고 일체의 금품·향응 등을 받아서는 아니된다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "직원은 가명예금 계좌를 보유하거나 거래처와의 금전거래 또는 그 알선행위를 하여서는 아니된다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(보증행위의 금지)",
+      "regulation_content": "직원은 당행에 대하여 타인의 신원보증 또는 기타의 일체의 보증행위를 하지 못한다. 다만, 은행장이 따로 인정하는 경우에는 예외로 할 수 있다.",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조",
+      "regulation_content": "삭제<1998.11.2.>",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제11조(업무상 과오의 신고)",
+      "regulation_content": "직원은 업무상 과오를 일으켰거나 또는 발견하였을 때는 과오내용의 경중에 불구하고 즉시 해당부서장 또는 영업점장에게 신고하여 그 지시를 받아야 한다.",
+      "type": "조",
+      "jo": "11",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제12조(거주지)",
+      "regulation_content": "직원은 소속부점 소재지에서 거주하여야 한다. 그러나 은행장의 허가를 얻었을 때에는 예외로 할 수 있다.",
+      "type": "조",
+      "jo": "12",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제13조(당직근무)",
+      "regulation_content": "직원의 일직 또는 숙직에 관한 사항은 따로 정하는「경비업무규정」에 의한다.<개정 2007.3.7., 2009.3.27.>",
+      "type": "조",
+      "jo": "13",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조(근무시간과 휴식시간)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14",
+      "sub_articles": [
+        {
+          "regulation_name": "제14조제1항",
+          "regulation_content": "직원의 근무시간과 휴식시간은 다음과 같다.\n  \n<표>",
+          "type": "항",
+          "jo": "14",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조제2항",
+          "regulation_content": "휴식시간은 업무집행에 지장이 없도록 교대로 이용하여야 한다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제14조제3항",
+          "regulation_content": "제1항의 근무시간은 금융기관 대표자회의의 결정이 있을 때 또는 기타 필요에 따라 1일 8시간 범위내에서 이를 변경 실시할 수 있다.",
+          "type": "항",
+          "jo": "14",
+          "hang": "3"
+        },
+        {
+          "regulation_name": "제14조의3제1항",
+          "regulation_content": "당행은 제14조에도 불구하고 업무의 시작 및 종료시각을 본인의 결정에 맡기기로 한 직원에 대하여 다음 각 호의 사항을 정하면 1개월 이내의 정산기간을 평균하여 1주간의 근로시간이 1주 40시간을 초과하지 아니하는 범위에서 1주 간에 40시간을, 1일에 8시간을 초과하여 근로하는 선택적 근로시간제를 시행할 수 있다.\n  1. 대상 직원의 범위(15세 이상 18세 미만의 근로자는 제외한다.)\n  2. 정산기간(1개월 이내의 일정한 기간으로 정하여야 한다.)\n  3. 정산기간의 총 근로시간\n  4. 반드시 근로하여야 할 시간대를 정하는 경우에는 그 시작 및 종료시각\n  5. 직원이 그의 결정에 따라 근로할 수 있는 시간대를 정하는 경우에는 그 시작 및 종료시각\n  6. 표준근로시간",
+          "type": "항",
+          "jo": "14조의3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제14조의3제2항",
+          "regulation_content": "선택적 근로시간제 적용 직원의 근로시간은 업무특성 등을 감안하여 소속부점장과 협의하되, 부점의 업무 공백, 기타 업무상 부득이한 경우 제1항의 정산기간 및 근무시간을 조정한다.\n[본조신설 2018.6.28.]",
+          "type": "항",
+          "jo": "14조의3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제14조의2",
+      "regulation_content": "삭제<2005.1.13.>",
+      "type": "조",
+      "jo": "14조의2",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제14조의3(선택적 근로시간제)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "14조의3",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제15조(공휴일)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "15",
+      "sub_articles": [
+        {
+          "regulation_name": "제15조제1항",
+          "regulation_content": "당행의 유급휴일은 다음 각호와 같다.<개정 2005.1.13., 2014.11.19.>\n  1. “관공서의공휴일에관한규정”에서 정하는 공휴일\n  2. 근로자의 날\n  3. 기타 따로 지정된 경우",
+          "type": "항",
+          "jo": "15",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제15조제2항",
+          "regulation_content": "토요일은 무급휴일로 한다.",
+          "type": "항",
+          "jo": "15",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제16조(특수업무 종사자의 근무시간)",
+      "regulation_content": "직원중 경비, 자동차운전, 전화, 청소 및 기타 특수업무에 종사하는 자에 대하여는 제14조제3항에 규정된 근무시간 범위내에서 시업시간 및 종업시간을 변경할 수 있다.",
+      "type": "조",
+      "jo": "16",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제17조(시간외근무, 야간 및 휴일근무)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "17",
+      "sub_articles": [
+        {
+          "regulation_name": "제17조제1항",
+          "regulation_content": "업무형편에 의하여 필요할 때에는 근로기준법의 정하는 범위내에서 근무시간외에 따로 시간외근무, 야간 및 휴일근무를 명할 수 있다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "1",
+          "related_laws": [
+            {
+              "law_name": "근로기준법",
+              "original_text": "근로기준법의",
+              "jo": null,
+              "hang": null,
+              "ho": null,
+              "mok": null,
+              "byeolpyo": null
+            }
+          ]
+        },
+        {
+          "regulation_name": "제17조제2항",
+          "regulation_content": "휴일근무의 경우의 휴식시간은 제14조에 준한다.",
+          "type": "항",
+          "jo": "17",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제18조(18세 미만자의 근무시간)",
+      "regulation_content": "18세 미만자의 근무시간은 1일 7시간, 1주일 35시간으로 한다. 다만, 당사자간의 합의에 의하여 1일에 1시간, 1주일 5시간을 한도로 연장할 수 있다.",
+      "type": "조",
+      "jo": "18",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제19조(휴가)",
+      "regulation_content": "직원의 휴가에 관하여는 따로 정하는「휴가규정」에 의한다.",
+      "type": "조",
+      "jo": "19",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제20조(휴직)",
+      "regulation_content": "직원의 휴직에 관하여는 따로 정하는「복무규정」에 의한다.",
+      "type": "조",
+      "jo": "20",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제21조(채용)",
+      "regulation_content": "직원의 채용은 따로 정하는「인사규정」에 의한다.",
+      "type": "조",
+      "jo": "21",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제22조(받을서류)",
+      "regulation_content": "직원의 채용시 받아야 할 서류에 관한 사항은 따로 정하는「인사규정」에 의한다.\n[제목개정 2013.8.22.]",
+      "type": "조",
+      "jo": "22",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제23조(신원보증)",
+      "regulation_content": "직원의 신원보증에 관한 사항은 따로 정하는「복무규정」에 의한다.",
+      "type": "조",
+      "jo": "23",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제24조(변상책임)",
+      "regulation_content": "직원이 고의 또는 과실로 당행에 손해를 끼쳤을 경우에는 본인 및 신원보증인 또는 신원보증보험회사는 연대하여 이를 변상하여야 한다.",
+      "type": "조",
+      "jo": "24",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제25조(보수)",
+      "regulation_content": "임금의 결정·계산과 지급방법, 임금의 마감, 지급시기, 승급, 제수당의 계산과 지급방법에 관한 사항은 따로 정하는「보수규정」에 의한다.",
+      "type": "조",
+      "jo": "25",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제26조(여비)",
+      "regulation_content": "여비의 지급과 조건은 따로 정하는「여비지급규정」에 의한다.",
+      "type": "조",
+      "jo": "26",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제27조(후생)",
+      "regulation_content": "식비, 작업용품 등의 부담 및 후생에 관한 사항은 따로 정하는「복지규정」에 의한다.",
+      "type": "조",
+      "jo": "27",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제28조(퇴직 및 정년)",
+      "regulation_content": "직원의 퇴직 및 정년에 관한 사항은 따로 정하는「인사규정」에 의한다.",
+      "type": "조",
+      "jo": "28",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제29조(퇴직금)",
+      "regulation_content": "퇴직금의 지급과 조건은 따로 정하는「퇴직금규정」에 의한다.",
+      "type": "조",
+      "jo": "29",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제30조(상여금)",
+      "regulation_content": "상여금의 지급과 조건은 따로 정하는「보수규정」에 의한다.",
+      "type": "조",
+      "jo": "30",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제31조(교육)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "31",
+      "sub_articles": [
+        {
+          "regulation_name": "제31조제1항",
+          "regulation_content": "18세 미만인 직원에 대하여는 따로 장학금을 지급하되 장학금지급에 관한 사항은 따로 정하는「복지규정」에 의한다.",
+          "type": "항",
+          "jo": "31",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제31조제2항",
+          "regulation_content": "직원의 교육에 관한 사항은 따로 정하는「연수규정」에 의한다.",
+          "type": "항",
+          "jo": "31",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제32조(건강진단)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "32",
+      "sub_articles": [
+        {
+          "regulation_name": "제32조제1항",
+          "regulation_content": "직원에 대하여는 채용할 때와 매년 정기적으로 건강진단을 실시한다.",
+          "type": "항",
+          "jo": "32",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제32조제2항",
+          "regulation_content": "제1항외에 필요하다고 인정할 때에는 전직원 또는 일부직원에 대하여 수시로 건강진단 또는 예방주사를 실시할 수 있다.",
+          "type": "항",
+          "jo": "32",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제33조(취업금지)",
+      "regulation_content": "전염성의 질병, 정신병 또는 근무로 인하여 병세가 악화될 우려가 있는 질병환자에 대하여는 따로 정하는「복무규정」에 의하여 취업을 금한다.",
+      "type": "조",
+      "jo": "33",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제34조(의무시설)",
+      "regulation_content": "직원 및 그 가족의 보건을 의하여 필요한 의무시설 및 그 운영에 관한 사항은 따로 정하는「복지규정」에 의한다.",
+      "type": "조",
+      "jo": "34",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제35조(요양비)",
+      "regulation_content": "직원 및 그 가족의 질병에 대한 요양비 지급에 관한 사항은 따로 정하는「복지규정」에 의한다.",
+      "type": "조",
+      "jo": "35",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제36조(재해보상)",
+      "regulation_content": "직원이 업무로 인하여 부상 또는 질병에 걸렸거나 사망하였을 때에는 따로 정하는「복지규정」및「퇴직금규정」에 의하여 요양보상, 휴업보상, 장해보상, 유족보상 및 장례비 등을 지급한다.",
+      "type": "조",
+      "jo": "36",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제37조(표창 및 징계)",
+      "regulation_content": "직원의 표창 및 징계에 관한 사항은 따로 정하는「직원상벌규정」에 의한다.",
+      "type": "조",
+      "jo": "37",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부칙<1999.11.11.>",
+      "regulation_content": "이 규칙은 1999년 11월 11일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2002.7.5.>",
+      "regulation_content": "이 규칙은 2002년 7월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2005.1.13.>",
+      "regulation_content": "이 규칙은 2005년 1월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2007.3.7.>",
+      "regulation_content": "이 규칙은 2007년 3월 7일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2009.3.27.>",
+      "regulation_content": "이 규칙은 2009년 4월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2013.8.22.>",
+      "regulation_content": "이 규칙은 2013년 8월 26일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2014.11.19.>",
+      "regulation_content": "이 규칙은 2014년 10월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2018.6.28.>",
+      "regulation_content": "이 규칙은 2018년 7월 1일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부칙<2022.6.2.>",
+      "regulation_content": "이 규칙은 2022년 6월 3일부터 시행한다.",
+      "type": "부칙"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "regulationName": "국외지점 인력Pool 운영기준",
+  "mappings": {},
+  "articles": [
+    {
+      "regulation_name": "제1조(목적)",
+      "regulation_content": "이 기준은 금융의 글로벌화에 따른 국외지점(국외현지법인 및 국외사무소 포함. 이하같음)의 확대에 대비하고 필요인력의 조기확보 및 직무역량 강화를 통한 국외영업력 강화를 위하여 국외지점 근무에 적합한 인력을 선발하고 관리하는 데 필요한 제반사항을 정함을 목적으로 한다.",
+      "type": "조",
+      "jo": "1",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제2조(대상 및 자격)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "2",
+      "sub_articles": [
+        {
+          "regulation_name": "제2조제1항",
+          "regulation_content": "다음 각호에 해당하는 직원을 정해진 절차에 따라 선발하여 국외지점 인력Pool을 구성한다.\n  1. 조직충성도가 높고 열정적인 자세와 투철한 도전정신으로 성과를 창출해 낼 수 있는 직원\n  2. 선발 후 3년 이내에 국외지점 업무수행에 필요한 여신, 외환, 전산, 리스크 관리, 자금관리 등 직무역량을 갖출 수 있는 직원",
+          "type": "항",
+          "jo": "2",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제2조제2항",
+          "regulation_content": "영업점 여신 및 외환관련 업무에 2년 이상 근무한 직원은 선발 심사에서 우대할 수 있으며, 그 세부사항은 인사부장이 정한다.",
+          "type": "항",
+          "jo": "2",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제3조(선발시기 및 방법)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "3",
+      "sub_articles": [
+        {
+          "regulation_name": "제3조제1항",
+          "regulation_content": "직원의 선발은 매년 1회 공모방식에 의하여 선발하는 것을 원칙으로 한다. 다만, 인사부장이 인력운용상 필요하다고 판단하는 경우 예외로 할 수 있다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제3조제2항",
+          "regulation_content": "인사부장은 선발예정인원, 자격기준, 선발일정 및 방법 등을 사전에 공지하여야 한다.",
+          "type": "항",
+          "jo": "3",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제4조(선발절차)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "4",
+      "sub_articles": [
+        {
+          "regulation_name": "제4조제1항",
+          "regulation_content": "공모희망자는 정해진 기준에 따라 필요 업무지식, 외국어능력 등의 개발계획을 포함하여 작성한 지원서를 인사부에 제출하여야 한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제4조제2항",
+          "regulation_content": "인사부장은 제출된 지원서 내용, 인력자원조사 등 각종 인사평가 자료를 토대로 최종 선발예정인원의 2배수 범위내에서 서류심사 합격자를 결정한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "2"
+        },
+        {
+          "regulation_name": "제4조제3항",
+          "regulation_content": "최종 선발은 서류심사 합격자를 대상으로 제5조에서 정하는 선발위원회의 면접을 거쳐 확정한다.",
+          "type": "항",
+          "jo": "4",
+          "hang": "3"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제5조(선발위원회 구성)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "5",
+      "sub_articles": [
+        {
+          "regulation_name": "제5조제1항",
+          "regulation_content": "선발위원회 구성은 경영지원그룹장을 위원장으로 하고 글로벌사업부장, 인사부장, 인재개발부장을 위원으로 한다.<개정 2015.7.14., 2020.7.20.>",
+          "type": "항",
+          "jo": "5",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제5조제2항",
+          "regulation_content": "위원장은 위원이 부득이하게 참석하지 못할 경우 해당부서 관련팀장을 대신 참석하게 하여 의견을 개진하게 할 수 있다.",
+          "type": "항",
+          "jo": "5",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제6조(인력Pool 운영인원)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "6",
+      "sub_articles": [
+        {
+          "regulation_name": "제6조제1항",
+          "regulation_content": "인력Pool은 국외지점 부부점장급이하 직원수의 2배수 내외에서 운영함을 원칙으로 한다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제6조제2항",
+          "regulation_content": "경영지원그룹장은 매년 국외지점 배치인원, 신설 국외지점 배치예정인원 등을 감안하여 선발인원을 적의 조정할 수 있다.",
+          "type": "항",
+          "jo": "6",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제7조(교육 및 OJT)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "7",
+      "sub_articles": [
+        {
+          "regulation_name": "제7조제1항",
+          "regulation_content": "인사부장은 인력Pool로 선발된 직원에 대하여 국제금융, 외환, 여신업무 등 기본직무 및 해당국가 외국어능력의 배양을 위한 교육을 지원하고 자기개발 계획 및 이행상황을 점검한다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제7조제2항",
+          "regulation_content": "인력Pool로 선발된 직원에 대하여는 해당국가 문화적응, 어학능력 향상, 국외지점업무 현지실습을 위한 국외지점 OJT를 실시할 수 있다.",
+          "type": "항",
+          "jo": "7",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제8조(이동 및 배치)",
+      "regulation_content": "",
+      "type": "조",
+      "jo": "8",
+      "sub_articles": [
+        {
+          "regulation_name": "제8조제1항",
+          "regulation_content": "국외지점 근무자는 근무성적, 자기개발노력, 국외지점 OJT평가 등을 감안하여 인력Pool에 포함된 직원 중 우수 직원을 이동․배치하는 것을 원칙으로 한다. 다만, 인력Pool 직원의 국외점포 근무가능시점까지는 잠정적으로 기타 직원도 이동․배치 대상에 포함하여 운용할 수 있다. 다만, 국외지점 신설 또는 업무 특성상 은행장이 필요하다고 인정하는 경우에는 예외로 할 수 있다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "1"
+        },
+        {
+          "regulation_name": "제8조제2항",
+          "regulation_content": "국외지점 배치예정자에 대하여는 부임에 따른 업무공백을 최소화하기 위하여 국내복귀직원의 복귀 6개월전 해당 국외지점에 단독 부임하게 하여 업무를 인수․인계하도록 할 수 있다.",
+          "type": "항",
+          "jo": "8",
+          "hang": "2"
+        }
+      ]
+    },
+    {
+      "regulation_name": "제9조(인력Pool 관리)",
+      "regulation_content": "다음 각호의 어느 하나에 해당하는 직원은 인력Pool에서 제외한다.\n  1. 연간 자기개발활동, 인력자원조사 및 근무성적평정 결과 등이 부진한 직원\n  2. 인력Pool 선발 후 3년 이내에 국외지점 업무수행에 필요한 직무역량을 갖추지 못한 직원\n  3. 기타 인력Pool 직원으로서 부적합하다고 인정되는 직원",
+      "type": "조",
+      "jo": "9",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "제10조(기타)",
+      "regulation_content": "이 기준에서 정하지 않은 세부사항은 인사부장이 전결 처리한다.",
+      "type": "조",
+      "jo": "10",
+      "sub_articles": []
+    },
+    {
+      "regulation_name": "부 칙<2006.4.21.>",
+      "regulation_content": "이 기준은 2006년 4월 21일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2009.10.19.>",
+      "regulation_content": "이 기준은 2009년 10월 19일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2012.5.25.>",
+      "regulation_content": "이 기준은 2012년 5월 25일부터 시행한다.",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2015.7.14.>",
+      "regulation_content": "이 기준은 2015년 7월 14일부터 시행한다. (2015년 7월 14일 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    },
+    {
+      "regulation_name": "부 칙<2020.7.20.>",
+      "regulation_content": "이 기준은 2020년 7월 23일부터 시행한다.(2020년 하반기 직제규정 개정에 따른 일괄개정)",
+      "type": "부칙"
+    }
+  ]
+}
