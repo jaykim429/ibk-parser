@@ -250,6 +250,8 @@ export class CompliancePipeline {
       obligations: obl.obligations,
       amendmentPairs: amendPairs.map((p) => ({ before: p.before, after: p.after })),
       truncated: doc.markdown.length > config.maxAnalyzeChars,
+      // 사전예고/예고(확정 전) → 미확정 프레이밍. (cleanLawName이 '(사전예고)'를 떼므로 파일명도 함께 검사)
+      preAnnouncement: /사전\s*예고|예고문|예고\b/.test(`${fileName} ${initialName} ${lawName}`),
     });
 
     const seconds = Math.round((Date.now() - t0) / 1000);

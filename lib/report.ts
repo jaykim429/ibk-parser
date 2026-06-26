@@ -43,6 +43,8 @@ export type ReportInput = {
   amendmentPairs?: { before: string; after: string }[];
   /** 원문이 길어 분석에 일부만 반영됐는지(절단) — 유의사항 도출용 */
   truncated?: boolean;
+  /** 사전예고/예고(확정 전) 문서 — 즉시적용이 아닌 조건부(미확정) 프레이밍 */
+  preAnnouncement?: boolean;
 };
 
 /**
@@ -258,12 +260,14 @@ function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmRepor
   const changes = (llm.overview_changes ?? []).filter(Boolean);
   const ibkView = (llm.ibk_view ?? []).filter(Boolean);
   const stageNote = input.infoOnly
-    ? `\n> 정보성 자료(보도자료·설명자료 등) — 규범적 개정 사항 아님. 관련 내규는 **동향 모니터링** 관점으로 정리(개정 단정 아님).`
-    : input.itemType === "guideline"
-      ? `\n> 자율규제(가이드라인·모범규준) — 이미 공표·적용 중인 연성규범. '입법 확정'을 기다리는 단계가 아니라 **즉시 내규 정합성 점검 대상**(자율 준수). 미충족 영역은 신규·보완 내규로 선제 대응 권장.`
-      : llm.certainty === "미확정"
-        ? `\n> ${llm.doc_stage || "확정 전"} 단계 문서 — 권고는 입법·개정 확정 시 재검토 전제(조건부).`
-        : "";
+    ? `\n> 정보성 자료(보도자료·설명자료·해설서·FAQ 등) — 규범적 개정 사항 아님. 관련 내규는 **동향 모니터링** 관점으로 정리(개정 단정 아님).`
+    : input.preAnnouncement
+      ? `\n> **사전예고(확정 전) 연성규범** — 아직 확정·시행 전이므로 권고는 조건부(확정 시 재검토 전제). 다만 방향이 명확하므로 미충족 영역은 선제 검토 권장.`
+      : input.itemType === "guideline"
+        ? `\n> 자율규제(가이드라인·모범규준·행정지도) — 사실상 준수 대상인 연성규범. '입법 확정'을 기다리는 단계가 아니라 **즉시 내규 정합성 점검 대상**(자율 준수). 미충족 영역은 신규·보완 내규로 선제 대응 권장.`
+        : llm.certainty === "미확정"
+          ? `\n> ${llm.doc_stage || "확정 전"} 단계 문서 — 권고는 입법·개정 확정 시 재검토 전제(조건부).`
+          : "";
   const sec1 = `## 1. 규제변동 개요
 ### 1.1 주요 변경 사항
 ${outline(changes, "- 변경 사항 식별 정보 부족")}
