@@ -1,9 +1,13 @@
 "use client";
 
 import { isValidElement, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import dynamic from "next/dynamic";
 import ReactMarkdown from "react-markdown";
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+
+// 원본 이미지 복원(PDF.js, 클라이언트 전용) — SSR 비활성
+const RestoreImageView = dynamic(() => import("./restore-image-view"), { ssr: false });
 
 const ACCEPT = ".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.txt";
 const FORMATS = ["PDF", "HWP", "HWPX", "DOC", "DOCX", "XLS", "XLSX", "TXT"];
@@ -609,6 +613,7 @@ function ReportDetail(props: {
 }) {
   const { job, downloadBusy, downloadError, downloadReport } = props;
   const [showRestore, setShowRestore] = useState(false);
+  const [restoreMode, setRestoreMode] = useState<"text" | "image">("text");
 
   if (!job) {
     return (
@@ -646,6 +651,7 @@ function ReportDetail(props: {
   }
 
   const hasRestore = !!result.restoredHtml;
+  const isPdf = /\.pdf$/i.test(job.fileName) || job.file?.type === "application/pdf";
 
   return (
     <div className="panel result-panel">
@@ -689,13 +695,37 @@ function ReportDetail(props: {
         )}
         {showRestore && hasRestore && (
           <div className="restore-pane">
-            <div className="restore-pane-head">원문 복원 (파싱 재구성)</div>
-            <iframe
-              className="restore-frame"
-              title="원문 복원"
-              sandbox=""
-              srcDoc={result.restoredHtml}
-            />
+            <div className="restore-pane-head">
+              <span>원문 복원</span>
+              {isPdf && job.file && (
+                <div className="restore-mode-toggle">
+                  <button
+                    className={restoreMode === "text" ? "on" : ""}
+                    onClick={() => setRestoreMode("text")}
+                  >
+                    파싱 재구성
+                  </button>
+                  <button
+                    className={restoreMode === "image" ? "on" : ""}
+                    onClick={() => setRestoreMode("image")}
+                  >
+                    원본 이미지
+                  </button>
+                </div>
+              )}
+            </div>
+            {isPdf && job.file && restoreMode === "image" ? (
+              <div className="restore-frame restore-image-scroll">
+                <RestoreImageView file={job.file} />
+              </div>
+            ) : (
+              <iframe
+                className="restore-frame"
+                title="원문 복원"
+                sandbox=""
+                srcDoc={result.restoredHtml}
+              />
+            )}
           </div>
         )}
         <div className="report-pane report-body">
