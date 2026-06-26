@@ -613,7 +613,9 @@ function ReportDetail(props: {
 }) {
   const { job, downloadBusy, downloadError, downloadReport } = props;
   const [showRestore, setShowRestore] = useState(false);
-  const [restoreMode, setRestoreMode] = useState<"text" | "image">("text");
+  // PDF는 '원본 이미지'(픽셀 완벽)를 기본으로 — 파싱 재구성이 다단 매뉴얼에선 보기 어려움.
+  // (비PDF는 isPdf 가드로 자동 텍스트 복원으로 폴백)
+  const [restoreMode, setRestoreMode] = useState<"text" | "image">("image");
 
   if (!job) {
     return (
