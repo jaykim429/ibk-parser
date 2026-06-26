@@ -24,6 +24,7 @@ import { rerankCandidates } from "./rerank";
 import { judgeMatches } from "./judge";
 import { generateReport, buildOffDomainReport } from "./report";
 import { renderBlocksToHtml } from "./render-blocks";
+import { extractAmendmentPairs } from "./amendment-table";
 import { formatRegulationItemName } from "./regulation-format";
 import { hashBuffer, getCached, setCached } from "./cache";
 import { config } from "./config";
@@ -131,10 +132,16 @@ export class CompliancePipeline {
     // 3) 입력 문서 청킹 → 멀티쿼리 하이브리드 검색(변경 단위별 쿼리 융합)
     const query = buildCanonicalQuery(analysis, provisions, doc.markdown);
     const subQueries = buildSubQueries(analysis, provisions);
-    const queries = [query, ...subQueries];
+    // P1: 신구조문대비표(현행|개정안)에서 '개정안' 조문을 정밀 매칭 쿼리로 추가
+    const amendPairs = extractAmendmentPairs(doc.blocks);
+    const amendQueries = amendPairs
+      .filter((p) => p.after.length >= 8)
+      .slice(0, config.subQueryMax)
+      .map((p) => `${lawName} ${p.after}`.replace(/\s+/g, " ").slice(0, 280));
+    const queries = [query, ...subQueries, ...amendQueries];
     console.log(`\n[PIPELINE] file=${fileName}`);
     console.log(
-      `[PIPELINE] itemType=${itemType}, infoOnly=${infoOnly}, lawName=${lawName}, provisions=${provisions.length}, analysisOk=${!!analysis?.success}, subQueries=${subQueries.length}`
+      `[PIPELINE] itemType=${itemType}, infoOnly=${infoOnly}, lawName=${lawName}, provisions=${provisions.length}, analysisOk=${!!analysis?.success}, subQueries=${subQueries.length}, amendPairs=${amendPairs.length}`
     );
     console.log(`[PIPELINE] canonicalQuery= ${query.slice(0, 300)}`);
 

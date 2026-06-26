@@ -10,7 +10,8 @@
  *
  * 매뉴얼형 내규를 화면/다운로드로 원형에 가깝게 복원하는 용도.
  */
-import type { IRBlock, IRTable, IRCell, InlineStyle } from "kordoc";
+import type { IRBlock, IRTable, InlineStyle } from "kordoc";
+import { mergeContinuationRows } from "./amendment-table";
 
 export type RenderOptions = {
   /** 문서 제목(헤더) */
@@ -56,35 +57,7 @@ function borderStyle(b?: { top: number; right: number; bottom: number; left: num
   return ` style="border-top:${px(b.top)};border-right:${px(b.right)};border-bottom:${px(b.bottom)};border-left:${px(b.left)}"`;
 }
 
-/**
- * PDF 표 줄바꿈 보정 — 셀 안의 한 줄이 별도 '행'으로 쪼개지는 현상(신구조문대비표 등)에서,
- * '첫 칸이 비고 다른 칸에 내용이 있는' 연속 행을 직전 행에 병합한다(헤더 0행은 보존).
- * 복원 표가 행 단위로 잘게 끊기는 것을 막아 원형에 가깝게 재구성.
- */
-function mergeContinuationRows(table: IRTable): IRTable {
-  const { rows, cols, cells } = table;
-  if (cols < 2 || rows < 3) return table;
-  const out: IRCell[][] = [];
-  for (let r = 0; r < rows; r++) {
-    const row = cells[r] ?? [];
-    const first = (row[0]?.text ?? "").trim();
-    const hasOther = row.some((c, i) => i > 0 && (c?.text ?? "").trim());
-    if (r > 0 && out.length && !first && hasOther) {
-      const prev = out[out.length - 1];
-      for (let c = 0; c < cols; c++) {
-        const t = (row[c]?.text ?? "").trim();
-        if (!t) continue;
-        const base = prev[c] ?? { text: "", colSpan: 1, rowSpan: 1 };
-        prev[c] = { ...base, text: (base.text ? base.text + "\n" : "") + t };
-      }
-    } else {
-      out.push(row.map((c) => ({ ...(c ?? { text: "", colSpan: 1, rowSpan: 1 }) })));
-    }
-  }
-  return { ...table, rows: out.length, cells: out };
-}
-
-/** IRTable → <table> (colSpan/rowSpan/너비/테두리 보존, 커버 셀 스킵) */
+/** IRTable → <table> (colSpan/rowSpan/너비/테두리 보존, 커버 셀 스킵). 연속행 병합은 amendment-table 공용 유틸. */
 function renderTable(input: IRTable): string {
   const table = mergeContinuationRows(input);
   const { rows, cols, cells } = table;
