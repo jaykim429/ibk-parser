@@ -83,6 +83,30 @@ export class CompliancePipeline {
       ? renderBlocksToHtml(doc.blocks, { title: initialName })
       : undefined;
 
+    // 본문 추출 실패/불충분 가드 — 빈 본문으로 분석을 진행하면 프로필 보일러플레이트로 채워진
+    // 가짜 매칭이 나온다. 추출 본문이 임계 미만이면 분석 중단(스캔/형식 문제 안내).
+    const bodyChars = doc.markdown.replace(/\s+/g, "").length;
+    if (bodyChars < config.minBodyChars) {
+      console.warn(`[PIPELINE] 본문 추출 불충분: ${fileName} — ${bodyChars}자 < ${config.minBodyChars}`);
+      const seconds = Math.round((Date.now() - t0) / 1000);
+      const lowResult: PipelineResult = {
+        success: true,
+        report: {
+          markdown: `# 규제변동 영향분석 보고서\n\n**분석 정보**\n\n- **문서명**: ${initialName}\n- **판정**: 본문 추출 불가\n\n> ⚠️ 문서에서 분석 가능한 본문을 충분히 추출하지 못했습니다(추출 ${bodyChars}자). 스캔/이미지 PDF이거나 형식 문제일 수 있습니다. 텍스트 추출 가능한 문서로 재시도하거나 OCR 설정을 확인해 주세요.`,
+          title: initialName,
+        },
+        restoredHtml,
+        stats: [
+          { num: 0, label: "영향 내규" },
+          { num: "추출 불가", label: "판정" },
+          { num: `${seconds}초`, label: "처리 시간" },
+        ],
+        meta: { fileType: doc.fileType, lowContent: true, bodyChars, warnings },
+      };
+      setCached(key, lowResult);
+      return lowResult;
+    }
+
     // 2) 관련성 게이트 ∥ analyze ∥ parse/bill (서버 읽기 전용, 병렬 — 게이트가 추가 지연 안 줌)
     const [relRes, analyzeRes, parseRes] = await Promise.allSettled([
       config.relevanceGateEnabled
