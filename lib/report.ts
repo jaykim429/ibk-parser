@@ -188,7 +188,7 @@ ${articleBlock}
 - **계층 구조**: overview_changes·ibk_view·priority_actions 의 각 항목은 문자열, 또는 내용상 상·하위가 분명할 때만 {"text":..,"children":[..]} 로 중첩(children 도 같은 형식, 최대 3단). 번호/기호(가., 1), ① 등)는 절대 직접 붙이지 말 것 — 시스템이 자동 부여한다. 억지로 중첩하지 말고 단순하면 문자열로.
 - articles 는 위 [index] 전체(0..${relevant.length - 1})를 포함.
 - comparison 은 반드시 주어진 '조문 원문'을 근거로. 원문에 기준(금액·요건)이 이미 있으면 "반영됨"으로 판단.
-- **반영 일관성**: comparison 이 "이미 반영됨"이면 recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지). 반대로 "미반영/차이"면 보완·개정 권고.
+- **반영 일관성**: 원문에 이미 반영됐거나(반영됨) 이 변경이 개정을 요구하지 않으면(개정 불요) recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지, 불요 사유 명시). "미반영/차이"면 보완·개정 권고. 영향도 낮음은 대개 '반영됨' 또는 '개정 불요'.
 - certainty 가 "미확정"이면 recommendation/priority_actions 를 단정하지 말 것(조건부).${
     input.infoOnly
       ? `\n- ★ 본 문서는 **정보성 자료(보도자료·설명자료 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.`
@@ -217,22 +217,11 @@ ${outline(changes, "- 변경 사항 식별 정보 부족")}
 ### 1.2 IBK 적용 관점
 ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
 
-  // 2.1 영향 요약(결정적: 영향도별 집계)
-  const levels: Array<["높음" | "중간" | "낮음", string]> = [
-    ["높음", "개정 필요"],
-    ["중간", "보완 검토"],
-    ["낮음", "현행 유지"],
-  ];
-  const summaryItems: string[] = levels
-    .map(([lv, note]) => {
-      const items = relevant.filter((j) => j.verdict.impact === lv);
-      if (!items.length) return "";
-      const names = items
-        .map((j) => `${shortRegName(j.regulation_name)} ${formatRegulationItemName(j)}`)
-        .join(", ");
-      return `**${lv}** (${note}) ${items.length}건: ${names}`;
-    })
-    .filter(Boolean);
+  // 영향 요약 집계(이름 나열은 아래 표와 중복이므로 카운트 한 줄로)
+  const cnt = (lv: "높음" | "중간" | "낮음") => relevant.filter((j) => j.verdict.impact === lv).length;
+  const countLine = relevant.length
+    ? `- 영향 내규 **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}`
+    : "- 영향 내규 없음";
 
   // 2.2 조치 필요 조문(높음·중간)만 원문 포함 상세 — 가독성 위해 낮음/현행유지·정보성은 제외(3.1 표로).
   const actionPairs = input.infoOnly
@@ -254,7 +243,7 @@ ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
             .split("\n")
             .map((l) => `  > ${l}`)
             .join("\n");
-          return `#### 2.3.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact}
+          return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact}
 - 가. **현재 내규 원문**${isAttachment ? "(요약)" : ""}
 ${quoted}
 - 나. **변경 비교**: ${a?.comparison || "원문과 직접 비교 정보 부족"}
@@ -263,8 +252,8 @@ ${quoted}
         })
         .join("\n\n")
     : input.infoOnly
-      ? "- 정보성 자료 — 개정·검토가 필요한 조문 없음(위 2.2 표는 동향 모니터링 대상)."
-      : "- 개정·검토(높음·중간)가 필요한 조문 없음(위 2.2 표의 현행 유지 항목 참조).";
+      ? "- 정보성 자료 — 개정·검토가 필요한 조문 없음(위 2.1 표는 동향 모니터링 대상)."
+      : "- 개정·검토(높음·중간)가 필요한 조문 없음(위 2.1 표의 현행 유지 항목 참조).";
 
   // 조치 요약표(결정적 조립) — 상세보다 먼저 오는 '한눈에 보기' 표
   const rows = relevant
@@ -282,13 +271,13 @@ ${quoted}
 ${rows}`
     : "- 영향 내규 없음";
 
-  // 2. 내규 정합성 분석 — 요약 → '조치 요약표' → 조문별 상세 순(표가 먼저)
+  // 2. 내규 정합성 분석 — 2.1 영향 요약(집계 + 조치 요약표) → 2.2 조문별 상세
   const sec2 = `## 2. 내규 정합성 분석
 ### 2.1 영향 요약
-${outline(summaryItems, "- 영향 내규 없음")}
-### 2.2 조치 요약표
+${countLine}
+
 ${summaryTable}
-### 2.3 조치 필요 조문 (높음·중간)
+### 2.2 조치 필요 조문 (높음·중간)
 ${details}`;
 
   const highItems = relevant.filter((j) => j.verdict.impact === "높음");
@@ -305,7 +294,8 @@ ${priority}`;
 
 // 개정필요성 → 반영 여부(결정적, 영향도와 일관)
 function reflectionOf(j: JudgedMatch, infoOnly = false): string {
-  // 정보성 자료(보도자료 등)는 구속력 없음 → '반영/미반영' 단정 대신 모니터링
+  // judge가 정규화한 reflection(반영됨/개정 불요/일부 반영/미반영/해당 없음/모니터링)을 우선 사용
+  if (j.verdict.reflection) return j.verdict.reflection;
   if (infoOnly) return "모니터링 대상";
   switch (j.verdict.compliance_need) {
     case "불요":

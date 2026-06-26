@@ -24,6 +24,8 @@ export type Verdict = {
   applicability_basis: BasisType | string;
   impact: ImpactLevel;
   compliance_need: ComplianceNeed | string;
+  /** 반영 여부 — 반영됨|개정 불요|일부 반영|미반영|해당 없음|모니터링 대상 */
+  reflection: string;
   ibk_specific: boolean;
   reason: string;
 };
@@ -109,6 +111,7 @@ ${candidateBlock}
     "applicability_basis": "직접적용|은행적용|금융회사적용|공공기관적용|상장회사적용|일반법인적용",
     "impact": "높음" | "중간" | "낮음" | "해당없음",
     "compliance_need": "필요" | "검토" | "불요",
+    "reflection": "반영됨" | "개정 불요" | "일부 반영" | "미반영" | "해당 없음",
     "ibk_specific": true | false,
     "reason": "IBK의 구체적 성격과 연결한 1~2문장 사유"
   }
@@ -146,6 +149,7 @@ ${candidateBlock}
           applicability_basis: v.applicability_basis ?? "금융회사적용",
           impact: normalizeImpact(v.impact, v.relevance, v.compliance_need, infoOnly),
           compliance_need: infoOnly && v.compliance_need === "필요" ? "검토" : v.compliance_need ?? "검토",
+          reflection: normalizeReflection(v.reflection, v.relevance, v.compliance_need, infoOnly),
           ibk_specific: !!v.ibk_specific,
           reason: v.reason ?? "",
         }
@@ -186,13 +190,34 @@ function normalizeImpact(
   return imp;
 }
 
+/**
+ * 반영 여부 정규화 — impact/compliance_need와 일관 강제, 5+1 케이스.
+ *  부적합→해당없음 / 정보성→모니터링 / 필요→미반영 / 검토→일부 반영
+ *  불요→ LLM이 '반영됨' 또는 '개정 불요' 선택(그 외는 개정 불요로).
+ */
+function normalizeReflection(
+  reflection: unknown,
+  relevance: unknown,
+  complianceNeed: unknown,
+  infoOnly = false
+): string {
+  if (infoOnly) return "모니터링 대상";
+  if (relevance === "부적합") return "해당 없음";
+  if (complianceNeed === "필요") return "미반영";
+  if (complianceNeed === "검토") return "일부 반영";
+  // 불요(낮음): 원문에 기준이 이미 있으면 '반영됨', 아니면 '개정 불요'
+  return reflection === "반영됨" ? "반영됨" : "개정 불요";
+}
+
 function fallbackVerdict(c: Candidate): Verdict {
   const imp = c.importance === "high" ? "높음" : c.importance === "medium" ? "중간" : "낮음";
+  const need = "검토";
   return {
     relevance: "적합",
     applicability_basis: "금융회사적용",
     impact: imp as ImpactLevel,
-    compliance_need: "검토",
+    compliance_need: need,
+    reflection: "일부 반영",
     ibk_specific: false,
     reason: "LLM 판정 미수행 — 하이브리드 검색 영향도를 사용함.",
   };
