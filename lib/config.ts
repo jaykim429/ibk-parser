@@ -90,10 +90,10 @@ export const config = {
   // ── PDF 손상 페이지 VLM 재OCR 복구 (에이전틱) ──
   //    글꼴(ToUnicode) 손상으로 텍스트층은 있으나 추출이 깨진 페이지를 렌더→VLM으로 복구.
   vlmRecoverEnabled: (env.VLM_RECOVER_ENABLED ?? "true") !== "false",
-  vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 8), // 복구 페이지 상한(비용 제한)
+  vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 20), // 복구 페이지 상한(비용 제한)
 
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v32",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v33",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──

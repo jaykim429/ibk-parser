@@ -101,11 +101,17 @@ export async function recoverLowQualityPages(args: {
   for (const page of target) {
     const png = pngs.get(page);
     if (!png) continue;
-    try {
-      const text = await args.ocr(png, page, "image/png");
-      if (text && text.trim()) out.push({ page, text: text.trim() });
-    } catch {
-      /* 페이지 OCR 실패 → skip */
+    // VLM이 간헐적으로 빈 응답을 주므로 최대 2회 시도(빈응답 재시도)
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const text = await args.ocr(png, page, "image/png");
+        if (text && text.trim()) {
+          out.push({ page, text: text.trim() });
+          break;
+        }
+      } catch {
+        /* 호출 실패 → 재시도 */
+      }
     }
   }
   return out;

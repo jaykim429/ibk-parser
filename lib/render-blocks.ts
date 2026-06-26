@@ -20,8 +20,20 @@ export type RenderOptions = {
   fragment?: boolean;
 };
 
+// HWP가 매핑 못한 사설영역(PUA) 문자 제거 — 용어 강조괄호(『』류)·드러냄표가 글리프 없는
+//  PUA(U+E000~F8FF, 평면15/16)로 들어와 브라우저에서 ≡/□로 표시됨. 코드포인트 기준 제거.
+function stripPua(s: string): string {
+  let out = "";
+  for (const ch of s) {
+    const c = ch.codePointAt(0) ?? 0;
+    if ((c >= 0xe000 && c <= 0xf8ff) || (c >= 0xf0000 && c <= 0xffffd) || (c >= 0x100000 && c <= 0x10fffd)) continue;
+    out += ch;
+  }
+  return out;
+}
+
 function esc(s: string | undefined): string {
-  return (s ?? "")
+  return stripPua(s ?? "")
     // 목차 점선 리더(··········, ……) → 단일 말줄임(복원 가독성)
     .replace(/[ \t]*[.·․‧⋯…]{3,}[ \t]*/g, " … ")
     .replace(/&/g, "&amp;")
