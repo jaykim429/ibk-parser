@@ -19,6 +19,20 @@ services:
       - "4000:4000"
     networks:
       - backend # core-ai·qdrant·opensearch 등이 있는 사내 네트워크
+    # PDF 고품질 파싱을 쓰려면 .env.docker 에 PDF_PARSER=rookie, ROOKIE_PARSER_URL=http://rookie-parser:8900
+
+  # PDF 파싱 사이드카(선택) — PDF만 위임(HWP는 앱 내 kordoc). 미사용 시 PDF_PARSER 미설정으로 둠.
+  rookie-parser:
+    build:
+      context: ./services/rookie-parser
+      dockerfile: Dockerfile
+    image: ibk-rookie-parser:latest
+    container_name: ibk-rookie-parser
+    restart: unless-stopped
+    expose:
+      - "8900"
+    networks:
+      - backend
 
 # 사내 백엔드가 떠 있는 기존 네트워크에 연결(이름은 환경에 맞게 수정).
 # 기존 compose에 병합 시 이 networks 블록은 환경의 정의를 따른다.

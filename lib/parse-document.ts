@@ -94,6 +94,20 @@ export async function parseDocument(
   buffer: Buffer,
   filename: string
 ): Promise<ParsedDoc> {
+  // PDF 라우팅: config.pdfParser==="rookie" 면 PDF만 Rookie 사이드카에 위임(HWP/HWPX는 항상 kordoc).
+  //   실패/미가동 시 kordoc 으로 폴백(무중단).
+  const isPdf =
+    /\.pdf$/i.test(filename) ||
+    (buffer.length >= 5 && buffer.subarray(0, 5).toString("latin1") === "%PDF-");
+  if (isPdf && config.pdfParser === "rookie") {
+    try {
+      const { parsePdfViaRookie } = await import("./pdf-rookie");
+      return await parsePdfViaRookie(buffer, filename);
+    } catch (e) {
+      console.warn(`[PARSE] Rookie PDF 파서 실패 → kordoc 폴백: ${(e as Error).message}`);
+    }
+  }
+
   const { parse, createVlmOcrProvider } = await loadKordoc();
 
   // 이미지 기반 PDF는 자동으로 VLM OCR로 라우팅됨 (텍스트 PDF엔 호출 안 됨)

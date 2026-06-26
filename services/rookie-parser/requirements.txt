@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+# PDF 엔진: OpenDataLoader(ODL) — bbox/표/읽기순서/한국어 OCR (Apache-2.0, Java CLI 필요)
+opendataloader-pdf>=2.0
+# ▶ CG 'rookie-parser'(Docling+ODL 라우팅)로 교체 시 아래 의존성 추가/대체:
+#   rookie-parser  (CG 내부 배포)
+#   docling, easyocr  (rookie 가 끌어옴)
