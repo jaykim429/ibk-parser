@@ -23,6 +23,7 @@ import { HybridRetriever } from "./retrieval";
 import { rerankCandidates } from "./rerank";
 import { judgeMatches } from "./judge";
 import { generateReport, buildOffDomainReport } from "./report";
+import { renderBlocksToHtml } from "./render-blocks";
 import { formatRegulationItemName } from "./regulation-format";
 import { hashBuffer, getCached, setCached } from "./cache";
 import { config } from "./config";
@@ -32,6 +33,8 @@ export type PipelineResult = {
   success: boolean;
   error?: string;
   report?: { markdown: string; title?: string };
+  /** 입력 문서 충실 복원 HTML(blocks→HTML) — UI 본문 옆 원문 대조용 */
+  restoredHtml?: string;
   stats?: Stat[];
   meta?: Record<string, unknown>;
 };
@@ -74,6 +77,11 @@ export class CompliancePipeline {
     const itemType = detectItemType(fileName, doc.markdown);
     const infoOnly = detectDocNature(fileName, doc.markdown) === "정보성";
 
+    // 입력 문서 충실 복원(blocks→HTML) — UI에서 보고서와 원문 대조용
+    const restoredHtml = doc.blocks?.length
+      ? renderBlocksToHtml(doc.blocks, { title: initialName })
+      : undefined;
+
     // 2) 관련성 게이트 ∥ analyze ∥ parse/bill (서버 읽기 전용, 병렬 — 게이트가 추가 지연 안 줌)
     const [relRes, analyzeRes, parseRes] = await Promise.allSettled([
       config.relevanceGateEnabled
@@ -97,6 +105,7 @@ export class CompliancePipeline {
       const offResult: PipelineResult = {
         success: true,
         report: { markdown: offReport, title: initialName },
+        restoredHtml,
         stats: [
           { num: 0, label: "영향 내규" },
           { num: "대상 아님", label: "판정" },
@@ -174,6 +183,7 @@ export class CompliancePipeline {
     const result: PipelineResult = {
       success: true,
       report: { markdown, title: lawName },
+      restoredHtml,
       stats,
       meta: {
         fileType: doc.fileType,

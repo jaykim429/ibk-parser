@@ -16,6 +16,7 @@ type PipelineResult = {
   success: boolean;
   error?: string;
   report?: { markdown: string; title?: string };
+  restoredHtml?: string;
   stats?: Stat[];
 };
 
@@ -586,6 +587,7 @@ function ReportDetail(props: {
   downloadReport: (format: "pdf" | "hwpx") => void;
 }) {
   const { job, downloadBusy, downloadError, downloadReport } = props;
+  const [showRestore, setShowRestore] = useState(false);
 
   if (!job) {
     return (
@@ -622,6 +624,8 @@ function ReportDetail(props: {
     );
   }
 
+  const hasRestore = !!result.restoredHtml;
+
   return (
     <div className="panel result-panel">
       <div className="result-toolbar">
@@ -651,10 +655,33 @@ function ReportDetail(props: {
             ))}
         </div>
       )}
-      <div className="report-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
-          {result.report.markdown}
-        </ReactMarkdown>
+      <div className={`report-split${showRestore ? " open" : ""}`}>
+        {hasRestore && (
+          <button
+            className="restore-tab"
+            onClick={() => setShowRestore((v) => !v)}
+            aria-pressed={showRestore}
+            title={showRestore ? "원문 닫기" : "원문 복원 보기"}
+          >
+            {showRestore ? "◀ 원문 닫기" : "원문 복원 ▶"}
+          </button>
+        )}
+        {showRestore && hasRestore && (
+          <div className="restore-pane">
+            <div className="restore-pane-head">원문 복원 (파싱 재구성)</div>
+            <iframe
+              className="restore-frame"
+              title="원문 복원"
+              sandbox=""
+              srcDoc={result.restoredHtml}
+            />
+          </div>
+        )}
+        <div className="report-pane report-body">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+            {result.report.markdown}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   );

@@ -752,6 +752,72 @@ a {
   margin-top: 3px;
 }
 
+/* ── 원문 복원 분할 뷰(좌측 탭 → 절반 펼침) ── */
+.report-split {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.report-split .report-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* 좌측 끝 작은 세로 탭 */
+.restore-tab {
+  flex: 0 0 28px;
+  align-self: stretch;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border: 1px solid var(--line);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: var(--accent, #f1f5f9);
+  color: #334155;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 12px 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.restore-tab:hover {
+  background: #e2e8f0;
+}
+/* 펼침: 좌 복원원문 / 우 보고서 50:50, 각자 내부 스크롤 */
+.report-split.open .restore-pane {
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-right: 12px;
+  overflow: hidden;
+  height: calc(100vh - 250px);
+  min-height: 360px;
+}
+.report-split.open .report-pane {
+  flex: 1 1 50%;
+  height: calc(100vh - 250px);
+  min-height: 360px;
+  overflow: auto;
+  padding-left: 2px;
+}
+.restore-pane-head {
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--line);
+}
+.restore-frame {
+  flex: 1 1 auto;
+  width: 100%;
+  border: 0;
+  background: #fff;
+}
+
 .report-body blockquote {
   margin: 8px 0;
   padding: 10px 14px;
