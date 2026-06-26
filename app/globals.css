@@ -758,6 +758,7 @@ a {
   display: flex;
   align-items: stretch;
   gap: 0;
+  padding-left: 44px; /* 좌측 거터 고정 버튼이 본문을 가리지 않도록 확보 */
 }
 .report-split .report-pane {
   flex: 1 1 auto;
@@ -766,7 +767,8 @@ a {
 /* 분석목록↔본문 사이 거터에 '화면 고정'으로 따라다니는 세로 탭(스크롤해도 유지) */
 .restore-tab {
   position: fixed; /* 뷰포트 고정 → 스크롤 추종 */
-  left: 258px; /* 분석목록(250px) + gap 경계 ≈ 거터 (레이아웃 변경 시 조정) */
+  /* 분석목록(250px) 오른쪽 거터에 배치 + 1760 중앙정렬 레이아웃 추종(사이드바 박스와 겹침 방지) */
+  left: calc(max(0px, (100vw - 1760px) / 2) + 278px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 50;

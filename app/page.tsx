@@ -144,8 +144,8 @@ export default function Home() {
       await new Promise((r) => setTimeout(r, 0));
       if (pending.length === 0) return;
 
-      // 진행 상황이 보이도록 첫 항목을 자동 선택(선택이 없을 때만).
-      setSelectedId((cur) => cur ?? pending[0].id);
+      // 진행 상황(ProcessingView)이 바로 보이도록 첫 처리 항목을 강제 선택.
+      setSelectedId(pending[0].id);
 
       // 동시 실행 수 제한 워커 풀
       let cursor = 0;

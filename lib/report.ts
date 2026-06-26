@@ -254,7 +254,7 @@ ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
             .split("\n")
             .map((l) => `  > ${l}`)
             .join("\n");
-          return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact}
+          return `#### 2.3.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact}
 - 가. **현재 내규 원문**${isAttachment ? "(요약)" : ""}
 ${quoted}
 - 나. **변경 비교**: ${a?.comparison || "원문과 직접 비교 정보 부족"}
@@ -263,35 +263,41 @@ ${quoted}
         })
         .join("\n\n")
     : input.infoOnly
-      ? "- 정보성 자료 — 개정·검토가 필요한 조문 없음(아래 3.1 표는 동향 모니터링 대상)."
-      : "- 개정·검토(높음·중간)가 필요한 조문 없음(아래 3.1 표의 현행 유지 항목 참조).";
+      ? "- 정보성 자료 — 개정·검토가 필요한 조문 없음(위 2.2 표는 동향 모니터링 대상)."
+      : "- 개정·검토(높음·중간)가 필요한 조문 없음(위 2.2 표의 현행 유지 항목 참조).";
 
-  const sec2 = `## 2. 내규 정합성 분석
-### 2.1 영향 요약
-${outline(summaryItems, "- 영향 내규 없음")}
-### 2.2 조치 필요 조문 (높음·중간)
-${details}`;
-
-  // 3. 조치 요약 및 권고(표 결정적 조립)
+  // 조치 요약표(결정적 조립) — 상세보다 먼저 오는 '한눈에 보기' 표
   const rows = relevant
     .map((j, i) => {
       const a = byIndex.get(i);
-      const rec = (a?.recommendation || "추가 검토").replace(/\s+/g, " ").replace(/\|/g, "／").slice(0, 60);
+      const recFull = (a?.recommendation || "추가 검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
+      // 표 셀은 word-break:keep-all로 깔끔히 줄바꿈됨 → 과한 절단 대신 넉넉히, 초과 시에만 말줄임
+      const rec = recFull.length > 160 ? recFull.slice(0, 159) + "…" : recFull;
       return `| ${i + 1} | ${shortRegName(j.regulation_name)} | ${formatRegulationItemName(j)} | ${j.verdict.impact} | ${reflectionOf(j, input.infoOnly)} | ${rec} |`;
     })
     .join("\n");
+  const summaryTable = relevant.length
+    ? `| 순번 | 내규명 | 조문명 | 영향도 | 반영 여부 | 권고 조치 |
+| --- | --- | --- | --- | --- | --- |
+${rows}`
+    : "- 영향 내규 없음";
+
+  // 2. 내규 정합성 분석 — 요약 → '조치 요약표' → 조문별 상세 순(표가 먼저)
+  const sec2 = `## 2. 내규 정합성 분석
+### 2.1 영향 요약
+${outline(summaryItems, "- 영향 내규 없음")}
+### 2.2 조치 요약표
+${summaryTable}
+### 2.3 조치 필요 조문 (높음·중간)
+${details}`;
+
   const highItems = relevant.filter((j) => j.verdict.impact === "높음");
   const priority = input.infoOnly
     ? "- 해당 없음 (정보성 자료 — 동향 모니터링 대상)"
     : highItems.length === 0
       ? "- 해당 없음 (영향도 '높음' 항목 없음)"
       : outline((llm.priority_actions ?? []).filter(Boolean), "- 영향도 '높음' 항목 우선 조치 검토");
-  const sec3 = `## 3. 조치 요약 및 권고
-### 3.1 조치 요약표
-| 순번 | 내규명 | 조문명 | 영향도 | 반영 여부 | 권고 조치 |
-| --- | --- | --- | --- | --- | --- |
-${rows}
-### 3.2 우선 조치
+  const sec3 = `## 3. 우선 조치
 ${priority}`;
 
   return [sec1, sec2, sec3].join("\n\n");
