@@ -11,8 +11,8 @@
  */
 import { callCompletion, extractJson } from "./llm";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
-import type { Analysis, ItemType } from "./server";
-import type { JudgedMatch } from "./judge";
+import { cleanLawName, type Analysis, type ItemType } from "./server";
+import type { JudgedMatch, CoverageGap } from "./judge";
 
 const REPORT_SYSTEM = `당신은 IBK기업은행 준법지원부의 컴플라이언스 보고서 작성 전문가입니다.
 규제변동(법률안/입법예고/시행령/고시/보도자료 등)이 IBK 사내규정에 미치는 영향을 분석합니다.
@@ -35,6 +35,8 @@ export type ReportInput = {
   fileName: string;
   candidateCount: number;
   infoOnly?: boolean;
+  /** 권고2: 요건 커버리지 갭(대응 내규 부재·부분충족). 부재=높음으로 집계. */
+  coverageGaps?: CoverageGap[];
 };
 
 /**
@@ -79,6 +81,7 @@ ${outline(
 const DOC_TYPE_LABEL: Record<string, string> = {
   bill: "법률안",
   policy: "입법예고/시행령 등",
+  guideline: "가이드라인/모범규준(자율규제)",
 };
 
 type ArticleAnalysis = {
@@ -99,10 +102,13 @@ type LlmReport = {
 
 export async function generateReport(input: ReportInput): Promise<string> {
   const relevant = input.judged.filter((j) => j.verdict.relevance === "적합");
+  const gapCount = (input.coverageGaps ?? []).filter((g) => g && g.requirement).length;
   const header = buildHeader(input, relevant.length);
   const section4 = buildAnalysisBasis(input, relevant.length);
 
-  if (relevant.length === 0) {
+  // 적합 내규도 없고 커버리지 갭도 없을 때만 '영향 없음' 단락. 갭이 있으면(가이드라인 신규요건 등)
+  // 적합 0건이어도 갭 섹션을 보여줘야 한다(과소커버리지 방지).
+  if (relevant.length === 0 && gapCount === 0) {
     return [header, noMatchBody(input), section4].join("\n\n");
   }
 
@@ -127,7 +133,7 @@ export async function generateReport(input: ReportInput): Promise<string> {
 function buildHeader(input: ReportInput, relevantCount: number): string {
   const date = formatKstDate();
   const domain = input.analysis?.law_domain || "-";
-  const lawName = input.analysis?.law_name || input.lawName;
+  const lawName = cleanLawName(input.analysis?.law_name || input.lawName);
   const docTypeLabel = input.infoOnly
     ? "보도자료 등 정보성 자료"
     : DOC_TYPE_LABEL[input.itemType] ?? input.itemType;
@@ -208,19 +214,29 @@ function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmRepor
   const ibkView = (llm.ibk_view ?? []).filter(Boolean);
   const stageNote = input.infoOnly
     ? `\n> 정보성 자료(보도자료·설명자료 등) — 규범적 개정 사항 아님. 관련 내규는 **동향 모니터링** 관점으로 정리(개정 단정 아님).`
-    : llm.certainty === "미확정"
-      ? `\n> ${llm.doc_stage || "확정 전"} 단계 문서 — 권고는 입법·개정 확정 시 재검토 전제(조건부).`
-      : "";
+    : input.itemType === "guideline"
+      ? `\n> 자율규제(가이드라인·모범규준) — 이미 공표·적용 중인 연성규범. '입법 확정'을 기다리는 단계가 아니라 **즉시 내규 정합성 점검 대상**(자율 준수). 미충족 영역은 신규·보완 내규로 선제 대응 권장.`
+      : llm.certainty === "미확정"
+        ? `\n> ${llm.doc_stage || "확정 전"} 단계 문서 — 권고는 입법·개정 확정 시 재검토 전제(조건부).`
+        : "";
   const sec1 = `## 1. 규제변동 개요
 ### 1.1 주요 변경 사항
 ${outline(changes, "- 변경 사항 식별 정보 부족")}
 ### 1.2 IBK 적용 관점
 ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
 
-  // 영향 요약 집계(이름 나열은 아래 표와 중복이므로 카운트 한 줄로)
+  // 커버리지 갭(권고2) — 부재=신규 내규 필요(높음), 부분=보완(중간)
+  const gaps = (input.coverageGaps ?? []).filter((g) => g && g.requirement);
+  const absentGaps = gaps.filter((g) => g.coverage === "부재");
+  const partialGaps = gaps.filter((g) => g.coverage === "부분");
+
+  // 영향 요약 집계(이름 나열은 아래 표와 중복이므로 카운트 한 줄로). 갭은 '내규 부재'라 별도 표기.
   const cnt = (lv: "높음" | "중간" | "낮음") => relevant.filter((j) => j.verdict.impact === lv).length;
-  const countLine = relevant.length
-    ? `- 영향 내규 **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}`
+  const gapNote = gaps.length
+    ? ` / 커버리지 갭 **${gaps.length}건**(부재 ${absentGaps.length}·부분 ${partialGaps.length})`
+    : "";
+  const countLine = relevant.length || gaps.length
+    ? `- 영향 내규 **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}${gapNote}`
     : "- 영향 내규 없음";
 
   // 2.2 조치 필요 조문(높음·중간)만 원문 포함 상세 — 가독성 위해 낮음/현행유지·정보성은 제외(3.1 표로).
@@ -271,21 +287,50 @@ ${quoted}
 ${rows}`
     : "- 영향 내규 없음";
 
-  // 2. 내규 정합성 분석 — 2.1 영향 요약(집계 + 조치 요약표) → 2.2 조문별 상세
-  const sec2 = `## 2. 내규 정합성 분석
+  // 2.3 커버리지 갭 — 원천문서 요구 의무 중 대응 내규 부재·부분충족(1:1 조문 매칭으로는 안 잡히는 누락)
+  const gapRows = gaps
+    .map((g, i) => {
+      const rec = (g.recommendation || "신규·보완 검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
+      const ev = (g.evidence || (g.coverage === "부재" ? "대응 내규 미확인" : "")).replace(/\|/g, "／").trim();
+      return `| ${i + 1} | ${g.requirement.replace(/\|/g, "／")} | ${g.coverage} | ${g.impact} | ${ev} | ${rec.length > 160 ? rec.slice(0, 159) + "…" : rec} |`;
+    })
+    .join("\n");
+  const sec23 = gaps.length
+    ? `### 2.3 커버리지 갭 (요구 의무 대비 대응 내규 부재·미흡)
+> 원천문서가 요구하는 의무 중 IBK 내규로 **충족되지 않은(부재)** 또는 **일부만 충족된(부분)** 항목. 조문 1:1 매칭으로는 드러나지 않는 누락으로, **부재 = 신규 내규 수립 필요(높음)**.
+
+| 순번 | 요구 의무 | 충족도 | 영향도 | 근거/비고 | 권고 조치 |
+| --- | --- | --- | --- | --- | --- |
+${gapRows}`
+    : "";
+
+  // 2. 내규 정합성 분석 — 2.1 영향 요약(집계 + 조치 요약표) → 2.2 조문별 상세 → 2.3 커버리지 갭
+  const sec2 = [
+    `## 2. 내규 정합성 분석
 ### 2.1 영향 요약
 ${countLine}
 
 ${summaryTable}
 ### 2.2 조치 필요 조문 (높음·중간)
-${details}`;
+${details}`,
+    sec23,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 
   const highItems = relevant.filter((j) => j.verdict.impact === "높음");
+  const llmPriority = (llm.priority_actions ?? []).filter(Boolean);
+  // 우선조치: LLM이 뽑은 높음 항목 + 커버리지 부재 갭(신규 내규 필요)을 합산
+  const gapPriority: OutlineItem[] = absentGaps.map((g) => ({
+    text: `${g.requirement} — 대응 내규 부재, 신규 수립 필요`,
+    children: g.recommendation ? [g.recommendation] : [],
+  }));
+  const priorityItems = [...llmPriority, ...gapPriority];
   const priority = input.infoOnly
     ? "- 해당 없음 (정보성 자료 — 동향 모니터링 대상)"
-    : highItems.length === 0
+    : highItems.length === 0 && absentGaps.length === 0
       ? "- 해당 없음 (영향도 '높음' 항목 없음)"
-      : outline((llm.priority_actions ?? []).filter(Boolean), "- 영향도 '높음' 항목 우선 조치 검토");
+      : outline(priorityItems, "- 영향도 '높음' 항목 우선 조치 검토");
   const sec3 = `## 3. 우선 조치
 ${priority}`;
 

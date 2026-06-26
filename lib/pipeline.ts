@@ -17,11 +17,15 @@ import {
   detectDocNature,
   buildCanonicalQuery,
   buildSubQueries,
+  extractObligations,
+  buildObligationQueries,
+  cleanLawName,
   type Analysis,
+  type ObligationExtract,
 } from "./server";
 import { HybridRetriever } from "./retrieval";
 import { rerankCandidates } from "./rerank";
-import { judgeMatches } from "./judge";
+import { judgeMatches, assessCoverage } from "./judge";
 import { generateReport, buildOffDomainReport } from "./report";
 import { renderBlocksToHtml } from "./render-blocks";
 import { extractAmendmentPairs } from "./amendment-table";
@@ -70,11 +74,14 @@ export class CompliancePipeline {
     const doc = await parseDocument(buffer, fileName);
     warnings.push(...doc.warnings);
     if (doc.markdown.length > config.maxAnalyzeChars) {
-      const msg = `본문 ${doc.markdown.length}자 중 ${config.maxAnalyzeChars}자까지만 분석(이후 ${doc.markdown.length - config.maxAnalyzeChars}자 절단)`;
+      // analyze 단계는 head+tail 표본화(앞 70%+뒤 30%)로 분석한다. 단 변경점 추출(P1 신구조문대비표)은
+      // 전체 blocks에서 별도 수행되므로 후반 변경 조문도 매칭에는 반영됨.
+      const msg = `본문 ${doc.markdown.length}자 → 분석은 ${config.maxAnalyzeChars}자 표본(앞 70%+뒤 30%, 중간 ${doc.markdown.length - config.maxAnalyzeChars}자 요약 생략). 변경점·복원은 전체 본문 사용`;
       warnings.push(msg);
       console.warn(`[PIPELINE] 절단 경고: ${fileName} — ${msg}`);
     }
-    const initialName = doc.title || fileName.replace(/\.[^.]+$/, "");
+    // 표시·검색용 문서명 정제(앞 일련번호/[공고·별첨] 표기/사본(n)/확장자 제거) — 파싱 아티팩트 차단
+    const initialName = cleanLawName(doc.title || fileName.replace(/\.[^.]+$/, ""));
     const itemType = detectItemType(fileName, doc.markdown);
     const infoOnly = detectDocNature(fileName, doc.markdown) === "정보성";
 
@@ -107,8 +114,8 @@ export class CompliancePipeline {
       return lowResult;
     }
 
-    // 2) 관련성 게이트 ∥ analyze ∥ parse/bill (서버 읽기 전용, 병렬 — 게이트가 추가 지연 안 줌)
-    const [relRes, analyzeRes, parseRes] = await Promise.allSettled([
+    // 2) 관련성 게이트 ∥ analyze ∥ parse/bill ∥ 의무추출 (서버 읽기 전용, 병렬 — 추가 지연 최소)
+    const [relRes, analyzeRes, parseRes, oblRes] = await Promise.allSettled([
       config.relevanceGateEnabled
         ? assessRelevance({ title: initialName, documentText: doc.markdown })
         : Promise.resolve({ relevant: true, domain: "", reason: "게이트 비활성" }),
@@ -119,6 +126,8 @@ export class CompliancePipeline {
         billText: doc.markdown,
         isPolicy: itemType === "policy",
       }),
+      // 의무·권고 추출(린치핀): 의무별 멀티쿼리 + 커버리지 갭 산출의 입력
+      extractObligations({ lawName: initialName, documentText: doc.markdown, itemType }),
     ]);
 
     // 무관 문서면 매칭을 생략하고 '분석 대상 아님' 보고서로 단락(오탐 방지)
@@ -151,21 +160,25 @@ export class CompliancePipeline {
     const analysis: Analysis | undefined =
       analyzeRes.status === "fulfilled" ? analyzeRes.value : undefined;
     const provisions = parseRes.status === "fulfilled" ? parseRes.value.provisions ?? [] : [];
+    const obl: ObligationExtract =
+      oblRes.status === "fulfilled" ? oblRes.value : { requiresFramework: false, obligations: [] };
     const lawName = analysis?.law_name || initialName;
 
-    // 3) 입력 문서 청킹 → 멀티쿼리 하이브리드 검색(변경 단위별 쿼리 융합)
+    // 3) 입력 문서 청킹 → 멀티쿼리 하이브리드 검색(변경 단위별 + 의무별 쿼리 융합)
     const query = buildCanonicalQuery(analysis, provisions, doc.markdown);
     const subQueries = buildSubQueries(analysis, provisions);
+    // 의무 기반 멀티쿼리 — 가이드라인처럼 '개정 조문'이 없는 문서도 요건별로 내규를 정밀 검색
+    const oblQueries = buildObligationQueries(obl.obligations, lawName);
     // P1: 신구조문대비표(현행|개정안)에서 '개정안' 조문을 정밀 매칭 쿼리로 추가
     const amendPairs = extractAmendmentPairs(doc.blocks);
     const amendQueries = amendPairs
       .filter((p) => p.after.length >= 8)
       .slice(0, config.subQueryMax)
       .map((p) => `${lawName} ${p.after}`.replace(/\s+/g, " ").slice(0, 280));
-    const queries = [query, ...subQueries, ...amendQueries];
+    const queries = [query, ...subQueries, ...oblQueries, ...amendQueries];
     console.log(`\n[PIPELINE] file=${fileName}`);
     console.log(
-      `[PIPELINE] itemType=${itemType}, infoOnly=${infoOnly}, lawName=${lawName}, provisions=${provisions.length}, analysisOk=${!!analysis?.success}, subQueries=${subQueries.length}, amendPairs=${amendPairs.length}`
+      `[PIPELINE] itemType=${itemType}, infoOnly=${infoOnly}, lawName=${lawName}, provisions=${provisions.length}, analysisOk=${!!analysis?.success}, subQueries=${subQueries.length}, obligations=${obl.obligations.length}(framework=${obl.requiresFramework}), oblQueries=${oblQueries.length}, amendPairs=${amendPairs.length}`
     );
     console.log(`[PIPELINE] canonicalQuery= ${query.slice(0, 300)}`);
 
@@ -189,6 +202,20 @@ export class CompliancePipeline {
     const judged = await judgeMatches({ lawName, itemType, analysis, candidates: reranked, infoOnly });
     const relevant = judged.filter((j) => j.verdict.relevance === "적합");
 
+    // 4.5) 요건 커버리지 갭(권고2) — 의무별 대응 내규 부재(높음)/부분(중간) 산출
+    const coverageGaps = await assessCoverage({
+      lawName,
+      obligations: obl.obligations,
+      requiresFramework: obl.requiresFramework,
+      judged,
+      infoOnly,
+    });
+    const absentGaps = coverageGaps.filter((g) => g.coverage === "부재");
+    const partialGaps = coverageGaps.filter((g) => g.coverage === "부분");
+    if (coverageGaps.length) {
+      console.log(`[PIPELINE] 커버리지 갭=${coverageGaps.length} (부재 ${absentGaps.length}·부분 ${partialGaps.length})`);
+    }
+
     // 5) 보고서 생성 (stateless LLM)
     const markdown = await generateReport({
       lawName,
@@ -198,14 +225,18 @@ export class CompliancePipeline {
       fileName,
       candidateCount: judged.length,
       infoOnly,
+      coverageGaps,
     });
 
     const seconds = Math.round((Date.now() - t0) / 1000);
     const countBy = (lv: string) => relevant.filter((j) => j.verdict.impact === lv).length;
+    // 헤드라인 영향도: 조문 매칭 + 커버리지 갭(부재=높음, 부분=중간) 합산 — 과소커버리지 방지
+    const highTotal = countBy("높음") + absentGaps.length;
+    const midTotal = countBy("중간") + partialGaps.length;
     const stats: Stat[] = [
-      { num: relevant.length, label: "영향 내규" },
-      { num: countBy("높음"), label: "영향도 높음" },
-      { num: countBy("중간"), label: "영향도 중간" },
+      { num: relevant.length + absentGaps.length, label: "영향 내규" },
+      { num: highTotal, label: "영향도 높음" },
+      { num: midTotal, label: "영향도 중간" },
       { num: countBy("낮음"), label: "영향도 낮음" },
       { num: judged.length, label: "검토 후보" },
       { num: `${seconds}초`, label: "처리 시간" },
@@ -226,6 +257,9 @@ export class CompliancePipeline {
         lawDomain: analysis?.law_domain ?? null,
         candidateCount: candidates.length,
         relevantCount: relevant.length,
+        requiresFramework: obl.requiresFramework,
+        obligationCount: obl.obligations.length,
+        coverageGaps,
         judged: judged.map((j) => ({
           regulation_name: j.regulation_name,
           jo: j.jo,

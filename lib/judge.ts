@@ -17,7 +17,7 @@ import {
 } from "./ibk-profile";
 import { formatRegulationItemName, inferRegulationKind, makeContentExcerpt } from "./regulation-format";
 import { config } from "./config";
-import type { Analysis, Candidate, ItemType } from "./server";
+import type { Analysis, Candidate, ItemType, Obligation } from "./server";
 
 export type Verdict = {
   relevance: "적합" | "부적합";
@@ -38,6 +38,15 @@ const IMPACT_RANK: Record<string, number> = {
   낮음: 2,
   해당없음: 3,
 };
+
+/**
+ * 저변별 '목적/총칙/통칙' 조항 식별 — 어떤 입력에도 걸리는 변별력 0 조항.
+ * 조문명(jo_title)이 목적/총칙/통칙인 경우만(정의·적용범위는 실질일 수 있어 제외).
+ */
+function isLowDiscriminationClause(c: Candidate): boolean {
+  const t = `${c.jo_title ?? ""} ${c.jo ?? ""}`.replace(/\s+/g, "");
+  return /(^|[(（])(목적|총칙|통칙)([)）]|$)/.test(t) || /^목적$|^총칙$|^통칙$/.test((c.jo_title ?? "").trim());
+}
 
 /** 같은 조문(또는 같은 부칙)이 여러 청크로 중복 검색되는 것을 제거 */
 function dedupeCandidates(candidates: Candidate[]): Candidate[] {
@@ -154,6 +163,20 @@ ${candidateBlock}
           reason: v.reason ?? "",
         }
       : fallbackVerdict(c);
+    // 결정적 백스톱: '목적/총칙' 저변별 조항이 현행유지(낮음)로 적합 처리되면 노이즈 → 부적합 강등.
+    //   (이번 변경이 그 조항을 직접 바꾼다면 LLM이 '필요/중간↑'로 줄 것이므로 낮음일 때만 강등)
+    if (
+      verdict.relevance === "적합" &&
+      verdict.impact === "낮음" &&
+      isLowDiscriminationClause(c)
+    ) {
+      verdict.relevance = "부적합";
+      verdict.impact = "해당없음";
+      verdict.reflection = "해당 없음";
+      if (!/저변별|목적|총칙/.test(verdict.reason)) {
+        verdict.reason = `목적·총칙류 저변별 조항으로, 이번 변경이 해당 조항 자체를 바꾸지 않아 직접 정합성 영향 없음. ${verdict.reason}`.trim();
+      }
+    }
     return { ...c, verdict };
   });
 
@@ -223,9 +246,15 @@ function fallbackVerdict(c: Candidate): Verdict {
   };
 }
 
+const ITEM_TYPE_LABEL: Record<ItemType, string> = {
+  policy: "입법예고/시행령 등",
+  bill: "법률안",
+  guideline: "가이드라인/모범규준(자율규제)",
+};
+
 function buildChangeSummary(lawName: string, itemType: ItemType, a?: Analysis): string {
   const lines = [
-    `- 문서유형: ${itemType === "policy" ? "입법예고/시행령 등" : "법률안"}`,
+    `- 문서유형: ${ITEM_TYPE_LABEL[itemType] ?? itemType}`,
     `- 법령명: ${a?.law_name || lawName}`,
   ];
   if (a?.law_domain) lines.push(`- 분야: ${a.law_domain}`);
@@ -239,4 +268,101 @@ function buildChangeSummary(lawName: string, itemType: ItemType, a?: Analysis): 
     lines.push(`- 주요 변경: ${ov}`);
   }
   return lines.join("\n");
+}
+
+// ── 요건 커버리지 분석 (권고2: '대응 내규 부재 = 높음' 신호) ──────────
+/**
+ * 커버리지 갭 — 원천문서가 요구하는 의무 중, IBK 내규로 충족되지 않는(부재) 또는
+ * 일부만 충족되는(부분) 항목. 1:1 조문 매칭만으로는 '없는 내규'가 보이지 않으므로 별도 산출.
+ */
+export type CoverageGap = {
+  area: string;
+  requirement: string;
+  coverage: "부재" | "부분";
+  evidence: string; // 부분충족 시 근거 내규, 부재면 "대응 내규 미확인"
+  impact: "높음" | "중간";
+  recommendation: string;
+};
+
+/**
+ * 의무 목록 × 검색·판정된 내규 → 충족/부분/부재 평가.
+ *  - requiresFramework(내규 체계 신설을 요구하는 원천문서)일 때만 갭을 영향도로 승격한다.
+ *    (단순 일부개정에서 '부재'를 높음으로 올리면 과대신호 → 보수적으로 게이트)
+ *  - 하드코딩 없음: 의무는 문서에서 추출된 것, 충족 판단은 제공된 내규 원문 근거로 LLM이 수행.
+ */
+export async function assessCoverage(args: {
+  lawName: string;
+  obligations: Obligation[];
+  requiresFramework: boolean;
+  judged: JudgedMatch[];
+  infoOnly?: boolean;
+}): Promise<CoverageGap[]> {
+  const obligations = args.obligations ?? [];
+  // 정보성 자료이거나 프레임워크 요구가 아니거나 의무가 없으면 갭 산출 안 함
+  if (args.infoOnly || !args.requiresFramework || obligations.length === 0) return [];
+
+  // IBK가 '보유한' 관련 내규 컨텍스트 — 적합 후보 우선(원문 발췌), 그 외는 이름만.
+  const fit = args.judged.filter((j) => j.verdict.relevance === "적합");
+  const fitBlock = fit
+    .slice(0, 24)
+    .map((j) => {
+      const itemName = formatRegulationItemName(j);
+      const content = makeContentExcerpt(j.regulation_content, 400);
+      return `- ${j.regulation_name} ${itemName}: ${content}`;
+    })
+    .join("\n");
+  const otherNames = Array.from(
+    new Set(args.judged.filter((j) => j.verdict.relevance !== "적합").map((j) => j.regulation_name))
+  ).slice(0, 30);
+
+  const oblBlock = obligations
+    .map((o, i) => `[${i}] (${o.kind}) ${o.title} — ${o.summary}`)
+    .join("\n");
+
+  const SYSTEM = `당신은 IBK기업은행 준법지원부의 내규 커버리지 분석가다. 원천문서가 요구하는 '의무 항목'마다, IBK가 보유한 내규로 그 의무가 충족되는지 평가한다.
+${IBK_PROFILE}
+
+판단 원칙:
+- 각 의무에 대해: 제공된 IBK 내규(원문 발췌)가 그 의무를 **실질적으로 충족**하면 "충족"(갭 아님), 일부만 다루면 "부분", 대응 내규가 보이지 않으면 "부재".
+- ⚠️ **선언적 상위규범(윤리원칙·기본방침 등)의 존재만으로 '충족'으로 보지 말 것.** 의무가 '위험관리규정 수립/위험평가체계/인적개입(HITL)·긴급정지 절차/보안통제/위탁관리/이해상충 통제' 같은 **구체적 체계·절차**를 요구하면, 그에 대응하는 구체 내규가 있어야 충족이다. 윤리원칙은 최상위 선언일 뿐 위험관리규정·통제절차와 층위가 다르다.
+- 표면 주제어만 겹치는 내규(목적·총칙 조항, 직교 영역 규정)는 충족 근거가 아니다.
+- 충족 항목은 출력하지 말 것. **부분·부재만** 출력한다.
+- 부재 = 신규 내규 수립 필요(높음), 부분 = 보완 필요(중간).
+JSON만 출력: {"gaps":[{"index":0,"coverage":"부재"|"부분","evidence":"부분이면 근거 내규명/조문, 부재면 '대응 내규 미확인'","recommendation":"신설/보완 권고 한 줄(개조식)"}]}`;
+
+  const prompt = `## 원천문서: ${args.lawName}
+## 요구 의무 항목
+${oblBlock}
+
+## IBK 보유 관련 내규(적합 후보 원문 발췌)
+${fitBlock || "- (적합으로 판정된 내규 없음)"}
+
+## 기타 검색된 내규명(원문 미첨부 — 참고)
+${otherNames.length ? otherNames.join(", ") : "- 없음"}
+
+## 지시
+각 의무 [index]가 위 IBK 내규로 충족되는지 평가하고, **부분·부재만** JSON으로 출력하라.`;
+
+  try {
+    const raw = await callCompletion({ systemPrompt: SYSTEM, prompt, maxTokens: 2600, temperature: 0.1, jsonMode: false });
+    const v = extractJson<{ gaps?: { index?: number; coverage?: string; evidence?: string; recommendation?: string }[] }>(raw);
+    const gaps = Array.isArray(v.gaps) ? v.gaps : [];
+    return gaps
+      .map((g) => {
+        const o = typeof g.index === "number" ? obligations[g.index] : undefined;
+        if (!o) return null;
+        const isAbsent = g.coverage !== "부분";
+        return {
+          area: o.key || o.title,
+          requirement: o.title,
+          coverage: isAbsent ? "부재" : "부분",
+          evidence: String(g.evidence ?? (isAbsent ? "대응 내규 미확인" : "")).trim(),
+          impact: isAbsent ? "높음" : "중간",
+          recommendation: String(g.recommendation ?? (isAbsent ? `${o.title} 관련 내규 신설 검토` : `${o.title} 관련 내규 보완 검토`)).trim(),
+        } as CoverageGap;
+      })
+      .filter((g): g is CoverageGap => g !== null);
+  } catch {
+    return [];
+  }
 }

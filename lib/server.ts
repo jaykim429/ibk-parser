@@ -30,7 +30,7 @@ async function post<T>(path: string, body: unknown): Promise<T> {
 }
 
 // ── 타입 ──────────────────────────────────────────────
-export type ItemType = "bill" | "policy";
+export type ItemType = "bill" | "policy" | "guideline";
 
 export type Analysis = {
   success: boolean;
@@ -314,10 +314,16 @@ export function buildCanonicalQuery(
   return q.slice(0, 800);
 }
 
-/** 파일명/본문으로 입법예고·시행령·고시·규정 등(policy) vs 법률안(bill) 판별 */
+/** 파일명/본문으로 가이드라인(자율규제) · 입법예고·시행령·고시·규정 등(policy) · 법률안(bill) 판별 */
 export function detectItemType(filename: string, text: string): ItemType {
   // 파일명에 명시적 법률안/의안 신호가 있으면 우선 bill
   if (/(법률안|법안|의안|개정법률안)/.test(filename)) return "bill";
+  // 가이드라인·모범규준·자율규제 등 '연성규범' — 이미 공표된 자율적용 문서.
+  //   법률안/시행령처럼 '확정 전' 단계가 아니라 즉시 정합성 점검 대상. 파일명·머리말로 판별.
+  const guideHay = filename + " " + text.slice(0, 1500);
+  if (/(가이드라인|가이드\s*북|모범규준|모범기준|모범사례|best\s*practice|자율규제|행동규범|행동강령\s*표준|운영기준\s*가이드|업무\s*가이드|실무\s*지침서|권고안)/i.test(guideHay)) {
+    return "guideline";
+  }
   // 규정/고시/지침류가 '파일명(=문서 자체 유형)'에 오면 policy.
   //   (본문 언급은 흔해 제외하되, 파일명은 문서 정체성이라 오탐 적음 → 규정·고시 샘플 정확 라우팅)
   if (/(규정|고시|지침|예규|훈령|준칙|세칙|요령)/.test(filename)) return "policy";
@@ -327,6 +333,113 @@ export function detectItemType(filename: string, text: string): ItemType {
     return "policy";
   }
   return "bill";
+}
+
+/**
+ * 소관 법령명 정리 — analyze가 법령명 추출에 실패해 '파일명'으로 폴백한 경우의 노이즈 제거.
+ * 앞쪽 날짜/문서번호, [별첨n-n] 같은 첨부 표기, 끝의 (n)/_vF/확장자류, 공고번호 잔재를 떼어
+ * 사람이 읽는 문서명에 가깝게 만든다. (특정 파일 하드코딩 아님 — 일반 패턴만 제거)
+ */
+export function cleanLawName(raw: string): string {
+  const orig = (raw || "").trim();
+  let s = orig;
+  s = s.replace(/\.(hwpx?|pdf|docx?|txt)$/i, ""); // 확장자
+  s = s.replace(/^\s*\d+(-\d+)?\s*[.)]\s*/, ""); // 앞 일련번호(예: "1. ", "2-1. ")
+  s = s.replace(/^\s*\d{6,8}[._\-\s]*(?=[\[(［(가-힣A-Za-z])/, ""); // 앞 날짜/문서번호(260618_, 250313 , 260618[)
+  // 앞쪽의 첨부/공고 표기 [별첨…] [금융위 공고…] [공고문(…호)] 등을 반복 제거(문서번호성 괄호 묶음)
+  for (let i = 0; i < 3; i++) {
+    const next = s.replace(/^\s*[\[(［(][^\])］)]*(별첨|공고|고시|호\)|제\d|회신|공문)[^\])］)]*[\])］)]\s*/, "");
+    if (next === s) break;
+    s = next;
+  }
+  s = s.replace(/\[[^\]]*별첨[^\]]*\]\s*/g, ""); // 본문 중간 [별첨2-2]
+  // 괄호가 짝이 안 맞아 남은 선행 닫힘기호/구두점 정리(예: "] 금융감독원…")
+  s = s.replace(/^[\s\]\)）］>·\-–—:]+/, "");
+  s = s.replace(/[_\s]*v?F\b/gi, ""); // _vF / _F 버전 꼬리
+  s = s.replace(/\s*[\(（]\s*\d+\s*[\)）]\s*$/, ""); // 끝의 (1) (2) 사본 표기
+  s = s.replace(/\s{2,}/g, " ").trim();
+  return s || orig;
+}
+
+export type Obligation = {
+  /** 짧은 식별 키(영역 라벨) */
+  key: string;
+  /** 의무·권고 한 줄 제목 */
+  title: string;
+  /** 무엇을 요구하는지 1~2문장 */
+  summary: string;
+  /** 의무 성격 */
+  kind: string; // 신규수립의무|기존강화|절차통제|조직기구|소비자보호|보안|위탁관리|기타
+};
+
+export type ObligationExtract = {
+  /** 이 문서가 '내규 체계 신설/신규 의무'를 요구하는 원천문서인가 */
+  requiresFramework: boolean;
+  obligations: Obligation[];
+};
+
+/**
+ * 원천문서(특히 가이드라인·모범규준·기본법)가 부과하는 **의무·권고 사항**을 추출한다.
+ *
+ * 왜: 가이드라인류는 '신구조문대비표/개정 조문'이 없어 기존 청킹(provision_changes 기반)으로는
+ *    변경단위가 거의 안 잡힌다. 대신 본문이 요구하는 의무·통제·조직·절차를 항목화해야
+ *    (1) 그 항목별로 내규를 정밀 검색하고(멀티쿼리), (2) 대응 내규 부재(갭)를 산출할 수 있다.
+ * 하드코딩 없음 — 7대 원칙 같은 특정 체크리스트를 박지 않고 LLM이 문서에서 직접 추출.
+ */
+export async function extractObligations(args: {
+  lawName: string;
+  documentText: string;
+  itemType: ItemType;
+}): Promise<ObligationExtract> {
+  const SYSTEM = `당신은 IBK기업은행 준법지원부의 규제 분석가다. 주어진 원천문서(법령안·시행령·고시·가이드라인·모범규준 등)가 **수범기관에 부과하는 의무·권고 사항**을 항목화한다.
+목표: 이 문서가 요구하는 "해야 할 일"의 목록. 각 항목은 그 자체로 내규 정합성 점검의 단위가 된다.
+원칙:
+- 본문이 실제로 요구하는 의무·통제·절차·조직·문서(규정/지침) 수립을 **구체적으로** 뽑는다. 추상적 슬로건이 아니라 점검 가능한 단위로.
+- 특히 **새로운 내규(규정·지침·체계) 수립을 요구**하거나, 조직·기구 설치(위원회·전담조직), 절차·통제(평가·승인·기록·점검·긴급정지 등), 교육, 보안, 위탁·제3자관리, 소비자보호 항목을 빠뜨리지 말 것.
+- 문서에 7대 원칙·장/절 구조가 있으면 각 원칙/영역을 최소 1개 항목으로 커버한다. 단 특정 도메인을 가정해 없는 의무를 지어내지 말 것.
+- 항목 수는 핵심 위주 5~14개. 서로 중복되지 않게.
+- requiresFramework: 이 문서가 단순 수치/문구 일부개정이 아니라 **내규 체계 신설·신규 의무 도입**을 요구하면 true.
+JSON만 출력: {"requiresFramework": true|false, "obligations": [{"key":"영역라벨","title":"의무 한 줄","summary":"무엇을 요구하는지 1~2문장","kind":"신규수립의무|기존강화|절차통제|조직기구|소비자보호|보안|위탁관리|기타"}]}`;
+  try {
+    const raw = await callCompletion({
+      systemPrompt: SYSTEM,
+      prompt: `## 문서\n제목: ${args.lawName}\n유형: ${args.itemType}\n본문:\n${clampDocText(args.documentText, config.maxAnalyzeChars)}`,
+      maxTokens: 2200,
+      temperature: 0.1,
+    });
+    const v = extractJson<{ requiresFramework?: boolean; obligations?: Obligation[] }>(raw);
+    const obligations = (Array.isArray(v.obligations) ? v.obligations : [])
+      .map((o) => ({
+        key: String(o?.key ?? "").trim(),
+        title: String(o?.title ?? "").trim(),
+        summary: String(o?.summary ?? "").trim(),
+        kind: String(o?.kind ?? "기타").trim(),
+      }))
+      .filter((o) => o.title || o.summary)
+      .slice(0, 14);
+    return { requiresFramework: v.requiresFramework === true, obligations };
+  } catch {
+    return { requiresFramework: false, obligations: [] };
+  }
+}
+
+/** 의무 항목 → 정밀 검색용 서브쿼리(각 의무에 대응하는 내규를 검색 단계에서부터 끌어옴) */
+export function buildObligationQueries(
+  obligations: Obligation[],
+  lawName: string,
+  max = config.subQueryMax
+): string[] {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  for (const o of obligations) {
+    const body = `${o.title} ${o.summary}`.replace(/\s+/g, " ").trim();
+    if (body.length < config.subQueryMinLen) continue;
+    const dedup = body.slice(0, 80);
+    if (seen.has(dedup)) continue;
+    seen.add(dedup);
+    if (out.length < max) out.push(`${lawName} ${body}`.trim().slice(0, 280));
+  }
+  return out;
 }
 
 /**
