@@ -297,87 +297,85 @@ export type CoverageItem = {
 /** 부분·부재(=갭)만 추린 부분집합 — 카운트·우선조치용 */
 export type CoverageGap = CoverageItem & { coverage: "부분" | "부재"; impact: "중간" | "높음" };
 
+/** 의무 + 그 의무 전용 검색 후보(내규). pipeline이 의무별 타깃 검색으로 채워 전달. */
+export type ObligationCandidates = { obligation: Obligation; candidates: Candidate[] };
+
 /**
- * 의무 목록 × 검색·판정된 내규 → 의무별 충족/부분/부재 평가(전 항목 반환).
- *  - requiresFramework(내규 체계 신설을 요구하는 원천문서)일 때만 수행한다.
- *    (단순 일부개정에서 '부재'를 높음으로 올리면 과대신호 → 보수적으로 게이트)
- *  - 하드코딩 없음: 의무는 문서에서 추출된 것, 충족 판단은 제공된 내규 원문 근거로 LLM이 수행.
+ * 의무별 커버리지 평가 — 각 의무를 '그 의무 전용 검색 후보'로 충족/부분/부재 판정(전 항목 반환).
+ *
+ * 재설계(정확도): 기존엔 전역 융합·리랭크 top-N 풀로만 판정 → 대응 내규가 풀 밖이면 '부재' 과대(예: 위탁규정
+ *  보유했으나 top-N 탈락 → false 부재). 이제 pipeline이 **의무마다 그 의무 텍스트로 직접 검색**해 전용 후보를
+ *  넘기고, 각 의무를 그 전용 후보로만 판정 → false 부재 제거 + 근거 정밀.
+ *  - 하드코딩 없음. 게이트(requiresFramework/일부개정 제외)는 pipeline이 담당.
  */
 export async function assessCoverage(args: {
   lawName: string;
-  obligations: Obligation[];
-  requiresFramework: boolean;
-  judged: JudgedMatch[];
+  perObligation: ObligationCandidates[];
+  globalRelevant?: JudgedMatch[]; // 여러 의무를 가로지르는 적합 내규(보조 힌트)
   infoOnly?: boolean;
 }): Promise<CoverageItem[]> {
-  const obligations = args.obligations ?? [];
-  // 정보성 자료이거나 프레임워크 요구가 아니거나 의무가 없으면 커버리지 산출 안 함
-  if (args.infoOnly || !args.requiresFramework || obligations.length === 0) return [];
+  const items = (args.perObligation ?? []).filter((x) => x && x.obligation);
+  if (args.infoOnly || items.length === 0) return [];
 
-  // IBK가 '보유한' 관련 내규 컨텍스트 — 적합 우선, 그 다음 참고(부적합) 후보까지 원문 발췌 포함.
-  //  ⚠️ 검색·판정으로 '적합'이 아니어도 그 내규가 특정 의무를 커버할 수 있다(예: 정보보호규정은
-  //     이번 개정엔 부적합이어도 보안 의무는 커버). 적합만 보면 '부재'가 과대 산출되므로 전체 풀을 준다.
-  const pool = [
-    ...args.judged.filter((j) => j.verdict.relevance === "적합"),
-    ...args.judged.filter((j) => j.verdict.relevance !== "적합"),
-  ];
-  const fitBlock = pool
-    .slice(0, 30)
-    .map((j) => {
-      const tag = j.verdict.relevance === "적합" ? "" : "(참고) ";
-      const itemName = formatRegulationItemName(j);
-      const content = makeContentExcerpt(j.regulation_content, 320);
-      return `- ${tag}${j.regulation_name} ${itemName}: ${content}`;
+  // 의무별 블록: 의무 + 그 의무 전용 검색 후보(원문 발췌, 중복 조문 제거 후 상위 5)
+  const block = items
+    .map((it, i) => {
+      const cands = dedupeCandidates(it.candidates ?? [])
+        .slice(0, 5)
+        .map((c) => `    - ${c.regulation_name} ${formatRegulationItemName(c)}: ${makeContentExcerpt(c.regulation_content, 300)}`)
+        .join("\n");
+      return `[${i}] (${it.obligation.kind}) ${it.obligation.title} — ${it.obligation.summary}\n  ▷ 이 의무로 검색된 IBK 내규 후보:\n${cands || "    - (대응 후보 없음)"}`;
     })
-    .join("\n");
-  const otherNames = Array.from(new Set(pool.slice(30).map((j) => j.regulation_name))).slice(0, 30);
+    .join("\n\n");
 
-  const oblBlock = obligations
-    .map((o, i) => `[${i}] (${o.kind}) ${o.title} — ${o.summary}`)
-    .join("\n");
+  const globalNames = Array.from(
+    new Set((args.globalRelevant ?? []).map((j) => `${j.regulation_name} ${formatRegulationItemName(j)}`))
+  ).slice(0, 20);
 
-  const SYSTEM = `당신은 IBK기업은행 준법지원부의 내규 커버리지 분석가다. 원천문서가 요구하는 '의무 항목'마다, IBK가 보유한 내규로 그 의무가 충족되는지 평가한다.
+  const SYSTEM = `당신은 IBK기업은행 준법지원부의 내규 커버리지 분석가다. 원천문서가 요구하는 '의무'마다, 그 의무로 검색된 IBK 내규 후보로 충족 여부를 판정한다.
 ${IBK_PROFILE}
 
 판단 원칙:
-- 각 의무에 대해 셋 중 하나로 판정: 제공된 IBK 내규(원문 발췌)가 그 의무를 **실질적으로 충족**하면 "충족", 일부만 다루면 "부분", 대응 내규가 보이지 않으면 "부재".
-- ⚠️ **선언적 상위규범(윤리원칙·기본방침 등)의 존재만으로 '충족'으로 보지 말 것.** 의무가 '위험관리규정 수립/위험평가체계/인적개입(HITL)·긴급정지 절차/보안통제/위탁관리/이해상충 통제' 같은 **구체적 체계·절차**를 요구하면, 그에 대응하는 구체 내규가 있어야 충족이다. 윤리원칙은 최상위 선언일 뿐 위험관리규정·통제절차와 층위가 다르다.
-- 표면 주제어만 겹치는 내규(목적·총칙 조항, 직교 영역 규정)는 충족 근거가 아니다.
-- ★ **모든 의무 항목([index] 전체)에 대해 빠짐없이** 한 줄씩 출력한다. evidence에는 충족·부분이면 대응 내규명/조문을, 부재면 "대응 내규 미확인"을 적는다.
-- 부재 = 신규 내규 수립 필요(높음), 부분 = 보완 필요(중간), 충족 = 현행 유지(낮음).
+- 각 의무를 그 의무의 '검색된 후보 내규'로 판정: 후보 중 **그 의무를 실질적으로 규율하는 조문**이 있으면 "충족"(요건 대부분 반영) 또는 "부분"(일부만), 그런 조문이 없으면 "부재".
+- ⚠️ **부재는 '그 의무 전용 후보'에도 대응 조문이 없을 때만**. 후보에 관련 내규가 있으면 우선 충족/부분을 검토하라(보유 내규를 '부재(신규 필요)'로 과대평가 금지).
+- ⚠️ **선언적 상위규범(윤리원칙·기본방침)만으론 구체 체계 의무(위험관리규정/평가체계/HITL·긴급정지/보안통제/위탁관리/이해상충)를 충족으로 보지 말 것**(층위가 다름).
+- 표면 주제어만 겹치는 내규(목적·총칙, 직교 영역)는 근거 아님. **evidence(충족·부분)에는 그 의무를 실제 규율하는 조문만 인용**(헐거운 주제어 매핑 금지).
+- 부재=신규 내규 필요(높음), 부분=보완(중간), 충족=현행 유지(낮음).
+- 모든 의무 [index]를 빠짐없이 평가.
 JSON만 출력: {"items":[{"index":0,"coverage":"충족"|"부분"|"부재","evidence":"대응 내규명/조문 또는 '대응 내규 미확인'","recommendation":"권고 한 줄(개조식). 충족이면 '현행 유지'"}]}`;
 
   const prompt = `## 원천문서: ${args.lawName}
-## 요구 의무 항목(${obligations.length}개 — 전부 평가)
-${oblBlock}
+## 의무별 평가 대상 (의무 + 그 의무 전용 검색 후보)
+${block}
 
-## IBK 보유 관련 내규(검색·판정된 후보 원문 발췌 — '(참고)'는 이번 개정엔 부적합이나 의무 커버 여부는 별도 판단)
-${fitBlock || "- (검색된 내규 없음)"}
-
-## 기타 검색된 내규명(원문 미첨부 — 참고)
-${otherNames.length ? otherNames.join(", ") : "- 없음"}
+## (참고) 이번 문서에 IBK가 '적합' 판정한 내규(여러 의무에 걸칠 수 있음)
+${globalNames.length ? globalNames.join(", ") : "- 없음"}
 
 ## 지시
-각 의무 [index] **전부**에 대해 충족/부분/부재를 평가해 JSON으로 출력하라.`;
+각 의무 [index]를 **그 의무의 후보 내규**로 충족/부분/부재 평가해 JSON으로 출력하라.`;
 
   try {
     const raw = await callCompletion({ systemPrompt: SYSTEM, prompt, maxTokens: 4000, temperature: 0.1, jsonMode: false });
     type CovRow = { index?: number; coverage?: string; evidence?: string; recommendation?: string };
     const v = extractJson<{ items?: CovRow[]; gaps?: CovRow[] }>(raw);
     const rows: CovRow[] = Array.isArray(v.items) ? v.items : Array.isArray(v.gaps) ? v.gaps : [];
-    const byIndex = new Map<number, { coverage?: string; evidence?: string; recommendation?: string }>();
+    const byIndex = new Map<number, CovRow>();
     for (const r of rows) if (typeof r.index === "number") byIndex.set(r.index, r);
 
     const norm = (c?: string): "충족" | "부분" | "부재" =>
-      c === "부재" ? "부재" : c === "부분" ? "부분" : c === "충족" ? "충족" : "부분";
+      c === "부재" ? "부재" : c === "충족" ? "충족" : "부분";
     const impactOf = (c: "충족" | "부분" | "부재"): "낮음" | "중간" | "높음" =>
       c === "부재" ? "높음" : c === "부분" ? "중간" : "낮음";
 
-    return obligations.map((o, i) => {
+    return items.map((it, i) => {
+      const o = it.obligation;
+      const hasCands = dedupeCandidates(it.candidates ?? []).length > 0;
       const r = byIndex.get(i);
-      // 평가 누락 항목은 숨기지 않고 '부분(중간)·담당확인'으로 표면화(과소커버리지 방지)
-      const coverage = r ? norm(r.coverage) : "부분";
-      const evidence = String(r?.evidence ?? (coverage === "부재" ? "대응 내규 미확인" : coverage === "부분" && !r ? "자동 평가 누락 — 담당 확인" : "")).trim();
+      // 평가 누락 시: 후보가 있으면 부분(중간), 없으면 부재(높음)
+      const coverage = r ? norm(r.coverage) : hasCands ? "부분" : "부재";
+      const evidence = String(
+        r?.evidence ?? (coverage === "부재" ? "대응 내규 미확인" : "자동 평가 누락 — 담당 확인")
+      ).trim();
       const defaultRec =
         coverage === "부재" ? `${o.title} 관련 내규 신설 검토`
           : coverage === "부분" ? `${o.title} 관련 내규 보완 검토`

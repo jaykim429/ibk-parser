@@ -22,10 +22,11 @@ import {
   cleanLawName,
   type Analysis,
   type ObligationExtract,
+  type Candidate,
 } from "./server";
 import { HybridRetriever } from "./retrieval";
 import { rerankCandidates } from "./rerank";
-import { judgeMatches, assessCoverage } from "./judge";
+import { judgeMatches, assessCoverage, type CoverageItem } from "./judge";
 import { generateReport, buildOffDomainReport } from "./report";
 import { renderBlocksToHtml } from "./render-blocks";
 import { extractAmendmentPairs } from "./amendment-table";
@@ -210,13 +211,24 @@ export class CompliancePipeline {
     //     가이드라인(자율규제) 또는 제정(신규)일 때만 대상. (특정 파일 하드코딩 아님 — 개정 vs 제정/가이드라인)
     const isAmendment = /(일부개정|개정안|개정법률안|개정령안?|개정고시|일부개정규정|타법개정)/.test(`${initialName} ${lawName}`);
     const frameworkEligible = obl.requiresFramework && (itemType === "guideline" || !isAmendment);
-    const coverage = await assessCoverage({
-      lawName,
-      obligations: obl.obligations,
-      requiresFramework: frameworkEligible,
-      judged,
-      infoOnly,
-    });
+    let coverage: CoverageItem[] = [];
+    if (frameworkEligible && obl.obligations.length > 0 && !infoOnly) {
+      // 의무별 타깃 검색(병렬): 각 의무 텍스트로 직접 retrieve → 그 의무 전용 후보로 충족도 판정.
+      //  (전역 융합 풀만 보면 보유 내규가 풀 밖일 때 'false 부재'가 남 → 의무별 검색으로 제거)
+      const perObligation = await Promise.all(
+        obl.obligations.map(async (o) => {
+          const q = `${lawName} ${o.title} ${o.summary}`.replace(/\s+/g, " ").trim().slice(0, 280);
+          let cands: Candidate[] = [];
+          try {
+            cands = await this.retriever.retrieve(q, lawName);
+          } catch {
+            /* 의무별 검색 실패 → 빈 후보(보수적으로 부재 처리) */
+          }
+          return { obligation: o, candidates: cands };
+        })
+      );
+      coverage = await assessCoverage({ lawName, perObligation, globalRelevant: relevant, infoOnly });
+    }
     const absentGaps = coverage.filter((g) => g.coverage === "부재");
     const partialGaps = coverage.filter((g) => g.coverage === "부분");
     if (coverage.length) {
