@@ -235,7 +235,7 @@ a {
 .analysis-grid {
   display: grid;
   grid-template-columns: 250px minmax(0, 1fr);
-  gap: 18px;
+  gap: 10px;
   align-items: start;
 }
 
@@ -257,14 +257,14 @@ a {
   z-index: 45;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  letter-spacing: 2px;
-  padding: 22px 10px;
-  font-size: 13px;
+  letter-spacing: 1.5px;
+  padding: 20px 6px;
+  font-size: 12.5px;
   font-weight: 700;
   color: #fff;
   background: var(--primary, #2563eb);
   border: none;
-  border-radius: 10px;
+  border-radius: 9px;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
   transition: background 0.15s, transform 0.15s;
@@ -804,7 +804,7 @@ a {
 .report-split {
   display: flex;
   align-items: flex-start; /* 세로탭이 늘어나지 않도록 */
-  gap: 8px;
+  gap: 4px;
 }
 .report-split .report-pane {
   flex: 1 1 auto;
@@ -823,13 +823,13 @@ a {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   border: none;
-  border-radius: 10px;
+  border-radius: 9px;
   background: var(--primary, #2563eb);
   color: #fff;
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 2px;
-  padding: 26px 11px;
+  letter-spacing: 1.5px;
+  padding: 20px 6px;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
   transition: background 0.15s, transform 0.15s;
