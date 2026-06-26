@@ -22,6 +22,8 @@ export type RenderOptions = {
 
 function esc(s: string | undefined): string {
   return (s ?? "")
+    // 목차 점선 리더(··········, ……) → 단일 말줄임(복원 가독성)
+    .replace(/[ \t]*[.·․‧⋯…]{3,}[ \t]*/g, " … ")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")

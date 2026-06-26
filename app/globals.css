@@ -239,31 +239,39 @@ a {
   align-items: start;
 }
 
-/* 분석 목록 접기 — 본문 전체폭(원문 2개 비교 등 넓게 보기) */
+/* 분석 목록 접기 — 본문 전체폭(원문 2개 비교 등 넓게 보기).
+   좌측에 '분석 목록' 펼침 세로탭(고정)이 있으므로 그만큼 본문을 들여 겹침 방지. */
 .analysis-grid.list-collapsed {
   grid-template-columns: 1fr;
+  padding-left: 52px;
 }
 .analysis-grid.list-collapsed .job-panel {
   display: none;
 }
+/* 접힘 시 '분석 목록' 펼침 탭 — 원문복원 탭과 동일하게 중앙정렬 레이아웃 추종 + 세로 탭(안정 위치) */
 .list-expand-tab {
   position: fixed;
-  left: 8px;
-  top: 92px;
+  left: calc(max(0px, (100vw - 1760px) / 2) + 8px);
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 45;
-  padding: 9px 11px;
-  font-size: 12px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 2px;
+  padding: 22px 10px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.5px;
   color: #fff;
   background: var(--primary, #2563eb);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  transition: background 0.15s, transform 0.15s;
 }
 .list-expand-tab:hover {
   background: #1d4ed8;
+  transform: translateY(-50%) scale(1.04);
 }
 .job-panel-head-actions {
   display: flex;
@@ -795,22 +803,23 @@ a {
 /* ── 원문 복원 분할 뷰(좌측 탭 → 절반 펼침) ── */
 .report-split {
   display: flex;
-  align-items: stretch;
-  gap: 0;
-  padding-left: 44px; /* 좌측 거터 고정 버튼이 본문을 가리지 않도록 확보 */
+  align-items: flex-start; /* 세로탭이 늘어나지 않도록 */
+  gap: 8px;
 }
 .report-split .report-pane {
   flex: 1 1 auto;
   min-width: 0;
 }
-/* 분석목록↔본문 사이 거터에 '화면 고정'으로 따라다니는 세로 탭(스크롤해도 유지) */
+/* 세로 토글 탭 — fixed 좌표가 아니라 report-split의 '좌측 칼럼'(in-flow)으로 둔다.
+   → 어떤 레이아웃(분석목록 유무/접힘)에서도 본문/패널 위에 겹치지 않음.
+   sticky top으로 스크롤 시 화면 중앙 높이를 유지(추종). */
 .restore-tab {
-  position: fixed; /* 뷰포트 고정 → 스크롤 추종 */
-  /* 분석목록(250px) 오른쪽 거터에 배치 + 1760 중앙정렬 레이아웃 추종(사이드바 박스와 겹침 방지) */
-  left: calc(max(0px, (100vw - 1760px) / 2) + 278px);
-  top: 50%;
+  position: sticky;
+  top: 50vh;
   transform: translateY(-50%);
-  z-index: 50;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  z-index: 30;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   border: none;
@@ -820,7 +829,7 @@ a {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
-  padding: 26px 11px; /* 더 큰 버튼 */
+  padding: 26px 11px;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
   transition: background 0.15s, transform 0.15s;

@@ -20,6 +20,10 @@ export function normalizeMarkdown(md: string): string {
   return (md || "")
     .replace(/\r\n?/g, "\n")
     .replace(/[ \t]+\n/g, "\n")
+    // 목차 점선 리더(··········, ……, ......) → 단일 말줄임. 매뉴얼 TOC 노이즈 제거.
+    .replace(/[ \t]*[.·․‧⋯…]{3,}[ \t]*/g, " … ")
+    // 점선 정리 후 빈 표 셀만 남은 TOC 표 행 정돈(예: "| … | | 13 |" → 한 줄로)
+    .replace(/^\|(?:\s*(?:…|)\s*\|)+\s*$/gm, "")
     .replace(/^\|(\s*\|)+\s*$/gm, "")
     .replace(/^\s*-?\s*\d{1,3}\s*-\s*$/gm, "")
     .replace(BOILERPLATE_LABEL, "")
