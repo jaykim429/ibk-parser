@@ -5,20 +5,32 @@
  *
  * 임베딩/저장 없음 — 순수 텍스트 추출만 수행.
  */
-import type { ParseOptions, ParseResult } from "kordoc";
+import type {
+  ParseOptions,
+  ParseResult,
+  IRBlock,
+  OutlineItem,
+  SearchChunk,
+} from "kordoc";
 import { config } from "./config";
 import { normalizeMarkdown, pickTitle } from "./doc-text";
 
 // kordoc는 ESM 전용 + 네이티브 의존성(sharp/pdfium 등)을 가지므로
 // webpack 번들링을 피해 런타임 네이티브 ESM 동적 import로 로드한다.
 // (new Function 으로 감싸 webpack 정적 분석을 우회)
-type KordocModule = {
+export type KordocModule = {
   parse: (input: Buffer | ArrayBuffer | string, options?: ParseOptions) => Promise<ParseResult>;
   createVlmOcrProvider: (cfg: { endpoint: string; model: string; apiKey?: string }) => unknown;
+  // 구조 기반 검색/렌더 유틸(매뉴얼형 내규 청킹·복원에 사용)
+  toSearchChunks: (blocks: IRBlock[]) => SearchChunk[];
+  chunkToText: (c: SearchChunk) => string;
+  linearizeTable: (table: NonNullable<IRBlock["table"]>) => string;
+  blocksToMarkdown: (blocks: IRBlock[]) => string;
+  renderHtml: (markdown: string, options?: Record<string, unknown>) => string;
 };
 let _kordoc: KordocModule | undefined;
 const _dynamicImport = new Function("s", "return import(s)") as (s: string) => Promise<KordocModule>;
-async function loadKordoc(): Promise<KordocModule> {
+export async function loadKordoc(): Promise<KordocModule> {
   if (!_kordoc) _kordoc = await _dynamicImport("kordoc");
   return _kordoc;
 }
@@ -34,6 +46,10 @@ export type ParsedDoc = {
   usedOcr: boolean;
   /** 추출 품질 의심(텍스트층은 있으나 비정상적으로 빈약/깨짐) — silent하지 않게 표면화 */
   lowQuality: boolean;
+  /** 구조화 중간표현(표/헤딩/스타일/이미지/PDF bbox) — 매뉴얼형 청킹·복원용 */
+  blocks: IRBlock[];
+  /** 헤딩 트리 */
+  outline: OutlineItem[];
   title?: string;
   warnings: string[];
 };
@@ -116,6 +132,8 @@ export async function parseDocument(
     isImageBased: !!result.isImageBased,
     usedOcr,
     lowQuality: q.lowQuality,
+    blocks: result.blocks ?? [],
+    outline: result.outline ?? [],
     title: pickTitle(result.metadata?.title, markdown, filename),
     warnings,
   };

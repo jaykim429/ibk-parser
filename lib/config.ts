@@ -42,6 +42,10 @@ export const config = {
   canonicalTermMax: num(env.CANONICAL_TERM_MAX, 30), // 대표 쿼리 키워드+개념 상한
   subQueryMinLen: num(env.SUBQUERY_MIN_LEN, 4), // 서브쿼리 본문 최소 길이
 
+  // ── 매뉴얼형(비정형) 내규 청킹 — 헤딩 섹션 단위 + overlap 서브분할 ──
+  manualChunkSize: num(env.MANUAL_CHUNK_SIZE, 900), // 섹션 청크 최대 글자
+  manualChunkOverlap: num(env.MANUAL_CHUNK_OVERLAP, 150), // 서브분할 겹침
+
   // ── 검색/리랭크/판정 튜닝 ──
   matchTopK: num(env.MATCH_TOPK, 30), // RRF 융합 후 후보 수
   vectorTopK: num(env.VECTOR_TOPK, 40), // 벡터 1차 후보
