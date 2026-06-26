@@ -270,23 +270,29 @@ function buildChangeSummary(lawName: string, itemType: ItemType, a?: Analysis): 
   return lines.join("\n");
 }
 
-// ── 요건 커버리지 분석 (권고2: '대응 내규 부재 = 높음' 신호) ──────────
+// ── 요건 커버리지 분석 (권고2: 요건 체크리스트 + '대응 내규 부재 = 높음' 신호) ──────────
 /**
- * 커버리지 갭 — 원천문서가 요구하는 의무 중, IBK 내규로 충족되지 않는(부재) 또는
- * 일부만 충족되는(부분) 항목. 1:1 조문 매칭만으로는 '없는 내규'가 보이지 않으므로 별도 산출.
+ * 요건 커버리지 — 원천문서가 요구하는 의무 항목 각각에 대해, IBK 내규로
+ *  충족/부분/부재 중 무엇인지 + 대응 내규(있으면) + 권고를 산출한다.
+ * 1:1 조문 매칭만으로는 '없는 내규(부재)'가 안 보이므로 별도 산출.
+ *  - 충족: 대응 내규 있음(낮음) / 부분: 일부만(중간) / 부재: 대응 내규 없음(높음·신규 필요)
+ * 보고서는 이 목록 전체를 '요건 체크리스트'로 표시하고, 부분·부재는 갭으로 집계한다.
  */
-export type CoverageGap = {
+export type CoverageItem = {
   area: string;
   requirement: string;
-  coverage: "부재" | "부분";
-  evidence: string; // 부분충족 시 근거 내규, 부재면 "대응 내규 미확인"
-  impact: "높음" | "중간";
+  kind: string;
+  coverage: "충족" | "부분" | "부재";
+  evidence: string; // 대응 내규(충족·부분) / "대응 내규 미확인"(부재)
+  impact: "낮음" | "중간" | "높음";
   recommendation: string;
 };
+/** 부분·부재(=갭)만 추린 부분집합 — 카운트·우선조치용 */
+export type CoverageGap = CoverageItem & { coverage: "부분" | "부재"; impact: "중간" | "높음" };
 
 /**
- * 의무 목록 × 검색·판정된 내규 → 충족/부분/부재 평가.
- *  - requiresFramework(내규 체계 신설을 요구하는 원천문서)일 때만 갭을 영향도로 승격한다.
+ * 의무 목록 × 검색·판정된 내규 → 의무별 충족/부분/부재 평가(전 항목 반환).
+ *  - requiresFramework(내규 체계 신설을 요구하는 원천문서)일 때만 수행한다.
  *    (단순 일부개정에서 '부재'를 높음으로 올리면 과대신호 → 보수적으로 게이트)
  *  - 하드코딩 없음: 의무는 문서에서 추출된 것, 충족 판단은 제공된 내규 원문 근거로 LLM이 수행.
  */
@@ -296,24 +302,28 @@ export async function assessCoverage(args: {
   requiresFramework: boolean;
   judged: JudgedMatch[];
   infoOnly?: boolean;
-}): Promise<CoverageGap[]> {
+}): Promise<CoverageItem[]> {
   const obligations = args.obligations ?? [];
-  // 정보성 자료이거나 프레임워크 요구가 아니거나 의무가 없으면 갭 산출 안 함
+  // 정보성 자료이거나 프레임워크 요구가 아니거나 의무가 없으면 커버리지 산출 안 함
   if (args.infoOnly || !args.requiresFramework || obligations.length === 0) return [];
 
-  // IBK가 '보유한' 관련 내규 컨텍스트 — 적합 후보 우선(원문 발췌), 그 외는 이름만.
-  const fit = args.judged.filter((j) => j.verdict.relevance === "적합");
-  const fitBlock = fit
-    .slice(0, 24)
+  // IBK가 '보유한' 관련 내규 컨텍스트 — 적합 우선, 그 다음 참고(부적합) 후보까지 원문 발췌 포함.
+  //  ⚠️ 검색·판정으로 '적합'이 아니어도 그 내규가 특정 의무를 커버할 수 있다(예: 정보보호규정은
+  //     이번 개정엔 부적합이어도 보안 의무는 커버). 적합만 보면 '부재'가 과대 산출되므로 전체 풀을 준다.
+  const pool = [
+    ...args.judged.filter((j) => j.verdict.relevance === "적합"),
+    ...args.judged.filter((j) => j.verdict.relevance !== "적합"),
+  ];
+  const fitBlock = pool
+    .slice(0, 30)
     .map((j) => {
+      const tag = j.verdict.relevance === "적합" ? "" : "(참고) ";
       const itemName = formatRegulationItemName(j);
-      const content = makeContentExcerpt(j.regulation_content, 400);
-      return `- ${j.regulation_name} ${itemName}: ${content}`;
+      const content = makeContentExcerpt(j.regulation_content, 320);
+      return `- ${tag}${j.regulation_name} ${itemName}: ${content}`;
     })
     .join("\n");
-  const otherNames = Array.from(
-    new Set(args.judged.filter((j) => j.verdict.relevance !== "적합").map((j) => j.regulation_name))
-  ).slice(0, 30);
+  const otherNames = Array.from(new Set(pool.slice(30).map((j) => j.regulation_name))).slice(0, 30);
 
   const oblBlock = obligations
     .map((o, i) => `[${i}] (${o.kind}) ${o.title} — ${o.summary}`)
@@ -323,45 +333,58 @@ export async function assessCoverage(args: {
 ${IBK_PROFILE}
 
 판단 원칙:
-- 각 의무에 대해: 제공된 IBK 내규(원문 발췌)가 그 의무를 **실질적으로 충족**하면 "충족"(갭 아님), 일부만 다루면 "부분", 대응 내규가 보이지 않으면 "부재".
+- 각 의무에 대해 셋 중 하나로 판정: 제공된 IBK 내규(원문 발췌)가 그 의무를 **실질적으로 충족**하면 "충족", 일부만 다루면 "부분", 대응 내규가 보이지 않으면 "부재".
 - ⚠️ **선언적 상위규범(윤리원칙·기본방침 등)의 존재만으로 '충족'으로 보지 말 것.** 의무가 '위험관리규정 수립/위험평가체계/인적개입(HITL)·긴급정지 절차/보안통제/위탁관리/이해상충 통제' 같은 **구체적 체계·절차**를 요구하면, 그에 대응하는 구체 내규가 있어야 충족이다. 윤리원칙은 최상위 선언일 뿐 위험관리규정·통제절차와 층위가 다르다.
 - 표면 주제어만 겹치는 내규(목적·총칙 조항, 직교 영역 규정)는 충족 근거가 아니다.
-- 충족 항목은 출력하지 말 것. **부분·부재만** 출력한다.
-- 부재 = 신규 내규 수립 필요(높음), 부분 = 보완 필요(중간).
-JSON만 출력: {"gaps":[{"index":0,"coverage":"부재"|"부분","evidence":"부분이면 근거 내규명/조문, 부재면 '대응 내규 미확인'","recommendation":"신설/보완 권고 한 줄(개조식)"}]}`;
+- ★ **모든 의무 항목([index] 전체)에 대해 빠짐없이** 한 줄씩 출력한다. evidence에는 충족·부분이면 대응 내규명/조문을, 부재면 "대응 내규 미확인"을 적는다.
+- 부재 = 신규 내규 수립 필요(높음), 부분 = 보완 필요(중간), 충족 = 현행 유지(낮음).
+JSON만 출력: {"items":[{"index":0,"coverage":"충족"|"부분"|"부재","evidence":"대응 내규명/조문 또는 '대응 내규 미확인'","recommendation":"권고 한 줄(개조식). 충족이면 '현행 유지'"}]}`;
 
   const prompt = `## 원천문서: ${args.lawName}
-## 요구 의무 항목
+## 요구 의무 항목(${obligations.length}개 — 전부 평가)
 ${oblBlock}
 
-## IBK 보유 관련 내규(적합 후보 원문 발췌)
-${fitBlock || "- (적합으로 판정된 내규 없음)"}
+## IBK 보유 관련 내규(검색·판정된 후보 원문 발췌 — '(참고)'는 이번 개정엔 부적합이나 의무 커버 여부는 별도 판단)
+${fitBlock || "- (검색된 내규 없음)"}
 
 ## 기타 검색된 내규명(원문 미첨부 — 참고)
 ${otherNames.length ? otherNames.join(", ") : "- 없음"}
 
 ## 지시
-각 의무 [index]가 위 IBK 내규로 충족되는지 평가하고, **부분·부재만** JSON으로 출력하라.`;
+각 의무 [index] **전부**에 대해 충족/부분/부재를 평가해 JSON으로 출력하라.`;
 
   try {
-    const raw = await callCompletion({ systemPrompt: SYSTEM, prompt, maxTokens: 2600, temperature: 0.1, jsonMode: false });
-    const v = extractJson<{ gaps?: { index?: number; coverage?: string; evidence?: string; recommendation?: string }[] }>(raw);
-    const gaps = Array.isArray(v.gaps) ? v.gaps : [];
-    return gaps
-      .map((g) => {
-        const o = typeof g.index === "number" ? obligations[g.index] : undefined;
-        if (!o) return null;
-        const isAbsent = g.coverage !== "부분";
-        return {
-          area: o.key || o.title,
-          requirement: o.title,
-          coverage: isAbsent ? "부재" : "부분",
-          evidence: String(g.evidence ?? (isAbsent ? "대응 내규 미확인" : "")).trim(),
-          impact: isAbsent ? "높음" : "중간",
-          recommendation: String(g.recommendation ?? (isAbsent ? `${o.title} 관련 내규 신설 검토` : `${o.title} 관련 내규 보완 검토`)).trim(),
-        } as CoverageGap;
-      })
-      .filter((g): g is CoverageGap => g !== null);
+    const raw = await callCompletion({ systemPrompt: SYSTEM, prompt, maxTokens: 4000, temperature: 0.1, jsonMode: false });
+    type CovRow = { index?: number; coverage?: string; evidence?: string; recommendation?: string };
+    const v = extractJson<{ items?: CovRow[]; gaps?: CovRow[] }>(raw);
+    const rows: CovRow[] = Array.isArray(v.items) ? v.items : Array.isArray(v.gaps) ? v.gaps : [];
+    const byIndex = new Map<number, { coverage?: string; evidence?: string; recommendation?: string }>();
+    for (const r of rows) if (typeof r.index === "number") byIndex.set(r.index, r);
+
+    const norm = (c?: string): "충족" | "부분" | "부재" =>
+      c === "부재" ? "부재" : c === "부분" ? "부분" : c === "충족" ? "충족" : "부분";
+    const impactOf = (c: "충족" | "부분" | "부재"): "낮음" | "중간" | "높음" =>
+      c === "부재" ? "높음" : c === "부분" ? "중간" : "낮음";
+
+    return obligations.map((o, i) => {
+      const r = byIndex.get(i);
+      // 평가 누락 항목은 숨기지 않고 '부분(중간)·담당확인'으로 표면화(과소커버리지 방지)
+      const coverage = r ? norm(r.coverage) : "부분";
+      const evidence = String(r?.evidence ?? (coverage === "부재" ? "대응 내규 미확인" : coverage === "부분" && !r ? "자동 평가 누락 — 담당 확인" : "")).trim();
+      const defaultRec =
+        coverage === "부재" ? `${o.title} 관련 내규 신설 검토`
+          : coverage === "부분" ? `${o.title} 관련 내규 보완 검토`
+            : "현행 유지";
+      return {
+        area: o.key || o.title,
+        requirement: o.title,
+        kind: o.kind,
+        coverage,
+        evidence,
+        impact: impactOf(coverage),
+        recommendation: String(r?.recommendation ?? defaultRec).trim(),
+      } as CoverageItem;
+    });
   } catch {
     return [];
   }

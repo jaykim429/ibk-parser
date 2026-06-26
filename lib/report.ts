@@ -12,7 +12,7 @@
 import { callCompletion, extractJson } from "./llm";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
 import { cleanLawName, type Analysis, type ItemType } from "./server";
-import type { JudgedMatch, CoverageGap } from "./judge";
+import type { JudgedMatch, CoverageItem } from "./judge";
 
 const REPORT_SYSTEM = `당신은 IBK기업은행 준법지원부의 컴플라이언스 보고서 작성 전문가입니다.
 규제변동(법률안/입법예고/시행령/고시/보도자료 등)이 IBK 사내규정에 미치는 영향을 분석합니다.
@@ -35,8 +35,8 @@ export type ReportInput = {
   fileName: string;
   candidateCount: number;
   infoOnly?: boolean;
-  /** 권고2: 요건 커버리지 갭(대응 내규 부재·부분충족). 부재=높음으로 집계. */
-  coverageGaps?: CoverageGap[];
+  /** 권고2: 요건 커버리지 — 의무별 충족/부분/부재 체크리스트. 부재=높음·부분=중간으로 집계. */
+  coverage?: CoverageItem[];
 };
 
 /**
@@ -102,7 +102,7 @@ type LlmReport = {
 
 export async function generateReport(input: ReportInput): Promise<string> {
   const relevant = input.judged.filter((j) => j.verdict.relevance === "적합");
-  const gapCount = (input.coverageGaps ?? []).filter((g) => g && g.requirement).length;
+  const gapCount = (input.coverage ?? []).filter((g) => g && g.requirement && g.coverage !== "충족").length;
   const header = buildHeader(input, relevant.length);
   const section4 = buildAnalysisBasis(input, relevant.length);
 
@@ -225,18 +225,20 @@ ${outline(changes, "- 변경 사항 식별 정보 부족")}
 ### 1.2 IBK 적용 관점
 ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
 
-  // 커버리지 갭(권고2) — 부재=신규 내규 필요(높음), 부분=보완(중간)
-  const gaps = (input.coverageGaps ?? []).filter((g) => g && g.requirement);
-  const absentGaps = gaps.filter((g) => g.coverage === "부재");
-  const partialGaps = gaps.filter((g) => g.coverage === "부분");
+  // 요건 커버리지(권고2) — 의무별 충족/부분/부재 체크리스트
+  const coverage = (input.coverage ?? []).filter((g) => g && g.requirement);
+  const absentGaps = coverage.filter((g) => g.coverage === "부재");
+  const partialGaps = coverage.filter((g) => g.coverage === "부분");
+  const metCount = coverage.filter((g) => g.coverage === "충족").length;
+  const gaps = [...absentGaps, ...partialGaps];
 
   // 영향 요약 집계(이름 나열은 아래 표와 중복이므로 카운트 한 줄로). 갭은 '내규 부재'라 별도 표기.
   const cnt = (lv: "높음" | "중간" | "낮음") => relevant.filter((j) => j.verdict.impact === lv).length;
-  const gapNote = gaps.length
-    ? ` / 커버리지 갭 **${gaps.length}건**(부재 ${absentGaps.length}·부분 ${partialGaps.length})`
+  const covNote = coverage.length
+    ? ` / 요건 ${coverage.length}개(충족 ${metCount}·부분 ${partialGaps.length}·부재 ${absentGaps.length})`
     : "";
-  const countLine = relevant.length || gaps.length
-    ? `- 영향 내규 **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}${gapNote}`
+  const countLine = relevant.length || coverage.length
+    ? `- 영향 내규 **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}${covNote}`
     : "- 영향 내규 없음";
 
   // 2.2 조치 필요 조문(높음·중간)만 원문 포함 상세 — 가독성 위해 낮음/현행유지·정보성은 제외(3.1 표로).
@@ -287,21 +289,23 @@ ${quoted}
 ${rows}`
     : "- 영향 내규 없음";
 
-  // 2.3 커버리지 갭 — 원천문서 요구 의무 중 대응 내규 부재·부분충족(1:1 조문 매칭으로는 안 잡히는 누락)
-  const gapRows = gaps
+  // 2.3 요건 커버리지 체크리스트 — 원천문서가 요구하는 의무 전체 × 충족/부분/부재 + 대응 내규
+  //   (조문 1:1 매칭으로는 드러나지 않는 '없는 내규'를 부재=높음으로 표면화)
+  const covMark: Record<string, string> = { 충족: "✅ 충족", 부분: "⚠️ 부분", 부재: "❌ 부재" };
+  const covRows = coverage
     .map((g, i) => {
-      const rec = (g.recommendation || "신규·보완 검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
-      const ev = (g.evidence || (g.coverage === "부재" ? "대응 내규 미확인" : "")).replace(/\|/g, "／").trim();
-      return `| ${i + 1} | ${g.requirement.replace(/\|/g, "／")} | ${g.coverage} | ${g.impact} | ${ev} | ${rec.length > 160 ? rec.slice(0, 159) + "…" : rec} |`;
+      const rec = (g.recommendation || "검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
+      const ev = (g.evidence || (g.coverage === "부재" ? "대응 내규 미확인" : "현행 내규")).replace(/\s+/g, " ").replace(/\|/g, "／").trim();
+      return `| ${i + 1} | ${g.requirement.replace(/\|/g, "／")} | ${covMark[g.coverage] ?? g.coverage} | ${g.impact} | ${ev.length > 60 ? ev.slice(0, 59) + "…" : ev} | ${rec.length > 140 ? rec.slice(0, 139) + "…" : rec} |`;
     })
     .join("\n");
-  const sec23 = gaps.length
-    ? `### 2.3 커버리지 갭 (요구 의무 대비 대응 내규 부재·미흡)
-> 원천문서가 요구하는 의무 중 IBK 내규로 **충족되지 않은(부재)** 또는 **일부만 충족된(부분)** 항목. 조문 1:1 매칭으로는 드러나지 않는 누락으로, **부재 = 신규 내규 수립 필요(높음)**.
+  const sec23 = coverage.length
+    ? `### 2.3 요건 커버리지 체크리스트 (이 문서가 요구하는 의무 ${coverage.length}건)
+> 원천문서가 요구하는 의무·권고를 항목화해 IBK 내규의 **충족 / 부분 / 부재**를 점검한 것. 조문 1:1 매칭으로는 드러나지 않는 누락으로, **부재 = 신규 내규 수립 필요(높음)**, 부분 = 보완(중간).
 
-| 순번 | 요구 의무 | 충족도 | 영향도 | 근거/비고 | 권고 조치 |
+| 순번 | 요구 의무·권고 | 충족도 | 영향도 | 대응 내규/근거 | 권고 조치 |
 | --- | --- | --- | --- | --- | --- |
-${gapRows}`
+${covRows}`
     : "";
 
   // 2. 내규 정합성 분석 — 2.1 영향 요약(집계 + 조치 요약표) → 2.2 조문별 상세 → 2.3 커버리지 갭

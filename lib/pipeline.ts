@@ -202,18 +202,25 @@ export class CompliancePipeline {
     const judged = await judgeMatches({ lawName, itemType, analysis, candidates: reranked, infoOnly });
     const relevant = judged.filter((j) => j.verdict.relevance === "적합");
 
-    // 4.5) 요건 커버리지 갭(권고2) — 의무별 대응 내규 부재(높음)/부분(중간) 산출
-    const coverageGaps = await assessCoverage({
+    // 4.5) 요건 커버리지(권고2) — 의무별 충족/부분/부재 + 대응 내규 산출(요건 체크리스트)
+    //   ★ 과대신호 방지: 커버리지 갭(부재=높음)은 '새 규범영역을 신설'하는 문서에서만 의미.
+    //     일부개정(개정안/개정령/개정고시)은 기존 내규가 이미 매핑돼 1:1 판정으로 충분하므로 제외.
+    //     가이드라인(자율규제) 또는 제정(신규)일 때만 대상. (특정 파일 하드코딩 아님 — 개정 vs 제정/가이드라인)
+    const isAmendment = /(일부개정|개정안|개정법률안|개정령안?|개정고시|일부개정규정|타법개정)/.test(`${initialName} ${lawName}`);
+    const frameworkEligible = obl.requiresFramework && (itemType === "guideline" || !isAmendment);
+    const coverage = await assessCoverage({
       lawName,
       obligations: obl.obligations,
-      requiresFramework: obl.requiresFramework,
+      requiresFramework: frameworkEligible,
       judged,
       infoOnly,
     });
-    const absentGaps = coverageGaps.filter((g) => g.coverage === "부재");
-    const partialGaps = coverageGaps.filter((g) => g.coverage === "부분");
-    if (coverageGaps.length) {
-      console.log(`[PIPELINE] 커버리지 갭=${coverageGaps.length} (부재 ${absentGaps.length}·부분 ${partialGaps.length})`);
+    const absentGaps = coverage.filter((g) => g.coverage === "부재");
+    const partialGaps = coverage.filter((g) => g.coverage === "부분");
+    if (coverage.length) {
+      console.log(
+        `[PIPELINE] 커버리지=${coverage.length} (충족 ${coverage.filter((g) => g.coverage === "충족").length}·부분 ${partialGaps.length}·부재 ${absentGaps.length})`
+      );
     }
 
     // 5) 보고서 생성 (stateless LLM)
@@ -225,7 +232,7 @@ export class CompliancePipeline {
       fileName,
       candidateCount: judged.length,
       infoOnly,
-      coverageGaps,
+      coverage,
     });
 
     const seconds = Math.round((Date.now() - t0) / 1000);
@@ -259,7 +266,7 @@ export class CompliancePipeline {
         relevantCount: relevant.length,
         requiresFramework: obl.requiresFramework,
         obligationCount: obl.obligations.length,
-        coverageGaps,
+        coverage,
         judged: judged.map((j) => ({
           regulation_name: j.regulation_name,
           jo: j.jo,
