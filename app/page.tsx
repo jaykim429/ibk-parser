@@ -426,6 +426,7 @@ function AnalysisView(props: {
 
   const hasJobs = jobs.length > 0;
   const doneCount = jobs.filter((j) => j.status === "done").length;
+  const [listCollapsed, setListCollapsed] = useState(false);
 
   const fileInput = (
     <input
@@ -477,9 +478,18 @@ function AnalysisView(props: {
     );
   }
 
-  // 업로드 후: 좌측 분석 목록 + 우측 상세 보고서
+  // 업로드 후: 좌측 분석 목록 + 우측 상세 보고서 (목록 접기 시 본문 전체폭)
   return (
-    <div className="analysis-grid">
+    <div className={`analysis-grid${listCollapsed ? " list-collapsed" : ""}`}>
+      {listCollapsed && (
+        <button
+          className="list-expand-tab"
+          onClick={() => setListCollapsed(false)}
+          title="분석 목록 펼치기"
+        >
+          분석 목록 ▸
+        </button>
+      )}
       <aside className="job-panel">
         <div className="job-panel-head">
           <div className="job-panel-title">
@@ -488,9 +498,14 @@ function AnalysisView(props: {
               완료 {doneCount} / 전체 {jobs.length}
             </span>
           </div>
-          <button className="btn ghost xs" onClick={clearJobs} disabled={busy}>
-            전체 지우기
-          </button>
+          <div className="job-panel-head-actions">
+            <button className="btn ghost xs" onClick={clearJobs} disabled={busy}>
+              전체 지우기
+            </button>
+            <button className="btn ghost xs" onClick={() => setListCollapsed(true)} title="목록 접기">
+              ◂ 접기
+            </button>
+          </div>
         </div>
 
         <div className="job-actions">

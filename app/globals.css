@@ -239,6 +239,38 @@ a {
   align-items: start;
 }
 
+/* 분석 목록 접기 — 본문 전체폭(원문 2개 비교 등 넓게 보기) */
+.analysis-grid.list-collapsed {
+  grid-template-columns: 1fr;
+}
+.analysis-grid.list-collapsed .job-panel {
+  display: none;
+}
+.list-expand-tab {
+  position: fixed;
+  left: 8px;
+  top: 92px;
+  z-index: 45;
+  padding: 9px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: var(--primary, #2563eb);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+}
+.list-expand-tab:hover {
+  background: #1d4ed8;
+}
+.job-panel-head-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
 /* ── 카드/패널 (shadcn) ─────────────────────────── */
 .panel {
   background: var(--card);
