@@ -5,7 +5,7 @@ import {
   fillHwpx,
   markdownToHwpx,
   parse
-} from "./chunk-LH2GNJQZ.js";
+} from "./chunk-2ZP57SMQ.js";
 import {
   detectFormat,
   detectZipFormat
@@ -114,7 +114,7 @@ program.name("kordoc").description("\uBAA8\uB450 \uD30C\uC2F1\uD574\uBC84\uB9AC\
   }
 });
 program.command("watch <dir>").description("\uB514\uB809\uD1A0\uB9AC \uAC10\uC2DC \u2014 \uC0C8 \uBB38\uC11C \uC790\uB3D9 \uBCC0\uD658").option("--webhook <url>", "\uACB0\uACFC \uC804\uC1A1 \uC6F9\uD6C5 URL").option("-d, --out-dir <dir>", "\uBCC0\uD658 \uACB0\uACFC \uCD9C\uB825 \uB514\uB809\uD1A0\uB9AC").option("-p, --pages <range>", "\uD398\uC774\uC9C0/\uC139\uC158 \uBC94\uC704").option("--format <type>", "\uCD9C\uB825 \uD615\uC2DD: markdown \uB610\uB294 json", "markdown").option("--silent", "\uC9C4\uD589 \uBA54\uC2DC\uC9C0 \uC228\uAE30\uAE30").action(async (dir, opts) => {
-  const { watchDirectory } = await import("./watch-K5XJSLHL.js");
+  const { watchDirectory } = await import("./watch-ULPRKYNV.js");
   await watchDirectory({
     dir,
     outDir: opts.outDir,

@@ -178,7 +178,7 @@ async function htmlToPdf(html: string, options?: PrintOptions): Promise<Buffer> 
 
   try {
     const page = await browser.newPage()
-    await page.setContent(html, { waitUntil: "networkidle0" })
+    await page.setContent(html, { waitUntil: "networkidle0" as "load" })
 
     const margin = options?.margin
     const pdf = await page.pdf({

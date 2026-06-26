@@ -13,6 +13,8 @@ const OPTIONAL_EXTERNAL = [
   "@huggingface/transformers",
   "@hyzyla/pdfium",
   "sharp",
+  "canvas",
+  "@napi-rs/canvas",
 ]
 
 export default defineConfig([

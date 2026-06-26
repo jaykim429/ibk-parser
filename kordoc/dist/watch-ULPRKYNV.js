@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {
   parse
-} from "./chunk-LH2GNJQZ.js";
+} from "./chunk-2ZP57SMQ.js";
 import {
   detectFormat
 } from "./chunk-CFQLK3LM.js";
@@ -147,4 +147,4 @@ async function sendWebhook(url, payload) {
 export {
   watchDirectory
 };
-//# sourceMappingURL=watch-K5XJSLHL.js.map
+//# sourceMappingURL=watch-ULPRKYNV.js.map

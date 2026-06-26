@@ -63,13 +63,21 @@ interface PdfPageProxy {
  * 미설치 시 에러 throw → 호출측에서 catch.
  */
 async function renderPageToPng(page: PdfPageProxy): Promise<Uint8Array> {
-  // node-canvas 동적 로드 (선택적 의존성)
+  // 캔버스 동적 로드(선택적 의존성). node-canvas 우선, 없으면 @napi-rs/canvas(프리빌트) 폴백.
   let createCanvas: (w: number, h: number) => { getContext(t: string): unknown; toBuffer(t: string): Buffer }
   try {
     const canvasModule = await import("canvas")
     createCanvas = canvasModule.createCanvas
   } catch {
-    throw new Error("OCR을 사용하려면 'canvas' 패키지를 설치하세요: npm install canvas")
+    try {
+      // @napi-rs/canvas: 네이티브 빌드 불필요(프리빌트) → Windows/폐쇄망 친화
+      const napi = (await import("@napi-rs/canvas")) as unknown as {
+        createCanvas: (w: number, h: number) => { getContext(t: string): unknown; toBuffer(t: string): Buffer }
+      }
+      createCanvas = napi.createCanvas
+    } catch {
+      throw new Error("OCR을 사용하려면 'canvas' 또는 '@napi-rs/canvas' 패키지를 설치하세요")
+    }
   }
 
   const scale = 2.0 // 300 DPI 근사

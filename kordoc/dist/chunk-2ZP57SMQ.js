@@ -16410,12 +16410,15 @@ var InsufficientDataError = class extends Error {
     this.available = available;
     this.name = "InsufficientDataError";
   }
+  requested;
+  available;
 };
 var Reader = class {
   constructor(buf, start = 0) {
     this.buf = buf;
     this.pos = start;
   }
+  buf;
   pos;
   position() {
     return this.pos;
@@ -18805,7 +18808,7 @@ async function parseHwp(buffer, options) {
 async function parsePdf(buffer, options) {
   let parsePdfDocument;
   try {
-    const mod = await import("./parser-G5A5767Q.js");
+    const mod = await import("./parser-VKTVG274.js");
     parsePdfDocument = mod.parsePdfDocument;
   } catch {
     return {
@@ -19043,4 +19046,4 @@ export {
   compare,
   parse
 };
-//# sourceMappingURL=chunk-LH2GNJQZ.js.map
+//# sourceMappingURL=chunk-2ZP57SMQ.js.map

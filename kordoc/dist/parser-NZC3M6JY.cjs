@@ -1,19 +1,19 @@
-import {
-  HEADING_RATIO_H1,
-  HEADING_RATIO_H2,
-  HEADING_RATIO_H3,
-  KordocError,
-  blocksToMarkdown,
-  detectLegalStructure,
-  safeMax,
-  safeMin
-} from "./chunk-BPSDXME3.js";
-import {
-  parsePageRange
-} from "./chunk-4H4KD7L4.js";
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _nullishCoalesce(lhs, rhsFn) { if (lhs != null) { return lhs; } else { return rhsFn(); } } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } var _class;
+
+
+
+
+
+
+
+
+var _chunkJAXAILBMcjs = require('./chunk-JAXAILBM.cjs');
+
+
+var _chunkV4Z4MUZWcjs = require('./chunk-V4Z4MUZW.cjs');
 
 // src/pdf/line-detector.ts
-import { OPS } from "pdfjs-dist/legacy/build/pdf.mjs";
+var _pdfmjs = require('pdfjs-dist/legacy/build/pdf.mjs');
 var ORIENTATION_TOL = 2;
 var MIN_LINE_LENGTH = 15;
 var MAX_LINE_WIDTH = 5;
@@ -58,46 +58,46 @@ function extractLines(fnArray, argsArray) {
     const op = fnArray[i];
     const args = argsArray[i];
     switch (op) {
-      case OPS.setLineWidth:
+      case _pdfmjs.OPS.setLineWidth:
         lineWidth = args[0] || 1;
         break;
-      case OPS.constructPath: {
+      case _pdfmjs.OPS.constructPath: {
         const arg0 = args[0];
         if (Array.isArray(arg0)) {
           const subOps = arg0;
           const coords = args[1];
           let ci = 0;
           for (const subOp of subOps) {
-            if (subOp === OPS.moveTo) {
+            if (subOp === _pdfmjs.OPS.moveTo) {
               curX = coords[ci++];
               curY = coords[ci++];
               pathStartX = curX;
               pathStartY = curY;
-            } else if (subOp === OPS.lineTo) {
+            } else if (subOp === _pdfmjs.OPS.lineTo) {
               const x2 = coords[ci++], y2 = coords[ci++];
               currentPath.push({ x1: curX, y1: curY, x2, y2 });
               curX = x2;
               curY = y2;
-            } else if (subOp === OPS.rectangle) {
+            } else if (subOp === _pdfmjs.OPS.rectangle) {
               const rx = coords[ci++], ry = coords[ci++];
               const rw = coords[ci++], rh = coords[ci++];
               pushRectangle(currentPath, rx, ry, rw, rh);
-            } else if (subOp === OPS.closePath) {
+            } else if (subOp === _pdfmjs.OPS.closePath) {
               if (curX !== pathStartX || curY !== pathStartY) {
                 currentPath.push({ x1: curX, y1: curY, x2: pathStartX, y2: pathStartY });
               }
               curX = pathStartX;
               curY = pathStartY;
-            } else if (subOp === OPS.curveTo) {
+            } else if (subOp === _pdfmjs.OPS.curveTo) {
               ci += 6;
-            } else if (subOp === OPS.curveTo2 || subOp === OPS.curveTo3) {
+            } else if (subOp === _pdfmjs.OPS.curveTo2 || subOp === _pdfmjs.OPS.curveTo3) {
               ci += 4;
             }
           }
         } else {
           const afterOp = arg0;
           const dataArr = args[1];
-          const pathData = dataArr?.[0];
+          const pathData = _optionalChain([dataArr, 'optionalAccess', _3 => _3[0]]);
           if (pathData && typeof pathData === "object") {
             const len = Object.keys(pathData).length;
             let di = 0;
@@ -128,29 +128,29 @@ function extractLines(fnArray, argsArray) {
               }
             }
           }
-          if (afterOp === OPS.stroke || afterOp === OPS.closeStroke) {
+          if (afterOp === _pdfmjs.OPS.stroke || afterOp === _pdfmjs.OPS.closeStroke) {
             flushPath(true);
-          } else if (afterOp === OPS.fill || afterOp === OPS.eoFill || afterOp === OPS.fillStroke || afterOp === OPS.eoFillStroke || afterOp === OPS.closeFillStroke || afterOp === OPS.closeEOFillStroke) {
+          } else if (afterOp === _pdfmjs.OPS.fill || afterOp === _pdfmjs.OPS.eoFill || afterOp === _pdfmjs.OPS.fillStroke || afterOp === _pdfmjs.OPS.eoFillStroke || afterOp === _pdfmjs.OPS.closeFillStroke || afterOp === _pdfmjs.OPS.closeEOFillStroke) {
             flushPath(true);
-          } else if (afterOp === OPS.endPath) {
+          } else if (afterOp === _pdfmjs.OPS.endPath) {
             flushPath(false);
           }
         }
         break;
       }
-      case OPS.stroke:
-      case OPS.closeStroke:
+      case _pdfmjs.OPS.stroke:
+      case _pdfmjs.OPS.closeStroke:
         flushPath(true);
         break;
-      case OPS.fill:
-      case OPS.eoFill:
-      case OPS.fillStroke:
-      case OPS.eoFillStroke:
-      case OPS.closeFillStroke:
-      case OPS.closeEOFillStroke:
+      case _pdfmjs.OPS.fill:
+      case _pdfmjs.OPS.eoFill:
+      case _pdfmjs.OPS.fillStroke:
+      case _pdfmjs.OPS.eoFillStroke:
+      case _pdfmjs.OPS.closeFillStroke:
+      case _pdfmjs.OPS.closeEOFillStroke:
         flushPath(true);
         break;
-      case OPS.endPath:
+      case _pdfmjs.OPS.endPath:
         flushPath(false);
         break;
     }
@@ -1145,7 +1145,7 @@ function buildClusterTable(rows, columns, pageNum) {
     const nonEmptyCols = cells[r].filter((c) => c.text.trim()).length;
     if (nonEmptyCols !== 1) continue;
     if (cells[r][0].text.trim() !== "") continue;
-    const contentText = cells[r].find((c) => c.text.trim())?.text.trim() || "";
+    const contentText = _optionalChain([cells, 'access', _4 => _4[r], 'access', _5 => _5.find, 'call', _6 => _6((c) => c.text.trim()), 'optionalAccess', _7 => _7.text, 'access', _8 => _8.trim, 'call', _9 => _9()]) || "";
     if (/^[○●▶\-·]/.test(contentText)) continue;
     for (let pr = r - 1; pr >= 0; pr--) {
       if (cells[pr].some((c) => c.text.trim())) {
@@ -1315,15 +1315,15 @@ function summarizeDocumentQuality(pages) {
 }
 
 // src/pdf/polyfill.ts
-import * as pdfjsWorker from "pdfjs-dist/legacy/build/pdf.worker.mjs";
+var _pdfworkermjs = require('pdfjs-dist/legacy/build/pdf.worker.mjs'); var pdfjsWorker = _interopRequireWildcard(_pdfworkermjs);
 var g = globalThis;
 if (typeof g.DOMMatrix === "undefined") {
-  g.DOMMatrix = class DOMMatrix {
-    m = [1, 0, 0, 1, 0, 0];
-    constructor(init) {
+  g.DOMMatrix = (_class = class DOMMatrix {
+    __init() {this.m = [1, 0, 0, 1, 0, 0]}
+    constructor(init) {;_class.prototype.__init.call(this);
       if (init) this.m = init;
     }
-  };
+  }, _class);
 }
 if (typeof g.Path2D === "undefined") {
   g.Path2D = class Path2D {
@@ -1332,8 +1332,8 @@ if (typeof g.Path2D === "undefined") {
 g.pdfjsWorker = pdfjsWorker;
 
 // src/pdf/parser.ts
-import { getDocument, GlobalWorkerOptions } from "pdfjs-dist/legacy/build/pdf.mjs";
-GlobalWorkerOptions.workerSrc = "";
+
+_pdfmjs.GlobalWorkerOptions.workerSrc = "";
 var MAX_PAGES = 5e3;
 var MAX_TOTAL_TEXT = 100 * 1024 * 1024;
 var PDF_LOAD_TIMEOUT_MS = 3e4;
@@ -1342,11 +1342,11 @@ async function safeDestroy(o) {
     const obj = o;
     if (obj && typeof obj.destroy === "function") await obj.destroy();
     else if (obj && typeof obj.cleanup === "function") await obj.cleanup();
-  } catch {
+  } catch (e2) {
   }
 }
 async function loadPdfWithTimeout(buffer) {
-  const loadingTask = getDocument({
+  const loadingTask = _pdfmjs.getDocument.call(void 0, {
     data: new Uint8Array(buffer),
     useSystemFonts: true,
     disableFontFace: true,
@@ -1359,7 +1359,7 @@ async function loadPdfWithTimeout(buffer) {
       new Promise((_, reject) => {
         timer = setTimeout(() => {
           void safeDestroy(loadingTask);
-          reject(new KordocError("PDF \uB85C\uB529 \uD0C0\uC784\uC544\uC6C3 (30\uCD08 \uCD08\uACFC)"));
+          reject(new (0, _chunkJAXAILBMcjs.KordocError)("PDF \uB85C\uB529 \uD0C0\uC784\uC544\uC6C3 (30\uCD08 \uCD08\uACFC)"));
         }, PDF_LOAD_TIMEOUT_MS);
       })
     ]);
@@ -1368,11 +1368,11 @@ async function loadPdfWithTimeout(buffer) {
   }
 }
 async function parsePdfDocument(buffer, options) {
-  const formulaBuffer = options?.formulaOcr ? buffer.slice(0) : null;
+  const formulaBuffer = _optionalChain([options, 'optionalAccess', _10 => _10.formulaOcr]) ? buffer.slice(0) : null;
   const doc = await loadPdfWithTimeout(buffer);
   try {
     const pageCount = doc.numPages;
-    if (pageCount === 0) throw new KordocError("PDF\uC5D0 \uD398\uC774\uC9C0\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.");
+    if (pageCount === 0) throw new (0, _chunkJAXAILBMcjs.KordocError)("PDF\uC5D0 \uD398\uC774\uC9C0\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4.");
     const metadata = { pageCount };
     await extractPdfMetadata(doc, metadata);
     const blocks = [];
@@ -1381,7 +1381,7 @@ async function parsePdfDocument(buffer, options) {
     let totalChars = 0;
     let totalTextBytes = 0;
     const effectivePageCount = Math.min(pageCount, MAX_PAGES);
-    const pageFilter = options?.pages ? parsePageRange(options.pages, effectivePageCount) : null;
+    const pageFilter = _optionalChain([options, 'optionalAccess', _11 => _11.pages]) ? _chunkV4Z4MUZWcjs.parsePageRange.call(void 0, options.pages, effectivePageCount) : null;
     const totalTarget = pageFilter ? pageFilter.size : effectivePageCount;
     const fontSizeFreq = /* @__PURE__ */ new Map();
     const pageHeights = /* @__PURE__ */ new Map();
@@ -1413,36 +1413,36 @@ async function parsePdfDocument(buffer, options) {
           pageText += pageText ? "\n" + t : t;
         }
         pageQuality.push(computePageQuality(i, pageText));
-        if (totalTextBytes > MAX_TOTAL_TEXT) throw new KordocError("\uD14D\uC2A4\uD2B8 \uCD94\uCD9C \uD06C\uAE30 \uCD08\uACFC");
+        if (totalTextBytes > MAX_TOTAL_TEXT) throw new (0, _chunkJAXAILBMcjs.KordocError)("\uD14D\uC2A4\uD2B8 \uCD94\uCD9C \uD06C\uAE30 \uCD08\uACFC");
         parsedPages++;
-        options?.onProgress?.(parsedPages, totalTarget);
+        _optionalChain([options, 'optionalAccess', _12 => _12.onProgress, 'optionalCall', _13 => _13(parsedPages, totalTarget)]);
       } catch (pageErr) {
-        if (pageErr instanceof KordocError) throw pageErr;
+        if (pageErr instanceof _chunkJAXAILBMcjs.KordocError) throw pageErr;
         warnings.push({ page: i, message: `\uD398\uC774\uC9C0 ${i} \uD30C\uC2F1 \uC2E4\uD328: ${pageErr instanceof Error ? pageErr.message : "\uC54C \uC218 \uC5C6\uB294 \uC624\uB958"}`, code: "PARTIAL_PARSE" });
       }
     }
     const parsedPageCount = parsedPages || (pageFilter ? pageFilter.size : effectivePageCount);
     if (totalChars / Math.max(parsedPageCount, 1) < 10) {
-      if (options?.ocr) {
+      if (_optionalChain([options, 'optionalAccess', _14 => _14.ocr])) {
         try {
-          const { ocrPages } = await import("./provider-WPIYEALY.js");
+          const { ocrPages } = await Promise.resolve().then(() => _interopRequireWildcard(require("./provider-PTDV4NOE.cjs")));
           const ocrBlocks = await ocrPages(doc, options.ocr, pageFilter, effectivePageCount);
           if (ocrBlocks.length > 0) {
             const ocrMarkdown = ocrBlocks.map((b) => b.text || "").filter(Boolean).join("\n\n");
             return { markdown: ocrMarkdown, blocks: ocrBlocks, metadata, warnings, isImageBased: true, pageQuality, qualitySummary: summarizeDocumentQuality(pageQuality) };
           }
-        } catch {
+        } catch (e3) {
         }
       }
-      throw Object.assign(new KordocError(`\uC774\uBBF8\uC9C0 \uAE30\uBC18 PDF (${pageCount}\uD398\uC774\uC9C0, ${totalChars}\uC790)`), { isImageBased: true });
+      throw Object.assign(new (0, _chunkJAXAILBMcjs.KordocError)(`\uC774\uBBF8\uC9C0 \uAE30\uBC18 PDF (${pageCount}\uD398\uC774\uC9C0, ${totalChars}\uC790)`), { isImageBased: true });
     }
-    if (options?.removeHeaderFooter !== false && parsedPageCount >= 3) {
+    if (_optionalChain([options, 'optionalAccess', _15 => _15.removeHeaderFooter]) !== false && parsedPageCount >= 3) {
       const removed = removeHeaderFooterBlocks(blocks, pageHeights, warnings);
       for (let ri = removed.length - 1; ri >= 0; ri--) {
         blocks.splice(removed[ri], 1);
       }
     }
-    if (options?.formulaOcr && formulaBuffer) {
+    if (_optionalChain([options, 'optionalAccess', _16 => _16.formulaOcr]) && formulaBuffer) {
       try {
         await applyFormulaOcr(formulaBuffer, blocks, pageFilter, effectivePageCount, warnings, options.onProgress);
       } catch (e) {
@@ -1457,10 +1457,10 @@ async function parsePdfDocument(buffer, options) {
       detectHeadings(blocks, medianFontSize);
     }
     detectMarkerHeadings(blocks);
-    const structured = detectLegalStructure(blocks);
+    const structured = _chunkJAXAILBMcjs.detectLegalStructure.call(void 0, blocks);
     const outline = structured.filter((b) => b.type === "heading" && b.level && b.text).map((b) => ({ level: b.level, text: b.text, pageNumber: b.pageNumber }));
     sanitizeBlockControlChars(structured);
-    let markdown = cleanPdfText(blocksToMarkdown(structured));
+    let markdown = cleanPdfText(_chunkJAXAILBMcjs.blocksToMarkdown.call(void 0, structured));
     return {
       markdown,
       blocks: structured,
@@ -1477,7 +1477,7 @@ async function parsePdfDocument(buffer, options) {
 async function extractPdfMetadata(doc, metadata) {
   try {
     const result = await doc.getMetadata();
-    if (!result?.info) return;
+    if (!_optionalChain([result, 'optionalAccess', _17 => _17.info])) return;
     const info = result.info;
     if (typeof info.Title === "string" && info.Title.trim()) metadata.title = info.Title.trim();
     if (typeof info.Author === "string" && info.Author.trim()) metadata.author = info.Author.trim();
@@ -1488,7 +1488,7 @@ async function extractPdfMetadata(doc, metadata) {
     }
     if (typeof info.CreationDate === "string") metadata.createdAt = parsePdfDate(info.CreationDate);
     if (typeof info.ModDate === "string") metadata.modifiedAt = parsePdfDate(info.ModDate);
-  } catch {
+  } catch (e4) {
   }
 }
 function parsePdfDate(dateStr) {
@@ -1539,15 +1539,15 @@ function computeMedianFontSizeFromFreq(freq) {
 }
 function detectHeadings(blocks, medianFontSize) {
   for (const block of blocks) {
-    if (block.type !== "paragraph" || !block.text || !block.style?.fontSize) continue;
+    if (block.type !== "paragraph" || !block.text || !_optionalChain([block, 'access', _18 => _18.style, 'optionalAccess', _19 => _19.fontSize])) continue;
     const text = block.text.trim();
     if (text.length === 0 || text.length > 200) continue;
     if (/^\d+$/.test(text)) continue;
     const ratio = block.style.fontSize / medianFontSize;
     let level = 0;
-    if (ratio >= HEADING_RATIO_H1) level = 1;
-    else if (ratio >= HEADING_RATIO_H2) level = 2;
-    else if (ratio >= HEADING_RATIO_H3) level = 3;
+    if (ratio >= _chunkJAXAILBMcjs.HEADING_RATIO_H1) level = 1;
+    else if (ratio >= _chunkJAXAILBMcjs.HEADING_RATIO_H2) level = 2;
+    else if (ratio >= _chunkJAXAILBMcjs.HEADING_RATIO_H3) level = 3;
     if (level > 0) {
       block.type = "heading";
       block.level = level;
@@ -1610,7 +1610,7 @@ function detectMarkerHeadings(blocks) {
       block.level = 4;
       continue;
     }
-    if (/^[가-힣]{2,6}$/.test(text) && block.style?.fontSize) {
+    if (/^[가-힣]{2,6}$/.test(text) && _optionalChain([block, 'access', _20 => _20.style, 'optionalAccess', _21 => _21.fontSize])) {
       const prev = blocks[i - 1];
       const next = blocks[i + 1];
       const prevIsStructural = !prev || prev.type === "table" || prev.type === "heading" || prev.type === "separator";
@@ -1859,7 +1859,7 @@ function extractBlocksWithGrids(items, pageNum, grids, horizontals, verticals) {
     }
     if (remaining.length > 0) {
       const allY = remaining.map((i) => i.y);
-      const pageH = safeMax(allY) - safeMin(allY);
+      const pageH = _chunkJAXAILBMcjs.safeMax.call(void 0, allY) - _chunkJAXAILBMcjs.safeMin.call(void 0, allY);
       const groups = xyCutOrder(remaining, Math.max(15, pageH * 0.03));
       const textBlocks = [];
       for (const group of groups) {
@@ -1957,7 +1957,7 @@ function extractPageBlocksFallback(items, pageNum) {
       blocks.push({ type: "paragraph", text: tableText, pageNumber: pageNum, bbox, style: dominantStyle(items) });
     } else {
       const allY = items.map((i) => i.y);
-      const pageHeight = safeMax(allY) - safeMin(allY);
+      const pageHeight = _chunkJAXAILBMcjs.safeMax.call(void 0, allY) - _chunkJAXAILBMcjs.safeMin.call(void 0, allY);
       const gapThreshold = Math.max(15, pageHeight * 0.03);
       const orderedGroups = xyCutOrder(items, gapThreshold);
       for (const group of orderedGroups) {
@@ -2006,7 +2006,7 @@ function dominantStyle(items) {
     }
   }
   if (dominantSize === 0) return void 0;
-  const fontName = items.find((i) => i.fontSize === dominantSize)?.fontName || void 0;
+  const fontName = _optionalChain([items, 'access', _22 => _22.find, 'call', _23 => _23((i) => i.fontSize === dominantSize), 'optionalAccess', _24 => _24.fontName]) || void 0;
   return { fontSize: dominantSize, fontName };
 }
 function normalizeItems(rawItems) {
@@ -2104,14 +2104,14 @@ function isProseSpread(items) {
   for (let i = 1; i < sorted.length; i++) {
     gaps.push(sorted[i].x - (sorted[i - 1].x + sorted[i - 1].w));
   }
-  const maxGap = safeMax(gaps);
+  const maxGap = _chunkJAXAILBMcjs.safeMax.call(void 0, gaps);
   const avgLen = items.reduce((s, i) => s + i.text.length, 0) / items.length;
   return maxGap < 40 && avgLen < 5;
 }
 function detectColumns(yLines) {
   const allItems = yLines.flat();
   if (allItems.length === 0) return null;
-  const pageWidth = safeMax(allItems.map((i) => i.x + i.w)) - safeMin(allItems.map((i) => i.x));
+  const pageWidth = _chunkJAXAILBMcjs.safeMax.call(void 0, allItems.map((i) => i.x + i.w)) - _chunkJAXAILBMcjs.safeMin.call(void 0, allItems.map((i) => i.x));
   if (pageWidth < 100) return null;
   let bigoLineIdx = -1;
   for (let i = 0; i < yLines.length; i++) {
@@ -2311,7 +2311,7 @@ function buildGridTable(lines, columns) {
   return md.join("\n");
 }
 function mergeLineSimple(items) {
-  if (items.length <= 1) return items[0]?.text || "";
+  if (items.length <= 1) return _optionalChain([items, 'access', _25 => _25[0], 'optionalAccess', _26 => _26.text]) || "";
   const sorted = [...items].sort((a, b) => a.x - b.x);
   const isEvenSpaced = detectEvenSpacedItems(sorted);
   let result = sorted[0].text;
@@ -2487,7 +2487,7 @@ function removeHeaderFooterBlocks(blocks, pageHeights, warnings) {
   const bottomEntries = [];
   for (let bi = 0; bi < blocks.length; bi++) {
     const b = blocks[bi];
-    if (!b.bbox || !b.pageNumber || !b.text?.trim()) continue;
+    if (!b.bbox || !b.pageNumber || !_optionalChain([b, 'access', _27 => _27.text, 'optionalAccess', _28 => _28.trim, 'call', _29 => _29()])) continue;
     const ph = pageHeights.get(b.bbox.page) || pageHeights.get(b.pageNumber);
     if (!ph) continue;
     const blockTop = ph - (b.bbox.y + b.bbox.height);
@@ -2510,7 +2510,7 @@ function removeHeaderFooterBlocks(blocks, pageHeights, warnings) {
     }
     const repeatedPatterns = /* @__PURE__ */ new Set();
     for (const [p, count] of patternCount) {
-      if (count >= MIN_REPEAT && (patternPages.get(p)?.size ?? 0) >= MIN_REPEAT) {
+      if (count >= MIN_REPEAT && (_nullishCoalesce(_optionalChain([patternPages, 'access', _30 => _30.get, 'call', _31 => _31(p), 'optionalAccess', _32 => _32.size]), () => ( 0))) >= MIN_REPEAT) {
         repeatedPatterns.add(p);
       }
     }
@@ -2568,7 +2568,7 @@ function mergeKoreanLines(text) {
   return result.join("\n");
 }
 async function applyFormulaOcr(buffer, blocks, pageFilter, effectivePageCount, warnings, _onProgress) {
-  const formulaMod = await import("./formula-3FYVVNFJ.js");
+  const formulaMod = await Promise.resolve().then(() => _interopRequireWildcard(require("./formula-ANWBAPOE.cjs")));
   const { FormulaPipeline, ensureFormulaModels } = formulaMod;
   await ensureFormulaModels((p) => {
     if (p.phase === "download" && p.total) {
@@ -2685,13 +2685,13 @@ async function applyFormulaOcr(buffer, blocks, pageFilter, effectivePageCount, w
 function formatMb(bytes) {
   return `${(bytes / 1024 / 1024).toFixed(1)}MB`;
 }
-export {
-  cleanPdfText,
-  collapseNumberSpacing,
-  detectAmendmentTable,
-  extractPdfMetadataOnly,
-  mergeAdjacentTableBlocks,
-  parsePdfDocument,
-  safeDestroy
-};
-//# sourceMappingURL=parser-KXUNYGRI.js.map
+
+
+
+
+
+
+
+
+exports.cleanPdfText = cleanPdfText; exports.collapseNumberSpacing = collapseNumberSpacing; exports.detectAmendmentTable = detectAmendmentTable; exports.extractPdfMetadataOnly = extractPdfMetadataOnly; exports.mergeAdjacentTableBlocks = mergeAdjacentTableBlocks; exports.parsePdfDocument = parsePdfDocument; exports.safeDestroy = safeDestroy;
+//# sourceMappingURL=parser-NZC3M6JY.cjs.map

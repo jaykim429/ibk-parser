@@ -22,7 +22,12 @@ async function renderPageToPng(page) {
     const canvasModule = await import("canvas");
     createCanvas = canvasModule.createCanvas;
   } catch {
-    throw new Error("OCR\uC744 \uC0AC\uC6A9\uD558\uB824\uBA74 'canvas' \uD328\uD0A4\uC9C0\uB97C \uC124\uCE58\uD558\uC138\uC694: npm install canvas");
+    try {
+      const napi = await import("@napi-rs/canvas");
+      createCanvas = napi.createCanvas;
+    } catch {
+      throw new Error("OCR\uC744 \uC0AC\uC6A9\uD558\uB824\uBA74 'canvas' \uB610\uB294 '@napi-rs/canvas' \uD328\uD0A4\uC9C0\uB97C \uC124\uCE58\uD558\uC138\uC694");
+    }
   }
   const scale = 2;
   const viewport = page.getViewport({ scale });
@@ -34,4 +39,4 @@ async function renderPageToPng(page) {
 export {
   ocrPages
 };
-//# sourceMappingURL=provider-WPIYEALY.js.map
+//# sourceMappingURL=provider-C3EEQRTV.js.map

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import {
   HEADING_RATIO_H1,
   HEADING_RATIO_H2,
@@ -8,10 +7,10 @@ import {
   detectLegalStructure,
   safeMax,
   safeMin
-} from "./chunk-UURFZHB4.js";
+} from "./chunk-BPSDXME3.js";
 import {
   parsePageRange
-} from "./chunk-3TBUDJDE.js";
+} from "./chunk-4H4KD7L4.js";
 
 // src/pdf/line-detector.ts
 import { OPS } from "pdfjs-dist/legacy/build/pdf.mjs";
@@ -1426,7 +1425,7 @@ async function parsePdfDocument(buffer, options) {
     if (totalChars / Math.max(parsedPageCount, 1) < 10) {
       if (options?.ocr) {
         try {
-          const { ocrPages } = await import("./provider-7H4CPZYS.js");
+          const { ocrPages } = await import("./provider-C3EEQRTV.js");
           const ocrBlocks = await ocrPages(doc, options.ocr, pageFilter, effectivePageCount);
           if (ocrBlocks.length > 0) {
             const ocrMarkdown = ocrBlocks.map((b) => b.text || "").filter(Boolean).join("\n\n");
@@ -2569,7 +2568,7 @@ function mergeKoreanLines(text) {
   return result.join("\n");
 }
 async function applyFormulaOcr(buffer, blocks, pageFilter, effectivePageCount, warnings, _onProgress) {
-  const formulaMod = await import("./formula-KOQV353G.js");
+  const formulaMod = await import("./formula-3FYVVNFJ.js");
   const { FormulaPipeline, ensureFormulaModels } = formulaMod;
   await ensureFormulaModels((p) => {
     if (p.phase === "download" && p.total) {
@@ -2695,4 +2694,4 @@ export {
   parsePdfDocument,
   safeDestroy
 };
-//# sourceMappingURL=parser-G5A5767Q.js.map
+//# sourceMappingURL=parser-BSWAYAUT.js.map

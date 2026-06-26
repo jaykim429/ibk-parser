@@ -8,7 +8,7 @@ import {
   fillHwpx,
   markdownToHwpx,
   parse
-} from "./chunk-LH2GNJQZ.js";
+} from "./chunk-2ZP57SMQ.js";
 import {
   detectFormat,
   detectZipFormat
@@ -191,7 +191,7 @@ server.tool(
           break;
         case "pdf":
           try {
-            const { extractPdfMetadataOnly } = await import("./parser-G5A5767Q.js");
+            const { extractPdfMetadataOnly } = await import("./parser-VKTVG274.js");
             metadata = await extractPdfMetadataOnly(buffer);
           } catch {
             metadata = void 0;

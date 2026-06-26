@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-// src/ocr/provider.ts
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } }// src/ocr/provider.ts
 async function ocrPages(doc, provider, pageFilter, effectivePageCount) {
   const blocks = [];
   for (let i = 1; i <= effectivePageCount; i++) {
@@ -12,7 +10,7 @@ async function ocrPages(doc, provider, pageFilter, effectivePageCount) {
       if (text.trim()) {
         blocks.push({ type: "paragraph", text: text.trim(), pageNumber: i });
       }
-    } catch {
+    } catch (e) {
       blocks.push({ type: "paragraph", text: `[OCR \uC2E4\uD328: \uD398\uC774\uC9C0 ${i}]` });
     }
   }
@@ -21,10 +19,15 @@ async function ocrPages(doc, provider, pageFilter, effectivePageCount) {
 async function renderPageToPng(page) {
   let createCanvas;
   try {
-    const canvasModule = await import("canvas");
+    const canvasModule = await Promise.resolve().then(() => _interopRequireWildcard(require("canvas")));
     createCanvas = canvasModule.createCanvas;
-  } catch {
-    throw new Error("OCR\uC744 \uC0AC\uC6A9\uD558\uB824\uBA74 'canvas' \uD328\uD0A4\uC9C0\uB97C \uC124\uCE58\uD558\uC138\uC694: npm install canvas");
+  } catch (e2) {
+    try {
+      const napi = await Promise.resolve().then(() => _interopRequireWildcard(require("@napi-rs/canvas")));
+      createCanvas = napi.createCanvas;
+    } catch (e3) {
+      throw new Error("OCR\uC744 \uC0AC\uC6A9\uD558\uB824\uBA74 'canvas' \uB610\uB294 '@napi-rs/canvas' \uD328\uD0A4\uC9C0\uB97C \uC124\uCE58\uD558\uC138\uC694");
+    }
   }
   const scale = 2;
   const viewport = page.getViewport({ scale });
@@ -33,7 +36,7 @@ async function renderPageToPng(page) {
   await page.render({ canvasContext: ctx, viewport }).promise;
   return new Uint8Array(canvas.toBuffer("image/png"));
 }
-export {
-  ocrPages
-};
-//# sourceMappingURL=provider-7H4CPZYS.js.map
+
+
+exports.ocrPages = ocrPages;
+//# sourceMappingURL=provider-PTDV4NOE.cjs.map
