@@ -79,29 +79,37 @@ function assessQuality(
   return { lowQuality: false };
 }
 
-// 진짜 헤딩 패턴(제N조/장, 번호 매김, 가.나., 원문자, 로마자) 또는 흔한 표제어
-const HEADING_PATTERN =
-  /^\s*(제\s*\d+\s*[조장절관편]|\d+(\.\d+)*\s*[.)]|\([0-9가-힣]+\)|[가-힣]\s*[.)]|[①-⑳]|[IVXivx]+\s*[.)]|[【\[][^】\]]+[】\]])/;
+// 조/장/절/관/편 제목 — 다소 길어도(≤55) 진짜 헤딩(예: "제25조의4(재난관리책임기관의 장의 …)")
+const HEADING_JO = /^\s*제\s*\d+\s*(조(\s*의\s*\d+)?|장|절|관|편)/;
+// 흔한 표제어(짧음)
 const HEADING_WORD =
   /^\s*(목적|정의|적용\s*범위|적용\s*대상|주요\s*내용|제안\s*이유|개정\s*이유|개정\s*취지|부\s*칙|총\s*칙|통\s*칙|구성|개요|배경|용어의?\s*정의|시행일|경과조치|별표|별지|서식)\b/;
-// 본문 종결(서술형 어미) 또는 디코드 실패(�)로 끝나는 줄 — 헤딩이 아니라 줄단위로 끊긴 본문
-const PROSE_TAIL = /(다|함|음|임|됨|등|것임|하였음|바람|한다|된다|이다|이며|하며|하여|위함|예정이다|목적으로)\s*[.)]?\s*$|�\s*$/;
+// 본문 종결(서술형 어미)·콜론 정의·디코드 실패(�)로 끝/포함 — 헤딩이 아니라 본문 줄
+const PROSE_TAIL =
+  /(다|함|음|임|됨|등|것임|하였음|바람|한다|된다|이다|이며|하며|하여|위함|예정이다|목적으로|경우|사항|때)\s*[.)]?\s*$|�/;
 
 /**
- * 헤딩 과분류 정규화 — 일부 PDF는 본문 문장을 줄단위로 끊어 전부 '헤딩'으로 분류한다
- * (예: AI 가이드라인 본문 822줄이 h3). 헤딩 패턴/표제어가 없고 본문스러운(길거나 서술형 종결,
- * 또는 글리프 손실 �로 끝나는) 헤딩 블록을 '문단'으로 강등 → 복원/목차/청킹 정상화.
- * 보편 규칙(특정 문서 하드코딩 없음), 진짜 표제(번호·짧은 명사구)는 보존.
+ * 헤딩 분류 정규화 — PDF/HWP 공통으로 본문 줄이 통째로 '헤딩'으로 태깅되는 문제 교정.
+ *  · PDF(AI 가이드라인): 본문 문장이 줄단위 h3
+ *  · HWP(모범규준 등): 모든 문단이 ParaShape HeadingType=L3 ("① 이 규준은…", "1. 자산운용회사 : …")
+ * 규칙(보편·하드코딩 없음): 헤딩은 **짧은 표제**만 유지한다.
+ *  - 제N조/장/절 제목 → 보존(≤55, 단 서술형 종결이면 본문)
+ *  - 짧은 표제어 → 보존
+ *  - 그 외: 길거나(>25) 서술형/콜론정의/� 포함이면 → '문단' 강등(시작이 ①·1.·가.여도)
+ * 효과: 복원 헤딩벽 제거 + 목차 정상화 + 내규 청킹을 조(條) 단위로(항·호 과세분화 방지).
  */
+function isShortHeadingTitle(t: string): boolean {
+  if (PROSE_TAIL.test(t)) return false; // 서술형/정의문/깨진 글자 → 본문
+  if (HEADING_JO.test(t)) return t.length <= 55; // 조/장/절 제목
+  if (HEADING_WORD.test(t)) return true;
+  return t.length <= 25; // 짧은 명사형 표제·절번호(1.1 등)·짧은 라벨
+}
 function demoteProseHeadings(blocks: IRBlock[]): { blocks: IRBlock[]; demoted: number } {
   let demoted = 0;
   const out = blocks.map((b) => {
     if (b.type !== "heading") return b;
     const t = (b.text ?? "").trim();
-    if (!t) return b;
-    if (HEADING_PATTERN.test(t) || HEADING_WORD.test(t)) return b; // 진짜 헤딩
-    const looksProse = t.length > 25 || PROSE_TAIL.test(t);
-    if (!looksProse) return b; // 짧은 명사형 표제는 헤딩 유지
+    if (!t || isShortHeadingTitle(t)) return b;
     demoted++;
     const { level: _omit, ...rest } = b as IRBlock & { level?: number };
     return { ...rest, type: "paragraph" } as IRBlock;
