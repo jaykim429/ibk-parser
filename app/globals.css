@@ -1092,7 +1092,9 @@ a {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 40%, #dbeafe, #eff6ff);
+  background: radial-gradient(circle at 50% 40%, #eef4ff, #d3e0f7);
+  border: 2px solid #1e3a8a; /* 네이비 링 — 공공기관 느낌 */
+  box-shadow: 0 4px 14px rgba(30, 58, 138, 0.18);
 }
 
 .proc-orb::before,
@@ -1122,8 +1124,20 @@ a {
 }
 
 .proc-orb-emoji {
-  font-size: 40px;
-  animation: proc-bob 2s ease-in-out infinite;
+  font-size: 42px;
+  animation: proc-pulse 2.4s ease-in-out infinite; /* 통통 튀지 않고 점잖은 펄스 */
+}
+
+@keyframes proc-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
 }
 
 @keyframes proc-bob {

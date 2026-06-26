@@ -27,6 +27,12 @@ export const config = {
   dgxSparkUrl: env.DGX_SPARK_URL || "http://172.23.80.102:8000",
   dgxSparkModel: env.DGX_SPARK_MODEL || "google/gemma-4-26B-A4B-it",
 
+  // ── PDF 파서 라우팅: kordoc(기본) | rookie(CG Rookie Parser 사이드카) ──
+  //    PDF만 rookie로 위임 가능(HWP/HWPX는 항상 kordoc). 실패 시 kordoc 폴백.
+  pdfParser: (env.PDF_PARSER || "kordoc").toLowerCase(), // "kordoc" | "rookie"
+  rookieParserUrl: env.ROOKIE_PARSER_URL || "http://rookie-parser:8900",
+  rookieTimeoutMs: num(env.ROOKIE_TIMEOUT_MS, 120000),
+
   // ── 임베딩 ──
   embeddingApiUrl: env.EMBEDDING_API_URL || "https://openrouter.ai/api/v1",
   embeddingApiKey: env.EMBEDDING_API_KEY || "",
@@ -79,7 +85,7 @@ export const config = {
   ocrMinCharsPerPage: num(env.OCR_MIN_CHARS_PER_PAGE, 80), // 페이지당 최소 글자수(미만이면 의심)
 
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v19",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v20",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──

@@ -354,7 +354,7 @@ function ProcessingView({ job }: { job: Job }) {
     <div className="panel proc">
       <div className="proc-hero">
         <div className="proc-orb">
-          <span className="proc-orb-emoji">🤖</span>
+          <span className="proc-orb-emoji">🏛️</span>
         </div>
         <h2>AI가 규제변동을 분석하고 있어요</h2>
         <p className="proc-file">{job.fileName}</p>
