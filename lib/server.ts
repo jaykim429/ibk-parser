@@ -70,6 +70,25 @@ export type Candidate = {
   [k: string]: unknown;
 };
 
+/**
+ * 대형 문서 본문 클램프 — 단순 앞자르기(head-only) 대신 head+tail 샘플링.
+ *
+ * 왜: 법률안/의안은 핵심이 양끝에 흩어진다 — 제안이유·주요내용은 앞,
+ *    부칙(시행일·경과조치)·후반 신설/개정 조문은 뒤. head-only 절단은 뒤를 통째로 버려
+ *    후반 변경점을 분석이 보지 못한다. (변경점 자체는 P1 신구조문대비표가 전체 blocks에서
+ *    별도 추출하므로 매칭은 보존되지만, analyze의 요약·키워드·도메인 판정은 head만 본다.)
+ *    도메인 하드코딩 없이 일반적으로 양끝을 모두 표본화한다.
+ * 한도 이하면 원문 그대로. 초과 시 앞 70% + 뒤 30%(경계 표식 삽입).
+ */
+export function clampDocText(text: string, max: number): string {
+  if (!text || text.length <= max) return text || "";
+  const marker = "\n\n…(중략: 본문 일부 생략)…\n\n";
+  const budget = max - marker.length;
+  const head = Math.floor(budget * 0.7);
+  const tail = budget - head;
+  return text.slice(0, head) + marker + text.slice(text.length - tail);
+}
+
 // ── 호출 ──────────────────────────────────────────────
 export async function analyzeDocument(args: {
   lawName: string;
@@ -78,7 +97,7 @@ export async function analyzeDocument(args: {
 }): Promise<Analysis> {
   return post<Analysis>("/api/v1/analyze/document", {
     law_name: args.lawName,
-    document_text: args.documentText.slice(0, config.maxAnalyzeChars),
+    document_text: clampDocText(args.documentText, config.maxAnalyzeChars),
     item_type: args.itemType,
   });
 }
@@ -92,7 +111,7 @@ export async function parseBill(args: {
   return post("/api/v1/parse/bill", {
     bill_id: args.billId,
     bill_name: args.billName,
-    bill_text: args.billText.slice(0, config.maxAnalyzeChars),
+    bill_text: clampDocText(args.billText, config.maxAnalyzeChars),
     is_policy: args.isPolicy,
   });
 }
@@ -123,7 +142,7 @@ export async function matchHybrid(args: {
     document_id: args.documentId,
     item_type: args.itemType,
     law_name: args.lawName,
-    document_text: args.documentText.slice(0, config.maxAnalyzeChars),
+    document_text: clampDocText(args.documentText, config.maxAnalyzeChars),
     provisions: args.provisions ?? [],
     pre_computed_analysis: args.analysis ?? null,
     top_k: args.topK ?? 20,
@@ -365,7 +384,7 @@ JSON만 출력: {"relevant": true|false, "domain": "분야 한 단어", "reason"
   try {
     const raw = await callCompletion({
       systemPrompt: SYSTEM,
-      prompt: `## 문서\n제목: ${args.title}\n본문(발췌):\n${args.documentText.slice(0, 4000)}`,
+      prompt: `## 문서\n제목: ${args.title}\n본문(발췌):\n${clampDocText(args.documentText, 4000)}`,
       maxTokens: 220,
       temperature: 0,
     });
