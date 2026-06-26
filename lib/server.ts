@@ -205,20 +205,33 @@ function buildFallbackQuery(
   return (combined || clean).slice(0, 800);
 }
 
+// 서브쿼리 노이즈 토큰 — change_type enum(영문)·placeholder·메타값은 검색 임베딩을 희석시킴.
+//  (예: analyze의 {change_type:"amended", target:"...", effect:"정보 없음"} → "amended ... 정보 없음")
+const QUERY_NOISE = new Set([
+  "amended", "new", "deleted", "modified", "added", "removed", "changed", "unchanged",
+  "정보 없음", "정보없음", "없음", "해당 없음", "해당없음", "n/a", "na", "null", "-", "—",
+]);
+
 /**
  * 객체에서 텍스트를 한 줄로 평탄화(변경 단위 텍스트 추출용).
  * ⚠️ 중첩 객체/배열까지 재귀 — provision_changes의 before/after(신·구조문)가
  *    nested로 들어와도 유실되지 않게 한다(얕은 추출은 변경 핵심을 놓침).
+ *  + change_type enum·placeholder 노이즈는 제거(쿼리 정밀도↑).
  */
 function objText(o: unknown, depth = 0): string {
   if (o == null) return "";
-  if (typeof o === "string") return o;
+  if (typeof o === "string") {
+    const t = o.trim();
+    return QUERY_NOISE.has(t.toLowerCase()) ? "" : o;
+  }
   if (typeof o === "number" || typeof o === "boolean") return String(o);
   if (depth > 4) return ""; // 순환/과대 객체 방어
   if (Array.isArray(o)) return o.map((v) => objText(v, depth + 1)).join(" ");
   if (typeof o === "object") {
-    return Object.values(o as Record<string, unknown>)
-      .map((v) => objText(v, depth + 1))
+    // change_type/type/id 같은 메타 키는 건너뛰고 의미 필드(target/effect/before/after/content 등)만 평탄화
+    return Object.entries(o as Record<string, unknown>)
+      .filter(([k]) => !/^(change_type|type|id|index|no|순번|kind)$/i.test(k))
+      .map(([, v]) => objText(v, depth + 1))
       .filter(Boolean)
       .join(" ");
   }
