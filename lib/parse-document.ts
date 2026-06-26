@@ -14,6 +14,7 @@ import type {
 } from "kordoc";
 import { config } from "./config";
 import { normalizeMarkdown, pickTitle } from "./doc-text";
+import { recoverLowQualityPages, type OcrFn } from "./pdf-ocr-recover";
 
 // kordoc는 ESM 전용 + 네이티브 의존성(sharp/pdfium 등)을 가지므로
 // webpack 번들링을 피해 런타임 네이티브 ESM 동적 import로 로드한다.
@@ -154,6 +155,8 @@ export async function parseDocument(
     model: DGX_MODEL,
   });
 
+  // parse()는 pdfjs가 buffer의 ArrayBuffer를 detach할 수 있어, VLM 페이지 복구용 복사본을 미리 확보
+  const recoverBuf = isPdf && config.vlmRecoverEnabled ? Buffer.from(buffer) : null;
   const result = await parse(buffer, { ocr, removeHeaderFooter: true } as ParseOptions);
 
   if (!result.success) {
@@ -165,7 +168,7 @@ export async function parseDocument(
     throw new Error("문서에서 추출된 텍스트가 없습니다.");
   }
 
-  const markdown = normalizeMarkdown(result.markdown);
+  let markdown = normalizeMarkdown(result.markdown);
 
   const usedOcr = (result.warnings ?? []).some((w) => w.code === "OCR_FALLBACK")
     || (!!result.isImageBased);
@@ -182,27 +185,59 @@ export async function parseDocument(
   //     (실제 강제 재OCR은 페이지 렌더 의존성 필요 → 후속. 현 단계는 정확 감지·표면화)
   const qs = result.qualitySummary;
   const kordocNeedsOcr = !!qs?.needsOcr && !usedOcr;
+  const recoveredBlocks: IRBlock[] = [];
+  let recoveredOcr = false;
   if (kordocNeedsOcr) {
-    const pages = qs?.ocrCandidatePages?.length ?? 0;
+    const cand = qs?.ocrCandidatePages ?? [];
     const hangul = Math.round((qs?.avgHangulRatio ?? 0) * 100);
-    const msg = `텍스트 추출 품질 저하 — OCR 권장(품질 의심 ${pages}개 페이지, 한글 추출비율 ${hangul}%). 스캔본 또는 글꼴 매핑 손상 가능.`;
-    warnings.push(msg);
-    console.warn(`[PARSE] 품질 신호: ${filename} — ${msg}`);
+    // 에이전틱 복구: 손상 의심 페이지를 렌더→VLM OCR로 텍스트 복구(PDF·상한 내·활성화 시)
+    if (isPdf && config.vlmRecoverEnabled && recoverBuf && cand.length > 0 && cand.length <= config.vlmRecoverMaxPages) {
+      try {
+        const rec = await recoverLowQualityPages({
+          buffer: recoverBuf,
+          pages: cand,
+          ocr: ocr as unknown as OcrFn,
+          maxPages: config.vlmRecoverMaxPages,
+        });
+        if (rec.length > 0) {
+          recoveredOcr = true;
+          // 분석/매칭이 복구 내용을 보도록 markdown에 합치고, 복원용 blocks도 추가
+          for (const r of rec) {
+            markdown += `\n\n<!-- VLM 복구 페이지 ${r.page} -->\n${r.text}`;
+            recoveredBlocks.push({ type: "heading", level: 3, text: `[복구 페이지 ${r.page}]` } as IRBlock);
+            for (const para of r.text.split(/\n{2,}/).map((s) => s.trim()).filter(Boolean)) {
+              recoveredBlocks.push({ type: "paragraph", text: para } as IRBlock);
+            }
+          }
+          const msg = `글꼴 손상/스캔 의심 ${rec.length}개 페이지를 VLM OCR로 복구함(p.${rec.map((r) => r.page).join(", ")}).`;
+          warnings.push(msg);
+          console.log(`[PARSE] VLM 페이지 복구: ${filename} — ${msg}`);
+        }
+      } catch (e) {
+        console.warn(`[PARSE] VLM 페이지 복구 실패: ${filename} — ${(e as Error).message}`);
+      }
+    }
+    if (!recoveredOcr) {
+      const msg = `텍스트 추출 품질 저하 — OCR 권장(품질 의심 ${cand.length}개 페이지, 한글 추출비율 ${hangul}%). 스캔본 또는 글꼴 매핑 손상 가능.`;
+      warnings.push(msg);
+      console.warn(`[PARSE] 품질 신호: ${filename} — ${msg}`);
+    }
   }
 
   // 헤딩 과분류(본문 줄이 전부 헤딩) 정규화 — 복원/목차/청킹 품질 개선
-  const { blocks: normBlocks, demoted } = demoteProseHeadings(result.blocks ?? []);
+  const { blocks: normBlocks0, demoted } = demoteProseHeadings(result.blocks ?? []);
   if (demoted > 0) {
     console.log(`[PARSE] 헤딩 과분류 정규화: ${filename} — 본문성 헤딩 ${demoted}개 → 문단 강등`);
   }
+  const normBlocks = recoveredBlocks.length ? [...normBlocks0, ...recoveredBlocks] : normBlocks0;
 
   return {
     markdown,
     fileType: result.fileType,
     pageCount: result.pageCount,
     isImageBased: !!result.isImageBased,
-    usedOcr,
-    lowQuality: q.lowQuality || kordocNeedsOcr,
+    usedOcr: usedOcr || recoveredOcr,
+    lowQuality: q.lowQuality || (kordocNeedsOcr && !recoveredOcr),
     blocks: normBlocks,
     outline: result.outline ?? [],
     title: pickTitle(result.metadata?.title, markdown, filename),

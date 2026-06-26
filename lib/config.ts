@@ -87,8 +87,13 @@ export const config = {
   // ── 파서 품질 게이트 (의심 추출 감지) ──
   ocrMinCharsPerPage: num(env.OCR_MIN_CHARS_PER_PAGE, 80), // 페이지당 최소 글자수(미만이면 의심)
 
+  // ── PDF 손상 페이지 VLM 재OCR 복구 (에이전틱) ──
+  //    글꼴(ToUnicode) 손상으로 텍스트층은 있으나 추출이 깨진 페이지를 렌더→VLM으로 복구.
+  vlmRecoverEnabled: (env.VLM_RECOVER_ENABLED ?? "true") !== "false",
+  vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 8), // 복구 페이지 상한(비용 제한)
+
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v30",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v31",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──

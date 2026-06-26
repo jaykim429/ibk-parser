@@ -269,6 +269,8 @@ a {
   display: flex;
   gap: 6px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* ── 카드/패널 (shadcn) ─────────────────────────── */
@@ -318,6 +320,10 @@ a {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  /* 버튼 라벨은 한 줄 유지 — 좁은 패널에서 "지우 기"처럼 글자 중간 줄바꿈 방지 */
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: 0 0 auto;
   transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -381,6 +387,7 @@ a {
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .job-panel-title {
