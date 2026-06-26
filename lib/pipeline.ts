@@ -161,8 +161,10 @@ export class CompliancePipeline {
       analyzeRes.status === "fulfilled" ? analyzeRes.value : undefined;
     const provisions = parseRes.status === "fulfilled" ? parseRes.value.provisions ?? [] : [];
     const obl: ObligationExtract =
-      oblRes.status === "fulfilled" ? oblRes.value : { requiresFramework: false, obligations: [] };
-    const lawName = analysis?.law_name || initialName;
+      oblRes.status === "fulfilled" ? oblRes.value : { documentTitle: "", requiresFramework: false, obligations: [] };
+    // 소관 법령/제목: LLM이 본문 의미로 뽑은 정식 제목 우선(편집스펙·불릿·공고번호 오인 방지) →
+    //  analyze 법령명 → 휴리스틱 제목 순. (보편적·에이전틱 — 정규식 휴리스틱 의존 최소화)
+    const lawName = cleanLawName(obl.documentTitle || analysis?.law_name || initialName);
 
     // 3) 입력 문서 청킹 → 멀티쿼리 하이브리드 검색(변경 단위별 + 의무별 쿼리 융합)
     const query = buildCanonicalQuery(analysis, provisions, doc.markdown);
@@ -198,8 +200,8 @@ export class CompliancePipeline {
       )
     );
 
-    // 4) LLM 적합성·영향도 판정
-    const judged = await judgeMatches({ lawName, itemType, analysis, candidates: reranked, infoOnly });
+    // 4) LLM 적합성·영향도 판정 (의무·권고도 함께 전달 — analyze 요약이 일부 단락에 고착해도 보정)
+    const judged = await judgeMatches({ lawName, itemType, analysis, candidates: reranked, infoOnly, obligations: obl.obligations });
     const relevant = judged.filter((j) => j.verdict.relevance === "적합");
 
     // 4.5) 요건 커버리지(권고2) — 의무별 충족/부분/부재 + 대응 내규 산출(요건 체크리스트)
@@ -233,15 +235,20 @@ export class CompliancePipeline {
       candidateCount: judged.length,
       infoOnly,
       coverage,
+      obligations: obl.obligations,
+      amendmentPairs: amendPairs.map((p) => ({ before: p.before, after: p.after })),
+      truncated: doc.markdown.length > config.maxAnalyzeChars,
     });
 
     const seconds = Math.round((Date.now() - t0) / 1000);
     const countBy = (lv: string) => relevant.filter((j) => j.verdict.impact === lv).length;
-    // 헤드라인 영향도: 조문 매칭 + 커버리지 갭(부재=높음, 부분=중간) 합산 — 과소커버리지 방지
+    // 헤드라인 영향도: 조문 매칭 + 커버리지 갭(부재=높음, 부분=중간) 합산 — 과소커버리지 방지.
+    //  '영향 내규'(기존 조문 매칭)와 '신규 필요'(부재 갭)는 별도 박스로 구분(혼동 방지).
     const highTotal = countBy("높음") + absentGaps.length;
     const midTotal = countBy("중간") + partialGaps.length;
     const stats: Stat[] = [
-      { num: relevant.length + absentGaps.length, label: "영향 내규" },
+      { num: relevant.length, label: "영향 내규" },
+      ...(absentGaps.length ? [{ num: absentGaps.length, label: "신규 필요" } as Stat] : []),
       { num: highTotal, label: "영향도 높음" },
       { num: midTotal, label: "영향도 중간" },
       { num: countBy("낮음"), label: "영향도 낮음" },

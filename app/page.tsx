@@ -286,10 +286,16 @@ export default function Home() {
 }
 
 function impactCount(job: Job): number | null {
-  const stat = job.result?.stats?.find((s) => s.label === "영향 내규");
-  if (!stat) return null;
-  const n = Number(stat.num);
-  return Number.isFinite(n) ? n : null;
+  const stats = job.result?.stats;
+  if (!stats) return null;
+  // 영향 내규(기존 조문 매칭) + 신규 필요(커버리지 부재 갭) 합산 — 가이드라인의 신규요건도 배지에 반영
+  const pick = (label: string) => {
+    const n = Number(stats.find((s) => s.label === label)?.num);
+    return Number.isFinite(n) ? n : 0;
+  };
+  const hasImpact = stats.some((s) => s.label === "영향 내규");
+  if (!hasImpact) return null;
+  return pick("영향 내규") + pick("신규 필요");
 }
 
 // ── 보고서 목차(TOC) ─────────────────────────────────

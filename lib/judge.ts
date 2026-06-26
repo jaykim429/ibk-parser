@@ -73,12 +73,13 @@ export async function judgeMatches(args: {
   candidates: Candidate[];
   maxCandidates?: number;
   infoOnly?: boolean;
+  obligations?: Obligation[];
 }): Promise<JudgedMatch[]> {
   const cands = dedupeCandidates(args.candidates).slice(0, args.maxCandidates ?? config.judgeMax);
   if (cands.length === 0) return [];
   const infoOnly = !!args.infoOnly;
 
-  const changeSummary = buildChangeSummary(args.lawName, args.itemType, args.analysis);
+  const changeSummary = buildChangeSummary(args.lawName, args.itemType, args.analysis, args.obligations);
 
   const candidateBlock = cands
     .map((c, i) => {
@@ -252,7 +253,7 @@ const ITEM_TYPE_LABEL: Record<ItemType, string> = {
   guideline: "가이드라인/모범규준(자율규제)",
 };
 
-function buildChangeSummary(lawName: string, itemType: ItemType, a?: Analysis): string {
+function buildChangeSummary(lawName: string, itemType: ItemType, a?: Analysis, obligations?: Obligation[]): string {
   const lines = [
     `- 문서유형: ${ITEM_TYPE_LABEL[itemType] ?? itemType}`,
     `- 법령명: ${a?.law_name || lawName}`,
@@ -266,6 +267,12 @@ function buildChangeSummary(lawName: string, itemType: ItemType, a?: Analysis): 
       .map((o) => JSON.stringify(o, null, 0))
       .join("; ");
     lines.push(`- 주요 변경: ${ov}`);
+  }
+  // 추출된 의무·권고를 함께 제시 — analyze(요약)가 문서의 일부(예: 편집기준)에 고착해도
+  //  실제 요구사항이 판정 기준에 반영되도록 한다(부적합 캐스케이드/부재 과대 방지).
+  if (obligations?.length) {
+    const obl = obligations.slice(0, 14).map((o) => `${o.title}(${o.kind})`).join("; ");
+    lines.push(`- 이 문서가 요구하는 의무·권고: ${obl}`);
   }
   return lines.join("\n");
 }

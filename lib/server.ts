@@ -373,6 +373,8 @@ export type Obligation = {
 };
 
 export type ObligationExtract = {
+  /** 문서의 정식 제목/주제(LLM이 본문 의미로 판단 — 편집스펙·불릿 오인 방지). 소관법령 표기에 사용 */
+  documentTitle: string;
   /** 이 문서가 '내규 체계 신설/신규 의무'를 요구하는 원천문서인가 */
   requiresFramework: boolean;
   obligations: Obligation[];
@@ -399,15 +401,16 @@ export async function extractObligations(args: {
 - 문서에 7대 원칙·장/절 구조가 있으면 각 원칙/영역을 최소 1개 항목으로 커버한다. 단 특정 도메인을 가정해 없는 의무를 지어내지 말 것.
 - 항목 수는 핵심 위주 5~14개. 서로 중복되지 않게.
 - requiresFramework: 이 문서가 단순 수치/문구 일부개정이 아니라 **내규 체계 신설·신규 의무 도입**을 요구하면 true.
-JSON만 출력: {"requiresFramework": true|false, "obligations": [{"key":"영역라벨","title":"의무 한 줄","summary":"무엇을 요구하는지 1~2문장","kind":"신규수립의무|기존강화|절차통제|조직기구|소비자보호|보안|위탁관리|기타"}]}`;
+- documentTitle: 이 문서의 **정식 제목/주제**를 본문 의미로 판단해 한 줄로(파일명·머리말의 편집스펙·불릿·공고번호에 현혹되지 말 것. 예: 본문이 개인신용정보 동의서 개선을 다루면 "개인신용정보 표준동의서 개선 가이드라인"). 법령/지침의 공식 명칭이 본문에 있으면 그대로.
+JSON만 출력: {"documentTitle":"문서 정식 제목","requiresFramework": true|false, "obligations": [{"key":"영역라벨","title":"의무 한 줄","summary":"무엇을 요구하는지 1~2문장","kind":"신규수립의무|기존강화|절차통제|조직기구|소비자보호|보안|위탁관리|기타"}]}`;
   try {
     const raw = await callCompletion({
       systemPrompt: SYSTEM,
-      prompt: `## 문서\n제목: ${args.lawName}\n유형: ${args.itemType}\n본문:\n${clampDocText(args.documentText, config.maxAnalyzeChars)}`,
-      maxTokens: 2200,
+      prompt: `## 문서\n파일/추정제목: ${args.lawName}\n유형: ${args.itemType}\n본문:\n${clampDocText(args.documentText, config.maxAnalyzeChars)}`,
+      maxTokens: 2400,
       temperature: 0.1,
     });
-    const v = extractJson<{ requiresFramework?: boolean; obligations?: Obligation[] }>(raw);
+    const v = extractJson<{ documentTitle?: string; requiresFramework?: boolean; obligations?: Obligation[] }>(raw);
     const obligations = (Array.isArray(v.obligations) ? v.obligations : [])
       .map((o) => ({
         key: String(o?.key ?? "").trim(),
@@ -417,9 +420,13 @@ JSON만 출력: {"requiresFramework": true|false, "obligations": [{"key":"영역
       }))
       .filter((o) => o.title || o.summary)
       .slice(0, 14);
-    return { requiresFramework: v.requiresFramework === true, obligations };
+    return {
+      documentTitle: String(v.documentTitle ?? "").trim(),
+      requiresFramework: v.requiresFramework === true,
+      obligations,
+    };
   } catch {
-    return { requiresFramework: false, obligations: [] };
+    return { documentTitle: "", requiresFramework: false, obligations: [] };
   }
 }
 

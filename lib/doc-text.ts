@@ -10,7 +10,7 @@ export const BOILERPLATE_LABEL =
 
 // 한국 공문서 제목 종결 패턴(보편) — 법령·안 + 정보성(의견서/회신/해석/자료) 포함
 export const TITLE_END =
-  /(법률안|법안|개정안|제정안|폐지안|일부개정령안|개정령안|고시안|공고안|시행령|시행규칙|시행세칙|세칙|규정|규칙|훈령|예규|조례|기준|지침|법률|법|령|의견서|회신|회신서|해석|해석례|보도자료|설명자료|참고자료|안내|\(\s*안\s*\)|（\s*안\s*）)\s*$/;
+  /(법률안|법안|개정안|제정안|폐지안|일부개정령안|개정령안|고시안|공고안|시행령|시행규칙|시행세칙|세칙|규정|규칙|훈령|예규|조례|기준|기준안|지침|법률|법|령|가이드라인|가이드|모범규준|모범기준|매뉴얼|요령|방안|계획|로드맵|표준약관|약관|동의서|의견서|회신|회신서|해석|해석례|보도자료|설명자료|참고자료|안내|\(\s*안\s*\)|（\s*안\s*）)\s*$/;
 
 /**
  * 파싱 마크다운 정규화 — 본문은 보존하고 정형 노이즈만 제거.
@@ -42,6 +42,10 @@ export function cleanFilename(name: string): string {
 // 조문/호/번호 항목 시작(본문) — 제목이 아님
 const BODY_START = /^(제\s*\d+\s*[조항호목]|\d+\s*[.)]|\(\s*\d+\s*\)|[가-힣]\s*[.)]|[①-⑳])/;
 
+// 편집·형식 스펙(폰트 크기/줄간격/여백 등)은 제목이 아니라 가독성 지침의 본문 항목.
+//   예: "◦ 제목 13p, 본문 10p 및 줄간격 130% 이상 : 가독성을 높이기 위한 최소 기준"
+const FORMAT_SPEC = /(\d+\s*(p|pt|px|포인트)\b)|줄\s*간격|자\s*간|글자\s*크기|글꼴|폰트|굵기|여백|들여쓰기|정렬\s*기준/i;
+
 /** 본문 상단에서 실제 문서 제목 추출 — 선행 기호/번호 정리, 본문 항목 제외, 후행 주석 제거 후 종결 패턴 검사 */
 export function titleFromContent(markdown: string): string {
   const lines = (markdown || "")
@@ -49,7 +53,8 @@ export function titleFromContent(markdown: string): string {
     .map((l) =>
       l
         .replace(/^#+\s*/, "")
-        .replace(/^[\s>*·▪▶◇○□■△❍-]+/, "")
+        // 선행 불릿/기호 폭넓게 제거(◦ ● ◌ ‣ ⁃ ◆ ▷ ☐ ✓ → 등 + 대시류 포함)
+        .replace(/^[\s>*·▪▫▸▶▷◇◆○◦●◌□■△▲❍‣⁃☐✓→\-–—]+/, "")
         .replace(/[|`]/g, "")
         .trim()
     )
@@ -60,7 +65,13 @@ export function titleFromContent(markdown: string): string {
     const l = raw.replace(/\s*[<〈][^>〉]*[>〉]\s*$/, "").trim();
     if (l.length < 6 || l.length > 70) continue;
     if (BODY_START.test(l)) continue; // 제N조/호/번호 항목은 제목 아님
-    if (TITLE_END.test(l)) return l;
+    if (FORMAT_SPEC.test(l)) continue; // 폰트/줄간격 등 편집 스펙은 제목 아님
+    // "라벨 : 설명" 형태(콜론 뒤 부연)는 제목이 아니라 항목 설명 — 콜론 앞만 제목 후보로 축약 시도
+    const colon = l.match(/^(.{6,60}?)\s*[:：]\s*\S/);
+    const cand = colon ? colon[1].trim() : l;
+    if (cand.length < 6 || cand.length > 70) continue;
+    if (BODY_START.test(cand) || FORMAT_SPEC.test(cand)) continue;
+    if (TITLE_END.test(cand)) return cand;
   }
   return "";
 }

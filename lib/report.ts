@@ -11,7 +11,7 @@
  */
 import { callCompletion, extractJson } from "./llm";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
-import { cleanLawName, type Analysis, type ItemType } from "./server";
+import { cleanLawName, type Analysis, type ItemType, type Obligation } from "./server";
 import type { JudgedMatch, CoverageItem } from "./judge";
 
 const REPORT_SYSTEM = `당신은 IBK기업은행 준법지원부의 컴플라이언스 보고서 작성 전문가입니다.
@@ -37,6 +37,12 @@ export type ReportInput = {
   infoOnly?: boolean;
   /** 권고2: 요건 커버리지 — 의무별 충족/부분/부재 체크리스트. 부재=높음·부분=중간으로 집계. */
   coverage?: CoverageItem[];
+  /** 추출된 의무·권고 — 가이드라인/모범규준 등에서 1.1을 상세히 쓰기 위한 입력(개정안엔 비어있을 수 있음) */
+  obligations?: Obligation[];
+  /** 신구조문대비표(현행→개정) — 개정안·입법예고의 1.1 핵심 근거 */
+  amendmentPairs?: { before: string; after: string }[];
+  /** 원문이 길어 분석에 일부만 반영됐는지(절단) — 유의사항 도출용 */
+  truncated?: boolean;
 };
 
 /**
@@ -98,18 +104,19 @@ type LlmReport = {
   ibk_view?: OutlineItem[];
   articles?: ArticleAnalysis[];
   priority_actions?: OutlineItem[];
+  caveats?: OutlineItem[];
 };
 
 export async function generateReport(input: ReportInput): Promise<string> {
   const relevant = input.judged.filter((j) => j.verdict.relevance === "적합");
   const gapCount = (input.coverage ?? []).filter((g) => g && g.requirement && g.coverage !== "충족").length;
   const header = buildHeader(input, relevant.length);
-  const section4 = buildAnalysisBasis(input, relevant.length);
 
   // 적합 내규도 없고 커버리지 갭도 없을 때만 '영향 없음' 단락. 갭이 있으면(가이드라인 신규요건 등)
   // 적합 0건이어도 갭 섹션을 보여줘야 한다(과소커버리지 방지).
   if (relevant.length === 0 && gapCount === 0) {
-    return [header, noMatchBody(input), section4].join("\n\n");
+    const sec4 = buildCaveats(input, []);
+    return [header, noMatchBody(input), sec4].filter(Boolean).join("\n\n");
   }
 
   let llm: LlmReport = {};
@@ -126,14 +133,16 @@ export async function generateReport(input: ReportInput): Promise<string> {
   }
 
   const body = assembleBody(input, relevant, llm);
-  return [header, body, section4].join("\n\n");
+  const sec4 = buildCaveats(input, (llm.caveats ?? []).filter(Boolean));
+  return [header, body, sec4].filter(Boolean).join("\n\n");
 }
 
 // ── 헤더(결정적) ───────────────────────────────────────
 function buildHeader(input: ReportInput, relevantCount: number): string {
   const date = formatKstDate();
   const domain = input.analysis?.law_domain || "-";
-  const lawName = cleanLawName(input.analysis?.law_name || input.lawName);
+  // 파이프라인이 LLM documentTitle 우선으로 해소한 input.lawName을 신뢰(편집스펙 오인 방지)
+  const lawName = cleanLawName(input.lawName || input.analysis?.law_name || "");
   const docTypeLabel = input.infoOnly
     ? "보도자료 등 정보성 자료"
     : DOC_TYPE_LABEL[input.itemType] ?? input.itemType;
@@ -150,12 +159,43 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
 
 // ── LLM 프롬프트(분석 텍스트만 JSON으로) ───────────────
 function buildPrompt(input: ReportInput, relevant: JudgedMatch[]): string {
+  const obligations = input.obligations ?? [];
+  const coverage = input.coverage ?? [];
+  // 의무·권고 블록 — 1.1을 문서 실질 내용에 맞게 상세히 쓰기 위한 핵심 입력
+  const oblBlock = obligations.length
+    ? obligations.map((o) => `- (${o.kind}) ${o.title}: ${o.summary}`).join("\n")
+    : "";
+  const covBlock = coverage.length
+    ? coverage
+        .map((c) => `- ${c.requirement} → ${c.coverage}${c.evidence ? ` (${c.evidence})` : ""}`)
+        .join("\n")
+    : "";
+  // 개정 개요/신구조문 — 개정안·입법예고에서 1.1의 핵심 근거(의무가 아니라 '무엇이 어떻게 바뀌나')
+  const ov = (input.analysis?.change_overview ?? [])
+    .slice(0, 8)
+    .map((o) => objToLine(o))
+    .filter(Boolean)
+    .join("; ");
+  const provCh = (input.analysis?.provision_changes ?? [])
+    .slice(0, 8)
+    .map((o) => objToLine(o))
+    .filter(Boolean)
+    .join("\n  · ");
+  const amendBlock = (input.amendmentPairs ?? [])
+    .slice(0, 8)
+    .map((p, i) => `  ${i + 1}) 현행: ${cleanInline(p.before, 160)} → 개정: ${cleanInline(p.after, 160)}`)
+    .join("\n");
   const changeSummary = [
     `- 문서유형(추정): ${DOC_TYPE_LABEL[input.itemType] ?? input.itemType}`,
-    `- 법령명: ${input.analysis?.law_name || input.lawName}`,
+    `- 법령명: ${cleanLawName(input.lawName || input.analysis?.law_name || "")}`,
     input.analysis?.law_domain ? `- 분야: ${input.analysis.law_domain}` : "",
     input.analysis?.core_summary ? `- 핵심요약: ${input.analysis.core_summary}` : "",
-    input.analysis?.summary ? `- 상세: ${input.analysis.summary}` : "",
+    input.analysis?.summary ? `- 상세(개정이유·배경 등): ${input.analysis.summary}` : "",
+    ov ? `- 개정 개요: ${ov}` : "",
+    provCh ? `- 조문별 변경:\n  · ${provCh}` : "",
+    amendBlock ? `- 신구조문대비표(현행→개정):\n${amendBlock}` : "",
+    oblBlock ? `- (참고) 추출된 의무·권고 — 가이드라인/모범규준 등에서 핵심. 개정안·보도자료엔 비어있거나 적을 수 있음:\n${oblBlock}` : "",
+    covBlock ? `- IBK 내규 커버리지:\n${covBlock}` : "",
   ]
     .filter(Boolean)
     .join("\n");
@@ -180,14 +220,19 @@ ${articleBlock}
 아래 JSON 객체 **하나만** 출력하라(설명 문장·코드펜스 금지). 모든 텍스트는 개조식.
 
 {
-  "doc_stage": "법률안(발의)|입법예고|규정변경예고|보도자료|공포·시행|기타 중 추정",
+  "doc_stage": "법률안(발의)|입법예고|규정변경예고|보도자료|공포·시행|가이드라인/모범규준(자율규제)|기타 중 추정",
   "certainty": "확정|미확정",
-  "overview_changes": [개조식 항목 3~5개. 각 항목은 문자열, 또는 하위 세부가 있으면 {"text":"상위","children":["하위1","하위2"]}],
-  "ibk_view": [IBK 적용 관점(직접/은행/금융회사/공공기관/상장회사 적용 등) 2~3개. 공공기관성+은행성 함께. 문자열 또는 중첩 객체],
+  "overview_changes": [주요 변경·핵심 내용. **문서 성격에 맞는 근거로 상세히**(상위 3~6개, 필요시 children으로 세부 2~4개 중첩):
+     · 개정안/입법예고/시행령/고시 → **개정이유·배경 + 신구조문(현행→개정) + 주요내용** 중심으로 '무엇이 어떻게 바뀌는가'를 구체적으로.
+     · 가이드라인/모범규준 → 문서가 정하는 **의무·절차·체계·조직**(예: 위원회 설치, 검토보고서, 외부전문가 검토, 계약 필수사항, 감시·점검) 중심으로.
+     · 보도자료/설명자료 → 발표된 **정책 방향·조치 내용** 중심(의무로 단정 금지).
+     ⚠️ 문서에 없는 의무·내용을 지어내지 말 것. 의무가 없는 문서면 의무를 만들지 말고 개정이유·내용으로 작성. 내용이 적으면 간결히],
+  "ibk_view": [IBK 적용 관점 — IBK의 어떤 지위(특수은행/은행/금융회사/공공기관/상장회사/고용주/개인정보처리자/AI도입기관)로 적용되는지 + 어떤 내규 영역(판매·내부통제·리스크·정보보호·위탁·인사 등)에 영향인지 + 왜인지를 2~4개로 구체적으로. 막연한 "검토 필요" 나열 금지],
   "articles": [
     { "index": 0, "comparison": "조문 원문과 규제변동의 일치/일부차이/미반영을 사실 기반 1~2문장(개조식)", "recommendation": "유지/보완/개정 중 구체 조치 1~2문장(개조식). 미확정 문서면 조건부 표현" }
   ],
-  "priority_actions": [영향도 '높음' 항목 중심 우선 조치. 문자열 또는 중첩 객체. 높음 없으면 빈 배열]
+  "priority_actions": [영향도 '높음' 항목 중심 우선 조치. 문자열 또는 중첩 객체. 높음 없으면 빈 배열],
+  "caveats": [이 **문서에 특유한** 진짜 유의사항만 0~2개(실무자가 오해/실수할 지점, 해석상 주의, 이 문서만의 한계). 사용자 친화적·비개발자 말투. ⚠️ 자율규제 강제력·확정 전 단계·신규/보완 필요 같은 **일반적 주의는 시스템이 따로 넣으니 제외**. "AI 보조 검토"·"검토 후보 N건 중 M건"·시스템/모델 언급 금지. 특유한 게 없으면 빈 배열]
 }
 
 규칙:
@@ -235,10 +280,10 @@ ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
   // 영향 요약 집계(이름 나열은 아래 표와 중복이므로 카운트 한 줄로). 갭은 '내규 부재'라 별도 표기.
   const cnt = (lv: "높음" | "중간" | "낮음") => relevant.filter((j) => j.verdict.impact === lv).length;
   const covNote = coverage.length
-    ? ` / 요건 ${coverage.length}개(충족 ${metCount}·부분 ${partialGaps.length}·부재 ${absentGaps.length})`
+    ? `\n- 요건 커버리지 **${coverage.length}건** — 충족 ${metCount} · 보완(부분) ${partialGaps.length} · **신규 필요(부재) ${absentGaps.length}** (부재=영향도 높음으로 반영)`
     : "";
   const countLine = relevant.length || coverage.length
-    ? `- 영향 내규 **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}${covNote}`
+    ? `- 영향 내규(기존 조문 매칭) **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}${covNote}`
     : "- 영향 내규 없음";
 
   // 2.2 조치 필요 조문(높음·중간)만 원문 포함 상세 — 가독성 위해 낮음/현행유지·정보성은 제외(3.1 표로).
@@ -271,7 +316,9 @@ ${quoted}
         .join("\n\n")
     : input.infoOnly
       ? "- 정보성 자료 — 개정·검토가 필요한 조문 없음(위 2.1 표는 동향 모니터링 대상)."
-      : "- 개정·검토(높음·중간)가 필요한 조문 없음(위 2.1 표의 현행 유지 항목 참조).";
+      : absentGaps.length || partialGaps.length
+        ? "- 기존 조문 단위로 매칭된 개정 대상은 없음. **아래 2.3 요건 커버리지 체크리스트의 신규·보완 필요 항목** 참조(신규 내규 수립이 핵심 조치)."
+        : "- 개정·검토(높음·중간)가 필요한 조문 없음(위 2.1 표의 현행 유지 항목 참조).";
 
   // 조치 요약표(결정적 조립) — 상세보다 먼저 오는 '한눈에 보기' 표
   const rows = relevant
@@ -417,6 +464,23 @@ function shortRegName(name: string): string {
   return (name ?? "").replace(/\s+/g, " ").trim();
 }
 
+/** 한 줄로 평탄화 + 공백 정리 + 길이 제한 (신구조문/개정개요 인라인용) */
+function cleanInline(s: string | undefined, max: number): string {
+  const t = (s ?? "").replace(/\s+/g, " ").trim();
+  return t.length > max ? t.slice(0, max - 1) + "…" : t;
+}
+
+/** analyze의 change_overview/provision_changes 객체(키 제각각)를 사람이 읽는 한 줄로 평탄화 */
+function objToLine(o: unknown): string {
+  if (o == null) return "";
+  if (typeof o === "string") return cleanInline(o, 220);
+  if (typeof o !== "object") return String(o);
+  const vals = Object.values(o as Record<string, unknown>)
+    .map((v) => (typeof v === "string" ? v : typeof v === "number" || typeof v === "boolean" ? String(v) : ""))
+    .filter(Boolean);
+  return cleanInline(vals.join(" — "), 220);
+}
+
 /** 조문 원문 정리 — 줄바꿈/공백 정돈, 길이 제한 */
 function cleanText(content: string | undefined, max: number): string {
   const s = (content ?? "")
@@ -432,17 +496,49 @@ function cleanText(content: string | undefined, max: number): string {
   return s.length > max ? `${s.slice(0, max - 1)}…` : s;
 }
 
-// ── 4번 섹션(결정적) ───────────────────────────────────
-function buildAnalysisBasis(input: ReportInput, relevantCount: number): string {
-  return `## 4. 검토 유의사항
-${outline(
-    [
-      "본 보고서는 업로드 문서와 현재 IBK 내규 후보를 비교한 AI 보조 검토 결과임.",
-      `검토 후보 ${input.candidateCount}건 중 실무 검토 필요 항목 ${relevantCount}건 중심으로 정리.`,
-      "금액 기준·시행일·최종 확정 문구는 담당 부서가 원문과 최신 내규로 재확인 필요.",
-    ],
-    "- 유의사항 없음"
-  )}`;
+// ── 4번 섹션 — 문서 맥락에서 '진짜' 유의사항 도출(없으면 섹션 자체 생략) ─────────
+//  형식적 문구(AI 보조 검토, N건 중 M건, 시스템 언급)는 넣지 않는다. 사용자 친화적·비개발자 말투.
+function buildCaveats(input: ReportInput, llmCaveats: OutlineItem[]): string {
+  const items: OutlineItem[] = [];
+  const coverage = input.coverage ?? [];
+  const absentN = coverage.filter((c) => c.coverage === "부재").length;
+  const partialN = coverage.filter((c) => c.coverage === "부분").length;
+
+  // 1) 문서 성격에 따른 진짜 주의점
+  if (input.infoOnly) {
+    items.push("이 문서는 보도자료·설명자료 등 정보성 자료입니다. 법령 개정이 확정된 것이 아니므로, 지금 바로 내규를 바꾸기보다 앞으로의 진행 상황을 지켜보는 것이 좋습니다.");
+  } else if (input.itemType === "guideline") {
+    items.push("자율규제(가이드라인·모범규준)로 법으로 강제되는 사항은 아니지만, 감독기관 점검과 평판 관리 측면에서 미리 반영해 두는 것이 바람직합니다.");
+  } else if (input.itemType === "bill" || input.itemType === "policy") {
+    items.push("아직 입법·개정이 확정되기 전 단계의 문서입니다. 심의·입법예고 과정에서 내용이 바뀔 수 있으니, 확정되는 시점에 한 번 더 확인하시길 권합니다.");
+  }
+
+  // 2) 커버리지 갭에서 나오는 실무 주의점
+  if (absentN > 0) {
+    items.push(`대응하는 내규가 아직 없는 항목이 ${absentN}건 있습니다. 이는 새 규정·지침을 만들어야 하는 사안이므로, 소관 부서와 담당·일정을 협의해 추진하시길 권합니다.`);
+  }
+  if (partialN > 0) {
+    items.push(`일부만 반영된 항목(${partialN}건)은 기존 내규의 문구를 보완하는 선에서 해결될 수 있으니, 현행 규정을 먼저 확인해 보시면 좋습니다.`);
+  }
+
+  // 3) 분석 범위 한계(원문 절단)
+  if (input.truncated) {
+    items.push("원문이 길어 분석에 일부만 반영되었습니다. 중요한 세부 조항은 원문 전체로 다시 한 번 확인해 주세요.");
+  }
+
+  // 4) 개정안·시행령의 수치/시행일 주의(해당 유형만)
+  if (!input.infoOnly && (input.itemType === "bill" || input.itemType === "policy")) {
+    items.push("금액 기준·시행일 같은 구체적인 수치는 반드시 원문을 기준으로 다시 확인해 주세요.");
+  }
+
+  // 5) 문서 특유의 LLM 도출 유의점(형식문구 제거)
+  for (const c of llmCaveats) {
+    const t = normOutlineItem(c).text;
+    if (t && !/AI\s*보조|검토\s*후보|시스템|모델|벡터|임베딩|\d+\s*건\s*중/.test(t)) items.push(c);
+  }
+
+  const body = outline(items, "");
+  return body ? `## 4. 검토 유의사항\n${body}` : "";
 }
 
 function noMatchBody(input: ReportInput): string {
