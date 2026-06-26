@@ -125,13 +125,26 @@ export async function parseDocument(
     console.warn(`[PARSE] 품질 의심: ${filename} — ${q.warning}`);
   }
 
+  // #4: kordoc PDF 품질 신호(ToUnicode 손상/PUA/제어문자 등으로 텍스트층은 있으나 깨진 PDF) —
+  //     문자수 휴리스틱보다 정확. needsOcr면 OCR 권장 경고 + lowQuality 승격.
+  //     (실제 강제 재OCR은 페이지 렌더 의존성 필요 → 후속. 현 단계는 정확 감지·표면화)
+  const qs = result.qualitySummary;
+  const kordocNeedsOcr = !!qs?.needsOcr && !usedOcr;
+  if (kordocNeedsOcr) {
+    const pages = qs?.ocrCandidatePages?.length ?? 0;
+    const hangul = Math.round((qs?.avgHangulRatio ?? 0) * 100);
+    const msg = `텍스트 추출 품질 저하 — OCR 권장(품질 의심 ${pages}개 페이지, 한글 추출비율 ${hangul}%). 스캔본 또는 글꼴 매핑 손상 가능.`;
+    warnings.push(msg);
+    console.warn(`[PARSE] 품질 신호: ${filename} — ${msg}`);
+  }
+
   return {
     markdown,
     fileType: result.fileType,
     pageCount: result.pageCount,
     isImageBased: !!result.isImageBased,
     usedOcr,
-    lowQuality: q.lowQuality,
+    lowQuality: q.lowQuality || kordocNeedsOcr,
     blocks: result.blocks ?? [],
     outline: result.outline ?? [],
     title: pickTitle(result.metadata?.title, markdown, filename),
