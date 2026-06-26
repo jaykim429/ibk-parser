@@ -23,16 +23,66 @@ const SYSTEM = `당신은 규제변동–내규 매칭의 '관련도 채점기'�
 - 목적·적용범위·정의·준용·부칙 같은 구조 조항은 다소 낮추되 0으로 죽이지 말 것(해당 내규가 업무 영역에 맞으면 30~50).
 - 점수만 판단합니다(적합/영향도 판정은 하지 않음).`;
 
-export async function rerankCandidates(args: {
+type RerankArgs = {
   lawName: string;
   itemType: ItemType;
   analysis?: Analysis;
   candidates: Candidate[];
   keepTopN?: number;
-}): Promise<Candidate[]> {
+};
+
+/**
+ * M7: 전용 크로스인코더 리랭커(/rerank) — (query, documents[]) 쌍을 채점.
+ * LLM 리랭커보다 빠르고 일관적. 도메인/규율체계 정밀 판정은 뒤의 judge가 보강한다.
+ * 실패 시 null 반환 → 호출부가 LLM 리랭커로 폴백.
+ */
+async function rerankViaServer(args: RerankArgs, keepTopN: number): Promise<Candidate[] | null> {
+  const { candidates } = args;
+  const query = [
+    args.analysis?.law_name || args.lawName,
+    args.analysis?.law_domain,
+    args.analysis?.core_summary,
+    (args.analysis?.search_keywords ?? []).slice(0, 15).join(" "),
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .slice(0, 1200);
+  const documents = candidates.map((c, i) => {
+    const laws = c.related_law_names?.length ? ` [근거법령: ${c.related_law_names.slice(0, 6).join(", ")}]` : "";
+    return { id: String(i), content: `${c.regulation_name} ${formatRegulationItemName(c)}${laws}: ${makeContentExcerpt(c.regulation_content, 500)}` };
+  });
+  try {
+    const r = await fetch(`${config.rerankUrl}/rerank`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, documents, top_k: keepTopN }),
+      signal: AbortSignal.timeout(config.pipelineTimeoutMs),
+    });
+    if (!r.ok) return null;
+    const data = (await r.json()) as { results?: { id?: string; score?: number }[] };
+    const results = data?.results;
+    if (!Array.isArray(results) || !results.length) return null;
+    const out: Candidate[] = [];
+    for (const it of results) {
+      const c = candidates[Number(it.id)];
+      if (c) out.push({ ...c, rerank_score: typeof it.score === "number" ? Math.round(it.score * 1000) / 1000 : undefined });
+    }
+    return out.length ? out.slice(0, keepTopN) : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function rerankCandidates(args: RerankArgs): Promise<Candidate[]> {
   const { candidates } = args;
   const keepTopN = args.keepTopN ?? config.rerankKeep;
   if (candidates.length <= keepTopN) return candidates;
+
+  // M7: 전용 리랭커 1차 시도 → 실패 시 LLM 리랭커로 폴백
+  if (config.rerankUseServer) {
+    const viaServer = await rerankViaServer(args, keepTopN);
+    if (viaServer) return viaServer;
+  }
 
   const change = [
     `문서유형: ${args.itemType === "policy" ? "입법예고/시행령 등" : "법률안"}`,
