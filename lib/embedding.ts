@@ -22,7 +22,9 @@ export async function embed(texts: string[]): Promise<number[][]> {
 }
 
 export async function embedQuery(text: string): Promise<number[]> {
-  const v = await embed([text.slice(0, 2000)]);
+  // M2: Qwen3-Embedding 비대칭 검색 — 쿼리 측에만 지시문 부착(passage는 raw로 적재됨)
+  const q = ((config.embeddingQueryInstruction || "") + text).slice(0, 2000);
+  const v = await embed([q]);
   if (!v[0]) throw new Error("쿼리 임베딩 결과가 비어 있습니다.");
   return v[0];
 }

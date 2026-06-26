@@ -19,6 +19,8 @@ export const config = {
   qdrantUrl: env.QDRANT_URL || "http://172.24.0.104:6333",
   ibkRegCollection: env.IBK_REG_COLLECTION || "regulations_ibk_test",
   rerankUrl: env.RERANK_URL || "http://172.24.0.104:5000",
+  // M7: 전용 크로스인코더 리랭커(/rerank) 1차 사용. 실패 시 LLM 리랭커로 폴백.
+  rerankUseServer: (env.RERANK_USE_SERVER ?? "true") !== "false",
   odsDbUrl: env.ODS_DB_URL || "",
 
   // ── 파서/OCR (DGX Spark VLM) ──
@@ -30,6 +32,13 @@ export const config = {
   embeddingApiKey: env.EMBEDDING_API_KEY || "",
   embeddingModel: env.EMBEDDING_MODEL || "qwen/qwen3-embedding-8b",
   embeddingDimension: num(env.EMBEDDING_DIMENSION, 4096),
+  // M2: Qwen3-Embedding 비대칭 검색용 쿼리 지시문(쿼리 측에만 부착, passage는 raw).
+  //     빈 문자열이면 미적용. (인덱스는 instruction 없이 적재됨)
+  embeddingQueryInstruction:
+    env.EMBEDDING_QUERY_INSTRUCTION ??
+    "Instruct: 주어진 규제변동·법령 내용과 직접 관련된 은행 내규 조문을 검색한다.\nQuery: ",
+  // M3: 대표 쿼리에 analyze 핵심요약(자연어 문장)을 포함(키워드 나열 + 자연어 혼합)
+  canonicalUseSummary: (env.CANONICAL_USE_SUMMARY ?? "true") !== "false",
 
   // ── 타임아웃(ms) ──
   pipelineTimeoutMs: num(env.PIPELINE_TIMEOUT_MS, 180000),

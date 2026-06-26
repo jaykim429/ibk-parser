@@ -281,7 +281,11 @@ export function buildCanonicalQuery(
   }
 
   const head = [analysis.law_name, analysis.law_domain].filter(Boolean).join(" ");
-  const q = `${head} ${uniq.join(", ")}`.trim();
+  // M3: 자연어 핵심요약을 키워드 앞에 혼합(문장 학습 임베딩 정합↑). 길이는 그대로 800자 캡.
+  const summary = config.canonicalUseSummary
+    ? (analysis.core_summary ?? "").replace(/\s+/g, " ").trim().slice(0, 300)
+    : "";
+  const q = [head, summary, uniq.join(", ")].filter(Boolean).join(" ").trim();
 
   // 키워드가 비어 핵심요약만 있는 경우의 폴백 (그래도 짧게 유지)
   if (uniq.length === 0) {
