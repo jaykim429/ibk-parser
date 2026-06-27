@@ -72,7 +72,11 @@ export async function renderPdfPagesToPng(
     doc = await openPdf(pdfjs, buffer);
     const numPages = doc.numPages;
     const wanted = Array.from(new Set(pages)).filter((n) => n >= 1 && n <= numPages);
+    // 연속 실패 N회면 워커/콘텐츠가 구조적으로 손상된 것 → 페이지마다 재오픈 비용을 끊는다(circuit breaker).
+    const MAX_CONSEC_FAILS = 3;
+    let consecFails = 0;
     for (const n of wanted) {
+      let ok = false;
       for (let attempt = 0; attempt < 2; attempt++) {
         try {
           if (!doc) doc = await openPdf(pdfjs, buffer); // 직전 페이지 실패로 워커가 죽었으면 재오픈
@@ -82,12 +86,18 @@ export async function renderPdfPagesToPng(
           const ctx = canvas.getContext("2d");
           await page.render({ canvasContext: ctx, viewport }).promise;
           map.set(n, new Uint8Array(canvas.toBuffer("image/png")));
+          ok = true;
           break; // 성공
         } catch {
           // 페이지 렌더 실패 → 워커가 죽었을 수 있으므로 문서 파기 후 재오픈하여 다음 시도/페이지 격리
           await destroyPdf(doc);
           doc = null;
         }
+      }
+      consecFails = ok ? 0 : consecFails + 1;
+      if (consecFails >= MAX_CONSEC_FAILS) {
+        console.warn(`[OCR-RENDER] 연속 ${consecFails}페이지 렌더 실패 → 손상 PDF로 판단, 렌더 조기 중단(복구 ${map.size}p).`);
+        break;
       }
     }
   } catch {

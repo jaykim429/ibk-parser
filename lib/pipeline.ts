@@ -254,7 +254,9 @@ export class CompliancePipeline {
       amendmentPairs: amendPairs.map((p) => ({ before: p.before, after: p.after })),
       truncated: doc.markdown.length > config.maxAnalyzeChars,
       // 사전예고/예고(확정 전) → 미확정 프레이밍. (cleanLawName이 '(사전예고)'를 떼므로 파일명도 함께 검사)
-      preAnnouncement: /사전\s*예고|예고문|예고\b/.test(`${fileName} ${initialName} ${lawName}`),
+      //  ⚠️ '예고\b'는 한글 뒤 단어경계가 성립 안 해 무용 → '사전예고/예고문/예고안' 명시 매칭으로 교체.
+      //     입법예고·규정변경예고는 isPendingDoc(미발효 입법)에서 조건부로 처리하므로 여기 미포함.
+      preAnnouncement: /사전\s*예고|예고\s*문|예고\s*안/.test(`${fileName} ${initialName} ${lawName}`),
     });
 
     const seconds = Math.round((Date.now() - t0) / 1000);

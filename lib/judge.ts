@@ -141,8 +141,9 @@ ${candidateBlock}
   try {
     verdicts = extractJson(raw);
     if (!Array.isArray(verdicts)) throw new Error("배열 아님");
-  } catch {
-    // 판정 실패 시: 검색영향도를 그대로 사용하는 fallback
+  } catch (e) {
+    // 판정 실패 시: 검색영향도를 그대로 사용하는 fallback (원인 추적 위해 로그)
+    console.warn(`[JUDGE] 판정 JSON 파싱 실패 → 검색영향도 fallback: ${(e as Error)?.message ?? e}`);
     return cands.map((c) => ({ ...c, verdict: fallbackVerdict(c) }));
   }
 
@@ -153,13 +154,17 @@ ${candidateBlock}
 
   const judged = cands.map((c, i) => {
     const v = byIndex.get(i);
+    // compliance_need를 한 번만 정규화(빈문자열 폴백 + infoOnly '필요'→'검토') 후 impact/reflection에 동일 값 전달.
+    //  (이전: 저장값은 강등하면서 정규화 함수엔 원본을 넘겨 단일 진실원천이 깨졌고, `?? "검토"`는 빈문자열을 못 막음)
+    const rawNeed = v && typeof v.compliance_need === "string" ? v.compliance_need.trim() : "";
+    const need = (infoOnly && (rawNeed || "검토") === "필요" ? "검토" : rawNeed || "검토") as Verdict["compliance_need"];
     const verdict: Verdict = v
       ? {
           relevance: v.relevance === "부적합" ? "부적합" : "적합",
           applicability_basis: v.applicability_basis ?? "금융회사적용",
-          impact: normalizeImpact(v.impact, v.relevance, v.compliance_need, infoOnly),
-          compliance_need: infoOnly && v.compliance_need === "필요" ? "검토" : v.compliance_need ?? "검토",
-          reflection: normalizeReflection(v.reflection, v.relevance, v.compliance_need, infoOnly),
+          impact: normalizeImpact(v.impact, v.relevance, need, infoOnly),
+          compliance_need: need,
+          reflection: normalizeReflection(v.reflection, v.relevance, need, infoOnly),
           ibk_specific: !!v.ibk_specific,
           reason: v.reason ?? "",
         }
@@ -392,7 +397,9 @@ ${globalNames.length ? globalNames.join(", ") : "- 없음"}
         recommendation: String(r?.recommendation ?? defaultRec).trim(),
       } as CoverageItem;
     });
-  } catch {
+  } catch (e) {
+    // ⚠️ 조용히 []를 반환하면 '갭 0(=과소커버리지)'로 둔갑하므로 반드시 로그(추적 가능).
+    console.warn(`[COVERAGE] assessCoverage 실패 → 빈 결과: ${(e as Error)?.message ?? e}`);
     return [];
   }
 }

@@ -472,7 +472,8 @@ JSON만 출력: {"documentTitle":"문서 정식 제목","requiresFramework": tru
       requiresFramework: v.requiresFramework === true,
       obligations,
     };
-  } catch {
+  } catch (e) {
+    console.warn(`[OBLIGATION] 의무 추출 실패 → 빈 결과: ${(e as Error)?.message ?? e}`);
     return { documentTitle: "", requiresFramework: false, obligations: [] };
   }
 }

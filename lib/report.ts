@@ -61,6 +61,20 @@ function isPendingDoc(input: ReportInput): boolean {
 }
 
 /**
+ * 문서 권고 프레이밍(단일 결정점) — buildPrompt(LLM 지시)와 assembleBody(stageNote)가
+ *  같은 결론을 쓰도록 한 곳에서 판단(이전: prompt는 pending만, stageNote는 다른 우선순위 → 상충).
+ *  우선순위: 정보성 > 사전예고 > 연성규범(가이드라인=즉시) > 미발효 입법(조건부) > 시행/전문(즉시).
+ */
+type DocFraming = "monitoring" | "conditional" | "immediate";
+function docFraming(input: ReportInput): DocFraming {
+  if (input.infoOnly) return "monitoring";
+  if (input.preAnnouncement) return "conditional";
+  if (input.itemType === "guideline") return "immediate"; // 연성규범: 미발효라도 즉시 점검(자율준수)
+  if (isPendingDoc(input)) return "conditional"; // 미발효 입법(법률안·입법예고·개정령안 등)
+  return "immediate"; // 공포·시행·전문
+}
+
+/**
  * 은행·금융 규제와 직접 관련이 없는 문서용 보고서.
  * 독자(실무자) 관점의 서술 — 개발/시스템 용어 없이 '왜 무관한지'를 내용 기반으로 설명한다.
  */
@@ -99,11 +113,6 @@ ${outline(
   )}`;
 }
 
-const DOC_TYPE_LABEL: Record<string, string> = {
-  bill: "법률안",
-  policy: "입법예고/시행령 등",
-  guideline: "가이드라인/모범규준(자율규제)",
-};
 
 /**
  * 문서유형 라벨 — itemType만으로는 'bill 캐치올'(실제 법률안 아님)·'policy 발효여부'를 구분 못해 오라벨이 난다.
@@ -162,7 +171,9 @@ export async function generateReport(input: ReportInput): Promise<string> {
       temperature: 0.2,
     });
     llm = extractJson<LlmReport>(raw);
-  } catch {
+  } catch (e) {
+    // LLM 보고서 생성 실패 → 결정적 본문만으로 폴백(원인 추적 위해 로그)
+    console.warn(`[REPORT] 보고서 LLM 생성/파싱 실패 → 결정적 폴백: ${(e as Error)?.message ?? e}`);
     llm = {};
   }
 
@@ -193,7 +204,7 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
 function buildPrompt(input: ReportInput, relevant: JudgedMatch[]): string {
   const obligations = input.obligations ?? [];
   const coverage = input.coverage ?? [];
-  const pending = isPendingDoc(input); // 확정 전(미발효)만 '확정 시' 조건부 허용
+  const framing = docFraming(input); // 단일 프레이밍 결정점(stageNote와 동일 우선순위 — 상충 제거)
   // 의무·권고 블록 — 1.1을 문서 실질 내용에 맞게 상세히 쓰기 위한 핵심 입력
   const oblBlock = obligations.length
     ? obligations.map((o) => `- (${o.kind}) ${o.title}: ${o.summary}`).join("\n")
@@ -274,13 +285,13 @@ ${articleBlock}
 - comparison 은 반드시 주어진 '조문 원문'을 근거로. 원문에 기준(금액·요건)이 이미 있으면 "반영됨"으로 판단.
 - **반영 일관성**: 원문에 이미 반영됐거나(반영됨) 이 변경이 개정을 요구하지 않으면(개정 불요) recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지, 불요 사유 명시). "미반영/차이"면 보완·개정 권고. 영향도 낮음은 대개 '반영됨' 또는 '개정 불요'.
 - **권고 표현(매우 중요)**: ${
-    input.infoOnly
+    framing === "monitoring"
       ? `본 문서는 **정보성 자료(보도자료·해설서·FAQ·법령해석·비조치 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.
     ❌ 모든 필드에서 금지 표현(절대 쓰지 말 것): "확정 시", "확정되면", "개정될 경우", "개정 시" — 정보성 자료엔 부적합(대신 "필요 시·동향에 따라").`
-      : pending
+      : framing === "conditional"
         ? `본 문서는 **확정 전(미발효 입법예고·법률안·사전예고)**이다: recommendation/priority_actions 는 "확정 시·개정될 경우" 같은 조건부 표현으로 단정을 피한다.`
-        : `본 문서는 **이미 시행·통용 중**(연성규범·개정 전문 등)이다: recommendation 은 "즉시·조속·선제 점검" 등 확정적으로 쓴다(입법 확정을 기다리는 단계가 아님).
-    ❌ 모든 필드에서 금지 표현(절대 쓰지 말 것): "확정 시", "확정되면", "(법률안/가이드라인 등) 확정·개정될 경우" — 이미 시행 중이라 부적합. (IBK 자체 내규를 고친다는 의미의 "내규 개정 시"는 허용)`
+        : `본 문서는 **이미 시행·통용 중 또는 자율준수 연성규범(즉시 점검 대상)**이다: recommendation 은 "즉시·조속·선제 점검" 등 확정적으로 쓴다(입법 확정을 기다리는 단계가 아님).
+    ❌ 모든 필드에서 금지 표현(절대 쓰지 말 것): "확정 시", "확정되면", "(법률안/가이드라인 등) 확정·개정될 경우" — 부적합. (IBK 자체 내규를 고친다는 의미의 "내규 개정 시"는 허용)`
   }`;
 }
 
@@ -441,11 +452,6 @@ function reflectionOf(j: JudgedMatch, infoOnly = false): string {
     default:
       return "일부 반영";
   }
-}
-
-function bullets(items: string[], fallback: string): string {
-  const list = items.map((s) => `- ${s.replace(/^[-*]\s*/, "").trim()}`).filter((s) => s !== "-");
-  return list.length ? list.join("\n") : fallback;
 }
 
 // 한국 공문서 계층 마커(깊이별). 섹션 번호(1/1.1/2.2.1)는 코드가 고정하고,
