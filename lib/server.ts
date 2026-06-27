@@ -85,7 +85,7 @@ export function clampDocText(text: string, max: number): string {
   if (!text || text.length <= max) return text || "";
   const marker = "\n\n…(중략: 본문 일부 생략)…\n\n";
   const budget = max - marker.length;
-  const head = Math.floor(budget * 0.7);
+  const head = Math.floor(budget * config.clampHeadRatio);
   const tail = budget - head;
   return text.slice(0, head) + marker + text.slice(text.length - tail);
 }
@@ -216,10 +216,10 @@ function buildFallbackQuery(
   const m = clean.match(
     /(제안\s*이유|개정\s*이유|개정\s*사유|제정\s*이유|폐지\s*이유|추진\s*배경|주요\s*내용|주요\s*개정\s*내용|주요\s*골자|골자|개요|신구조문|제안\s*경위)[\s\S]{0,800}/
   );
-  const core = (m ? m[0] : clean).slice(0, 800);
+  const core = (m ? m[0] : clean).slice(0, config.queryMaxLen);
 
   const combined = normalizeWhitespace(`${provText} ${core}`);
-  return (combined || clean).slice(0, 800);
+  return (combined || clean).slice(0, config.queryMaxLen);
 }
 
 // 서브쿼리 노이즈 토큰 — change_type enum(영문)·placeholder·메타값은 검색 임베딩을 희석시킴.
@@ -287,7 +287,7 @@ export function buildSubQueries(
     if (seen.has(dedup)) continue;
     seen.add(dedup);
     eligible++;
-    if (out.length < maxQueries) out.push(`${head} ${body}`.trim().slice(0, 280));
+    if (out.length < maxQueries) out.push(`${head} ${body}`.trim().slice(0, config.subQueryLen));
   }
   if (eligible > out.length) {
     console.log(
@@ -305,7 +305,7 @@ export function buildSubQueries(
 function buildObligationCanonical(title: string, obligations: Obligation[]): string {
   const titles = obligations.map((o) => o?.title ?? "").filter(Boolean).join(" ");
   const summaries = obligations.map((o) => o?.summary ?? "").filter(Boolean).join(" ");
-  return normalizeWhitespace(`${title ?? ""} ${titles} ${summaries}`).slice(0, 800);
+  return normalizeWhitespace(`${title ?? ""} ${titles} ${summaries}`).slice(0, config.queryMaxLen);
 }
 
 export function buildCanonicalQuery(
@@ -359,7 +359,7 @@ export function buildCanonicalQuery(
     return `${head} ${(analysis.core_summary ?? "").replace(/\s+/g, " ").slice(0, 300)}`.trim()
       || fallbackText.replace(/\s+/g, " ").slice(0, 500);
   }
-  return q.slice(0, 800);
+  return q.slice(0, config.queryMaxLen);
 }
 
 /** 파일명/본문으로 가이드라인(자율규제) · 입법예고·시행령·고시·규정 등(policy) · 법률안(bill) 판별 */
@@ -503,7 +503,7 @@ export function buildObligationQueries(
     const dedup = body.slice(0, 80);
     if (seen.has(dedup)) continue;
     seen.add(dedup);
-    if (out.length < max) out.push(`${lawName} ${body}`.trim().slice(0, 280));
+    if (out.length < max) out.push(`${lawName} ${body}`.trim().slice(0, config.subQueryLen));
   }
   return out;
 }

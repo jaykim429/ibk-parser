@@ -181,7 +181,7 @@ export class CompliancePipeline {
     const amendQueries = amendPairs
       .filter((p) => p.after.length >= 8)
       .slice(0, config.subQueryMax)
-      .map((p) => `${lawName} ${p.after}`.replace(/\s+/g, " ").slice(0, 280));
+      .map((p) => `${lawName} ${p.after}`.replace(/\s+/g, " ").slice(0, config.subQueryLen));
     const queries = [query, ...subQueries, ...oblQueries, ...amendQueries];
     console.log(`\n[PIPELINE] file=${fileName}`);
     console.log(
@@ -221,7 +221,7 @@ export class CompliancePipeline {
       //  (전역 융합 풀만 보면 보유 내규가 풀 밖일 때 'false 부재'가 남 → 의무별 검색으로 제거)
       const perObligation = await Promise.all(
         obl.obligations.map(async (o) => {
-          const q = normalizeWhitespace(`${lawName} ${o.title} ${o.summary}`).slice(0, 280);
+          const q = normalizeWhitespace(`${lawName} ${o.title} ${o.summary}`).slice(0, config.subQueryLen);
           let cands: Candidate[] = [];
           try {
             cands = await this.retriever.retrieve(q, lawName);

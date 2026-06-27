@@ -53,9 +53,12 @@ export const config = {
 
   // ── 입력 문서 분석/청킹 ──
   maxAnalyzeChars: num(env.MAX_ANALYZE_CHARS, 60000), // analyze/parseBill 본문 절단 한계
+  clampHeadRatio: num(env.CLAMP_HEAD_RATIO, 0.7), // 절단 시 앞부분 비율(나머지는 뒤). 제안이유=앞·부칙=뒤 보존
   subQueryMax: num(env.SUBQUERY_MAX, 6), // 입력 문서 변경단위 서브쿼리 상한
   canonicalTermMax: num(env.CANONICAL_TERM_MAX, 30), // 대표 쿼리 키워드+개념 상한
   subQueryMinLen: num(env.SUBQUERY_MIN_LEN, 4), // 서브쿼리 본문 최소 길이
+  queryMaxLen: num(env.QUERY_MAX_LEN, 800), // 대표/폴백/의무 대표쿼리 길이 캡(임베딩 희석 방지)
+  subQueryLen: num(env.SUBQUERY_LEN, 280), // 개별 서브쿼리(변경단위·의무·신구조문) 길이 캡
 
   // ── 매뉴얼형(비정형) 내규 청킹 — 헤딩 섹션 단위 + overlap 서브분할 ──
   manualChunkSize: num(env.MANUAL_CHUNK_SIZE, 900), // 섹션 청크 최대 글자
