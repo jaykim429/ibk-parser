@@ -168,7 +168,10 @@ export class CompliancePipeline {
     const lawName = cleanLawName(obl.documentTitle || analysis?.law_name || initialName);
 
     // 3) 입력 문서 청킹 → 멀티쿼리 하이브리드 검색(변경 단위별 + 의무별 쿼리 융합)
-    const query = buildCanonicalQuery(analysis, provisions, doc.markdown);
+    const query = buildCanonicalQuery(analysis, provisions, doc.markdown, {
+      obligations: obl.obligations,
+      title: lawName,
+    });
     const subQueries = buildSubQueries(analysis, provisions);
     // 의무 기반 멀티쿼리 — 가이드라인처럼 '개정 조문'이 없는 문서도 요건별로 내규를 정밀 검색
     const oblQueries = buildObligationQueries(obl.obligations, lawName);

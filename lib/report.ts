@@ -20,9 +20,10 @@ IBK는 「중소기업은행법」상 특수은행이자 기타공공기관이�
 
 작성 원칙:
 - **문체는 개조식으로 통일한다.** 명사형/어간 종결("~함", "~필요", "~검토", "~유지", "~신설")만 사용. "~합니다/~입니다/~하십시오/~된다" 같은 경어체·서술형 종결 금지.
-- **문서의 성격(stage)에 따라 단정성을 조절한다.**
-  - 법률안(발의)·입법예고·규정변경예고·보도자료처럼 **확정 전** 문서는 단정하지 말 것. "확정 시", "입법예고 단계로 변동 가능", "개정될 경우" 같은 조건부 표현 사용.
-  - 공포·시행 등 **확정** 문서만 확정적 조치를 권고.
+- **문서의 성격(stage)에 따라 단정성을 조절한다. "확정 시 / 개정될 경우" 같은 조건부 표현은 아래 (가)에만 쓰고, (나)·(다)에는 절대 쓰지 말 것.**
+  - (가) **미발효 입법예고·법률안(발의)·규정변경예고·사전예고** = 확정 전 → "확정 시", "개정될 경우" 같은 조건부 표현 사용.
+  - (나) **이미 시행·통용 중인 연성규범(가이드라인·모범규준·행정지도·자율규제 규정)과 공포/개정 전문** = 사실상 적용 중 → "확정 시" 금지. **즉시·조속·선제 점검** 등 확정적 권고로 쓴다(입법 확정을 기다리는 단계 아님).
+  - (다) **정보성 자료(보도자료·해설서·안내서·FAQ·법령해석·비조치)** → 개정으로 단정 금지. **동향 모니터링·사전 검토** 표현(조건부 "확정 시"가 아님).
 - 주어진 조문 원문과 규제변동 내용을 **직접 비교**해 사실 기반으로 쓴다. 원문에 이미 같은 기준(금액·요건)이 있으면 "반영됨"으로 본다. 원문에 없는 내용을 추측하지 않는다.
 - 주어진 후보 외의 내규·조문을 지어내지 않는다. 개발자용 설명(벡터·임베딩·모델명) 금지.
 - 한국어. 실무자가 바로 활용하도록 간결·구체적으로.`;
@@ -46,6 +47,18 @@ export type ReportInput = {
   /** 사전예고/예고(확정 전) 문서 — 즉시적용이 아닌 조건부(미확정) 프레이밍 */
   preAnnouncement?: boolean;
 };
+
+/**
+ * '확정 전(미발효 입법)' 문서인가 — "확정 시" 같은 조건부 표현은 여기에만 허용.
+ *  정보성은 별도(모니터링)로 처리하므로 false. 이미 시행 중인 연성규범·전문(전문/공포)은 false(즉시 권고).
+ *  (LLM 자체 certainty 추정이 과하게 '미확정'을 남발 → 파일명/제목 기반으로 결정적으로 판단)
+ */
+function isPendingDoc(input: ReportInput): boolean {
+  if (input.infoOnly) return false;
+  if (input.preAnnouncement) return true;
+  const hay = `${input.fileName} ${input.lawName}`;
+  return /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안|\(안\)|（안）)/.test(hay);
+}
 
 /**
  * 은행·금융 규제와 직접 관련이 없는 문서용 보고서.
@@ -91,6 +104,25 @@ const DOC_TYPE_LABEL: Record<string, string> = {
   policy: "입법예고/시행령 등",
   guideline: "가이드라인/모범규준(자율규제)",
 };
+
+/**
+ * 문서유형 라벨 — itemType만으로는 'bill 캐치올'(실제 법률안 아님)·'policy 발효여부'를 구분 못해 오라벨이 난다.
+ *  · 정보성 → 정보성 자료
+ *  · guideline → 가이드라인/모범규준
+ *  · bill: 진짜 법률안/의안 신호 있으면 "법률안", 아니면(기준·매뉴얼 등 캐치올) "기준·규범 문서"
+ *  · policy: 미발효(입법예고·개정령안)면 "입법예고/규정변경예고 등", 발효(규정·고시·세칙 전문)면 "규정·고시·세칙 등"
+ */
+function docTypeLabelOf(input: ReportInput): string {
+  if (input.infoOnly) return "보도자료 등 정보성 자료";
+  if (input.itemType === "guideline") return "가이드라인/모범규준(자율규제)";
+  if (input.itemType === "bill") {
+    return /(법률안|법안|의안|발의|개정법률안)/.test(`${input.fileName} ${input.lawName}`)
+      ? "법률안"
+      : "기준·규범 문서";
+  }
+  // policy
+  return isPendingDoc(input) ? "입법예고/규정변경예고 등" : "규정·고시·세칙 등";
+}
 
 type ArticleAnalysis = {
   index: number;
@@ -145,9 +177,7 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
   const domain = input.analysis?.law_domain || "-";
   // 파이프라인이 LLM documentTitle 우선으로 해소한 input.lawName을 신뢰(편집스펙 오인 방지)
   const lawName = cleanLawName(input.lawName || input.analysis?.law_name || "");
-  const docTypeLabel = input.infoOnly
-    ? "보도자료 등 정보성 자료"
-    : DOC_TYPE_LABEL[input.itemType] ?? input.itemType;
+  const docTypeLabel = docTypeLabelOf(input);
   return `# 규제변동 영향분석 보고서
 
 **분석 정보**
@@ -163,6 +193,7 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
 function buildPrompt(input: ReportInput, relevant: JudgedMatch[]): string {
   const obligations = input.obligations ?? [];
   const coverage = input.coverage ?? [];
+  const pending = isPendingDoc(input); // 확정 전(미발효)만 '확정 시' 조건부 허용
   // 의무·권고 블록 — 1.1을 문서 실질 내용에 맞게 상세히 쓰기 위한 핵심 입력
   const oblBlock = obligations.length
     ? obligations.map((o) => `- (${o.kind}) ${o.title}: ${o.summary}`).join("\n")
@@ -188,7 +219,7 @@ function buildPrompt(input: ReportInput, relevant: JudgedMatch[]): string {
     .map((p, i) => `  ${i + 1}) 현행: ${cleanInline(p.before, 160)} → 개정: ${cleanInline(p.after, 160)}`)
     .join("\n");
   const changeSummary = [
-    `- 문서유형(추정): ${DOC_TYPE_LABEL[input.itemType] ?? input.itemType}`,
+    `- 문서유형(추정): ${docTypeLabelOf(input)}`, // 헤더 라벨과 동일 소스(불일치 제거 — bill 캐치올을 '법률안'으로 오인해 '확정 시' 헤지 남발하던 문제)
     `- 법령명: ${cleanLawName(input.lawName || input.analysis?.law_name || "")}`,
     input.analysis?.law_domain ? `- 분야: ${input.analysis.law_domain}` : "",
     input.analysis?.core_summary ? `- 핵심요약: ${input.analysis.core_summary}` : "",
@@ -242,10 +273,12 @@ ${articleBlock}
 - articles 는 위 [index] 전체(0..${relevant.length - 1})를 포함.
 - comparison 은 반드시 주어진 '조문 원문'을 근거로. 원문에 기준(금액·요건)이 이미 있으면 "반영됨"으로 판단.
 - **반영 일관성**: 원문에 이미 반영됐거나(반영됨) 이 변경이 개정을 요구하지 않으면(개정 불요) recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지, 불요 사유 명시). "미반영/차이"면 보완·개정 권고. 영향도 낮음은 대개 '반영됨' 또는 '개정 불요'.
-- certainty 가 "미확정"이면 recommendation/priority_actions 를 단정하지 말 것(조건부).${
+- **권고 표현(매우 중요)**: ${
     input.infoOnly
-      ? `\n- ★ 본 문서는 **정보성 자료(보도자료·설명자료 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.`
-      : ""
+      ? `본 문서는 **정보성 자료(보도자료·해설서·FAQ·법령해석·비조치 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. "확정 시" 같은 조건부 표현도 쓰지 말 것. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.`
+      : pending
+        ? `본 문서는 **확정 전(미발효 입법예고·법률안·사전예고)**이다: recommendation/priority_actions 는 "확정 시·개정될 경우" 같은 조건부 표현으로 단정을 피한다.`
+        : `본 문서는 **이미 시행·통용 중**(연성규범·개정 전문 등)이다: recommendation 은 "즉시·조속·선제 점검" 등 확정적으로 쓰고, **"확정 시 / 개정될 경우" 같은 조건부 표현을 쓰지 말 것**(입법 확정을 기다리는 단계가 아님).`
   }`;
 }
 
@@ -265,7 +298,7 @@ function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmRepor
       ? `\n> **사전예고(확정 전) 연성규범** — 아직 확정·시행 전이므로 권고는 조건부(확정 시 재검토 전제). 다만 방향이 명확하므로 미충족 영역은 선제 검토 권장.`
       : input.itemType === "guideline"
         ? `\n> 자율규제(가이드라인·모범규준·행정지도) — 사실상 준수 대상인 연성규범. '입법 확정'을 기다리는 단계가 아니라 **즉시 내규 정합성 점검 대상**(자율 준수). 미충족 영역은 신규·보완 내규로 선제 대응 권장.`
-        : llm.certainty === "미확정"
+        : isPendingDoc(input)
           ? `\n> ${llm.doc_stage || "확정 전"} 단계 문서 — 권고는 입법·개정 확정 시 재검토 전제(조건부).`
           : "";
   const sec1 = `## 1. 규제변동 개요

@@ -186,12 +186,28 @@ function buildFallbackQuery(
     .join(" ")
     .slice(0, 600);
 
-  // 원문 정리: 표 행/구분선/HTML/헤딩 마크업 제거
-  const clean = (fallbackText ?? "")
+  // 목차(TOC) 노이즈 제거 — 대형 가이드라인은 머리말이 '제목 …… 페이지번호' 목차라,
+  //  그대로 쓰면 "개요 … 1 … 4 … 6" 같은 페이지번호·점선리더가 쿼리에 섞인다(보편 패턴, 하드코딩 아님).
+  const deToc = (fallbackText ?? "")
+    .split(/\r?\n/)
+    .filter((line) => {
+      const t = line.trim();
+      if (!t) return false;
+      const leaders = (t.match(/[·.…‥]/g) ?? []).length;
+      // 점선 리더가 줄의 상당부분 → 목차/구분선 행
+      if (leaders >= 4 && leaders >= t.replace(/\s/g, "").length * 0.35) return false;
+      return true;
+    })
+    .join("\n");
+
+  // 원문 정리: 표 행/구분선/HTML/헤딩 마크업 + 인라인 목차잔재(…페이지번호) 제거
+  const clean = deToc
     .replace(/\|[^\n]*\|/g, " ")
     .replace(/[-|]{2,}/g, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/#{1,6}\s*/g, " ")
+    .replace(/[·.…‥]{1,}\s*\d{1,4}\b/g, " ") // "… 1", "···· 23" (목차 항목+페이지)
+    .replace(/[·.…‥]{2,}/g, " ")             // 잔여 점선 리더
     .replace(/\s+/g, " ")
     .trim();
 
@@ -280,15 +296,33 @@ export function buildSubQueries(
   return out;
 }
 
+/**
+ * analyze 실패 시 대표쿼리 폴백(우선) — LLM이 추출한 의무·권고(클린·고밀도)로 구성.
+ *  의무추출은 analyze와 독립 병렬 호출이라 analyze가 실패해도 살아있다 → 원문 목차 폴백보다 정확.
+ *  제목+의무 title들을 앞에(테마 최대 커버), summary는 남는 길이에 채운다.
+ */
+function buildObligationCanonical(title: string, obligations: Obligation[]): string {
+  const titles = obligations.map((o) => o?.title ?? "").filter(Boolean).join(" ");
+  const summaries = obligations.map((o) => o?.summary ?? "").filter(Boolean).join(" ");
+  return `${title ?? ""} ${titles} ${summaries}`.replace(/\s+/g, " ").trim().slice(0, 800);
+}
+
 export function buildCanonicalQuery(
   analysis: Analysis | undefined,
   provisions: Record<string, unknown>[],
-  fallbackText: string
+  fallbackText: string,
+  fallback?: { obligations?: Obligation[]; title?: string }
 ): string {
   // ⚠️ match/hybrid는 "긴 원문"을 넣으면 임베딩이 희석되어 후보가 거의 안 나온다.
   //    (실측: 원문 8000자 → 0건, 키워드 위주 짧은 쿼리 → 11건)
   //    따라서 analyze가 정규화한 키워드·개념 중심으로 "짧고 밀도 높은" 쿼리를 만든다.
   if (!analysis || !analysis.success) {
+    // analyze 실패 시: 추출된 의무가 있으면 그것으로(원문 목차 노이즈 회피), 없으면 원문 폴백.
+    const obs = fallback?.obligations ?? [];
+    if (obs.length > 0) {
+      const oblCanon = buildObligationCanonical(fallback?.title ?? "", obs);
+      if (oblCanon.replace(/\s/g, "").length >= 20) return oblCanon;
+    }
     return buildFallbackQuery(provisions, fallbackText);
   }
   const terms = [
@@ -478,8 +512,22 @@ const INTERPRETIVE_FORMAT =
 // 규범(구속력 있는 제·개정) 신호
 const NORMATIVE_DOC =
   /(법률안|법안|의안|개정법률안|시행령|시행규칙|일부개정령|개정고시|고시안|공고안|규정변경예고|입법예고|행정규칙|개정안|제정안|대통령령|총리령|부령)/;
+// 연성규범 '문서유형' 정체 신호(파일명) — 모범규준·준칙·가이드라인·행정지도 등은 그 자체가 규범 문서.
+//   (제·개정 신호가 없어도 규범. 단 파일명에 해설서·안내서·FAQ·회신이 함께 있으면 그 형식이 우선)
+const NORMATIVE_IDENTITY =
+  /(모범규준|모범기준|모범사례|표준준칙|준칙|규준|가이드라인|가이드\s*북|행동강령|행동규범|행정지도|표준약관|표준안|업무처리기준|운영기준|시행세칙|세칙|시행규칙|규정|고시|예규|훈령|요령|지침)/;
 
 export function detectDocNature(filename: string, text: string): DocNature {
+  // 0) 파일명이 '연성규범 문서유형'(모범규준·준칙·가이드라인·행정지도 등)을 선언하면 규범.
+  //    단 파일명이 동시에 해설서·안내서·FAQ·회신이면 그 형식이 우선(정보성)이므로 제외.
+  //    (왜: 모범규준 전문이 본문 머리말에 '안내/설명' 류 단어를 담아 정보성으로 오분류되는 것 방지 — [무보증사채 수요예측 모범규준] 케이스)
+  if (
+    NORMATIVE_IDENTITY.test(filename) &&
+    !DELIVERY_FORMAT.test(filename) &&
+    !INTERPRETIVE_FORMAT.test(filename)
+  ) {
+    return "규범";
+  }
   // 1) 순수 전달/설명 형식(보도자료·안내서·해설서·FAQ·로드맵)이면 본문이 법안을 다뤄도 정보성(형식 우선)
   const identity = filename + " " + text.slice(0, 300);
   if (DELIVERY_FORMAT.test(identity)) return "정보성";
@@ -509,7 +557,8 @@ export async function assessRelevance(args: {
   documentText: string;
 }): Promise<RelevanceVerdict> {
   const SYSTEM = `당신은 IBK기업은행 준법지원부의 1차 분류기다. **이 문서가 실제로 다루는 변경·조치 내용**이 IBK 업무·내규에 의무나 직접 영향을 주는지 판정한다.
-핵심 질문: "이 문서의 **구체적 변경 내용**이, IBK가 (은행·금융회사·특수은행·공공기관·상장법인·고용주·개인정보처리자·AI 도입기관·일반 법인 중 어느 지위로든) 준수하거나 내규에 반영해야 할 의무·영향을 만드는가?"
+핵심 질문: "이 문서의 **구체적 변경 내용**이, IBK가 (은행·금융회사·특수은행·**겸영 금융투자업자·신탁업자**·공공기관·상장법인·고용주·개인정보처리자·AI 도입기관·일반 법인 중 어느 지위로든) 준수하거나 내규에 반영해야 할 의무·영향을 만드는가?"
+※ IBK는 은행이면서 **펀드판매·신탁·파생·투자권유·투자일임·퇴직연금 등 금융투자업을 겸영**한다. 따라서 "금융투자회사 대상"이라는 표현만으로 무관 처리하지 말 것 — IBK가 영위하는 그 업무에 관한 자본시장법·금융투자협회 자율규제(모범규준·표준안)는 관련이다. (IBK 미영위 전업 증권사 고유업무면 무관.)
 - 관련(true): 이 문서의 변경이 위 지위의 IBK에 실질 의무·영향을 만드는 경우. 금융·감독·소비자보호·개인정보·신용정보·내부통제·전자금융·자본시장·공공기관 운영/공시 + 노동/근로/산업안전, AI·신기술, 개인정보 등 IBK에 적용되는 범용법의 '실질 의무 변경'. 보도자료·해석이라도 내용이 그러하면 관련.
 - 무관(false): 이 문서의 변경이 **특정 타 산업 행위자·타 영역만** 바꾸고 IBK 업무와 무관한 경우.
 - ⚠️ **결정적 원칙**: "그 법이 일반적으로/범용으로 모든 법인에 적용된다"는 **추상적 사실만으로 관련으로 판단하지 말 것.** 반드시 **이 문서가 바꾸는 구체적 내용**으로 판단한다. (예: 어떤 법의 이번 개정이 선거구·정원·타 산업 행위자·타 부처 소관 사항만 바꾸면, 그 법이 범용법이어도 *이 문서*는 무관.) 주제어 중복(소비자·분쟁·민원·절차 등)만으로 관련 금지(동음이의 주의).
