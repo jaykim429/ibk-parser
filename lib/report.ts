@@ -11,7 +11,7 @@
  */
 import { callCompletion, extractJson } from "./llm";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
-import { cleanLawName, type Analysis, type ItemType, type Obligation } from "./server";
+import { cleanLawName, BILL_SIGNAL, PENDING_SIGNAL, type Analysis, type ItemType, type Obligation } from "./server";
 import type { JudgedMatch, CoverageItem } from "./judge";
 
 const REPORT_SYSTEM = `당신은 IBK기업은행 준법지원부의 컴플라이언스 보고서 작성 전문가입니다.
@@ -56,8 +56,7 @@ export type ReportInput = {
 function isPendingDoc(input: ReportInput): boolean {
   if (input.infoOnly) return false;
   if (input.preAnnouncement) return true;
-  const hay = `${input.fileName} ${input.lawName}`;
-  return /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안|\(안\)|（안）)/.test(hay);
+  return PENDING_SIGNAL.test(`${input.fileName} ${input.lawName}`);
 }
 
 /**
@@ -125,7 +124,7 @@ function docTypeLabelOf(input: ReportInput): string {
   if (input.infoOnly) return "보도자료 등 정보성 자료";
   if (input.itemType === "guideline") return "가이드라인/모범규준(자율규제)";
   if (input.itemType === "bill") {
-    return /(법률안|법안|의안|발의|개정법률안)/.test(`${input.fileName} ${input.lawName}`)
+    return BILL_SIGNAL.test(`${input.fileName} ${input.lawName}`)
       ? "법률안"
       : "기준·규범 문서";
   }

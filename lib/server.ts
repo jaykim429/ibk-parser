@@ -362,9 +362,19 @@ export function buildCanonicalQuery(
 }
 
 /** 파일명/본문으로 가이드라인(자율규제) · 입법예고·시행령·고시·규정 등(policy) · 법률안(bill) 판별 */
+/**
+ * 문서 분류·프레이밍 공유 신호(단일 정의 — server/report가 같은 패턴을 쓰도록).
+ *  - BILL_SIGNAL: 진짜 법률안/의안 판별(detectItemType·docTypeLabelOf 공유).
+ *  - PENDING_SIGNAL: 미발효 입법(확정 전) 판별(isPendingDoc). BILL_SIGNAL ⊂ PENDING_SIGNAL.
+ *  (이전엔 같은 의미 regex가 4곳에 흩어져 '발의' 누락 등 경계 불일치가 있었음)
+ */
+export const BILL_SIGNAL = /(법률안|법안|의안|발의|개정법률안)/;
+export const PENDING_SIGNAL =
+  /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안|\(안\)|（안）)/;
+
 export function detectItemType(filename: string, text: string): ItemType {
   // 파일명에 명시적 법률안/의안 신호가 있으면 우선 bill
-  if (/(법률안|법안|의안|개정법률안)/.test(filename)) return "bill";
+  if (BILL_SIGNAL.test(filename)) return "bill";
   // 가이드라인·모범규준·행정지도 등 '연성규범' — 구속력 있는 법령은 아니나 사실상 준수 대상.
   //   ⚠️ "자율규제" 단독은 제외(예: "자율규제위원회 운영 규정"은 규정=policy). 명시적 가이드라인/모범규준/행정지도만.
   const guideHay = filename + " " + text.slice(0, 1500);
