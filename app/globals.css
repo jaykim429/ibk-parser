@@ -953,6 +953,7 @@ a {
   position: sticky;
   top: 84px;
   align-self: start;
+  flex: 0 0 208px; /* report-split(flex)의 우측 고정폭 레일 */
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -960,6 +961,13 @@ a {
   max-height: calc(100vh - 104px);
   overflow-y: auto;
   box-shadow: var(--shadow-sm);
+}
+/* 목차 클릭 점프 시 상단 sticky 액션바(84px)에 헤딩이 가리지 않도록 여백 확보 */
+.report-body h1,
+.report-body h2,
+.report-body h3,
+.report-body h4 {
+  scroll-margin-top: 136px;
 }
 
 .toc-nav.toc-empty {

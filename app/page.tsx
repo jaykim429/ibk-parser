@@ -329,6 +329,41 @@ const mdComponents: Components = {
   h4: ({ children }) => <h4 id={slugify(nodeText(children))}>{children}</h4>,
 };
 
+// 마크다운에서 ##/### 헤딩만 추출(헤딩 id와 동일 slug). #### 조문상세·# 제목은 제외(목차 과밀 방지).
+function extractToc(markdown: string): { level: number; text: string; slug: string }[] {
+  const out: { level: number; text: string; slug: string }[] = [];
+  for (const raw of (markdown || "").split(/\r?\n/)) {
+    const m = raw.match(/^(#{2,3})\s+(.+?)\s*$/);
+    if (!m) continue;
+    const text = m[2].replace(/[*_`]/g, "").trim();
+    if (text) out.push({ level: m[1].length, text, slug: slugify(text) });
+  }
+  return out;
+}
+
+// 보고서 목차 네비(우측 sticky) — 항목 클릭 시 해당 섹션으로 스무스 스크롤.
+function ReportToc({ markdown }: { markdown: string }) {
+  const items = extractToc(markdown);
+  if (items.length < 3) return null; // 섹션이 거의 없으면 숨김
+  const jump = (slug: string) => {
+    document.getElementById(slug)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  return (
+    <nav className="toc-nav" aria-label="보고서 목차">
+      <div className="toc-title">목차</div>
+      <ul>
+        {items.map((it, i) => (
+          <li key={i} className={`toc-l${it.level}`}>
+            <button type="button" onClick={() => jump(it.slug)} title={it.text}>
+              {it.text}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 // ── 분석 중 시각화 ───────────────────────────────────
 const STAGE_EMOJI = ["📄", "🔎", "🧩", "📝"];
 const PROC_TIPS = [
@@ -743,6 +778,8 @@ function ReportDetail(props: {
             {result.report.markdown}
           </ReactMarkdown>
         </div>
+        {/* 우측 목차 — 원문 보기(분할) 중엔 공간 확보 위해 숨김 */}
+        {!showRestore && <ReportToc markdown={result.report.markdown} />}
       </div>
     </div>
   );
