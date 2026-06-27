@@ -236,7 +236,7 @@ export class CompliancePipeline {
     const partialGaps = coverage.filter((g) => g.coverage === "부분");
     if (coverage.length) {
       console.log(
-        `[PIPELINE] 커버리지=${coverage.length} (충족 ${coverage.filter((g) => g.coverage === "충족").length}·부분 ${partialGaps.length}·부재 ${absentGaps.length})`
+        `[PIPELINE] 커버리지=${coverage.length} (충족 ${coverage.filter((g) => g.coverage === "충족").length}·부분 ${partialGaps.length}·부재 ${absentGaps.length}·해당없음 ${coverage.filter((g) => g.coverage === "해당없음").length})`
       );
     }
 

@@ -289,9 +289,9 @@ export type CoverageItem = {
   area: string;
   requirement: string;
   kind: string;
-  coverage: "충족" | "부분" | "부재";
-  evidence: string; // 대응 내규(충족·부분) / "대응 내규 미확인"(부재)
-  impact: "낮음" | "중간" | "높음";
+  coverage: "충족" | "부분" | "부재" | "해당없음";
+  evidence: string; // 대응 내규(충족·부분) / "대응 내규 미확인"(부재) / "IBK 비영위 업무"(해당없음)
+  impact: "낮음" | "중간" | "높음" | "없음";
   recommendation: string;
 };
 /** 부분·부재(=갭)만 추린 부분집합 — 카운트·우선조치용 */
@@ -341,8 +341,9 @@ ${IBK_PROFILE}
 - ⚠️ **선언적 상위규범(윤리원칙·기본방침)만으론 구체 체계 의무(위험관리규정/평가체계/HITL·긴급정지/보안통제/위탁관리/이해상충)를 충족으로 보지 말 것**(층위가 다름).
 - 표면 주제어만 겹치는 내규(목적·총칙, 직교 영역)는 근거 아님. **evidence(충족·부분)에는 그 의무를 실제 규율하는 조문만 인용**(헐거운 주제어 매핑 금지).
 - 부재=신규 내규 필요(높음), 부분=보완(중간), 충족=현행 유지(낮음).
+- ⚠️ **"해당없음"은 그 의무가 IBK가 영위하지 않는 업무·서비스에 관한 것일 때만**(위 IBK 프로필의 업무 범위 기준 — 예: IBK가 전혀 취급하지 않는 상품/업무의 전용 의무). **단순히 '대응 조문을 못 찾음'은 부재(신규 필요)이지 해당없음이 아니다.** IBK가 그 업무를 하는지 불확실하면 보수적으로 "부재"로 둔다(해당없음 남용 금지 — 진짜 비영위만).
 - 모든 의무 [index]를 빠짐없이 평가.
-JSON만 출력: {"items":[{"index":0,"coverage":"충족"|"부분"|"부재","evidence":"대응 내규명/조문 또는 '대응 내규 미확인'","recommendation":"권고 한 줄(개조식). 충족이면 '현행 유지'"}]}`;
+JSON만 출력: {"items":[{"index":0,"coverage":"충족"|"부분"|"부재"|"해당없음","evidence":"대응 내규명/조문 / '대응 내규 미확인'(부재) / 'IBK 비영위 업무'(해당없음)","recommendation":"권고 한 줄(개조식). 충족이면 '현행 유지', 해당없음이면 '해당 없음(비영위)'"}]}`;
 
   const prompt = `## 원천문서: ${args.lawName}
 ## 의무별 평가 대상 (의무 + 그 의무 전용 검색 후보)
@@ -362,16 +363,16 @@ ${globalNames.length ? globalNames.join(", ") : "- 없음"}
     const byIndex = new Map<number, CovRow>();
     for (const r of rows) if (typeof r.index === "number") byIndex.set(r.index, r);
 
-    const norm = (c?: string): "충족" | "부분" | "부재" =>
-      c === "부재" ? "부재" : c === "충족" ? "충족" : "부분";
-    const impactOf = (c: "충족" | "부분" | "부재"): "낮음" | "중간" | "높음" =>
-      c === "부재" ? "높음" : c === "부분" ? "중간" : "낮음";
+    const norm = (c?: string): "충족" | "부분" | "부재" | "해당없음" =>
+      c === "부재" ? "부재" : c === "충족" ? "충족" : c === "해당없음" || c === "해당 없음" ? "해당없음" : "부분";
+    const impactOf = (c: "충족" | "부분" | "부재" | "해당없음"): "낮음" | "중간" | "높음" | "없음" =>
+      c === "부재" ? "높음" : c === "부분" ? "중간" : c === "해당없음" ? "없음" : "낮음";
 
     return items.map((it, i) => {
       const o = it.obligation;
       const hasCands = dedupeCandidates(it.candidates ?? []).length > 0;
       const r = byIndex.get(i);
-      // 평가 누락 시: 후보가 있으면 부분(중간), 없으면 부재(높음)
+      // 평가 누락 시: 후보가 있으면 부분(중간), 없으면 부재(높음) — 누락을 해당없음으로 처리하지 않음(안전방향)
       const coverage = r ? norm(r.coverage) : hasCands ? "부분" : "부재";
       const evidence = String(
         r?.evidence ?? (coverage === "부재" ? "대응 내규 미확인" : "자동 평가 누락 — 담당 확인")
@@ -379,7 +380,8 @@ ${globalNames.length ? globalNames.join(", ") : "- 없음"}
       const defaultRec =
         coverage === "부재" ? `${o.title} 관련 내규 신설 검토`
           : coverage === "부분" ? `${o.title} 관련 내규 보완 검토`
-            : "현행 유지";
+            : coverage === "해당없음" ? "해당 없음(IBK 비영위 업무)"
+              : "현행 유지";
       return {
         area: o.key || o.title,
         requirement: o.title,

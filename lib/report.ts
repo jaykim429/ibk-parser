@@ -143,7 +143,7 @@ type LlmReport = {
 
 export async function generateReport(input: ReportInput): Promise<string> {
   const relevant = input.judged.filter((j) => j.verdict.relevance === "적합");
-  const gapCount = (input.coverage ?? []).filter((g) => g && g.requirement && g.coverage !== "충족").length;
+  const gapCount = (input.coverage ?? []).filter((g) => g && g.requirement && g.coverage !== "충족" && g.coverage !== "해당없음").length;
   const header = buildHeader(input, relevant.length);
 
   // 적합 내규도 없고 커버리지 갭도 없을 때만 '영향 없음' 단락. 갭이 있으면(가이드라인 신규요건 등)
@@ -275,10 +275,12 @@ ${articleBlock}
 - **반영 일관성**: 원문에 이미 반영됐거나(반영됨) 이 변경이 개정을 요구하지 않으면(개정 불요) recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지, 불요 사유 명시). "미반영/차이"면 보완·개정 권고. 영향도 낮음은 대개 '반영됨' 또는 '개정 불요'.
 - **권고 표현(매우 중요)**: ${
     input.infoOnly
-      ? `본 문서는 **정보성 자료(보도자료·해설서·FAQ·법령해석·비조치 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. "확정 시" 같은 조건부 표현도 쓰지 말 것. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.`
+      ? `본 문서는 **정보성 자료(보도자료·해설서·FAQ·법령해석·비조치 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.
+    ❌ 모든 필드에서 금지 표현(절대 쓰지 말 것): "확정 시", "확정되면", "개정될 경우", "개정 시" — 정보성 자료엔 부적합(대신 "필요 시·동향에 따라").`
       : pending
         ? `본 문서는 **확정 전(미발효 입법예고·법률안·사전예고)**이다: recommendation/priority_actions 는 "확정 시·개정될 경우" 같은 조건부 표현으로 단정을 피한다.`
-        : `본 문서는 **이미 시행·통용 중**(연성규범·개정 전문 등)이다: recommendation 은 "즉시·조속·선제 점검" 등 확정적으로 쓰고, **"확정 시 / 개정될 경우" 같은 조건부 표현을 쓰지 말 것**(입법 확정을 기다리는 단계가 아님).`
+        : `본 문서는 **이미 시행·통용 중**(연성규범·개정 전문 등)이다: recommendation 은 "즉시·조속·선제 점검" 등 확정적으로 쓴다(입법 확정을 기다리는 단계가 아님).
+    ❌ 모든 필드에서 금지 표현(절대 쓰지 말 것): "확정 시", "확정되면", "(법률안/가이드라인 등) 확정·개정될 경우" — 이미 시행 중이라 부적합. (IBK 자체 내규를 고친다는 의미의 "내규 개정 시"는 허용)`
   }`;
 }
 
@@ -312,12 +314,13 @@ ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
   const absentGaps = coverage.filter((g) => g.coverage === "부재");
   const partialGaps = coverage.filter((g) => g.coverage === "부분");
   const metCount = coverage.filter((g) => g.coverage === "충족").length;
+  const naCount = coverage.filter((g) => g.coverage === "해당없음").length;
   const gaps = [...absentGaps, ...partialGaps];
 
   // 영향 요약 집계(이름 나열은 아래 표와 중복이므로 카운트 한 줄로). 갭은 '내규 부재'라 별도 표기.
   const cnt = (lv: "높음" | "중간" | "낮음") => relevant.filter((j) => j.verdict.impact === lv).length;
   const covNote = coverage.length
-    ? `\n- 요건 커버리지 **${coverage.length}건** — 충족 ${metCount} · 보완(부분) ${partialGaps.length} · **신규 필요(부재) ${absentGaps.length}** (부재=영향도 높음으로 반영)`
+    ? `\n- 요건 커버리지 **${coverage.length}건** — 충족 ${metCount} · 보완(부분) ${partialGaps.length} · **신규 필요(부재) ${absentGaps.length}**${naCount ? ` · 해당없음(비영위) ${naCount}` : ""} (부재=영향도 높음으로 반영)`
     : "";
   const countLine = relevant.length || coverage.length
     ? `- 영향 내규(기존 조문 매칭) **${relevant.length}건** — 높음 ${cnt("높음")} · 중간 ${cnt("중간")} · 낮음 ${cnt("낮음")}${covNote}`
@@ -375,11 +378,11 @@ ${rows}`
 
   // 2.3 요건 커버리지 체크리스트 — 원천문서가 요구하는 의무 전체 × 충족/부분/부재 + 대응 내규
   //   (조문 1:1 매칭으로는 드러나지 않는 '없는 내규'를 부재=높음으로 표면화)
-  const covMark: Record<string, string> = { 충족: "✅ 충족", 부분: "⚠️ 부분", 부재: "❌ 부재" };
+  const covMark: Record<string, string> = { 충족: "✅ 충족", 부분: "⚠️ 부분", 부재: "❌ 부재", 해당없음: "➖ 해당없음" };
   const covRows = coverage
     .map((g, i) => {
       const rec = (g.recommendation || "검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
-      const ev = (g.evidence || (g.coverage === "부재" ? "대응 내규 미확인" : "현행 내규")).replace(/\s+/g, " ").replace(/\|/g, "／").trim();
+      const ev = (g.evidence || (g.coverage === "부재" ? "대응 내규 미확인" : g.coverage === "해당없음" ? "IBK 비영위 업무" : "현행 내규")).replace(/\s+/g, " ").replace(/\|/g, "／").trim();
       return `| ${i + 1} | ${g.requirement.replace(/\|/g, "／")} | ${covMark[g.coverage] ?? g.coverage} | ${g.impact} | ${ev.length > 60 ? ev.slice(0, 59) + "…" : ev} | ${rec.length > 140 ? rec.slice(0, 139) + "…" : rec} |`;
     })
     .join("\n");

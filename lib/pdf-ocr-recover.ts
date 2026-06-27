@@ -37,7 +37,26 @@ async function loadPdfjs(): Promise<Record<string, unknown>> {
   return pdfjs;
 }
 
-/** 지정 페이지들을 PNG로 렌더(2x ≈ 300DPI). 실패 페이지는 결과에서 제외. */
+/** 버퍼로 새 pdfjs 문서 오픈(복사본 전달 — pdfjs가 underlying storage를 detach할 수 있음). */
+async function openPdf(pdfjs: Record<string, unknown>, buffer: Buffer): Promise<PdfDoc> {
+  const data = new Uint8Array(buffer.byteLength);
+  data.set(buffer);
+  const getDocument = pdfjs.getDocument as (opts: Record<string, unknown>) => { promise: Promise<PdfDoc> };
+  return getDocument({ data, isEvalSupported: false, useSystemFonts: true, disableAutoFetch: true, disableStream: true }).promise;
+}
+async function destroyPdf(doc: PdfDoc | null): Promise<void> {
+  try {
+    await (doc as unknown as { destroy?: () => Promise<void> })?.destroy?.();
+  } catch {
+    /* noop */
+  }
+}
+
+/**
+ * 지정 페이지들을 PNG로 렌더(2x ≈ 300DPI). 실패 페이지는 결과에서 제외.
+ * ⚠️ 난해 PDF는 페이지 렌더 중 pdfjs 워커가 죽어("Worker task terminated") 이후 모든 페이지가 전멸할 수 있다.
+ *    → 페이지 실패 시 문서를 파기·재오픈하고 그 페이지를 1회 재시도(워커 격리) → 일부 페이지만 깨져도 나머지는 복구.
+ */
 export async function renderPdfPagesToPng(
   buffer: Buffer,
   pages: number[],
@@ -47,32 +66,34 @@ export async function renderPdfPagesToPng(
   const napi = (await _imp("@napi-rs/canvas")) as unknown as {
     createCanvas: (w: number, h: number) => { getContext(t: string): unknown; toBuffer(t: string): Buffer };
   };
-  // pdfjs가 입력 버퍼의 underlying storage를 detach할 수 있어 복사본 전달
-  const data = new Uint8Array(buffer.byteLength);
-  data.set(buffer);
-  const getDocument = pdfjs.getDocument as (opts: Record<string, unknown>) => { promise: Promise<PdfDoc> };
-  const doc = await getDocument({ data, isEvalSupported: false, useSystemFonts: true }).promise;
   const map = new Map<number, Uint8Array>();
+  let doc: PdfDoc | null = null;
   try {
-    const wanted = Array.from(new Set(pages)).filter((n) => n >= 1 && n <= doc.numPages);
+    doc = await openPdf(pdfjs, buffer);
+    const numPages = doc.numPages;
+    const wanted = Array.from(new Set(pages)).filter((n) => n >= 1 && n <= numPages);
     for (const n of wanted) {
-      try {
-        const page = await doc.getPage(n);
-        const viewport = page.getViewport({ scale });
-        const canvas = napi.createCanvas(Math.floor(viewport.width), Math.floor(viewport.height));
-        const ctx = canvas.getContext("2d");
-        await page.render({ canvasContext: ctx, viewport }).promise;
-        map.set(n, new Uint8Array(canvas.toBuffer("image/png")));
-      } catch {
-        /* 페이지 렌더 실패 → skip */
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          if (!doc) doc = await openPdf(pdfjs, buffer); // 직전 페이지 실패로 워커가 죽었으면 재오픈
+          const page = await doc.getPage(n);
+          const viewport = page.getViewport({ scale });
+          const canvas = napi.createCanvas(Math.floor(viewport.width), Math.floor(viewport.height));
+          const ctx = canvas.getContext("2d");
+          await page.render({ canvasContext: ctx, viewport }).promise;
+          map.set(n, new Uint8Array(canvas.toBuffer("image/png")));
+          break; // 성공
+        } catch {
+          // 페이지 렌더 실패 → 워커가 죽었을 수 있으므로 문서 파기 후 재오픈하여 다음 시도/페이지 격리
+          await destroyPdf(doc);
+          doc = null;
+        }
       }
     }
+  } catch {
+    /* 문서 오픈 자체 실패 → 빈 맵 */
   } finally {
-    try {
-      await (doc as { destroy?: () => Promise<void> }).destroy?.();
-    } catch {
-      /* noop */
-    }
+    await destroyPdf(doc);
   }
   return map;
 }
