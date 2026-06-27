@@ -917,11 +917,20 @@ a {
   font-size: 14px;
 }
 
+/* 넓은 표(요건 커버리지·조치요약 8열 등)는 좁은 패널에서 셀이 압축돼 줄바꿈 폭증 → 가로 스크롤 래퍼로 가독성 유지 */
+.report-body .md-table-wrap {
+  overflow-x: auto;
+  margin: 14px 0;
+}
 .report-body table {
   width: 100%;
   border-collapse: collapse;
   margin: 14px 0;
   font-size: 14px;
+}
+.report-body .md-table-wrap > table {
+  margin: 0;
+  min-width: 760px; /* 이하로 좁아지면 압축 대신 래퍼가 가로 스크롤 */
 }
 
 .report-body th,

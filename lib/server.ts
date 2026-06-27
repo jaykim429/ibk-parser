@@ -373,6 +373,47 @@ export const BILL_SIGNAL = /(법률안|법안|의안|발의|개정법률안)/;
 export const PENDING_SIGNAL =
   /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안|\(안\)|（안）)/;
 
+/**
+ * 시행일·유예기간을 **명시적으로 기재된 경우에만** 추출(로컬 결정적 정규식).
+ *  ⚠️ 백테스팅(과거 문서) 도구이므로 '분석일 대비 잔여일/시급성'은 계산하지 않는다 — 사실(문자열)만 반환.
+ *  ⚠️ 모호하면 추출하지 않음(추론·기본값 금지). 부칙은 보통 문서 끝이라 본문 전체를 본다.
+ */
+export function extractEffectiveDate(text: string): { effectiveDate?: string; gracePeriod?: string } {
+  const t = (text || "").replace(/\s+/g, " ");
+  const out: { effectiveDate?: string; gracePeriod?: string } = {};
+  // '시행' 맥락의 날짜만 수집한다(부수 일자 오인 방지: '적용/산정/기준일'은 제외, 오직 '시행').
+  //   (a) '날짜 (부터) 시행'  (b) '시행일: 날짜'.  → 수집된 것 중 **최신 날짜**를 현행 시행일로(전문 다부칙 대비, 옛 부칙 오선택 방지).
+  //   '시행' 맥락 날짜가 하나도 없으면 추출 안 함(추측 금지 — 백테스팅 보수성).
+  const DATE = "((?:\\d{4}|\\d{2})\\s*[.년]\\s*\\d{1,2}\\s*[.월]\\s*\\d{1,2}\\s*일?)";
+  const cands: string[] = [];
+  let mm: RegExpExecArray | null;
+  for (const re of [new RegExp(`${DATE}\\s*(?:부터)?\\s*시행`, "g"), new RegExp(`시행일\\s*[:(\\[]?\\s*${DATE}`, "g")]) {
+    while ((mm = re.exec(t)) !== null) cands.push(mm[1]);
+  }
+  let best = -1;
+  let bestStr = "";
+  for (const ds0 of cands) {
+    const ds = ds0.replace(/\s+/g, "");
+    const dm = ds.match(/(\d{2,4})[.년](\d{1,2})[.월](\d{1,2})/);
+    if (!dm) continue;
+    let y = Number(dm[1]);
+    if (y < 100) y += 2000;
+    const num = y * 10000 + Number(dm[2]) * 100 + Number(dm[3]);
+    if (num > best) {
+      best = num;
+      bestStr = ds;
+    }
+  }
+  if (bestStr) out.effectiveDate = bestStr;
+  // 2) 공포 후 N개월/년/일 경과 후 시행(유예기간 성격)
+  const gm = t.match(/공포(?:한\s*날)?[^.]{0,6}?(\d+\s*(?:개월|년|일))\s*(?:이?\s*경과한?\s*날?)?\s*(?:부터)?\s*시행/);
+  if (gm) out.gracePeriod = `공포 후 ${gm[1].replace(/\s+/g, "")}`;
+  // 3) 명시적 '유예기간' 표기
+  const um = t.match(/유예\s*기간[:\s]*(\d+\s*(?:개월|년|일))/);
+  if (um && !out.gracePeriod) out.gracePeriod = `유예 ${um[1].replace(/\s+/g, "")}`;
+  return out;
+}
+
 export function detectItemType(filename: string, text: string): ItemType {
   // 파일명에 명시적 법률안/의안 신호가 있으면 우선 bill
   if (BILL_SIGNAL.test(filename)) return "bill";

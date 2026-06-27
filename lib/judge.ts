@@ -23,6 +23,8 @@ export type Verdict = {
   relevance: "적합" | "부적합";
   applicability_basis: BasisType | string;
   impact: ImpactLevel;
+  /** 리스크 크기 — 개정 필요성(impact)과 독립. 미대응/위반 시 컴플라이언스·사업 리스크(法源·제재·범위). 시간 무관(백테스팅 안전). */
+  risk_level: ImpactLevel;
   compliance_need: ComplianceNeed | string;
   /** 반영 여부 — 반영됨|개정 불요|일부 반영|미반영|해당 없음|모니터링 대상 */
   reflection: string;
@@ -110,6 +112,7 @@ ${candidateBlock}
 - impact 와 compliance_need 를 반드시 일치시킨다: 현행 내규로 충분하면 impact="낮음"·compliance_need="불요"(현행 유지), 보완검토면 "중간"·"검토", 개정·신설 필요면 "높음"·"필요". "반영됨인데 높음" 같은 모순 금지.
 - ★ 후보 '조문 원문'에 변경의 새 기준(금액·요건·절차)이 **이미 동일하게** 있으면(원문 수치를 끝까지 직접 대조), 그 조문이 변경의 직접 대상이라도 반드시 compliance_need="불요"·impact="낮음"(반영됨). impact는 주제 적중도가 아니라 개정 필요성으로 판단.
 - IBK의 특수은행·공공기관 이중성을 반드시 고려한다.
+- **risk_level(리스크 크기)은 impact(개정 필요성)와 독립적으로** 판단한다(위 '리스크 크기' 기준 참조). 法源 강도·제재 수위·영향 범위로만 보고, '시행일까지 남은 시간/시급성'으로 키우거나 줄이지 말 것(백테스팅: 과거 문서). 부적합이면 risk_level="해당없음".
 - 후보의 구분이 "별표" 또는 "별지서식"이면 jo 값은 별표/서식 번호일 수 있다. 이를 "제n조"로 오인하지 말고 별표/서식 자체로 판단한다.
 - compliance_need는 현재 내규내용과 이번 규제변동을 비교해 판단한다. 현재 내규에 이미 같은 기준이 반영되어 있으면 "불요" 또는 "검토"로 두고, 사유에 "현행 반영 여부"를 명확히 쓴다.
 - 반드시 아래 스키마의 JSON 배열만 출력한다(설명 문장 금지):
@@ -120,6 +123,7 @@ ${candidateBlock}
     "relevance": "적합" | "부적합",
     "applicability_basis": "직접적용|은행적용|금융회사적용|공공기관적용|상장회사적용|일반법인적용",
     "impact": "높음" | "중간" | "낮음" | "해당없음",
+    "risk_level": "높음" | "중간" | "낮음" | "해당없음",
     "compliance_need": "필요" | "검토" | "불요",
     "reflection": "반영됨" | "개정 불요" | "일부 반영" | "미반영" | "해당 없음",
     "ibk_specific": true | false,
@@ -163,6 +167,7 @@ ${candidateBlock}
           relevance: v.relevance === "부적합" ? "부적합" : "적합",
           applicability_basis: v.applicability_basis ?? "금융회사적용",
           impact: normalizeImpact(v.impact, v.relevance, need, infoOnly),
+          risk_level: normalizeRisk(v.risk_level, v.relevance),
           compliance_need: need,
           reflection: normalizeReflection(v.reflection, v.relevance, need, infoOnly),
           ibk_specific: !!v.ibk_specific,
@@ -178,6 +183,7 @@ ${candidateBlock}
     ) {
       verdict.relevance = "부적합";
       verdict.impact = "해당없음";
+      verdict.risk_level = "해당없음";
       verdict.reflection = "해당 없음";
       if (!/저변별|목적|총칙/.test(verdict.reason)) {
         verdict.reason = `목적·총칙류 저변별 조항으로, 이번 변경이 해당 조항 자체를 바꾸지 않아 직접 정합성 영향 없음. ${verdict.reason}`.trim();
@@ -238,6 +244,12 @@ function normalizeReflection(
   return reflection === "반영됨" ? "반영됨" : "개정 불요";
 }
 
+/** 리스크 크기 정규화 — 개정 필요성과 독립. 부적합→해당없음, 누락→중간(보수 기본). */
+function normalizeRisk(risk: unknown, relevance: unknown): ImpactLevel {
+  if (relevance === "부적합") return "해당없음";
+  return risk === "높음" || risk === "중간" || risk === "낮음" ? risk : "중간";
+}
+
 function fallbackVerdict(c: Candidate): Verdict {
   const imp = c.importance === "high" ? "높음" : c.importance === "medium" ? "중간" : "낮음";
   const need = "검토";
@@ -245,6 +257,7 @@ function fallbackVerdict(c: Candidate): Verdict {
     relevance: "적합",
     applicability_basis: "금융회사적용",
     impact: imp as ImpactLevel,
+    risk_level: imp as ImpactLevel,
     compliance_need: need,
     reflection: "일부 반영",
     ibk_specific: false,

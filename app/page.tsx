@@ -321,12 +321,17 @@ function nodeText(node: ReactNode): string {
   return "";
 }
 
-// 보고서 헤딩에 id 부여(목차 스크롤 앵커)
+// 보고서 헤딩에 id 부여(목차 스크롤 앵커) + 넓은 표는 가로 스크롤 래퍼로 감싸 좁은 패널에서 압축 방지
 const mdComponents: Components = {
   h1: ({ children }) => <h1 id={slugify(nodeText(children))}>{children}</h1>,
   h2: ({ children }) => <h2 id={slugify(nodeText(children))}>{children}</h2>,
   h3: ({ children }) => <h3 id={slugify(nodeText(children))}>{children}</h3>,
   h4: ({ children }) => <h4 id={slugify(nodeText(children))}>{children}</h4>,
+  table: ({ children }) => (
+    <div className="md-table-wrap">
+      <table>{children}</table>
+    </div>
+  ),
 };
 
 // 마크다운에서 ##/### 헤딩만 추출(헤딩 id와 동일 slug). #### 조문상세·# 제목은 제외(목차 과밀 방지).

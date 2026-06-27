@@ -47,6 +47,9 @@ export type ReportInput = {
   truncated?: boolean;
   /** 사전예고/예고(확정 전) 문서 — 즉시적용이 아닌 조건부(미확정) 프레이밍 */
   preAnnouncement?: boolean;
+  /** 시행일·유예기간 — 문서에 명시된 경우만(백테스팅: 시급성 점수화 없이 사실만 표기) */
+  effectiveDate?: string;
+  gracePeriod?: string;
 };
 
 /**
@@ -135,6 +138,7 @@ function docTypeLabelOf(input: ReportInput): string {
 
 type ArticleAnalysis = {
   index: number;
+  gist?: string;
   comparison?: string;
   recommendation?: string;
 };
@@ -189,6 +193,11 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
   // 파이프라인이 LLM documentTitle 우선으로 해소한 input.lawName을 신뢰(편집스펙 오인 방지)
   const lawName = cleanLawName(input.lawName || input.analysis?.law_name || "");
   const docTypeLabel = docTypeLabelOf(input);
+  // 시행일/유예기간 — 명시된 경우만(백테스팅: 시급성 점수 아님, 사실 표기). 분석일보다 과거면 중립적으로 '이미 시행' 부기.
+  const effLine = input.effectiveDate
+    ? `\n- **시행일**: ${input.effectiveDate}${isPastDate(input.effectiveDate, date) ? " (이미 시행)" : ""}`
+    : "";
+  const graceLine = input.gracePeriod ? `\n- **유예기간**: ${input.gracePeriod}` : "";
   return `# 규제변동 영향분석 보고서
 
 **분석 정보**
@@ -197,7 +206,19 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
 - **문서유형**: ${docTypeLabel}
 - **소관 법령**: ${lawName}
 - **규제 분야**: ${domain}
-- **영향 내규**: ${relevantCount}건`;
+- **영향 내규**: ${relevantCount}건${effLine}${graceLine}`;
+}
+
+/** 시행일 문자열이 분석일(YYYY-MM-DD)보다 과거인지 — 백테스팅 중립 표기용(점수 아님). 파싱 불확실하면 false. */
+function isPastDate(eff: string, today: string): boolean {
+  const m = eff.match(/(\d{2,4})[.년]\s*(\d{1,2})[.월]\s*(\d{1,2})/);
+  if (!m) return false;
+  let y = Number(m[1]);
+  if (y < 100) y += 2000; // 2자리 연도
+  const effNum = y * 10000 + Number(m[2]) * 100 + Number(m[3]);
+  const t = today.replace(/[^\d]/g, "");
+  const todayNum = Number(t.slice(0, 8));
+  return Number.isFinite(effNum) && Number.isFinite(todayNum) && effNum < todayNum;
 }
 
 // ── LLM 프롬프트(분석 텍스트만 JSON으로) ───────────────
@@ -249,7 +270,7 @@ function buildPrompt(input: ReportInput, relevant: JudgedMatch[]): string {
       const kind = inferRegulationKind(j);
       const itemName = formatRegulationItemName(j);
       const content = cleanText(j.regulation_content, 1600);
-      return `[${i}] 내규: ${j.regulation_name} / 구분: ${kind} / 조문명: ${itemName} / 영향도(확정): ${j.verdict.impact} / 개정필요성: ${j.verdict.compliance_need}
+      return `[${i}] 내규: ${j.regulation_name} / 구분: ${kind} / 조문명: ${itemName} / 영향도(확정): ${j.verdict.impact} / 개정필요성: ${j.verdict.compliance_need} / 리스크: ${j.verdict.risk_level ?? "중간"}
     조문 원문: ${content}`;
     })
     .join("\n\n");
@@ -273,7 +294,7 @@ ${articleBlock}
      ⚠️ 문서에 없는 의무·내용을 지어내지 말 것. 의무가 없는 문서면 의무를 만들지 말고 개정이유·내용으로 작성. 내용이 적으면 간결히],
   "ibk_view": [IBK 적용 관점 — IBK의 어떤 지위(특수은행/은행/금융회사/공공기관/상장회사/고용주/개인정보처리자/AI도입기관)로 적용되는지 + 어떤 내규 영역(판매·내부통제·리스크·정보보호·위탁·인사 등)에 영향인지 + 왜인지를 2~4개로 구체적으로. 막연한 "검토 필요" 나열 금지],
   "articles": [
-    { "index": 0, "comparison": "조문 원문과 규제변동의 일치/일부차이/미반영을 사실 기반 1~2문장(개조식)", "recommendation": "유지/보완/개정 중 구체 조치 1~2문장(개조식). 미확정 문서면 조건부 표현" }
+    { "index": 0, "gist": "이 조문이 규율하는 핵심을 명사형으로 25자 내외 1줄(예: '신상품 사전 리스크 검토 절차'). 조문 원문 기반, 군더더기 없이", "comparison": "조문 원문과 규제변동의 일치/일부차이/미반영을 사실 기반 1~2문장(개조식)", "recommendation": "유지/보완/개정 중 구체 조치 1~2문장(개조식). 미확정 문서면 조건부 표현" }
   ],
   "priority_actions": [영향도 '높음' 항목 중심 우선 조치. 문자열 또는 중첩 객체. 높음 없으면 빈 배열],
   "caveats": [이 **문서에 특유한** 진짜 유의사항만 0~2개(실무자가 오해/실수할 지점, 해석상 주의, 이 문서만의 한계). 사용자 친화적·비개발자 말투. ⚠️ 자율규제 강제력·확정 전 단계·신규/보완 필요 같은 **일반적 주의는 시스템이 따로 넣으니 제외**. "AI 보조 검토"·"검토 후보 N건 중 M건"·시스템/모델 언급 금지. 특유한 게 없으면 빈 배열]
@@ -357,7 +378,7 @@ ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
             .split("\n")
             .map((l) => `  > ${l}`)
             .join("\n");
-          return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact}
+          return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact} · 리스크 ${j.verdict.risk_level ?? "중간"}
 - 가. **현재 내규 원문**${isAttachment ? "(요약)" : ""}
 ${quoted}
 - 나. **변경 비교**: ${a?.comparison || "원문과 직접 비교 정보 부족"}
@@ -377,13 +398,16 @@ ${quoted}
       const a = byIndex.get(i);
       const recFull = (a?.recommendation || "추가 검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
       // 표 셀은 word-break:keep-all로 깔끔히 줄바꿈됨 → 과한 절단 대신 넉넉히, 초과 시에만 말줄임
-      const rec = recFull.length > 160 ? recFull.slice(0, 159) + "…" : recFull;
-      return `| ${i + 1} | ${shortRegName(j.regulation_name)} | ${formatRegulationItemName(j)} | ${j.verdict.impact} | ${reflectionOf(j, input.infoOnly)} | ${rec} |`;
+      const rec = recFull.length > 130 ? recFull.slice(0, 129) + "…" : recFull;
+      const gistFull = (a?.gist || "").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
+      const gist = gistFull ? (gistFull.length > 44 ? gistFull.slice(0, 43) + "…" : gistFull) : "—";
+      const risk = j.verdict.risk_level ?? "중간";
+      return `| ${i + 1} | ${shortRegName(j.regulation_name)} | ${formatRegulationItemName(j)} | ${gist} | ${j.verdict.impact} | ${risk} | ${reflectionOf(j, input.infoOnly)} | ${rec} |`;
     })
     .join("\n");
   const summaryTable = relevant.length
-    ? `| 순번 | 내규명 | 조문명 | 영향도 | 반영 여부 | 권고 조치 |
-| --- | --- | --- | --- | --- | --- |
+    ? `| 순번 | 내규명 | 조문명 | 조문 요지 | 영향도 | 리스크 | 반영 여부 | 권고 조치 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 ${rows}`
     : "- 영향 내규 없음";
 
@@ -603,9 +627,9 @@ ${outline(["이번 규제변동과 직접 정합성 검토가 필요한 IBK 사�
 ${outline(["업로드 문서와 후보 내규 비교 결과, 실질적 정합성 검토가 필요한 IBK 사내규정 미식별."], "- 영향 내규 없음")}
 
 ## 3. 조치 요약 및 권고
-| 순번 | 내규명 | 조문명 | 영향도 | 반영 여부 | 권고 조치 |
-| --- | --- | --- | --- | --- | --- |
-| - | - | - | 해당없음 | 불요 | 추가 조치 불필요 |`;
+| 순번 | 내규명 | 조문명 | 조문 요지 | 영향도 | 리스크 | 반영 여부 | 권고 조치 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| - | - | - | - | 해당없음 | 해당없음 | 불요 | 추가 조치 불필요 |`;
 }
 
 function formatKstDate(): string {

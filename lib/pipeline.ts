@@ -21,6 +21,7 @@ import {
   extractObligations,
   buildObligationQueries,
   cleanLawName,
+  extractEffectiveDate,
   type Analysis,
   type ObligationExtract,
   type Candidate,
@@ -254,6 +255,8 @@ export class CompliancePipeline {
       obligations: obl.obligations,
       amendmentPairs: amendPairs.map((p) => ({ before: p.before, after: p.after })),
       truncated: doc.markdown.length > config.maxAnalyzeChars,
+      // 시행일/유예기간 — 명시된 경우만(로컬 결정적 추출). 백테스팅이라 시급성 점수화 없이 사실만 표기.
+      ...extractEffectiveDate(doc.markdown),
       // 사전예고/예고(확정 전) → 미확정 프레이밍. (cleanLawName이 '(사전예고)'를 떼므로 파일명도 함께 검사)
       //  ⚠️ '예고\b'는 한글 뒤 단어경계가 성립 안 해 무용 → '사전예고/예고문/예고안' 명시 매칭으로 교체.
       //     입법예고·규정변경예고는 isPendingDoc(미발효 입법)에서 조건부로 처리하므로 여기 미포함.
