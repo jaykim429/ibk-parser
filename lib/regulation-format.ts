@@ -59,12 +59,18 @@ function formatAttachmentLabel(c: Candidate, kind: string): string {
 function extractAttachmentTitle(content: string | undefined): string {
   const s = normalizeWhitespace(content);
   if (!s) return "";
-  const title = s
+  let title = s
     .replace(/^별표\s*\d*\s*/i, "")
     .replace(/^별지서식\s*\d*\s*/i, "")
-    .split(/<개정|구분\s+내용|<표>|첨부|주\)/)[0]
+    // 제목 경계 토큰에서 절취 — 개정마커(<신설|<제정|<개정)·본문 시작 토큰(☞·■·상품명:)을 누락하면
+    //  제목 뒤 본문이 줄줄이 붙어 비대화(별표/별지서식 셀 가독성 저하). 이 경계들을 모두 끊는다.
+    .split(/<개정|<신설|<제정|구분\s+내용|<표>|첨부|주\)|☞|■|상품명\s*[:：]/)[0]
     .trim();
-  return title.length > 70 ? `${title.slice(0, 69)}…` : title;
+  // 추출 본문이 제목을 즉시 반복(예: '면책신청서 면책신청서')하면 1회만 — HWP 양식 추출 아티팩트.
+  title = title.replace(/^(.{2,40}?)\s+\1(?=\s|$)/, "$1").trim();
+  // 본문이 섞여 비정상적으로 길면(경계 절취 실패) 제목 부착을 포기 — 호출부가 깨끗한 라벨('별표 3')만 사용.
+  if (!title || title.length > 40) return "";
+  return title;
 }
 
 function extractArticleLabel(name: string | undefined): string | undefined {

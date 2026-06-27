@@ -171,18 +171,28 @@ export async function generateReport(input: ReportInput): Promise<string> {
   }
 
   let llm: LlmReport = {};
-  try {
-    const raw = await callCompletion({
-      systemPrompt: REPORT_SYSTEM,
-      prompt: buildPrompt(input, relevant),
-      maxTokens: 6000,
-      temperature: 0.2,
-    });
-    llm = extractJson<LlmReport>(raw);
-  } catch (e) {
-    // LLM 보고서 생성 실패 → 결정적 본문만으로 폴백(원인 추적 위해 로그)
-    console.warn(`[REPORT] 보고서 LLM 생성/파싱 실패 → 결정적 폴백: ${(e as Error)?.message ?? e}`);
-    llm = {};
+  // 개요·적용관점이 모두 비면(OCR 손상 본문 등으로 생성 실패) 1회 재시도 후, 그래도 비면 정직 고지.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const raw = await callCompletion({
+        systemPrompt: REPORT_SYSTEM,
+        prompt: buildPrompt(input, relevant),
+        maxTokens: 6000,
+        temperature: attempt === 0 ? 0.2 : 0,
+      });
+      llm = extractJson<LlmReport>(raw);
+    } catch (e) {
+      // LLM 보고서 생성 실패 → 결정적 본문만으로 폴백(원인 추적 위해 로그)
+      console.warn(`[REPORT] 보고서 LLM 생성/파싱 실패(시도 ${attempt + 1}/2): ${(e as Error)?.message ?? e}`);
+      llm = {};
+    }
+    if ((llm.overview_changes?.length ?? 0) > 0 || (llm.ibk_view?.length ?? 0) > 0) break;
+  }
+  if (!(llm.overview_changes?.length) && !(llm.ibk_view?.length)) {
+    // '정보 부족' 플레이스홀더 대신 추출 한계를 사용자에게 정직하게 고지(빈 섹션 노출 방지).
+    llm.overview_changes = [
+      "이 문서는 글꼴 손상 또는 스캔 페이지(OCR 복구분)로 자동 변경요약 생성이 제한되었습니다. 아래 영향 내규·요건 커버리지는 참고하되, 구체 변경 내용은 원문을 직접 확인해 주세요.",
+    ];
   }
 
   const body = assembleBody(input, relevant, llm);
@@ -275,7 +285,7 @@ function buildPrompt(input: ReportInput, relevant: JudgedMatch[]): string {
       const kind = inferRegulationKind(j);
       const itemName = formatRegulationItemName(j);
       const content = cleanText(j.regulation_content, 1600);
-      return `[${i}] 내규: ${j.regulation_name} / 구분: ${kind} / 조문명: ${itemName} / 영향도(확정): ${j.verdict.impact} / 개정필요성: ${j.verdict.compliance_need} / 리스크: ${j.verdict.risk_level ?? "중간"}
+      return `[${i}] 내규: ${j.regulation_name} / 구분: ${kind} / 조문명: ${itemName} / 영향도(확정): ${j.verdict.impact} / 개정필요성: ${j.verdict.compliance_need} / 반영여부(확정): ${reflectionOf(j, input.infoOnly)} / 리스크: ${j.verdict.risk_level ?? "중간"}
     조문 원문: ${content}`;
     })
     .join("\n\n");
@@ -308,8 +318,8 @@ ${articleBlock}
 규칙:
 - **계층 구조**: overview_changes·ibk_view·priority_actions 의 각 항목은 문자열, 또는 내용상 상·하위가 분명할 때만 {"text":..,"children":[..]} 로 중첩(children 도 같은 형식, 최대 3단). 번호/기호(가., 1), ① 등)는 절대 직접 붙이지 말 것 — 시스템이 자동 부여한다. 억지로 중첩하지 말고 단순하면 문자열로.
 - articles 는 위 [index] 전체(0..${relevant.length - 1})를 포함.
-- comparison 은 반드시 주어진 '조문 원문'을 근거로. 원문에 기준(금액·요건)이 이미 있으면 "반영됨"으로 판단.
-- **반영 일관성**: 원문에 이미 반영됐거나(반영됨) 이 변경이 개정을 요구하지 않으면(개정 불요) recommendation 은 "현행 유지" 계열로만(개정·보완 권고 금지, 불요 사유 명시). "미반영/차이"면 보완·개정 권고. 영향도 낮음은 대개 '반영됨' 또는 '개정 불요'.
+- comparison 은 반드시 주어진 '조문 원문'을 근거로, **주어진 '반영여부(확정)' 라벨과 일치하는 결론**으로 쓴다(원문을 인용해 그 라벨의 근거를 제시). 라벨과 모순되는 단정 금지 — 반영여부=미반영인데 "이미 반영/일치함"으로 끝내지 말 것(이 경우 "원칙·일반 조항은 있으나 이번 변경이 요구하는 구체 의무는 미반영"처럼 미반영 근거를 쓴다). 반영여부=반영됨/개정 불요이면 "원문에 이미 …가 규정되어 있어 부합"으로 쓴다.
+- **권고 일관성(반영여부 종속)**: recommendation 은 반드시 반영여부(확정)에 맞춘다 — 반영됨/개정 불요 → "현행 유지"(개정·보완 권고 금지, 불요 사유 명시); 일부 반영 → "보완"; 미반영 → "개정·신설". 반영여부와 어긋나는 권고(예: 미반영인데 "현행 유지", 개정 불요인데 "개정") 절대 금지.
 - **권고 표현(매우 중요)**: ${
     framing === "monitoring"
       ? `본 문서는 **정보성 자료(보도자료·해설서·FAQ·법령해석·비조치 등)**다: 법령 개정이 아니므로 "개정하라/미반영"으로 단정하지 말 것. recommendation 은 "동향 모니터링·사전 검토" 중심, priority_actions 는 비워둔다. 단, 중요한 정책 방향 신호는 ibk_view 에 살린다.
@@ -338,19 +348,48 @@ function stripLeadConditional(text: string): string {
     .trim();
 }
 
+/** judge 사유에 조치 동사(보완/개정/신설…)가 있으면 권고로 승계(없으면 빈 문자열). */
+function pickActionFromReason(reason?: string): string {
+  const s = (reason || "").replace(/\s+/g, " ").trim();
+  if (!s || !/(보완|개정|신설|강화|마련|수립)/.test(s)) return "";
+  return s.length > 120 ? `${s.slice(0, 119)}…` : s;
+}
+
+/**
+ * 권고 ↔ 반영여부 정합 백스톱(결정적) — 사용자에게 보이는 '반영여부'(judge 라벨)와 '권고'가
+ *  어긋나는 상충을 제거한다(프롬프트로 1차 정합화하되 LLM이 흘리면 여기서 강제).
+ *   · 반영됨/개정 불요(무조치)인데 권고가 개정·보완 → '현행 유지'
+ *   · 미반영/일부 반영(조치 필요)인데 권고가 현행 유지/공란 → judge 사유의 조치동사 또는 기본 조치문
+ *  reflection을 뒤집지는 않는다(어느 LLM이 옳은지 본문만으론 단정 불가 — 라벨은 judge가 단일 기준).
+ */
+function reconcileRecommendation(reflection: string, rec: string | undefined, reason?: string): string {
+  const r = (rec || "").trim();
+  const recHold = !r || /현행\s*유지/.test(r);
+  const recAction = /(개정|보완|신설|강화|수립|마련|추가|반영하여|도입)/.test(r);
+  if ((reflection === "반영됨" || reflection === "개정 불요") && recAction && !recHold) {
+    return "현행 유지";
+  }
+  if ((reflection === "미반영" || reflection === "일부 반영") && recHold) {
+    return pickActionFromReason(reason) || (reflection === "미반영" ? "개정·신설 검토 필요" : "보완 검토 필요");
+  }
+  return r || "담당 부서 추가 검토 필요";
+}
+
 // ── 본문 결정적 조립 ───────────────────────────────────
 function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmReport): string {
   const framing = docFraming(input);
+  const reflByIndex = new Map<number, string>();
+  relevant.forEach((j, i) => reflByIndex.set(i, reflectionOf(j, input.infoOnly)));
   const byIndex = new Map<number, ArticleAnalysis>();
   for (const a of llm.articles ?? []) {
     if (typeof a.index !== "number") continue;
+    let rec = a.recommendation;
     // 이미 시행/정보성 문서엔 조건부 권고가 §4 프레이밍과 상충 → 선행 조건부 부사구만 정리.
-    byIndex.set(
-      a.index,
-      framing === "conditional" || !a.recommendation
-        ? a
-        : { ...a, recommendation: stripLeadConditional(a.recommendation) }
-    );
+    if (rec && framing !== "conditional") rec = stripLeadConditional(rec);
+    // 권고 ↔ 반영여부 정합 강제(상충 제거). 정보성('모니터링 대상')은 대상 라벨이 아니라 무영향.
+    const refl = reflByIndex.get(a.index);
+    if (refl) rec = reconcileRecommendation(refl, rec, relevant[a.index]?.verdict?.reason);
+    byIndex.set(a.index, rec === a.recommendation ? a : { ...a, recommendation: rec });
   }
 
   // 1. 규제변동 개요
@@ -408,7 +447,7 @@ ${outline(ibkView, "- 적용 관점 정보 부족")}${stageNote}`;
             .split("\n")
             .map((l) => `  > ${l}`)
             .join("\n");
-          return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact} · 리스크 ${j.verdict.risk_level ?? "중간"}
+          return `#### 2.2.${n + 1} ${j.regulation_name} ${itemName} · 영향도 ${j.verdict.impact} · 리스크 ${j.verdict.degraded ? "미산정" : j.verdict.risk_level ?? "중간"}
 - 가. **현재 내규 원문**${isAttachment ? "(요약)" : ""}
 ${quoted}
 - 나. **변경 비교**: ${a?.comparison || "원문과 직접 비교 정보 부족"}
@@ -431,7 +470,7 @@ ${quoted}
       const rec = recFull.length > 130 ? recFull.slice(0, 129) + "…" : recFull;
       const gistFull = (a?.gist || "").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
       const gist = gistFull ? (gistFull.length > 44 ? gistFull.slice(0, 43) + "…" : gistFull) : "—";
-      const risk = j.verdict.risk_level ?? "중간";
+      const risk = j.verdict.degraded ? "미산정" : j.verdict.risk_level ?? "중간";
       return `| ${i + 1} | ${shortRegName(j.regulation_name)} | ${formatRegulationItemName(j)} | ${gist} | ${j.verdict.impact} | ${risk} | ${reflectionOf(j, input.infoOnly)} | ${rec} |`;
     })
     .join("\n");
@@ -462,11 +501,17 @@ ${rows}`
 ${covRows}`
     : "";
 
+  // 판정 실패(degraded) 조문 고지 — 리스크 '미산정' 표기와 함께 사용자에게 한계를 정직 안내.
+  const degradedCount = relevant.filter((j) => j.verdict.degraded).length;
+  const degradedNote = degradedCount
+    ? `\n> ⚠️ 이 중 ${degradedCount}건은 자동 정합성 판정이 일시적으로 수행되지 못해 검색 기반 잠정 추정치로 표시되었습니다(리스크 미산정). 해당 조문은 원문을 직접 확인해 주세요.`
+    : "";
+
   // 2. 내규 정합성 분석 — 2.1 영향 요약(집계 + 조치 요약표) → 2.2 조문별 상세 → 2.3 커버리지 갭
   const sec2 = [
     `## 2. 내규 정합성 분석
 ### 2.1 영향 요약
-${countLine}
+${countLine}${degradedNote}
 
 ${summaryTable}
 ### 2.2 조치 필요 조문
@@ -616,7 +661,9 @@ function buildCaveats(input: ReportInput, llmCaveats: OutlineItem[]): string {
   } else if (input.itemType === "guideline") {
     items.push("자율규제(가이드라인·모범규준·행정지도)로 법으로 강제되는 사항은 아니지만, 감독기관 점검과 평판 관리 측면에서 미리 반영해 두는 것이 바람직합니다.");
   } else {
-    items.push("이미 시행·공포된 규정의 (개정) 전문입니다. 본문 내용은 확정된 사항이므로 현행 내규와의 정합성을 지금 점검하시는 것이 좋습니다.");
+    // '공포된 규정의 (개정) 전문'으로 특정하면 협회 표준안·표준계약서 등(공포 규정이 아닌 확정 배포 문서)에
+    //  허위가 됨 → '시행 중이거나 확정·배포된 문서'로 일반화(시행세칙·규정·표준안·표준계약서 모두 참).
+    items.push("이미 시행 중이거나 확정·배포된 문서입니다. 본문 내용은 확정된 사항이므로 현행 내규와의 정합성을 지금 점검하시는 것이 좋습니다.");
   }
 
   // 2) 커버리지 갭에서 나오는 실무 주의점

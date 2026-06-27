@@ -30,6 +30,8 @@ export type Verdict = {
   reflection: string;
   ibk_specific: boolean;
   reason: string;
+  /** LLM 판정 실패로 검색영향도 잠정 추정치를 쓴 경우 true — 리스크 축 미산정·고지 대상(2축 독립 오인 방지). */
+  degraded?: boolean;
 };
 
 export type JudgedMatch = Candidate & { verdict: Verdict };
@@ -133,21 +135,30 @@ ${candidateBlock}
 
   // ⚠️ json_mode=true는 서버가 Python dict를 str()로 직렬화해 작은따옴표 JSON을 반환(파싱불가).
   //    json_mode=false로 두고 프롬프트로 JSON 배열을 요구 → extractJson이 ```json 펜스까지 처리.
-  const raw = await callCompletion({
-    systemPrompt: system,
-    prompt,
-    maxTokens: 6000,
-    temperature: 0.1,
-    jsonMode: false,
-  });
-
-  let verdicts: (Partial<Verdict> & { index: number })[];
-  try {
-    verdicts = extractJson(raw);
-    if (!Array.isArray(verdicts)) throw new Error("배열 아님");
-  } catch (e) {
-    // 판정 실패 시: 검색영향도를 그대로 사용하는 fallback (원인 추적 위해 로그)
-    console.warn(`[JUDGE] 판정 JSON 파싱 실패 → 검색영향도 fallback: ${(e as Error)?.message ?? e}`);
+  //  maxTokens는 후보 수에 비례(후보마다 사유 포함 객체 1개) — 고정 6000은 후보 18건에서 응답이 잘려
+  //  파싱 실패→문서 전체가 검색영향도 fallback으로 강등되던 회귀의 직접 원인이었음. 넉넉히+상한.
+  const judgeMaxTokens = Math.min(16000, 4000 + cands.length * 700);
+  let verdicts: (Partial<Verdict> & { index: number })[] | null = null;
+  // 파싱 실패는 보통 응답 잘림 → 1회 재시도(결정성 위해 temperature 0). 그래도 실패면 fallback.
+  for (let attempt = 0; attempt < 2 && !verdicts; attempt++) {
+    const raw = await callCompletion({
+      systemPrompt: system,
+      prompt,
+      maxTokens: judgeMaxTokens,
+      temperature: attempt === 0 ? 0.1 : 0,
+      jsonMode: false,
+    });
+    try {
+      const parsed = extractJson<unknown>(raw);
+      if (!Array.isArray(parsed)) throw new Error("배열 아님");
+      verdicts = parsed as (Partial<Verdict> & { index: number })[];
+    } catch (e) {
+      console.warn(`[JUDGE] 판정 JSON 파싱 실패(시도 ${attempt + 1}/2): ${(e as Error)?.message ?? e}`);
+    }
+  }
+  if (!verdicts) {
+    // 최종 실패 시: 검색영향도를 그대로 쓰는 fallback(degraded 표시 — 리스크 축은 산정 안 함).
+    console.warn(`[JUDGE] 재시도 후에도 파싱 실패 → 전 후보 검색영향도 fallback(degraded)`);
     return cands.map((c) => ({ ...c, verdict: fallbackVerdict(c) }));
   }
 
@@ -260,11 +271,15 @@ function fallbackVerdict(c: Candidate): Verdict {
     relevance: "적합",
     applicability_basis: "금융회사적용",
     impact: imp,
-    risk_level: imp,
+    // ⚠️ 리스크를 impact로 동일 대입하지 않는다 — 그러면 두 축(개정필요성·리스크)이 비트 단위로 같아져
+    //  '독립 평가'로 오인됨. 판정 미수행 시 리스크는 산정 불가 → 보수 기본 '중간' + degraded로 별도 고지.
+    risk_level: "중간",
     compliance_need: need,
     reflection: refl,
     ibk_specific: false,
-    reason: "LLM 판정 미수행 — 하이브리드 검색 영향도를 사용함.",
+    // 사용자 노출 가능 — 개발/내부 용어('하이브리드 검색') 금지, 비전문가 친화 표현.
+    reason: "자동 정합성 판정을 일시적으로 수행하지 못해 검색 기반 잠정 추정치로 표시함(원문 직접 확인 권장).",
+    degraded: true,
   };
 }
 

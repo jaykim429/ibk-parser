@@ -388,7 +388,8 @@ export function extractEffectiveDate(text: string): { effectiveDate?: string; gr
   //   tier1 '이 OO은/는 …날짜… 시행'(정식 부칙 조항) → tier2 '시행일: 날짜' → tier3 '날짜 (부터) 시행'(본문).
   //   상위 tier에서 찾으면 종료(본문 예시일자가 정식 부칙을 덮는 것 방지). 각 tier 내에선 최신(전문 다부칙 대비).
   //   '시행' 맥락이 전혀 없으면 추출 안 함(추측 금지 — 백테스팅 보수성).
-  const DATE = "((?:\\d{4}|\\d{2})\\s*[.년]\\s*\\d{1,2}\\s*[.월]\\s*\\d{1,2}\\s*일?)";
+  // 2자리 연도 앞 어깨따옴표('25.9.8) 허용 — '시행일(’25.9.8.)' 같은 축약 표기 누락 방지.
+  const DATE = "(['’]?(?:\\d{4}|\\d{2})\\s*[.년]\\s*\\d{1,2}\\s*[.월]\\s*\\d{1,2}\\s*일?)";
   const tiers = [
     new RegExp(`이\\s*(?:영|법률|법|규정|규준|기준|고시|지침|행정지도|가이드라인|모범규준|준칙|세칙|예규|훈령)[은는][^.]{0,30}?${DATE}[^.]{0,8}?(?:부터)?\\s*시행`, "g"),
     new RegExp(`시행일\\s*[:(\\[]?\\s*${DATE}`, "g"),
@@ -399,7 +400,11 @@ export function extractEffectiveDate(text: string): { effectiveDate?: string; gr
     let best = -1;
     let bestStr = "";
     while ((mm = re.exec(t)) !== null) {
-      const ds = mm[1].replace(/\s+/g, "");
+      // 인용·예시 내 '…시행된 OO법/령'은 타 법령의 시행일이므로 자기 시행일로 채택하지 않는다
+      //  (예: 작성예시 문장의 "2016.8.1 시행된 지배구조법 시행령"). '시행한다/시행된다.'(부칙)는 유지.
+      const after = t.slice(mm.index + mm[0].length, mm.index + mm[0].length + 30);
+      if (/^\s*된\s*[가-힣·\s]{0,20}(법|령|규정|규칙|고시|기준|지침|조례)/.test(after)) continue;
+      const ds = mm[1].replace(/['’\s]+/g, "");
       const dm = ds.match(/(\d{2,4})[.년](\d{1,2})[.월](\d{1,2})/);
       if (!dm) continue;
       let y = Number(dm[1]);
