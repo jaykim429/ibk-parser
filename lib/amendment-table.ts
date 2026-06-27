@@ -4,6 +4,7 @@
  *  - extractAmendmentPairs: 입력 문서 blocks에서 (현행, 개정안) 쌍 추출 → 정밀 매칭 쿼리에 사용
  */
 import type { IRBlock, IRTable, IRCell } from "kordoc";
+import { normalizeWhitespace } from "./doc-text";
 
 const RE_HYUN = /현\s*행/;
 const RE_GAE = /개\s*정/;
@@ -53,8 +54,8 @@ export function extractAmendmentPairs(blocks: IRBlock[]): AmendmentPair[] {
     const t = mergeContinuationRows(b.table);
     for (let r = 1; r < t.rows; r++) {
       const row = t.cells[r] ?? [];
-      const before = (row[hyunIdx]?.text ?? "").replace(/\s+/g, " ").trim();
-      const after = (row[gaeIdx]?.text ?? "").replace(/\s+/g, " ").trim();
+      const before = normalizeWhitespace(row[hyunIdx]?.text);
+      const after = normalizeWhitespace(row[gaeIdx]?.text);
       if (after && after.length >= 8) pairs.push({ before, after });
     }
   }

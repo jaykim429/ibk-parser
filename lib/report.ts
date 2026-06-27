@@ -12,6 +12,7 @@
 import { callCompletion, extractJson } from "./llm";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
 import { cleanLawName, BILL_SIGNAL, PENDING_SIGNAL, type Analysis, type ItemType, type Obligation } from "./server";
+import { normalizeWhitespace } from "./doc-text";
 import type { JudgedMatch, CoverageItem } from "./judge";
 
 const REPORT_SYSTEM = `당신은 IBK기업은행 준법지원부의 컴플라이언스 보고서 작성 전문가입니다.
@@ -506,12 +507,12 @@ function outline(items: OutlineItem[], fallback: string): string {
 }
 
 function shortRegName(name: string): string {
-  return (name ?? "").replace(/\s+/g, " ").trim();
+  return normalizeWhitespace(name);
 }
 
 /** 한 줄로 평탄화 + 공백 정리 + 길이 제한 (신구조문/개정개요 인라인용) */
 function cleanInline(s: string | undefined, max: number): string {
-  const t = (s ?? "").replace(/\s+/g, " ").trim();
+  const t = normalizeWhitespace(s);
   return t.length > max ? t.slice(0, max - 1) + "…" : t;
 }
 

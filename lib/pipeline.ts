@@ -9,6 +9,7 @@
  *  HTTP 계층(route)과 분리 + 컴포넌트 주입 가능 → compliance.ihopper.co.kr 등에서 재사용.
  */
 import { parseDocument } from "./parse-document";
+import { normalizeWhitespace } from "./doc-text";
 import {
   analyzeDocument,
   parseBill,
@@ -220,7 +221,7 @@ export class CompliancePipeline {
       //  (전역 융합 풀만 보면 보유 내규가 풀 밖일 때 'false 부재'가 남 → 의무별 검색으로 제거)
       const perObligation = await Promise.all(
         obl.obligations.map(async (o) => {
-          const q = `${lawName} ${o.title} ${o.summary}`.replace(/\s+/g, " ").trim().slice(0, 280);
+          const q = normalizeWhitespace(`${lawName} ${o.title} ${o.summary}`).slice(0, 280);
           let cands: Candidate[] = [];
           try {
             cands = await this.retriever.retrieve(q, lawName);

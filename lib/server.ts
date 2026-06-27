@@ -5,6 +5,7 @@
 
 import { config } from "./config";
 import { callCompletion, extractJson } from "./llm";
+import { normalizeWhitespace } from "./doc-text";
 
 const CORE_AI_BASE_URL = config.coreAiBaseUrl;
 const TIMEOUT = config.pipelineTimeoutMs;
@@ -217,7 +218,7 @@ function buildFallbackQuery(
   );
   const core = (m ? m[0] : clean).slice(0, 800);
 
-  const combined = `${provText} ${core}`.replace(/\s+/g, " ").trim();
+  const combined = normalizeWhitespace(`${provText} ${core}`);
   return (combined || clean).slice(0, 800);
 }
 
@@ -278,7 +279,7 @@ export function buildSubQueries(
   const seen = new Set<string>();
   let eligible = 0;
   for (const u of units) {
-    const body = objText(u).replace(/\s+/g, " ").trim();
+    const body = normalizeWhitespace(objText(u));
     if (body.length < config.subQueryMinLen) continue;
     // ⚠️ dedup은 head가 아니라 'body' 기준 — 모든 쿼리가 head로 시작하므로
     //    head가 길면 head-포함 prefix가 전부 같아져 서브쿼리가 1개로 붕괴한다.
@@ -304,7 +305,7 @@ export function buildSubQueries(
 function buildObligationCanonical(title: string, obligations: Obligation[]): string {
   const titles = obligations.map((o) => o?.title ?? "").filter(Boolean).join(" ");
   const summaries = obligations.map((o) => o?.summary ?? "").filter(Boolean).join(" ");
-  return `${title ?? ""} ${titles} ${summaries}`.replace(/\s+/g, " ").trim().slice(0, 800);
+  return normalizeWhitespace(`${title ?? ""} ${titles} ${summaries}`).slice(0, 800);
 }
 
 export function buildCanonicalQuery(
@@ -349,7 +350,7 @@ export function buildCanonicalQuery(
   const head = [analysis.law_name, analysis.law_domain].filter(Boolean).join(" ");
   // M3: 자연어 핵심요약을 키워드 앞에 혼합(문장 학습 임베딩 정합↑). 길이는 그대로 800자 캡.
   const summary = config.canonicalUseSummary
-    ? (analysis.core_summary ?? "").replace(/\s+/g, " ").trim().slice(0, 300)
+    ? normalizeWhitespace(analysis.core_summary).slice(0, 300)
     : "";
   const q = [head, summary, uniq.join(", ")].filter(Boolean).join(" ").trim();
 
@@ -497,7 +498,7 @@ export function buildObligationQueries(
   const out: string[] = [];
   const seen = new Set<string>();
   for (const o of obligations) {
-    const body = `${o.title} ${o.summary}`.replace(/\s+/g, " ").trim();
+    const body = normalizeWhitespace(`${o.title} ${o.summary}`);
     if (body.length < config.subQueryMinLen) continue;
     const dedup = body.slice(0, 80);
     if (seen.has(dedup)) continue;

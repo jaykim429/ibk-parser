@@ -1,4 +1,5 @@
 import type { Candidate } from "./server";
+import { normalizeWhitespace } from "./doc-text";
 
 export function inferRegulationKind(c: Candidate): string {
   const raw = `${c.type ?? ""} ${c.regulation_name ?? ""} ${c.jo_title ?? ""}`.trim();
@@ -30,7 +31,7 @@ export function formatRegulationItemName(c: Candidate): string {
 }
 
 export function makeContentExcerpt(content: string | undefined, max = 260): string {
-  const s = (content ?? "").replace(/\s+/g, " ").trim();
+  const s = normalizeWhitespace(content);
   if (!s) return "-";
   return s.length > max ? `${s.slice(0, max - 1)}…` : s;
 }
@@ -48,7 +49,7 @@ function formatAttachmentLabel(c: Candidate, kind: string): string {
 }
 
 function extractAttachmentTitle(content: string | undefined): string {
-  const s = (content ?? "").replace(/\s+/g, " ").trim();
+  const s = normalizeWhitespace(content);
   if (!s) return "";
   const title = s
     .replace(/^별표\s*\d*\s*/i, "")

@@ -16,13 +16,14 @@
 import type { IRBlock } from "kordoc";
 import { config } from "./config";
 import { parseDocument, loadKordoc } from "./parse-document";
+import { normalizeWhitespace } from "./doc-text";
 
 const RE_BYEOLJI = /별\s*표|별지\s*서식/;
 
 /** 제어문자 제거 + 내부 줄바꿈/연속공백 → 단일 공백 */
 function normalize(s: string): string {
   // eslint-disable-next-line no-control-regex
-  return (s || "").replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "").replace(/\s+/g, " ").trim();
+  return normalizeWhitespace((s || "").replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ""));
 }
 
 export type ManualChunk = {
