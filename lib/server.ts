@@ -381,30 +381,37 @@ export const PENDING_SIGNAL =
 export function extractEffectiveDate(text: string): { effectiveDate?: string; gracePeriod?: string } {
   const t = (text || "").replace(/\s+/g, " ");
   const out: { effectiveDate?: string; gracePeriod?: string } = {};
-  // '시행' 맥락의 날짜만 수집한다(부수 일자 오인 방지: '적용/산정/기준일'은 제외, 오직 '시행').
-  //   (a) '날짜 (부터) 시행'  (b) '시행일: 날짜'.  → 수집된 것 중 **최신 날짜**를 현행 시행일로(전문 다부칙 대비, 옛 부칙 오선택 방지).
-  //   '시행' 맥락 날짜가 하나도 없으면 추출 안 함(추측 금지 — 백테스팅 보수성).
+  // '시행' 맥락의 날짜만 추출(부수 일자 오인 방지: '적용/산정/기준일' 제외). **우선순위 tier**로 정식 부칙을 먼저:
+  //   tier1 '이 OO은/는 …날짜… 시행'(정식 부칙 조항) → tier2 '시행일: 날짜' → tier3 '날짜 (부터) 시행'(본문).
+  //   상위 tier에서 찾으면 종료(본문 예시일자가 정식 부칙을 덮는 것 방지). 각 tier 내에선 최신(전문 다부칙 대비).
+  //   '시행' 맥락이 전혀 없으면 추출 안 함(추측 금지 — 백테스팅 보수성).
   const DATE = "((?:\\d{4}|\\d{2})\\s*[.년]\\s*\\d{1,2}\\s*[.월]\\s*\\d{1,2}\\s*일?)";
-  const cands: string[] = [];
+  const tiers = [
+    new RegExp(`이\\s*(?:영|법률|법|규정|규준|기준|고시|지침|행정지도|가이드라인|모범규준|준칙|세칙|예규|훈령)[은는][^.]{0,30}?${DATE}[^.]{0,8}?(?:부터)?\\s*시행`, "g"),
+    new RegExp(`시행일\\s*[:(\\[]?\\s*${DATE}`, "g"),
+    new RegExp(`${DATE}\\s*(?:부터)?\\s*시행`, "g"),
+  ];
   let mm: RegExpExecArray | null;
-  for (const re of [new RegExp(`${DATE}\\s*(?:부터)?\\s*시행`, "g"), new RegExp(`시행일\\s*[:(\\[]?\\s*${DATE}`, "g")]) {
-    while ((mm = re.exec(t)) !== null) cands.push(mm[1]);
-  }
-  let best = -1;
-  let bestStr = "";
-  for (const ds0 of cands) {
-    const ds = ds0.replace(/\s+/g, "");
-    const dm = ds.match(/(\d{2,4})[.년](\d{1,2})[.월](\d{1,2})/);
-    if (!dm) continue;
-    let y = Number(dm[1]);
-    if (y < 100) y += 2000;
-    const num = y * 10000 + Number(dm[2]) * 100 + Number(dm[3]);
-    if (num > best) {
-      best = num;
-      bestStr = ds;
+  for (const re of tiers) {
+    let best = -1;
+    let bestStr = "";
+    while ((mm = re.exec(t)) !== null) {
+      const ds = mm[1].replace(/\s+/g, "");
+      const dm = ds.match(/(\d{2,4})[.년](\d{1,2})[.월](\d{1,2})/);
+      if (!dm) continue;
+      let y = Number(dm[1]);
+      if (y < 100) y += 2000;
+      const num = y * 10000 + Number(dm[2]) * 100 + Number(dm[3]);
+      if (num > best) {
+        best = num;
+        bestStr = ds;
+      }
+    }
+    if (bestStr) {
+      out.effectiveDate = bestStr;
+      break;
     }
   }
-  if (bestStr) out.effectiveDate = bestStr;
   // 2) 공포 후 N개월/년/일 경과 후 시행(유예기간 성격)
   const gm = t.match(/공포(?:한\s*날)?[^.]{0,6}?(\d+\s*(?:개월|년|일))\s*(?:이?\s*경과한?\s*날?)?\s*(?:부터)?\s*시행/);
   if (gm) out.gracePeriod = `공포 후 ${gm[1].replace(/\s+/g, "")}`;
@@ -558,7 +565,7 @@ export type DocNature = "규범" | "정보성";
 // 순수 '전달/설명 형식' — 보도/설명/안내서/해설서/FAQ/로드맵 등. 본문이 법안을 다뤄도 그 문서 자체는
 //   비구속(정보성). 예: "OO 보안 해설서", "OO 안내서", "규제 개선 로드맵" → 설명·동향 자료(모니터링).
 const DELIVERY_FORMAT =
-  /(보도자료|보도설명|보도참고|설명자료|해명자료|참고자료|안내자료|안내서|해설서|설명서|로드맵|간담회|브리핑|카드뉴스|인포그래픽|Q\s*&\s*A|FAQ)/i;
+  /(보도자료|보도설명|보도참고|설명자료|해명자료|참고자료|안내자료|안내서|해설서|설명서|로드맵|간담회|브리핑|카드뉴스|인포그래픽|Q\s*&\s*A|FAQ|시사점|법무법인|법률사무소|회계법인|이슈리포트|이슈\s*\[|현황\s*및\s*개선)/i;
 // '해석/의견/회신' 형식 — 그 문서의 정체가 해석·회신이면(파일명 기준) 본문이 법령을 인용해도 정보성.
 const INTERPRETIVE_FORMAT =
   /(비조치\s*의견서?|비조치\s*의견|비조치|노액션|no[-\s]?action|유권해석|법령해석|법령\s*질의|해석례|질의\s*회신|질의\s*응답|회신문|회신서|회신)/i;

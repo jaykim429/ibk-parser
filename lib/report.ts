@@ -194,8 +194,9 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
   const lawName = cleanLawName(input.lawName || input.analysis?.law_name || "");
   const docTypeLabel = docTypeLabelOf(input);
   // 시행일/유예기간 — 명시된 경우만(백테스팅: 시급성 점수 아님, 사실 표기). 분석일보다 과거면 중립적으로 '이미 시행' 부기.
+  // 미발효 입법(초안)은 '예정 시행일'일 뿐이므로 '(이미 시행)' 단정 금지(백테스팅: 제안 시행일이 분석일보다 과거여도 초안이면 미발효).
   const effLine = input.effectiveDate
-    ? `\n- **시행일**: ${input.effectiveDate}${isPastDate(input.effectiveDate, date) ? " (이미 시행)" : ""}`
+    ? `\n- **시행일**: ${input.effectiveDate}${isPendingDoc(input) ? " (예정, 미발효)" : isPastDate(input.effectiveDate, date) ? " (이미 시행)" : ""}`
     : "";
   const graceLine = input.gracePeriod ? `\n- **유예기간**: ${input.gracePeriod}` : "";
   return `# 규제변동 영향분석 보고서
@@ -576,13 +577,17 @@ function buildCaveats(input: ReportInput, llmCaveats: OutlineItem[]): string {
   const absentN = coverage.filter((c) => c.coverage === "부재").length;
   const partialN = coverage.filter((c) => c.coverage === "부분").length;
 
-  // 1) 문서 성격에 따른 진짜 주의점
-  if (input.infoOnly) {
+  // 1) 문서 성격에 따른 진짜 주의점 — 본문 프레이밍(docFraming)과 동일 신호 사용(상충 방지).
+  //    이전: itemType=bill/policy에 무조건 '확정 전 단계' 문구 → 시행중 개정전문·준칙·시행세칙에 오노출(헤더 '이미 시행'과 모순).
+  const fr = docFraming(input);
+  if (fr === "monitoring") {
     items.push("이 문서는 보도자료·설명자료 등 정보성 자료입니다. 법령 개정이 확정된 것이 아니므로, 지금 바로 내규를 바꾸기보다 앞으로의 진행 상황을 지켜보는 것이 좋습니다.");
-  } else if (input.itemType === "guideline") {
-    items.push("자율규제(가이드라인·모범규준)로 법으로 강제되는 사항은 아니지만, 감독기관 점검과 평판 관리 측면에서 미리 반영해 두는 것이 바람직합니다.");
-  } else if (input.itemType === "bill" || input.itemType === "policy") {
+  } else if (fr === "conditional") {
     items.push("아직 입법·개정이 확정되기 전 단계의 문서입니다. 심의·입법예고 과정에서 내용이 바뀔 수 있으니, 확정되는 시점에 한 번 더 확인하시길 권합니다.");
+  } else if (input.itemType === "guideline") {
+    items.push("자율규제(가이드라인·모범규준·행정지도)로 법으로 강제되는 사항은 아니지만, 감독기관 점검과 평판 관리 측면에서 미리 반영해 두는 것이 바람직합니다.");
+  } else {
+    items.push("이미 시행·공포된 규정의 (개정) 전문입니다. 본문 내용은 확정된 사항이므로 현행 내규와의 정합성을 지금 점검하시는 것이 좋습니다.");
   }
 
   // 2) 커버리지 갭에서 나오는 실무 주의점

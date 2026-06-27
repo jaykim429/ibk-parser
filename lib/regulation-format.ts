@@ -23,7 +23,15 @@ export function formatRegulationItemName(c: Candidate): string {
     return /부칙/.test(c.regulation_name) ? c.regulation_name : "부칙";
   }
 
-  const article = c.jo ? `제${c.jo}조` : extractArticleLabel(c.regulation_name);
+  // 조 라벨 정규화 — c.jo가 이미 '조'를 포함('5조의3')하면 중복('제5조의3조') 방지, '5의3'은 '제5조의3'으로.
+  const joStr = String(c.jo ?? "").trim();
+  const article = !joStr
+    ? extractArticleLabel(c.regulation_name)
+    : /조/.test(joStr)
+      ? `제${joStr}`
+      : /^\d+의\d+/.test(joStr)
+        ? `제${joStr.replace("의", "조의")}`
+        : `제${joStr}조`;
   const title = cleanJoTitle(c.jo_title);
   const hang = c.hang ? ` 제${c.hang}항` : "";
   const name = `${article ?? ""}${title ? `(${title})` : ""}${hang}`.trim();

@@ -251,15 +251,18 @@ function normalizeRisk(risk: unknown, relevance: unknown): ImpactLevel {
 }
 
 function fallbackVerdict(c: Candidate): Verdict {
-  const imp = c.importance === "high" ? "높음" : c.importance === "medium" ? "중간" : "낮음";
-  const need = "검토";
+  // 판정 실패 시 검색영향도 사용. ⚠️ impact↔compliance_need↔reflection을 일관 매핑(불변식 준수) —
+  //  이전엔 reflection을 '일부 반영'으로 고정해 '높음+일부 반영' 같은 정규화 불변식 위반이 발생했음.
+  const imp: ImpactLevel = c.importance === "high" ? "높음" : c.importance === "medium" ? "중간" : "낮음";
+  const need: ComplianceNeed = imp === "높음" ? "필요" : imp === "중간" ? "검토" : "불요";
+  const refl = imp === "높음" ? "미반영" : imp === "중간" ? "일부 반영" : "개정 불요";
   return {
     relevance: "적합",
     applicability_basis: "금융회사적용",
-    impact: imp as ImpactLevel,
-    risk_level: imp as ImpactLevel,
+    impact: imp,
+    risk_level: imp,
     compliance_need: need,
-    reflection: "일부 반영",
+    reflection: refl,
     ibk_specific: false,
     reason: "LLM 판정 미수행 — 하이브리드 검색 영향도를 사용함.",
   };
