@@ -366,12 +366,15 @@ export function buildCanonicalQuery(
 /**
  * 문서 분류·프레이밍 공유 신호(단일 정의 — server/report가 같은 패턴을 쓰도록).
  *  - BILL_SIGNAL: 진짜 법률안/의안 판별(detectItemType·docTypeLabelOf 공유).
- *  - PENDING_SIGNAL: 미발효 입법(확정 전) 판별(isPendingDoc). BILL_SIGNAL ⊂ PENDING_SIGNAL.
- *  (이전엔 같은 의미 regex가 4곳에 흩어져 '발의' 누락 등 경계 불일치가 있었음)
+ *  - PENDING_STRONG: 미발효 입법(확정 전)의 명시적 신호 — 파일명·법령명 어디서든 인정.
+ *  - PENDING_WEAK: '(안)'만의 약신호 — 파일명에서만 인정. analyze가 본문 초안 표제('…기준(안)')에서
+ *      끌어온 법령명의 잔재 '(안)'이 기제정·기시행 문서를 '미발효'로 오분류하는 것을 막는다(230_22 등).
+ *  BILL_SIGNAL ⊂ PENDING_STRONG. (이전엔 같은 의미 regex가 흩어져 경계 불일치가 있었음)
  */
 export const BILL_SIGNAL = /(법률안|법안|의안|발의|개정법률안)/;
-export const PENDING_SIGNAL =
-  /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안|\(안\)|（안）)/;
+export const PENDING_STRONG =
+  /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안)/;
+export const PENDING_WEAK = /(\(안\)|（안）)/;
 
 /**
  * 시행일·유예기간을 **명시적으로 기재된 경우에만** 추출(로컬 결정적 정규식).
@@ -430,9 +433,10 @@ export function detectItemType(filename: string, text: string): ItemType {
   if (/(가이드라인|가이드\s*북|모범규준|모범기준|모범사례|best\s*practice|행정지도|행동규범|행동강령\s*표준|운영기준\s*가이드|업무\s*가이드|실무\s*지침서|권고안)/i.test(guideHay)) {
     return "guideline";
   }
-  // 규정/고시/지침류가 '파일명(=문서 자체 유형)'에 오면 policy.
+  // 규정/고시/지침/기준류가 '파일명(=문서 자체 유형)'에 오면 policy.
   //   (본문 언급은 흔해 제외하되, 파일명은 문서 정체성이라 오탐 적음 → 규정·고시 샘플 정확 라우팅)
-  if (/(규정|고시|지침|예규|훈령|준칙|세칙|요령)/.test(filename)) return "policy";
+  //   '기준'(업무처리기준·위험관리기준 등 내부 규범)을 누락하면 bill 캐치올로 추락 → 미발효 오프레이밍.
+  if (/(규정|고시|지침|예규|훈령|준칙|세칙|요령|기준)/.test(filename)) return "policy";
   // 시행령/입법예고 등은 본문 머리말까지 포함해 판별
   const hay = filename + " " + text.slice(0, 3000);
   if (/(입법예고|시행령|시행규칙|개정고시|규정변경예고|일부개정령|행정규칙)/.test(hay)) {

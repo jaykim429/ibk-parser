@@ -11,7 +11,7 @@
  */
 import { callCompletion, extractJson } from "./llm";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
-import { cleanLawName, BILL_SIGNAL, PENDING_SIGNAL, type Analysis, type ItemType, type Obligation } from "./server";
+import { cleanLawName, BILL_SIGNAL, PENDING_STRONG, PENDING_WEAK, type Analysis, type ItemType, type Obligation } from "./server";
 import { normalizeWhitespace } from "./doc-text";
 import type { JudgedMatch, CoverageItem } from "./judge";
 
@@ -60,7 +60,11 @@ export type ReportInput = {
 function isPendingDoc(input: ReportInput): boolean {
   if (input.infoOnly) return false;
   if (input.preAnnouncement) return true;
-  return PENDING_SIGNAL.test(`${input.fileName} ${input.lawName}`);
+  // 강신호(법률안·개정령안·입법예고 등)는 파일명·법령명 어디서든 인정.
+  if (PENDING_STRONG.test(`${input.fileName} ${input.lawName}`)) return true;
+  // 약신호 '(안)'은 파일명에만 — analyze가 본문 초안 표제에서 끌어온 법령명의 잔재 '(안)'으로
+  //  기제정·기시행 문서가 미발효로 오분류되는 것을 막는다(예: '…업무처리기준(안)' → 2011 제정 문서).
+  return PENDING_WEAK.test(input.fileName);
 }
 
 /**
@@ -295,7 +299,7 @@ ${articleBlock}
      ⚠️ 문서에 없는 의무·내용을 지어내지 말 것. 의무가 없는 문서면 의무를 만들지 말고 개정이유·내용으로 작성. 내용이 적으면 간결히],
   "ibk_view": [IBK 적용 관점 — IBK의 어떤 지위(특수은행/은행/금융회사/공공기관/상장회사/고용주/개인정보처리자/AI도입기관)로 적용되는지 + 어떤 내규 영역(판매·내부통제·리스크·정보보호·위탁·인사 등)에 영향인지 + 왜인지를 2~4개로 구체적으로. 막연한 "검토 필요" 나열 금지],
   "articles": [
-    { "index": 0, "gist": "이 조문이 규율하는 핵심을 명사형으로 25자 내외 1줄(예: '신상품 사전 리스크 검토 절차'). 조문 원문 기반, 군더더기 없이", "comparison": "조문 원문과 규제변동의 일치/일부차이/미반영을 사실 기반 1~2문장(개조식)", "recommendation": "유지/보완/개정 중 구체 조치 1~2문장(개조식). 미확정 문서면 조건부 표현" }
+    { "index": 0, "gist": "이 조문이 규율하는 핵심을 명사형으로 25자 내외 1줄(예: '신상품 사전 리스크 검토 절차'). 조문 원문 기반, 군더더기 없이", "comparison": "조문 원문과 규제변동의 일치/일부차이/미반영을 사실 기반 1~2문장(개조식)", "recommendation": "유지/보완/개정 중 구체 조치 1~2문장(개조식). 단정성(조건부/확정)은 아래 '권고 표현' 규칙을 따른다" }
   ],
   "priority_actions": [영향도 '높음' 항목 중심 우선 조치. 문자열 또는 중첩 객체. 높음 없으면 빈 배열],
   "caveats": [이 **문서에 특유한** 진짜 유의사항만 0~2개(실무자가 오해/실수할 지점, 해석상 주의, 이 문서만의 한계). 사용자 친화적·비개발자 말투. ⚠️ 자율규제 강제력·확정 전 단계·신규/보완 필요 같은 **일반적 주의는 시스템이 따로 넣으니 제외**. "AI 보조 검토"·"검토 후보 N건 중 M건"·시스템/모델 언급 금지. 특유한 게 없으면 빈 배열]
@@ -313,15 +317,40 @@ ${articleBlock}
       : framing === "conditional"
         ? `본 문서는 **확정 전(미발효 입법예고·법률안·사전예고)**이다: recommendation/priority_actions 는 "확정 시·개정될 경우" 같은 조건부 표현으로 단정을 피한다.`
         : `본 문서는 **이미 시행·통용 중 또는 자율준수 연성규범(즉시 점검 대상)**이다: recommendation 은 "즉시·조속·선제 점검" 등 확정적으로 쓴다(입법 확정을 기다리는 단계가 아님).
+    ⚠️ 본문에 '(안)'·'개정안'·초안 표제 같은 흔적이 남아 있어도(과거 제정·개정 당시 원안이 그대로 보존된 경우 등), 문서유형·시행일 기준 **이미 발효된 문서**이므로 조건부 표현을 쓰지 말 것.
     ❌ 모든 필드에서 금지 표현(절대 쓰지 말 것): "확정 시", "확정되면", "(법률안/가이드라인 등) 확정·개정될 경우" — 부적합. (IBK 자체 내규를 고친다는 의미의 "내규 개정 시"는 허용)`
   }`;
 }
 
+/**
+ * framing이 '확정 전(conditional)'이 아닌데 LLM 권고에 남은 **선행 조건부 부사구**
+ *  ('확정 시'·'확정되면'·'개정될 경우')를 제거한다 — §4 '이미 시행' 프레이밍과의 상충 방지.
+ *  프롬프트로 1차 억제하되, 본문에 초안표기('(안)' 등)가 남은 기제정 문서에서 LLM이 본문에
+ *  끌려 조건부를 남기는 경우의 결정적 안전망. '내규 개정 시' 등 정당한 표현은 건드리지 않는다
+ *  (바른 부사구만, 어절 경계로 한정 — '확정 시점'·'개정 시' 등은 불간섭).
+ */
+function stripLeadConditional(text: string): string {
+  return text
+    .replace(/(^|[.,)\s])확정\s*시(?=\s)\s*/g, "$1")
+    .replace(/(^|[.,)\s])확정\s*(?:·\s*시행)?되면\s*/g, "$1")
+    .replace(/(^|[.,)\s])개정\s*(?:·\s*시행)?될\s*경우\s*/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 // ── 본문 결정적 조립 ───────────────────────────────────
 function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmReport): string {
+  const framing = docFraming(input);
   const byIndex = new Map<number, ArticleAnalysis>();
   for (const a of llm.articles ?? []) {
-    if (typeof a.index === "number") byIndex.set(a.index, a);
+    if (typeof a.index !== "number") continue;
+    // 이미 시행/정보성 문서엔 조건부 권고가 §4 프레이밍과 상충 → 선행 조건부 부사구만 정리.
+    byIndex.set(
+      a.index,
+      framing === "conditional" || !a.recommendation
+        ? a
+        : { ...a, recommendation: stripLeadConditional(a.recommendation) }
+    );
   }
 
   // 1. 규제변동 개요
