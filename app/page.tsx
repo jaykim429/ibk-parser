@@ -491,15 +491,6 @@ function AnalysisView(props: {
   // 업로드 후: 좌측 분석 목록 + 우측 상세 보고서 (목록 접기 시 본문 전체폭)
   return (
     <div className={`analysis-grid${listCollapsed ? " list-collapsed" : ""}`}>
-      {listCollapsed && (
-        <button
-          className="list-expand-tab"
-          onClick={() => setListCollapsed(false)}
-          title="분석 목록 펼치기"
-        >
-          분석 목록 ▸
-        </button>
-      )}
       <aside className="job-panel">
         <div className="job-panel-head">
           <div className="job-panel-title">
@@ -511,9 +502,6 @@ function AnalysisView(props: {
           <div className="job-panel-head-actions">
             <button className="btn ghost xs" onClick={clearJobs} disabled={busy}>
               전체 지우기
-            </button>
-            <button className="btn ghost xs" onClick={() => setListCollapsed(true)} title="목록 접기">
-              ◂ 접기
             </button>
           </div>
         </div>
@@ -598,6 +586,8 @@ function AnalysisView(props: {
           downloadBusy={downloadBusy}
           downloadError={downloadError}
           downloadReport={downloadReport}
+          listCollapsed={listCollapsed}
+          onToggleList={() => setListCollapsed((v) => !v)}
         />
       </section>
       {fileInput}
@@ -610,8 +600,10 @@ function ReportDetail(props: {
   downloadBusy: "pdf" | "hwpx" | null;
   downloadError: string;
   downloadReport: (format: "pdf" | "hwpx") => void;
+  listCollapsed: boolean;
+  onToggleList: () => void;
 }) {
-  const { job, downloadBusy, downloadError, downloadReport } = props;
+  const { job, downloadBusy, downloadError, downloadReport, listCollapsed, onToggleList } = props;
   const [showRestore, setShowRestore] = useState(false);
   // PDF는 '원본 이미지'(픽셀 완벽)를 기본으로 — 파싱 재구성이 다단 매뉴얼에선 보기 어려움.
   // (비PDF는 isPdf 가드로 자동 텍스트 복원으로 폴백)
@@ -675,7 +667,7 @@ function ReportDetail(props: {
       {result.stats && result.stats.length > 0 && (
         <div className="stats">
           {result.stats
-            .filter((s) => s.label !== "처리 시간")
+            .filter((s) => s.label !== "처리 시간" && s.label !== "검토 후보")
             .map((s, i) => (
               <div className="stat" key={i}>
                 <div className="num">{s.num}</div>
@@ -684,21 +676,37 @@ function ReportDetail(props: {
             ))}
         </div>
       )}
-      <div className={`report-split${showRestore ? " open" : ""}`}>
+      <div className="report-actionbar">
+        <button
+          className="ab-btn"
+          onClick={onToggleList}
+          title={listCollapsed ? "분석 목록 펼치기" : "분석 목록 접기"}
+        >
+          <span className="ab-ic" aria-hidden>☰</span>
+          {listCollapsed ? "분석 목록" : "목록 접기"}
+        </button>
         {hasRestore && (
           <button
-            className="restore-tab"
+            className={`ab-btn ab-restore${showRestore ? " on" : ""}`}
             onClick={() => setShowRestore((v) => !v)}
             aria-pressed={showRestore}
-            title={showRestore ? "원문 닫기" : "원문 복원 보기"}
+            title={showRestore ? "원문 닫기" : "원문 보기"}
           >
-            {showRestore ? "◀ 원문 닫기" : "원문 복원 ▶"}
+            {showRestore ? (
+              <>원문 닫기 <span className="ab-ic" aria-hidden>✕</span></>
+            ) : (
+              <>
+                <span className="ab-ic" aria-hidden>▣</span> 원문 보기
+              </>
+            )}
           </button>
         )}
+      </div>
+      <div className={`report-split${showRestore ? " open" : ""}`}>
         {showRestore && hasRestore && (
           <div className="restore-pane">
             <div className="restore-pane-head">
-              <span>원문 복원</span>
+              <span>원문 보기</span>
               {isPdf && job.file && (
                 <div className="restore-mode-toggle">
                   <button
@@ -723,7 +731,7 @@ function ReportDetail(props: {
             ) : (
               <iframe
                 className="restore-frame"
-                title="원문 복원"
+                title="원문 보기"
                 sandbox=""
                 srcDoc={result.restoredHtml}
               />

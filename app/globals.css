@@ -239,39 +239,12 @@ a {
   align-items: start;
 }
 
-/* 분석 목록 접기 — 본문 전체폭(원문 2개 비교 등 넓게 보기).
-   좌측에 '분석 목록' 펼침 세로탭(고정)이 있으므로 그만큼 본문을 들여 겹침 방지. */
+/* 분석 목록 접기 — 본문 전체폭. 접힘/펼침 토글은 보고서 상단 액션바(.report-actionbar)가 담당. */
 .analysis-grid.list-collapsed {
   grid-template-columns: 1fr;
-  padding-left: 52px;
 }
 .analysis-grid.list-collapsed .job-panel {
   display: none;
-}
-/* 접힘 시 '분석 목록' 펼침 탭 — 원문복원 탭과 동일하게 중앙정렬 레이아웃 추종 + 세로 탭(안정 위치) */
-.list-expand-tab {
-  position: fixed;
-  left: calc(max(0px, (100vw - 1760px) / 2) + 8px);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 45;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  letter-spacing: 1.5px;
-  padding: 20px 6px;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #fff;
-  background: var(--primary, #2563eb);
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-  transition: background 0.15s, transform 0.15s;
-}
-.list-expand-tab:hover {
-  background: #1d4ed8;
-  transform: translateY(-50%) scale(1.04);
 }
 .job-panel-head-actions {
   display: flex;
@@ -813,30 +786,59 @@ a {
 /* 세로 토글 탭 — fixed 좌표가 아니라 report-split의 '좌측 칼럼'(in-flow)으로 둔다.
    → 어떤 레이아웃(분석목록 유무/접힘)에서도 본문/패널 위에 겹치지 않음.
    sticky top으로 스크롤 시 화면 중앙 높이를 유지(추종). */
-.restore-tab {
+/* 보고서 상단 액션바 — 분석목록/원문보기 토글을 한 줄에 모은 컨트롤(중앙 플로팅 세로탭 대체) */
+.report-actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding: 7px 9px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
   position: sticky;
-  top: 50vh;
-  transform: translateY(-50%);
-  align-self: flex-start;
-  flex: 0 0 auto;
-  z-index: 30;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  border: none;
-  border-radius: 9px;
-  background: var(--primary, #2563eb);
-  color: #fff;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  padding: 20px 6px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-  transition: background 0.15s, transform 0.15s;
+  top: 84px; /* 분석 목록 패널과 동일 높이로 고정(스크롤 시 항상 접근) */
+  z-index: 20;
 }
-.restore-tab:hover {
+.ab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s, border-color 0.13s;
+  white-space: nowrap;
+}
+.ab-btn:hover {
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+}
+.ab-ic {
+  font-size: 12.5px;
+  line-height: 1;
+}
+/* 원문 보기 = 1차 액션(강조). 열림 시 채워진 강조색. */
+.ab-restore {
+  color: #1d4ed8;
+  border-color: #9dbcfb;
+}
+.ab-restore:hover {
+  background: #eef3fe;
+}
+.ab-restore.on {
   background: #1d4ed8;
-  transform: translateY(-50%) scale(1.04);
+  color: #fff;
+  border-color: #1d4ed8;
+}
+.ab-restore.on:hover {
+  background: #1746c4;
 }
 /* 펼침: 좌 복원원문 / 우 보고서 50:50, 각자 내부 스크롤 */
 .report-split.open .restore-pane {

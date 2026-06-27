@@ -415,7 +415,7 @@ ${covRows}`
 ${countLine}
 
 ${summaryTable}
-### 2.2 조치 필요 조문 (높음·중간)
+### 2.2 조치 필요 조문
 ${details}`,
     sec23,
   ]
