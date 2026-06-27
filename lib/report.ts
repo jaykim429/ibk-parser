@@ -394,7 +394,9 @@ ${rows}`
     .map((g, i) => {
       const rec = (g.recommendation || "검토").replace(/\s+/g, " ").replace(/\|/g, "／").trim();
       const ev = (g.evidence || (g.coverage === "부재" ? "대응 내규 미확인" : g.coverage === "해당없음" ? "IBK 비영위 업무" : "현행 내규")).replace(/\s+/g, " ").replace(/\|/g, "／").trim();
-      return `| ${i + 1} | ${g.requirement.replace(/\|/g, "／")} | ${covMark[g.coverage] ?? g.coverage} | ${g.impact} | ${ev.length > 60 ? ev.slice(0, 59) + "…" : ev} | ${rec.length > 140 ? rec.slice(0, 139) + "…" : rec} |`;
+      // 대응 내규/근거 = "내규명 / 근거설명" 2부 구조라 내규명만으로 50자 이상 → 60자 캡은 근거를 통째로 잘랐음.
+      //  220자로 완화(LLM evidence는 통상 80~150자라 사실상 전량 노출, 병적 길이만 방어).
+      return `| ${i + 1} | ${g.requirement.replace(/\|/g, "／")} | ${covMark[g.coverage] ?? g.coverage} | ${g.impact} | ${ev.length > 220 ? ev.slice(0, 219) + "…" : ev} | ${rec.length > 160 ? rec.slice(0, 159) + "…" : rec} |`;
     })
     .join("\n");
   const sec23 = coverage.length

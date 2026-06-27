@@ -96,7 +96,7 @@ export const config = {
   vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 20), // 복구 페이지 상한(비용 제한)
 
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v45",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v46",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──
