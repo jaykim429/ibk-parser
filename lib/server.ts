@@ -373,7 +373,7 @@ export function buildCanonicalQuery(
  */
 export const BILL_SIGNAL = /(법률안|법안|의안|발의|개정법률안)/;
 export const PENDING_STRONG =
-  /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안)/;
+  /(법률안|법안|의안|발의|입법예고|규정변경예고|변경예고|사전예고|예고문|예고안|개정안|개정령안|개정법률안|개정고시안|제정안|대통령령안|시행령안|시행규칙안)/;
 export const PENDING_WEAK = /(\(안\)|（안）)/;
 
 /**

@@ -375,9 +375,38 @@ function reconcileRecommendation(reflection: string, rec: string | undefined): s
   return r || "담당 부서 추가 검토 필요";
 }
 
+/**
+ * 변경비교(report LLM이 조문 원문을 직접 대조) ↔ 반영여부(judge 라벨) 상충 교정.
+ *  변경비교가 **순수 긍정**('이미 반영/규정되어 있/충족/일치/부합')인데 라벨이 '미반영·일부 반영'+높음/중간이면,
+ *  judge가 원문 반영을 놓친 과대플래그로 보고 '반영됨·낮음'으로 교정한다(2.2 변경비교↔반영여부↔2.3 커버리지 삼자 상충 제거).
+ *  ⚠️ 부정·보완 마커('미반영/부족/없음/신설·보완·개정 필요/일부')가 하나라도 있으면 교정 안 함(예: "원칙은 반영됐으나 구체
+ *   의무는 미반영"은 진짜 미반영 — 오교정 방지). 리스크 축은 독립이라 건드리지 않음.
+ */
+function reconcileReflectionWithComparison(
+  v: JudgedMatch["verdict"],
+  comparison: string | undefined,
+  infoOnly?: boolean
+): JudgedMatch["verdict"] {
+  if (infoOnly || !comparison) return v;
+  if ((v.reflection !== "미반영" && v.reflection !== "일부 반영") || (v.impact !== "높음" && v.impact !== "중간")) return v;
+  const affirm = /(반영됨|이미\s*(반영|규정|정의|포함|마련)|규정되어\s*있|정의되어\s*있|명시되어\s*있|포함되어\s*있|충족(함|하)|일치(함|하)|부합(함|하))/.test(comparison);
+  const negate = /(미반영|반영되지|반영\s*안|포함되지\s*않|규정되어\s*있지\s*않|부족|미흡|미비|없음|결여|누락|신설\s*필요|보완\s*필요|개정\s*필요|일부)/.test(comparison);
+  if (affirm && !negate) {
+    return { ...v, reflection: "반영됨", impact: "낮음", compliance_need: "불요" };
+  }
+  return v;
+}
+
 // ── 본문 결정적 조립 ───────────────────────────────────
-function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmReport): string {
+function assembleBody(input: ReportInput, relevant0: JudgedMatch[], llm: LlmReport): string {
   const framing = docFraming(input);
+  // 변경비교(원문 직접 대조) 순수 긍정 ↔ judge '미반영' 라벨 상충을 먼저 교정한 뒤 이후 렌더·정합에 사용.
+  const cmpByIndex = new Map<number, string>();
+  for (const a of llm.articles ?? []) if (typeof a.index === "number") cmpByIndex.set(a.index, a.comparison ?? "");
+  const relevant = relevant0.map((j, i) => {
+    const v = reconcileReflectionWithComparison(j.verdict, cmpByIndex.get(i), input.infoOnly);
+    return v === j.verdict ? j : { ...j, verdict: v };
+  });
   const reflByIndex = new Map<number, string>();
   relevant.forEach((j, i) => reflByIndex.set(i, reflectionOf(j, input.infoOnly)));
   const byIndex = new Map<number, ArticleAnalysis>();
