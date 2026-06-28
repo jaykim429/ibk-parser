@@ -61,8 +61,9 @@ export const config = {
   subQueryLen: num(env.SUBQUERY_LEN, 280), // 개별 서브쿼리(변경단위·의무·신구조문) 길이 캡
 
   // ── 매뉴얼형(비정형) 내규 청킹 — 헤딩 섹션 단위 + overlap 서브분할 ──
-  manualChunkSize: num(env.MANUAL_CHUNK_SIZE, 900), // 섹션 청크 최대 글자
+  manualChunkSize: num(env.MANUAL_CHUNK_SIZE, 900), // 섹션·표 청크 최대 글자(표도 동일 분할 → 거대표 꼬리손실 방지)
   manualChunkOverlap: num(env.MANUAL_CHUNK_OVERLAP, 150), // 서브분할 겹침
+  embeddingTextCap: num(env.EMBEDDING_TEXT_CAP, 2000), // 청크 임베딩/BM25 텍스트 길이 캡(매직넘버 제거)
 
   // ── 검색/리랭크/판정 튜닝 ──
   matchTopK: num(env.MATCH_TOPK, 30), // RRF 융합 후 후보 수
@@ -96,7 +97,7 @@ export const config = {
   vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 20), // 복구 페이지 상한(비용 제한)
 
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v52",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v54",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──

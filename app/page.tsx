@@ -9,8 +9,9 @@ import remarkGfm from "remark-gfm";
 // 원본 이미지 복원(PDF.js, 클라이언트 전용) — SSR 비활성
 const RestoreImageView = dynamic(() => import("./restore-image-view"), { ssr: false });
 
-const ACCEPT = ".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.txt";
-const FORMATS = ["PDF", "HWP", "HWPX", "DOC", "DOCX", "XLS", "XLSX", "TXT"];
+// 파서(kordoc + txt 직접처리)가 실제 지원하는 포맷만 노출 — .doc(레거시 OLE2 Word)은 kordoc 미지원이라 제외.
+const ACCEPT = ".pdf,.hwp,.hwpx,.docx,.xls,.xlsx,.txt";
+const FORMATS = ["PDF", "HWP", "HWPX", "DOCX", "XLS", "XLSX", "TXT"];
 const STEP_LABELS = ["파일 변환", "조문 파싱", "내규 매칭", "보고서 생성"];
 // 동시에 분석할 파일 수(백엔드 LLM 부하를 고려한 상한). 필요 시 조정.
 const MAX_CONCURRENCY = 3;

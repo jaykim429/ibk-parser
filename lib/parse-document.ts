@@ -67,9 +67,16 @@ function assessQuality(
 ): { lowQuality: boolean; warning?: string } {
   if (isImageBased) return { lowQuality: false }; // 스캔본은 이미 OCR 경로
   const len = markdown.replace(/\s+/g, "").length;
-  const garbled = (markdown.match(/�/g) ?? []).length;
+  // 치환문자(�)뿐 아니라 글꼴(ToUnicode) 손상 시 흔한 PUA(U+E000–F8FF)·제어문자도 깨짐 신호로 본다.
+  //  (PUA로 매핑되면 �가 안 떠 무음 통과하던 케이스 차단 — needsOcr와 별개의 2차 방어선)
+  let garbled = 0;
+  for (let gi = 0; gi < markdown.length; gi++) {
+    const cc = markdown.charCodeAt(gi);
+    // U+FFFD(치환), PUA(E000-F8FF), 제어문자(탭/개행 제외) = 글꼴손상·인코딩깨짐 신호
+    if (cc === 0xfffd || (cc >= 0xe000 && cc <= 0xf8ff) || (cc > 0 && cc < 9) || (cc >= 0x0e && cc <= 0x1f)) garbled++;
+  }
   if (garbled > 0 && garbled / Math.max(1, markdown.length) > 0.01) {
-    return { lowQuality: true, warning: `깨진 문자(�) 과다 — 추출 품질 의심(${garbled}자)` };
+    return { lowQuality: true, warning: `깨진/사적영역(PUA)·제어문자 과다 — 추출 품질 의심(${garbled}자)` };
   }
   if (pageCount && pageCount > 0 && len / pageCount < config.ocrMinCharsPerPage) {
     return {
@@ -139,6 +146,26 @@ export async function parseDocument(
   buffer: Buffer,
   filename: string
 ): Promise<ParsedDoc> {
+  // TXT 평문 — kordoc 미지원 포맷이라 직접 처리. UTF-8 우선, 치환문자(�)가 나오면 EUC-KR/CP949 폴백
+  //  (한국 공문 txt는 CP949가 흔함). 구조가 없으므로 빈 줄 기준 문단 블록만 생성.
+  if (/\.txt$/i.test(filename)) {
+    let text = buffer.toString("utf-8");
+    if (/�/.test(text)) {
+      try { text = new TextDecoder("euc-kr").decode(buffer); } catch { /* utf-8 유지 */ }
+    }
+    const markdown = normalizeMarkdown(text);
+    if (!markdown.trim()) throw new Error("문서에서 추출된 텍스트가 없습니다.");
+    const blocks = markdown
+      .split(/\n{2,}/)
+      .map((t) => t.trim())
+      .filter(Boolean)
+      .map((t) => ({ type: "paragraph", text: t } as IRBlock));
+    return {
+      markdown, fileType: "txt", isImageBased: false, usedOcr: false, lowQuality: false,
+      blocks, outline: [], title: pickTitle(undefined, markdown, filename), warnings: [],
+    };
+  }
+
   // PDF 라우팅: config.pdfParser==="rookie" 면 PDF만 Rookie 사이드카에 위임(HWP/HWPX는 항상 kordoc).
   //   실패/미가동 시 kordoc 으로 폴백(무중단).
   const isPdf =
@@ -235,7 +262,18 @@ export async function parseDocument(
   if (demoted > 0) {
     console.log(`[PARSE] 헤딩 과분류 정규화: ${filename} — 본문성 헤딩 ${demoted}개 → 문단 강등`);
   }
-  const normBlocks = recoveredBlocks.length ? [...normBlocks0, ...recoveredBlocks] : normBlocks0;
+  let normBlocks = recoveredBlocks.length ? [...normBlocks0, ...recoveredBlocks] : normBlocks0;
+  // M1 무음누락 가드: 본문(markdown)은 정상인데 blocks가 비면 복원·인덱싱(manualToChunks)·변경점추출이 통째
+  //  0이 되어 색인에서 누락(에러 없이). markdown 문단으로 blocks를 폴백 생성해 정합을 보장한다.
+  if (normBlocks.length === 0 && markdown.trim()) {
+    normBlocks = markdown
+      .split(/\n{2,}/)
+      .map((t) => t.trim())
+      .filter(Boolean)
+      .map((t) => ({ type: "paragraph", text: t } as IRBlock));
+    warnings.push("구조 블록이 비어 본문 문단으로 폴백 생성함(복원·색인 정합 보장).");
+    console.warn(`[PARSE] blocks 비어있음 → markdown 문단 폴백: ${filename}`);
+  }
 
   return {
     markdown,

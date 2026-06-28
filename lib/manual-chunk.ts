@@ -45,12 +45,26 @@ export type ManualChunk = {
   nextId?: string;
 };
 
-/** 긴 섹션을 겹침 윈도우로 서브분할 (내규 조-청킹과 동일 원리, 단위만 '섹션') */
+/**
+ * 긴 섹션/표를 겹침 윈도우로 서브분할 — 단어 중간 절단 방지(경계 스냅).
+ *  끝 지점이 어절 중간이면 가까운 줄바꿈/공백으로 당긴다(무공백 런이면 강제 진행 — 무한루프 방지).
+ *  표(linearize '헤더=값' 행)도 동일 적용해 거대표 꼬리가 캡에서 잘려 검색 누락되는 것을 막는다.
+ */
 function subSplit(s: string, size: number, overlap: number): string[] {
   if (s.length <= size) return [s];
-  const step = Math.max(1, size - overlap);
   const out: string[] = [];
-  for (let i = 0; i < s.length; i += step) out.push(s.slice(i, i + size));
+  let i = 0;
+  while (i < s.length) {
+    let end = Math.min(i + size, s.length);
+    if (end < s.length) {
+      const back = s.slice(i, end);
+      const cut = Math.max(back.lastIndexOf("\n"), back.lastIndexOf(" "));
+      if (cut > size * 0.7) end = i + cut + 1; // 후반부 경계에서만 스냅(과도한 축소 방지)
+    }
+    out.push(s.slice(i, end));
+    if (end >= s.length) break;
+    i = Math.max(i + 1, end - overlap); // overlap 적용하되 항상 전진
+  }
   return out;
 }
 
@@ -162,12 +176,14 @@ export async function manualToChunks(
   }
   const groups = mergeLabelGroups(merged);
 
-  // 그룹 → 청크(긴 text 그룹은 overlap 서브분할), 섹션경로 컨텍스트 부착
+  // 그룹 → 청크(긴 text·표 모두 overlap 서브분할 → 거대표 꼬리손실 방지), 섹션경로 컨텍스트 부착
   const chunks: ManualChunk[] = [];
   groups.forEach((g, gi) => {
     const sectionId = g.headingPath.join(" > ");
     const ctx = sectionId ? sectionId + "\n" : "";
-    const parts = g.type === "text" ? subSplit(g.text, config.manualChunkSize, config.manualChunkOverlap) : [g.text];
+    // 표도 size 초과 시 행 경계(linearize '\n')로 분할 — 이전엔 표를 통째 1청크로 둬 임베딩 캡(2000)에서
+    //  꼬리 행이 잘려 검색 불가였음. subSplit이 '\n' 경계 우선 스냅이라 행 단위로 깔끔히 나뉜다.
+    const parts = subSplit(g.text, config.manualChunkSize, config.manualChunkOverlap);
     parts.forEach((body, pi) => {
       chunks.push({
         id: `${regId}|${gi}|${pi}`,
@@ -176,7 +192,7 @@ export async function manualToChunks(
         headingPath: g.headingPath,
         sectionId,
         type: g.type,
-        text: (ctx + body).slice(0, 2000),
+        text: (ctx + body).slice(0, config.embeddingTextCap),
         body,
         pageNumber: g.pageNumber,
         needsSummary: g.needsSummary,
