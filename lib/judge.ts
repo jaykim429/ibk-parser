@@ -32,6 +32,10 @@ export type Verdict = {
   reason: string;
   /** LLM 판정 실패로 검색영향도 잠정 추정치를 쓴 경우 true — 리스크 축 미산정·고지 대상(2축 독립 오인 방지). */
   degraded?: boolean;
+  /** 0-선결: 이 변경 의무의 1차 수범자(업권+행위). 내부 추론 강제·백스톱용(보고서 비노출). */
+  obligor?: string;
+  /** 수범자-IBK 관계: 겸영해당|IBK직접|비영위|불명. '비영위'면 백스톱이 부적합 강등(fail-safe). */
+  obligor_match?: string;
 };
 
 export type JudgedMatch = Candidate & { verdict: Verdict };
@@ -108,7 +112,8 @@ ${changeSummary}
 ${candidateBlock}
 
 ## 지시
-각 후보 [index]에 대해 판정 기준(1~3단계 + 적합성/영향도)을 적용해 판정하라.
+각 후보 [index]에 대해 판정 기준(0단계 nexus + 1~3단계 + 적합성/영향도)을 적용해 판정하라.
+- ★ **relevance 판정 전에 먼저** 이번 규제변동이 부과하는 의무의 **1차 수범자(업권+행위)를 obligor에 한 줄로 쓰고**, 그 주체가 IBK와 어떻게 닿는지 obligor_match로 분류하라: "겸영해당"(IBK가 영위/대리하는 업무의 수범자) | "IBK직접"(은행·공공기관 등 직접 수범) | "비영위"(IBK가 그 인허가를 보유하지 않아 영위하지 않는 타 업권 고유 행위자) | "불명". obligor_match="비영위"면 주제어가 겹쳐도 전 후보 "부적합".
 - 키워드만 겹치고 실질 업무객체가 다르면 "부적합"으로 판정한다.
 - 후보 조문이 다루는 **업무 영역**이 이번 변경과 겹치면(근거법령 표기가 달라도) "적합"으로 본다. 업무 영역이 같고 개정이 불요하면 "적합·낮음(참고)". 업무 영역 자체가 다른데 수치·용어만 겹치면 "부적합". 애매하면 0건 단정보다 "적합·낮음".
 - impact 와 compliance_need 를 반드시 일치시킨다: 현행 내규로 충분하면 impact="낮음"·compliance_need="불요"(현행 유지), 보완검토면 "중간"·"검토", 개정·신설 필요면 "높음"·"필요". "반영됨인데 높음" 같은 모순 금지.
@@ -122,6 +127,8 @@ ${candidateBlock}
 [
   {
     "index": 0,
+    "obligor": "이 변경이 부과하는 의무의 1차 수범자 업권+행위 한 줄(예: '가상자산사업자의 가상자산 대여 영업')",
+    "obligor_match": "겸영해당" | "IBK직접" | "비영위" | "불명",
     "relevance": "적합" | "부적합",
     "applicability_basis": "직접적용|은행적용|금융회사적용|공공기관적용|상장회사적용|일반법인적용",
     "impact": "높음" | "중간" | "낮음" | "해당없음",
@@ -186,8 +193,21 @@ ${candidateBlock}
           reflection: normalizeReflection(v.reflection, v.relevance, need, infoOnly),
           ibk_specific: !!v.ibk_specific,
           reason: v.reason ?? "",
+          obligor: typeof v.obligor === "string" ? v.obligor : undefined,
+          obligor_match: typeof v.obligor_match === "string" ? v.obligor_match : undefined,
         }
       : fallbackVerdict(c);
+    // 수범자 백스톱(fail-safe): 1차 수범자가 IBK 비영위 타 업권으로 명시 특정된 후보만 부적합 강등.
+    //  '불명'·'겸영해당'·'IBK직접'은 보호 → 겸영(금투·방카) 오차단 회귀 0. (가상자산 등 업종 하드코딩 없음)
+    if (verdict.relevance === "적합" && v?.obligor_match === "비영위") {
+      verdict.relevance = "부적합";
+      verdict.impact = "해당없음";
+      verdict.risk_level = "해당없음";
+      verdict.reflection = "해당 없음";
+      if (!/수범자|비영위|영위하지/.test(verdict.reason)) {
+        verdict.reason = `이번 변경 의무의 1차 수범자가 IBK 비영위 타 업권(${v?.obligor ?? ""})으로, IBK가 그 행위를 직접 수행하지 않아 직접 정합성 영향 없음. ${verdict.reason}`.trim();
+      }
+    }
     // 2축 최종 정합 가드 — 어떤 경로로든 반영여부↔개정필요성이 모순되지 않게(사용자 노출 표의 상충 금지).
     verdict = enforceAxisConsistency(verdict);
     // 결정적 백스톱: '목적/총칙' 저변별 조항이 현행유지(낮음)로 적합 처리되면 노이즈 → 부적합 강등.
