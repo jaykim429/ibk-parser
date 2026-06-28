@@ -172,8 +172,11 @@ ${candidateBlock}
     // compliance_need를 한 번만 정규화(빈문자열 폴백 + infoOnly '필요'→'검토') 후 impact/reflection에 동일 값 전달.
     //  (이전: 저장값은 강등하면서 정규화 함수엔 원본을 넘겨 단일 진실원천이 깨졌고, `?? "검토"`는 빈문자열을 못 막음)
     const rawNeed = v && typeof v.compliance_need === "string" ? v.compliance_need.trim() : "";
-    const need = (infoOnly && (rawNeed || "검토") === "필요" ? "검토" : rawNeed || "검토") as Verdict["compliance_need"];
-    const verdict: Verdict = v
+    // ⚠️ need를 정확히 enum(필요/검토/불요)으로 강제 — LLM이 변형값('필요함'·'해당없음' 등)을 주면
+    //  normalizeImpact(원값 유지)과 normalizeReflection(→개정불요 기본)이 발산해 '개정불요+높음' 모순이 생김.
+    const enumNeed = rawNeed === "필요" || rawNeed === "검토" || rawNeed === "불요" ? rawNeed : "검토";
+    const need = (infoOnly && enumNeed === "필요" ? "검토" : enumNeed) as Verdict["compliance_need"];
+    let verdict: Verdict = v
       ? {
           relevance: v.relevance === "부적합" ? "부적합" : "적합",
           applicability_basis: v.applicability_basis ?? "금융회사적용",
@@ -185,6 +188,8 @@ ${candidateBlock}
           reason: v.reason ?? "",
         }
       : fallbackVerdict(c);
+    // 2축 최종 정합 가드 — 어떤 경로로든 반영여부↔개정필요성이 모순되지 않게(사용자 노출 표의 상충 금지).
+    verdict = enforceAxisConsistency(verdict);
     // 결정적 백스톱: '목적/총칙' 저변별 조항이 현행유지(낮음)로 적합 처리되면 노이즈 → 부적합 강등.
     //   (이번 변경이 그 조항을 직접 바꾼다면 LLM이 '필요/중간↑'로 줄 것이므로 낮음일 때만 강등)
     if (
@@ -259,6 +264,22 @@ function normalizeReflection(
 function normalizeRisk(risk: unknown, relevance: unknown): ImpactLevel {
   if (relevance === "부적합") return "해당없음";
   return risk === "높음" || risk === "중간" || risk === "낮음" ? risk : "중간";
+}
+
+/**
+ * 2축 최종 정합 가드 — 반영여부(reflection)와 개정필요성(impact)이 모순되지 않게 강제.
+ *  · '반영됨/개정 불요'(개정 불필요)는 정의상 개정필요성=낮음 → 높음/중간과 공존 불가.
+ *  · '미반영'(개정 필요)인데 낮음이면 모순 → 중간(보수). 리스크 축은 독립이므로 건드리지 않음.
+ *  (need가 LLM 변형값이라 normalizeImpact/Reflection이 발산하는 경로의 최종 방어 — 표 상충 차단)
+ */
+function enforceAxisConsistency(v: Verdict): Verdict {
+  if ((v.reflection === "반영됨" || v.reflection === "개정 불요") && v.impact !== "낮음") {
+    return { ...v, impact: "낮음", compliance_need: "불요" };
+  }
+  if (v.reflection === "미반영" && v.impact === "낮음") {
+    return { ...v, impact: "중간" };
+  }
+  return v;
 }
 
 function fallbackVerdict(c: Candidate): Verdict {

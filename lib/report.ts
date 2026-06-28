@@ -209,7 +209,9 @@ function buildHeader(input: ReportInput, relevantCount: number): string {
   const docTypeLabel = docTypeLabelOf(input);
   // 시행일/유예기간 — 명시된 경우만(백테스팅: 시급성 점수 아님, 사실 표기). 분석일보다 과거면 중립적으로 '이미 시행' 부기.
   // 미발효 입법(초안)은 '예정 시행일'일 뿐이므로 '(이미 시행)' 단정 금지(백테스팅: 제안 시행일이 분석일보다 과거여도 초안이면 미발효).
-  const effLine = input.effectiveDate
+  // 정보성 자료(해설서·방법서·보도자료 등)는 자체 '시행일'이 없고 본문에 인용된 타법 시행일을
+  //  끌어오기 쉬워(오표시 위험) 표시하지 않는다 — 시행일은 규범(infoOnly=false) 문서에만.
+  const effLine = input.effectiveDate && !input.infoOnly
     ? `\n- **시행일**: ${input.effectiveDate}${isPendingDoc(input) ? " (예정, 미발효)" : isPastDate(input.effectiveDate, date) ? " (이미 시행)" : ""}`
     : "";
   const graceLine = input.gracePeriod ? `\n- **유예기간**: ${input.gracePeriod}` : "";
@@ -348,29 +350,27 @@ function stripLeadConditional(text: string): string {
     .trim();
 }
 
-/** judge 사유에 조치 동사(보완/개정/신설…)가 있으면 권고로 승계(없으면 빈 문자열). */
-function pickActionFromReason(reason?: string): string {
-  const s = (reason || "").replace(/\s+/g, " ").trim();
-  if (!s || !/(보완|개정|신설|강화|마련|수립)/.test(s)) return "";
-  return s.length > 120 ? `${s.slice(0, 119)}…` : s;
-}
-
 /**
  * 권고 ↔ 반영여부 정합 백스톱(결정적) — 사용자에게 보이는 '반영여부'(judge 라벨)와 '권고'가
  *  어긋나는 상충을 제거한다(프롬프트로 1차 정합화하되 LLM이 흘리면 여기서 강제).
  *   · 반영됨/개정 불요(무조치)인데 권고가 개정·보완 → '현행 유지'
- *   · 미반영/일부 반영(조치 필요)인데 권고가 현행 유지/공란 → judge 사유의 조치동사 또는 기본 조치문
+ *   · 미반영/일부 반영(조치 필요)인데 권고가 현행 유지/공란/진단문 누출 → 결정적 조치 라벨
  *  reflection을 뒤집지는 않는다(어느 LLM이 옳은지 본문만으론 단정 불가 — 라벨은 judge가 단일 기준).
  */
-function reconcileRecommendation(reflection: string, rec: string | undefined, reason?: string): string {
+function reconcileRecommendation(reflection: string, rec: string | undefined): string {
   const r = (rec || "").trim();
   const recHold = !r || /현행\s*유지/.test(r);
   const recAction = /(개정|보완|신설|강화|수립|마련|추가|반영하여|도입)/.test(r);
+  // 권고 슬롯에 액션 라벨이 아니라 '~하고 있으나 ~필요함'·'~와 연관됨' 류 진단·사유 문장이 누출된 경우 감지
+  //  (변경비교 성격 텍스트가 권고 칸에 잘못 채워짐 → 8열 표 라벨 정렬 붕괴). 종결 마침표/서술형 어미가 신호.
+  const looksLikeAssessment =
+    /(하고\s*있으나|되어\s*있으나|규정하고\s*있|명시하고\s*있|포함하고\s*있|반영하고\s*있|연관됨|밀접|판단됨|사료됨|확인됨)/.test(r) ||
+    (r.length > 40 && /(필요함|있음|없음|됨)\.?$/.test(r));
   if ((reflection === "반영됨" || reflection === "개정 불요") && recAction && !recHold) {
     return "현행 유지";
   }
-  if ((reflection === "미반영" || reflection === "일부 반영") && recHold) {
-    return pickActionFromReason(reason) || (reflection === "미반영" ? "개정·신설 검토 필요" : "보완 검토 필요");
+  if ((reflection === "미반영" || reflection === "일부 반영") && (recHold || looksLikeAssessment)) {
+    return reflection === "미반영" ? "개정·신설 검토 필요" : "보완 검토 필요";
   }
   return r || "담당 부서 추가 검토 필요";
 }
@@ -388,7 +388,7 @@ function assembleBody(input: ReportInput, relevant: JudgedMatch[], llm: LlmRepor
     if (rec && framing !== "conditional") rec = stripLeadConditional(rec);
     // 권고 ↔ 반영여부 정합 강제(상충 제거). 정보성('모니터링 대상')은 대상 라벨이 아니라 무영향.
     const refl = reflByIndex.get(a.index);
-    if (refl) rec = reconcileRecommendation(refl, rec, relevant[a.index]?.verdict?.reason);
+    if (refl) rec = reconcileRecommendation(refl, rec);
     byIndex.set(a.index, rec === a.recommendation ? a : { ...a, recommendation: rec });
   }
 
@@ -528,7 +528,20 @@ ${details}`,
     text: `${g.requirement} — 대응 내규 부재, 신규 수립 필요`,
     children: g.recommendation ? [g.recommendation] : [],
   }));
-  const priorityItems = [...llmPriority, ...gapPriority];
+  // 우선조치 dedup — 합성 액션(LLM)과 커버리지 부재 항목이 동일 의무를 가리키면 한 번만 노출
+  //  (예: '…매뉴얼 작성 및 게시 의무화'(합성) vs '…매뉴얼 작성 및 게시 — 부재'(갭)). 정규화 키 선두 일치로 판별.
+  const priKey = (it: OutlineItem): string => {
+    const t = typeof it === "string" ? it : it?.text ?? "";
+    return t.replace(/[\s·,.()\-—:]/g, "").slice(0, 12);
+  };
+  const seenPri = new Set<string>();
+  const priorityItems = [...llmPriority, ...gapPriority].filter((it) => {
+    const k = priKey(it);
+    if (!k) return true;
+    if (seenPri.has(k)) return false;
+    seenPri.add(k);
+    return true;
+  });
   const priority = input.infoOnly
     ? "- 해당 없음 (정보성 자료 — 동향 모니터링 대상)"
     : highItems.length === 0 && absentGaps.length === 0
