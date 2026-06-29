@@ -68,6 +68,15 @@ export const config = {
 
   // ── 업로드/리소스 가드 ──
   maxUploadBytes: num(env.MAX_UPLOAD_BYTES, 30 * 1024 * 1024), // 서버측 업로드 크기 상한(기본 30MB — 관측 최대 8.6MB+스캔 매뉴얼 여유, OOM 무위험, env 조정)
+  // 동시 파이프라인 상한 — 무거운 분석(다수 LLM·OCR·600s)이 동시 다발로 들어오면 core-ai 과부하·인스턴스 OOM.
+  //  초과 요청은 즉시 429(큐 대기 없음 — 클라 데드라인 충돌·복잡 회피). 전제: 단일 인스턴스(다중이면 분산제어 필요).
+  //  백엔드(core-ai) 동시 처리 용량에 맞춰 조정.
+  maxConcurrentPipelines: num(env.MAX_CONCURRENT_PIPELINES, 3),
+  // 업로드 허용 확장자(소문자) — 무거운 파싱 진입 전 조기 차단(UX·자원). 내용 검증은 kordoc이 수행(매직바이트 불요).
+  allowedUploadExts: (env.ALLOWED_UPLOAD_EXTS || "pdf,hwp,hwpx,docx")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean),
 
   // ── 입력 문서 분석/청킹 ──
   maxAnalyzeChars: num(env.MAX_ANALYZE_CHARS, 60000), // analyze/parseBill 본문 절단 한계

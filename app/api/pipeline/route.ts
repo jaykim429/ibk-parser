@@ -18,6 +18,15 @@ const tooLarge = (): NextResponse<PipelineResult> =>
     { status: 413 }
   );
 
+const tooBusy = (): NextResponse<PipelineResult> =>
+  NextResponse.json(
+    { success: false, error: "현재 동시에 처리 중인 분석이 많습니다. 잠시 후 다시 시도해 주세요." },
+    { status: 429 }
+  );
+
+// 동시 파이프라인 수(프로세스 전역) — 단일 인스턴스 전제의 자원 가드. 무거운 분석 동시폭주 → 백엔드 과부하·OOM 방지.
+let inFlight = 0;
+
 export async function POST(req: NextRequest): Promise<NextResponse<PipelineResult>> {
   try {
     const form = await req.formData();
@@ -26,6 +35,14 @@ export async function POST(req: NextRequest): Promise<NextResponse<PipelineResul
       return NextResponse.json({ success: false, error: "파일이 없습니다." }, { status: 400 });
     }
     const f = file as File;
+    // 타입 가드: 무거운 파싱 진입 전 확장자 allowlist 조기 차단(내용검증은 kordoc)
+    const ext = (f.name.match(/\.([^.]+)$/)?.[1] ?? "").toLowerCase();
+    if (!config.allowedUploadExts.includes(ext)) {
+      return NextResponse.json(
+        { success: false, error: `지원하지 않는 파일 형식입니다(.${ext || "?"}). 지원 형식: ${config.allowedUploadExts.join(", ")}` },
+        { status: 415 }
+      );
+    }
     // 크기 가드: arrayBuffer() 전 신고 크기로 조기 컷(거대버퍼 RAM 적재 회피)
     if (f.size > config.maxUploadBytes) return tooLarge();
     const buffer = Buffer.from(await f.arrayBuffer());
@@ -35,8 +52,15 @@ export async function POST(req: NextRequest): Promise<NextResponse<PipelineResul
     // 실측 강제선(Content-Length/신고 크기 위조 방어)
     if (buffer.length > config.maxUploadBytes) return tooLarge();
 
-    const result = await runPipeline({ buffer, fileName: f.name });
-    return NextResponse.json(result);
+    // 동시성 가드: 상한 초과면 즉시 429(증가 전 검사). 무거운 작업이라 큐 대기 대신 재시도 안내.
+    if (inFlight >= config.maxConcurrentPipelines) return tooBusy();
+    inFlight++;
+    try {
+      const result = await runPipeline({ buffer, fileName: f.name });
+      return NextResponse.json(result);
+    } finally {
+      inFlight--; // 정상·예외 모두 감소(누수 방지)
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : "파이프라인 처리 중 오류가 발생했습니다.";
     return NextResponse.json({ success: false, error: message }, { status: 500 });
