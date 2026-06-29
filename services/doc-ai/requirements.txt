@@ -1,0 +1,18 @@
+# doc-ai 사이드카 — 순수 Python Docling(Java/ODL 없음).
+# compliance-ibk/law-core-ai 정합: FastAPI · Python 3.11 · pydantic v2 (종국 흡수 대비 버전 정렬).
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
+
+# 문서-AI 엔진: Docling(코드 MIT / 가중치 ds4sd/docling-models = CDLA-Permissive-2.0 — 고지 동봉).
+#   ⚠️ do_ocr=False 로 운용 → EasyOCR 기본 CRAFT(비상업 가중치) 미적재(라이선스). OCR 은 3단계 DGX VLM 정본.
+docling>=2.0.0
+# PDF 사전 스캔(페이지 텍스트량·needsOcr 신호) — 가벼움. PDFium 바인딩(BSD-3, AGPL PyMuPDF 회피).
+pypdfium2>=4.0.0
+
+# [TODO 최적화] 표 없는 순수 디지털 빠른경로(pdfminer.six, MIT) — 성능상 파싱은 종단의 ~1~2%라 후순위.
+# pdfminer.six>=20221105
+
+# ⚠️ 배포 시: 정확 버전 핀 + 모델 가중치 커밋해시 핀 + 사내 PyPI 미러(--no-index)로 폐쇄망 외부망 0.
+#   GPU 미할당이면 CPU-only torch wheel 사용(--extra-index-url https://download.pytorch.org/whl/cpu).
