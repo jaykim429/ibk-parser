@@ -34,7 +34,10 @@ export const config = {
   rookieTimeoutMs: num(env.ROOKIE_TIMEOUT_MS, 120000),
 
   // ── 임베딩 ──
-  embeddingApiUrl: env.EMBEDDING_API_URL || "https://openrouter.ai/api/v1",
+  // ⚠️ fail-closed: 디폴트 외부망(OpenRouter) 폴백 제거. env 미설정 시 임베딩 호출이
+  //    즉시 실패하도록(embedding.ts 가드) → 폐쇄망에서 내규 파생 텍스트가 외부로 침묵 송출되는 것 방지.
+  //    운영 시 EMBEDDING_API_URL에 내부(또는 명시적 외부) 엔드포인트를 반드시 지정.
+  embeddingApiUrl: env.EMBEDDING_API_URL || "",
   embeddingApiKey: env.EMBEDDING_API_KEY || "",
   embeddingModel: env.EMBEDDING_MODEL || "qwen/qwen3-embedding-8b",
   embeddingDimension: num(env.EMBEDDING_DIMENSION, 4096),
@@ -47,9 +50,13 @@ export const config = {
   canonicalUseSummary: (env.CANONICAL_USE_SUMMARY ?? "true") !== "false",
 
   // ── 타임아웃(ms) ──
-  pipelineTimeoutMs: num(env.PIPELINE_TIMEOUT_MS, 180000),
+  pipelineTimeoutMs: num(env.PIPELINE_TIMEOUT_MS, 180000), // 개별 LLM/rerank/analyze 호출 1건 상한
+  pipelineTotalTimeoutMs: num(env.PIPELINE_TOTAL_TIMEOUT_MS, 600000), // 파이프라인 전체 데드라인(좀비 요청·무한 대기 차단)
   embeddingTimeoutMs: num(env.EMBEDDING_TIMEOUT_MS, 60000),
   qdrantTimeoutMs: num(env.QDRANT_TIMEOUT_MS, 30000),
+
+  // ── 업로드/리소스 가드 ──
+  maxUploadBytes: num(env.MAX_UPLOAD_BYTES, 30 * 1024 * 1024), // 서버측 업로드 크기 상한(기본 30MB — 관측 최대 8.6MB+스캔 매뉴얼 여유, OOM 무위험, env 조정)
 
   // ── 입력 문서 분석/청킹 ──
   maxAnalyzeChars: num(env.MAX_ANALYZE_CHARS, 60000), // analyze/parseBill 본문 절단 한계

@@ -313,5 +313,13 @@ export class CompliancePipeline {
 
 /** 함수형 진입점(호환) — route에서 사용 */
 export function runPipeline(input: PipelineInput): Promise<PipelineResult> {
-  return new CompliancePipeline().run(input);
+  // 전체 데드라인: 개별 호출 상한(pipelineTimeoutMs)과 별개로 파이프라인 총시간을 제한해
+  //  HTTP 무한 대기·좀비 요청을 차단(초과 시 명확한 실패 응답). 내부 작업은 각 단계 자체 타임아웃으로 종료됨.
+  const deadline = new Promise<PipelineResult>((resolve) =>
+    setTimeout(
+      () => resolve({ success: false, error: "처리 시간 초과 — 문서가 너무 크거나 복잡합니다. 분할 후 다시 시도해 주세요." }),
+      config.pipelineTotalTimeoutMs
+    )
+  );
+  return Promise.race([new CompliancePipeline().run(input), deadline]);
 }

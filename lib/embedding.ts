@@ -5,6 +5,10 @@
 import { config } from "./config";
 
 export async function embed(texts: string[]): Promise<number[][]> {
+  // fail-closed: 엔드포인트 미설정 시 외부로 침묵 송출되지 않도록 즉시 실패(폐쇄망 거버넌스).
+  if (!config.embeddingApiUrl) {
+    throw new Error("임베딩 엔드포인트(EMBEDDING_API_URL)가 설정되지 않았습니다 — 내부(또는 명시적) 임베딩 URL을 지정하세요.");
+  }
   const r = await fetch(`${config.embeddingApiUrl}/embeddings`, {
     method: "POST",
     headers: {

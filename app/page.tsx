@@ -105,13 +105,24 @@ export default function Home() {
 
       const timers: ReturnType<typeof setTimeout>[] = [];
       timers.push(setTimeout(() => patchJob(job.id, { step: 1 }), 5000));
-      timers.push(setTimeout(() => patchJob(job.id, { step: 2 }), 85000));
-      timers.push(setTimeout(() => patchJob(job.id, { step: 3 }), 230000));
+      timers.push(setTimeout(() => patchJob(job.id, { step: 2 }), 120000));
+      timers.push(setTimeout(() => patchJob(job.id, { step: 3 }), 300000));
 
       try {
         const fd = new FormData();
         fd.append("file", job.file);
-        const res = await fetch("/api/pipeline", { method: "POST", body: fd });
+        // 전체 데드라인(서버 600s)보다 약간 길게 — 무한 스피너 방지
+        const res = await fetch("/api/pipeline", { method: "POST", body: fd, signal: AbortSignal.timeout(630000) });
+        // 504/502(프록시 타임아웃)는 비-JSON이라 res.json()이 throw → 원인 은폐. 상태로 먼저 분기.
+        if (!res.ok) {
+          const reason =
+            res.status === 504 || res.status === 502
+              ? "서버 처리시간 초과(프록시 타임아웃) — 문서가 크거나 복잡합니다."
+              : res.status === 413
+                ? "파일이 너무 큽니다."
+                : `요청 실패(HTTP ${res.status})`;
+          throw new Error(reason);
+        }
         const data: PipelineResult = await res.json();
         timers.forEach(clearTimeout);
         patchJob(job.id, {
@@ -499,7 +510,7 @@ function AnalysisView(props: {
         >
           <div className="drop-icon">문서</div>
           <strong>파일을 끌어다 놓거나 클릭하여 선택</strong>
-          <span>여러 파일 동시 선택 가능 · 파일당 최대 10MB</span>
+          <span>여러 파일 동시 선택 가능 · 파일당 최대 30MB</span>
           <div className="formats">
             {FORMATS.map((format) => (
               <span className="fmt" key={format}>
