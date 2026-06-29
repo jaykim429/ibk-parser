@@ -225,27 +225,11 @@ export default function Home() {
 
   return (
     <>
-      <header className="cg-header">
-        <div className="cg-header-inner">
-          <a className="cg-brand" href="/">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/CGinside.png" alt="CG INSIDE" className="cg-logo-img" />
-            <span className="cg-sys-name">
-              내규 기반 법령
-              <br />
-              리스크 모니터링 시스템
-            </span>
-          </a>
-          <span className="cg-page-badge">AI 영향분석 테스트 Lab</span>
-        </div>
-      </header>
-
       <main className="app-main">
         <div className="app-layout">
           <section className="workspace">
             <div className="workspace-head">
               <div>
-                <p className="eyebrow">규제변동 영향분석</p>
                 <h1>{PAGE_TITLE}</h1>
                 <p className="lede">규제변동 문서를 업로드하면 IBK 내규 영향 보고서를 생성합니다.</p>
               </div>
