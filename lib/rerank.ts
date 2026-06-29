@@ -117,7 +117,7 @@ ${block}
       systemPrompt: SYSTEM,
       prompt,
       maxTokens: 1500,
-      temperature: 0,
+      temperature: config.llmTemperature,
     });
     const scores = extractJson<{ index: number; score: number }[]>(raw);
     if (!Array.isArray(scores)) throw new Error("not array");

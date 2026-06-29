@@ -523,7 +523,7 @@ JSON만 출력: {"documentTitle":"문서 정식 제목","requiresFramework": tru
       systemPrompt: SYSTEM,
       prompt: `## 문서\n파일/추정제목: ${args.lawName}\n유형: ${args.itemType}\n본문:\n${clampDocText(args.documentText, config.maxAnalyzeChars)}`,
       maxTokens: 2400,
-      temperature: 0.1,
+      temperature: config.llmTemperature,
     });
     const v = extractJson<{ documentTitle?: string; requiresFramework?: boolean; obligations?: Obligation[] }>(raw);
     const obligations = (Array.isArray(v.obligations) ? v.obligations : [])
@@ -640,7 +640,7 @@ JSON만 출력: {"relevant": true|false, "domain": "분야 한 단어", "reason"
       systemPrompt: SYSTEM,
       prompt: `## 문서\n제목: ${args.title}\n본문(발췌):\n${clampDocText(args.documentText, 4000)}`,
       maxTokens: 240,
-      temperature: 0,
+      temperature: config.llmTemperature,
     });
     const v = extractJson<{ relevant?: boolean; domain?: string; reason?: string }>(raw);
     return {

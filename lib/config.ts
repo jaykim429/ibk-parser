@@ -49,6 +49,17 @@ export const config = {
   // M3: 대표 쿼리에 analyze 핵심요약(자연어 문장)을 포함(키워드 나열 + 자연어 혼합)
   canonicalUseSummary: (env.CANONICAL_USE_SUMMARY ?? "true") !== "false",
 
+  // ── 결정성/재현성 (컴플라이언스·백테스팅: 같은 입력 → 같은 결과가 불변식) ──
+  //   분석 경로 LLM 호출의 '1차(결과)' temperature. 0=그리디(결정적). 사이트별 리터럴 대신
+  //   이 단일 노브로 전 호출을 통일 → 판정/추출/커버리지/보고서의 '클라이언트측 샘플링 변동'을 제거.
+  //   ⚠️ 절반의 해결: 서버측 잔여 비결정(vLLM 배치 구성·부동소수 비결합)은 temperature로 못 잡는다.
+  //   ⚠️ end-to-end 완전 재현엔 core-ai의 analyze/parseBill·임베딩·검색순위 서버측 결정화(+seed)가 동반돼야 함(백엔드 책임).
+  //      특히 analyze가 흔들리면 쿼리→검색후보가 바뀌어 하류(결정화된 judge)도 다른 입력을 본다.
+  llmTemperature: num(env.LLM_TEMPERATURE, 0),
+  //   파싱 실패(드묾·응답 잘림 등) '재시도'에서만 쓰는 temperature. 1차가 0이면 재시도도 0일 때
+  //   동일 출력이 재생산돼 복구가 무의미 → 재시도는 살짝 샘플링해 다른 출력으로 회복(공통 경로는 결정적 유지).
+  llmRetryTemperature: num(env.LLM_RETRY_TEMPERATURE, 0.3),
+
   // ── 타임아웃(ms) ──
   pipelineTimeoutMs: num(env.PIPELINE_TIMEOUT_MS, 180000), // 개별 LLM/rerank/analyze 호출 1건 상한
   pipelineTotalTimeoutMs: num(env.PIPELINE_TOTAL_TIMEOUT_MS, 600000), // 파이프라인 전체 데드라인(좀비 요청·무한 대기 차단)
@@ -112,7 +123,7 @@ export const config = {
   vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 20), // 복구 페이지 상한(비용 제한)
 
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
-  cacheVersion: env.REPORT_CACHE_VERSION || "v55",
+  cacheVersion: env.REPORT_CACHE_VERSION || "v56",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),
 
   // ── 데이터 ──

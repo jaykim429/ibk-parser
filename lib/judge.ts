@@ -146,13 +146,15 @@ ${candidateBlock}
   //  파싱 실패→문서 전체가 검색영향도 fallback으로 강등되던 회귀의 직접 원인이었음. 넉넉히+상한.
   const judgeMaxTokens = Math.min(16000, 4000 + cands.length * 700);
   let verdicts: (Partial<Verdict> & { index: number })[] | null = null;
-  // 파싱 실패는 보통 응답 잘림 → 1회 재시도(결정성 위해 temperature 0). 그래도 실패면 fallback.
+  // 1차는 결정적(llmTemperature=0) → 같은 입력=같은 판정(재현성).
+  //  파싱 실패의 주원인은 응답 잘림(truncation)이므로 재시도는 (a) maxTokens를 상한까지 키워 '길이부족'을
+  //  정조준하고, (b) 동시에 살짝 샘플링(llmRetryTemperature)해 비결정적 JSON 깨짐도 함께 회복한다. 그래도 실패면 fallback.
   for (let attempt = 0; attempt < 2 && !verdicts; attempt++) {
     const raw = await callCompletion({
       systemPrompt: system,
       prompt,
-      maxTokens: judgeMaxTokens,
-      temperature: attempt === 0 ? 0.1 : 0,
+      maxTokens: attempt === 0 ? judgeMaxTokens : Math.min(16000, Math.round(judgeMaxTokens * 1.5)),
+      temperature: attempt === 0 ? config.llmTemperature : config.llmRetryTemperature,
       jsonMode: false,
     });
     try {
@@ -435,7 +437,9 @@ ${globalNames.length ? globalNames.join(", ") : "- 없음"}
 각 의무 [index]를 **그 의무의 후보 내규**로 충족/부분/부재 평가해 JSON으로 출력하라.`;
 
   try {
-    const raw = await callCompletion({ systemPrompt: SYSTEM, prompt, maxTokens: 4000, temperature: 0.1, jsonMode: false });
+    // maxTokens는 의무 수에 비례(고정 4000은 의무가 많으면 응답이 잘려 빈 결과→갭 오집계로 조용히 새던 경로).
+    const coverageMaxTokens = Math.min(8000, 2000 + items.length * 400);
+    const raw = await callCompletion({ systemPrompt: SYSTEM, prompt, maxTokens: coverageMaxTokens, temperature: config.llmTemperature, jsonMode: false });
     type CovRow = { index?: number; coverage?: string; evidence?: string; recommendation?: string };
     const v = extractJson<{ items?: CovRow[]; gaps?: CovRow[] }>(raw);
     const rows: CovRow[] = Array.isArray(v.items) ? v.items : Array.isArray(v.gaps) ? v.gaps : [];

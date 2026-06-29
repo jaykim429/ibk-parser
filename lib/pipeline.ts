@@ -66,6 +66,8 @@ export class CompliancePipeline {
       config.bm25TopK,
       config.rrfK,
       config.maxAnalyzeChars,
+      config.llmTemperature,
+      config.llmRetryTemperature,
     ].join("-");
     const key = `report-${config.cacheVersion}-${cfgSig}:${fileHash}`;
     const cached = getCached<PipelineResult>(key);
@@ -209,6 +211,11 @@ export class CompliancePipeline {
     // 4) LLM 적합성·영향도 판정 (의무·권고도 함께 전달 — analyze 요약이 일부 단락에 고착해도 보정)
     const judged = await judgeMatches({ lawName, itemType, analysis, candidates: reranked, infoOnly, obligations: obl.obligations });
     const relevant = judged.filter((j) => j.verdict.relevance === "적합");
+    // 진단(재현성 국소화): 같은 문서 재분석 시 매칭 수가 흔들리면, 변동이 '판정된 후보집합'(상류 쿼리·검색·rerank
+    //  변동)에서 오는지 'judge 판정 flip'에서 오는지 구분해야 한다. 정렬 키셋 로그로 run 간 diff가 가능 → 추측 대신 국소화.
+    const keyOf = (c: Candidate) => `${c.regulation_name} ${formatRegulationItemName(c)}`;
+    console.log(`[PIPELINE] 판정후보(${judged.length})= ${judged.map(keyOf).sort().join(" | ")}`);
+    console.log(`[PIPELINE] 적합(${relevant.length})= ${relevant.map(keyOf).sort().join(" | ") || "(없음)"}`);
 
     // 4.5) 요건 커버리지(권고2) — 의무별 충족/부분/부재 + 대응 내규 산출(요건 체크리스트)
     //   ★ 과대신호 방지: 커버리지 갭(부재=높음)은 '새 규범영역을 신설'하는 문서에서만 의미.

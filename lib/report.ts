@@ -10,6 +10,7 @@
  * stateless /generate/completion 사용 → 서버 DB 적재 없음.
  */
 import { callCompletion, extractJson } from "./llm";
+import { config } from "./config";
 import { formatRegulationItemName, inferRegulationKind } from "./regulation-format";
 import { cleanLawName, BILL_SIGNAL, PENDING_STRONG, PENDING_WEAK, type Analysis, type ItemType, type Obligation } from "./server";
 import { normalizeWhitespace } from "./doc-text";
@@ -178,7 +179,7 @@ export async function generateReport(input: ReportInput): Promise<string> {
         systemPrompt: REPORT_SYSTEM,
         prompt: buildPrompt(input, relevant),
         maxTokens: 6000,
-        temperature: attempt === 0 ? 0.2 : 0,
+        temperature: attempt === 0 ? config.llmTemperature : config.llmRetryTemperature,
       });
       llm = extractJson<LlmReport>(raw);
     } catch (e) {
