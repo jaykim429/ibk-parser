@@ -120,7 +120,10 @@ imageData: img ? {
 
 ## 7. 의존성 · 라이선스 · 모델 번들
 
-**Node 제거**: `@huggingface/transformers`(Apache-2.0)·`onnxruntime-node`(MIT)·`sharp`(Apache-2.0)·`@hyzyla/pdfium`(MIT)·`puppeteer-core`(Apache-2.0) = **kordoc formula/Print dead path → 0단계 즉시 제거**. `@napi-rs/canvas`(MIT) = OCR 이관 후. `pdfjs-dist`(Apache-2.0) = kordoc PDF 폴백 폐기 후에만.
+**Node footprint(0단계 구현 중 정정 — 중요)**: formula deps는 **우리 직접 deps가 아니라 kordoc `optionalDependencies`**(`@huggingface/transformers`·`onnxruntime-node`·`@hyzyla/pdfium`·`sharp`) + **`peerDependencies`**(`puppeteer-core`·`pdfjs-dist`)다. 따라서 *우리 package.json에서 빼도 kordoc이 optional로 끌어와 footprint가 안 줄어든다.* `kordoc/src/types.ts`가 "미설치 시 parse 실패 않고 경고+수식 skip"을 보장하므로,
+- **실제 footprint 레버 = 배포에서 `npm ci --omit=optional`**(formula 4종 미설치, parse는 정상 degrade). puppeteer-core(peer)는 Chromium 미동봉이라 footprint 작음 — 잔존 허용.
+- **package.json 하이지닉(0단계 완료)**: 우리가 안 쓰는 `sharp`·`@hyzyla/pdfium` 직접 deps 제거(kordoc optional과 중복) + 실제 쓰는 `@napi-rs/canvas`(^0.1.100, pdf-ocr-recover 렌더) **명시 선언** → `--omit=optional` 후에도 생존(regular dep). next.config externals도 kordoc·pdfjs-dist·@napi-rs/canvas로 정리.
+- `pdfjs-dist`(Apache-2.0, kordoc peer) = OCR 렌더 + kordoc PDF 폴백 → 유지. `@napi-rs/canvas`(MIT) = 폴백 폐기 후에만 제거(phase 5).
 
 **라이선스(코드 vs 가중치 분리 — 배포 high 수용)**:
 | 항목 | 코드 | **가중치** |

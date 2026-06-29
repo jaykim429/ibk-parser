@@ -12,14 +12,12 @@ const frameAncestors = process.env.FRAME_ANCESTORS || "'self'";
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
+    // 네이티브/ESM 전용 — webpack 번들 제외. kordoc formula(onnx/transformers/pdfium/sharp)·
+    // print(puppeteer)는 미사용 dead path라 deps에서 제거(0단계). PDF 파싱·OCR 렌더 경로만 유지.
     serverComponentsExternalPackages: [
       "kordoc",
-      "sharp",
       "pdfjs-dist",
-      "puppeteer-core",
-      "@hyzyla/pdfium",
-      "onnxruntime-node",
-      "@huggingface/transformers",
+      "@napi-rs/canvas",
     ],
   },
   async headers() {

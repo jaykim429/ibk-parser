@@ -10,7 +10,7 @@
     "test:parser": "npx --yes tsx scripts/test-doc-text.ts"
   },
   "dependencies": {
-    "@hyzyla/pdfium": "2.1.13",
+    "@napi-rs/canvas": "^0.1.100",
     "@types/pg": "^8.20.0",
     "kordoc": "file:kordoc",
     "neo4j-driver": "^6.1.0",
@@ -20,8 +20,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-markdown": "9.0.1",
-    "remark-gfm": "4.0.0",
-    "sharp": "0.34.5"
+    "remark-gfm": "4.0.0"
   },
   "devDependencies": {
     "@types/node": "20.14.10",
