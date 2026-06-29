@@ -118,7 +118,7 @@ function isShortHeadingTitle(t: string): boolean {
   if (HEADING_WORD.test(t)) return true;
   return t.length <= 25; // 짧은 명사형 표제·절번호(1.1 등)·짧은 라벨
 }
-function demoteProseHeadings(blocks: IRBlock[]): { blocks: IRBlock[]; demoted: number } {
+export function demoteProseHeadings(blocks: IRBlock[]): { blocks: IRBlock[]; demoted: number } {
   let demoted = 0;
   const out = blocks.map((b) => {
     if (b.type !== "heading") return b;
@@ -129,6 +129,15 @@ function demoteProseHeadings(blocks: IRBlock[]): { blocks: IRBlock[]; demoted: n
     return { ...rest, type: "paragraph" } as IRBlock;
   });
   return { blocks: out, demoted };
+}
+
+/** markdown 문단(빈 줄 기준) → paragraph blocks. txt 처리·blocks 부재 폴백·사이드카 어댑터 공용(중복 제거). */
+export function blocksFromMarkdown(markdown: string): IRBlock[] {
+  return markdown
+    .split(/\n{2,}/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+    .map((t) => ({ type: "paragraph", text: t } as IRBlock));
 }
 
 const ERROR_MESSAGES: Record<string, string> = {
@@ -155,11 +164,7 @@ export async function parseDocument(
     }
     const markdown = normalizeMarkdown(text);
     if (!markdown.trim()) throw new Error("문서에서 추출된 텍스트가 없습니다.");
-    const blocks = markdown
-      .split(/\n{2,}/)
-      .map((t) => t.trim())
-      .filter(Boolean)
-      .map((t) => ({ type: "paragraph", text: t } as IRBlock));
+    const blocks = blocksFromMarkdown(markdown);
     return {
       markdown, fileType: "txt", isImageBased: false, usedOcr: false, lowQuality: false,
       blocks, outline: [], title: pickTitle(undefined, markdown, filename), warnings: [],
@@ -177,6 +182,15 @@ export async function parseDocument(
       return await parsePdfViaRookie(buffer, filename);
     } catch (e) {
       console.warn(`[PARSE] Rookie PDF 파서 실패 → kordoc 폴백: ${(e as Error).message}`);
+    }
+  }
+  // Docling 순수 Python 사이드카(Java/ODL 제거). 계약은 Rookie 호환(같은 /parse·URL), 어댑터가 IRBlock 불변식 강제.
+  if (isPdf && config.pdfParser === "docling") {
+    try {
+      const { parsePdfViaDocling } = await import("./pdf-docling");
+      return await parsePdfViaDocling(buffer, filename);
+    } catch (e) {
+      console.warn(`[PARSE] Docling PDF 파서 실패 → kordoc 폴백: ${(e as Error).message}`);
     }
   }
 
@@ -266,11 +280,7 @@ export async function parseDocument(
   // M1 무음누락 가드: 본문(markdown)은 정상인데 blocks가 비면 복원·인덱싱(manualToChunks)·변경점추출이 통째
   //  0이 되어 색인에서 누락(에러 없이). markdown 문단으로 blocks를 폴백 생성해 정합을 보장한다.
   if (normBlocks.length === 0 && markdown.trim()) {
-    normBlocks = markdown
-      .split(/\n{2,}/)
-      .map((t) => t.trim())
-      .filter(Boolean)
-      .map((t) => ({ type: "paragraph", text: t } as IRBlock));
+    normBlocks = blocksFromMarkdown(markdown);
     warnings.push("구조 블록이 비어 본문 문단으로 폴백 생성함(복원·색인 정합 보장).");
     console.warn(`[PARSE] blocks 비어있음 → markdown 문단 폴백: ${filename}`);
   }

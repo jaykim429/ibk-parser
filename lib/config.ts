@@ -27,9 +27,9 @@ export const config = {
   dgxSparkUrl: env.DGX_SPARK_URL || "http://172.23.80.102:8000",
   dgxSparkModel: env.DGX_SPARK_MODEL || "google/gemma-4-26B-A4B-it",
 
-  // ── PDF 파서 라우팅: kordoc(기본) | rookie(CG Rookie Parser 사이드카) ──
-  //    PDF만 rookie로 위임 가능(HWP/HWPX는 항상 kordoc). 실패 시 kordoc 폴백.
-  pdfParser: (env.PDF_PARSER || "kordoc").toLowerCase(), // "kordoc" | "rookie"
+  // ── PDF 파서 라우팅: kordoc(기본) | rookie(레거시 ODL Java 사이드카) | docling(순수 Python 사이드카) ──
+  //    PDF만 사이드카로 위임 가능(HWP/HWPX는 항상 kordoc). 실패/미가동 시 kordoc 폴백(무중단).
+  pdfParser: (env.PDF_PARSER || "kordoc").toLowerCase(), // "kordoc" | "rookie" | "docling"
   rookieParserUrl: env.ROOKIE_PARSER_URL || "http://rookie-parser:8900",
   rookieTimeoutMs: num(env.ROOKIE_TIMEOUT_MS, 120000),
 
