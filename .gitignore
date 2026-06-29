@@ -12,6 +12,11 @@ next-env.d.ts
 /uploads
 /scripts/_*.mjs
 
+# Python 사이드카(services/*) 빌드 부산물
+**/__pycache__
+*.pyc
+**/.venv
+
 **/.claude
 CGinside.png
 로고 아이비케이.png
