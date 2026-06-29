@@ -138,8 +138,25 @@ async function main(): Promise<void> {
     const jsonPath = path.join(outDir, `${regId}_${sanitize(regName)}.json`);
     writeFileSync(jsonPath, JSON.stringify({ regulationName: regName, mappings: {}, source: "manual", articles }, null, 1), "utf-8");
 
-    // ── Qdrant 증분 업서트(벡터검색용) ──
+    // ── Qdrant 업서트(벡터검색용) ──
     if (!dry) {
+      // stale 청소(P1): 재인덱싱 시 이전 청크(삭제·시프트분)가 유령 포인트로 남으면 검색 노이즈·keyOf 충돌·
+      //  enrich 오매칭(절단본 판정)으로 이어진다. 이 내규(regId)의 기존 manual 포인트를 먼저 삭제 후 재적재.
+      //  ⚠ source=="manual" 필터로 한정 — 조문형 RDB 적재분(source≠manual)은 절대 건드리지 않음.
+      const del = await fetch(`${QDRANT}/collections/${COLL}/points/delete?wait=true`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          filter: {
+            must: [
+              { key: "regulation_id", match: { value: regId } },
+              { key: "source", match: { value: "manual" } },
+            ],
+          },
+        }),
+      });
+      if (!del.ok) throw new Error(`stale delete HTTP ${del.status}: ${(await del.text()).slice(0, 200)}`);
+
       const items = chunks.map((c, i) => ({
         id: uuid(`${regId}|${articles[i].type}|${i + 1}|0`),
         text: String(c.text).slice(0, 2000),

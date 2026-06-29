@@ -17,6 +17,7 @@ import type { IRBlock } from "kordoc";
 import { config } from "./config";
 import { parseDocument, loadKordoc } from "./parse-document";
 import { normalizeWhitespace } from "./doc-text";
+import { normalizeHeadingTree, stripTocLeaders, type NormBlock } from "./heading-normalize";
 
 const RE_BYEOLJI = /별\s*표|별지\s*서식/;
 
@@ -116,10 +117,24 @@ function mergeLabelGroups(groups: Group[]): Group[] {
  *  - paragraph/list: 현재 섹션 본문
  *  - table: linearizeTable 로 "헤더=값" 선형화
  */
-function blocksToUnits(blocks: IRBlock[], linearize: (t: NonNullable<IRBlock["table"]>) => string): Unit[] {
+function blocksToUnits(blocks: NormBlock[], linearize: (t: NonNullable<IRBlock["table"]>) => string): Unit[] {
   const path: { level: number; text: string }[] = [];
   const units: Unit[] = [];
+  // 목차(TOC) 보존격리: __toc 마킹된 연속 블록을 모아 '단일 (목차) 메타유닛'으로 흡수(노이즈 9청크→1).
+  let tocBuf: string[] = [];
+  const flushToc = () => {
+    if (!tocBuf.length) return;
+    const text = normalize(stripTocLeaders(tocBuf.join(" ")));
+    if (text) units.push({ headingPath: [...path.map((p) => p.text), "(목차)"], type: "text", text });
+    tocBuf = [];
+  };
   for (const b of blocks) {
+    if (b.__toc) {
+      const t = b.text ?? (b.type === "table" && b.table ? linearize(b.table) : "");
+      if (t) tocBuf.push(t);
+      continue;
+    }
+    flushToc(); // 목차 구간 종료 → 단일 메타유닛 방출 후 본문 처리 재개
     if (b.type === "heading" && b.text) {
       const level = b.level ?? 1;
       while (path.length && path[path.length - 1].level >= level) path.pop();
@@ -140,6 +155,7 @@ function blocksToUnits(blocks: IRBlock[], linearize: (t: NonNullable<IRBlock["ta
       if (text) units.push({ headingPath: path.map((p) => p.text), type: "text", text, pageNumber: b.pageNumber });
     }
   }
+  flushToc(); // 문서 말미가 목차 구간으로 끝나는 경우 방출
   return units;
 }
 
@@ -155,7 +171,12 @@ export async function manualToChunks(
 ): Promise<ManualChunk[]> {
   const doc = await parseDocument(buffer, fileName);
   const k = await loadKordoc();
-  const units = blocksToUnits(doc.blocks, k.linearizeTable);
+  // 헤딩 인지 정규화(인덱싱 경로 전용) — 형태정규화·인접중복 dedup·목차 보존격리. 라이브 분석엔 영향 없음.
+  const { blocks: normBlocks, stats: hn } = normalizeHeadingTree(doc.blocks);
+  if (hn.dedupHeadings || hn.tocBlocks) {
+    console.log(`[CHUNK] 헤딩 정규화: ${fileName} — 중복헤딩 ${hn.dedupHeadings} dedup · 목차블록 ${hn.tocBlocks} 격리(${hn.tocRegions}구간)`);
+  }
+  const units = blocksToUnits(normBlocks, k.linearizeTable);
   const name = regName || doc.title || fileName.replace(/\.[^.]+$/, "");
 
   // 같은 섹션의 연속 'text' 유닛을 한 그룹으로 병합. 표는 개별 청크 유지.

@@ -65,6 +65,14 @@ export const config = {
   manualChunkOverlap: num(env.MANUAL_CHUNK_OVERLAP, 150), // 서브분할 겹침
   embeddingTextCap: num(env.EMBEDDING_TEXT_CAP, 2000), // 청크 임베딩/BM25 텍스트 길이 캡(매직넘버 제거)
 
+  // ── 비정형 헤딩 인지 정규화(인덱싱 경로 전용 — manualToChunks) ──
+  //    순수 정규식: 헤딩 형태정규화 + 인접 동일헤딩 dedup + 목차(TOC) 보존격리.
+  //    라이브 분석(markdown)엔 무영향. false-negative 방지로 TOC는 삭제하지 않고 단일 메타유닛으로 흡수.
+  headingNormalizeEnabled: (env.HEADING_NORMALIZE_ENABLED ?? "true") !== "false",
+  tocRunsPerBlock: num(env.TOC_RUNS_PER_BLOCK, 2), // 블록당 점선리더 런이 이 수 이상이면 목차 라인 후보
+  tocMinLines: num(env.TOC_MIN_LINES, 3), // 목차 라인 후보가 이 수 이상 연속이면 목차 구간으로 격리
+  tocManyRuns: num(env.TOC_MANY_RUNS, 6), // 단일 블록에 점선리더 런이 이 수 이상이면(거대 목차블록) 단독 격리
+
   // ── 검색/리랭크/판정 튜닝 ──
   matchTopK: num(env.MATCH_TOPK, 30), // RRF 융합 후 후보 수
   vectorTopK: num(env.VECTOR_TOPK, 40), // 벡터 1차 후보
