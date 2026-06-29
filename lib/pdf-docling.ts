@@ -83,6 +83,11 @@ export async function parsePdfViaDocling(buffer: Buffer, filename: string): Prom
   const data = (await res.json()) as DoclingResponse;
   if (!data.markdown || !data.markdown.trim()) throw new Error("docling: 추출된 텍스트 없음");
 
+  // 후퇴 모드(설계 K): 사이드카가 OCR 필요로 봤으나 복구 못함(예: DGX 미도달) → throw → kordoc 폴백(자체 OCR 경로).
+  if (config.doclingFallbackOnNeedsOcr && data.qualitySummary?.needsOcr && !data.usedOcr) {
+    throw new Error("docling: needsOcr 미복구 — kordoc 폴백(후퇴 모드)");
+  }
+
   const markdown = normalizeMarkdown(data.markdown);
 
   let blocks = adaptBlocks(data.blocks ?? []);                       // ① image 키리네임+디코드(실패=throw)

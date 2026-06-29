@@ -19,9 +19,36 @@ services:
       - "4000:4000"
     networks:
       - backend # core-ai·qdrant·opensearch 등이 있는 사내 네트워크
-    # PDF 고품질 파싱을 쓰려면 .env.docker 에 PDF_PARSER=rookie, ROOKIE_PARSER_URL=http://rookie-parser:8900
+    # PDF 고품질 파싱: .env.docker 에 PDF_PARSER=docling, ROOKIE_PARSER_URL=http://doc-ai:8900 (권장)
+    #   docling 사용 시 아래 depends_on 주석 해제(모델 준비 전 요청 차단). 미사용(kordoc 기본)이면 불요.
+    # depends_on:
+    #   doc-ai:
+    #     condition: service_healthy
 
-  # PDF 파싱 사이드카(선택) — PDF만 위임(HWP는 앱 내 kordoc). 미사용 시 PDF_PARSER 미설정으로 둠.
+  # PDF 파싱 사이드카(권장, 순수 Python Docling — Java 없음). rookie-parser 대체. PDF만 위임(HWP는 앱 내 kordoc).
+  doc-ai:
+    build:
+      context: ./services/doc-ai
+      dockerfile: Dockerfile
+    image: ibk-doc-ai:latest
+    container_name: ibk-doc-ai
+    restart: unless-stopped
+    expose:
+      - "8900"
+    environment:
+      # 사이드카가 스캔/손상 페이지를 직접 OCR(3단계)할 때 쓰는 DGX VLM(Node dgxSparkUrl 정합)
+      - DOCAI_DGX_URL=${DGX_SPARK_URL:-http://172.23.80.102:8000}
+      - DOCAI_DGX_MODEL=${DGX_SPARK_MODEL:-google/gemma-4-26B-A4B-it}
+    networks:
+      - backend
+    healthcheck: # /health 는 Docling 모델 프리로드 완료 후에만 200(설계 §8-2 — G1)
+      test: ["CMD", "python", "-c", "import urllib.request,sys;sys.exit(0 if urllib.request.urlopen('http://localhost:8900/health',timeout=3).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 120s # 모델 워밍업 여유
+
+  # 레거시 PDF 사이드카(ODL Java CLI) — docling 으로 대체됨. PDF_PARSER=rookie 호환용으로만 잔존.
   rookie-parser:
     build:
       context: ./services/rookie-parser

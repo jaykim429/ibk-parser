@@ -32,6 +32,9 @@ export const config = {
   pdfParser: (env.PDF_PARSER || "kordoc").toLowerCase(), // "kordoc" | "rookie" | "docling"
   rookieParserUrl: env.ROOKIE_PARSER_URL || "http://rookie-parser:8900",
   rookieTimeoutMs: num(env.ROOKIE_TIMEOUT_MS, 120000),
+  // docling 후퇴모드: 사이드카가 needsOcr로 봤으나 미복구(예: DGX 미도달)면 어댑터가 throw → kordoc 폴백(자체 OCR).
+  //   G2(사이드카→DGX 도달성) 미통과 시 분할흡수 후퇴용. 기본 false(사이드카 OCR 신뢰).
+  doclingFallbackOnNeedsOcr: (env.DOCLING_FALLBACK_ON_NEEDSOCR ?? "false") === "true",
 
   // ── 임베딩 ──
   // ⚠️ fail-closed: 디폴트 외부망(OpenRouter) 폴백 제거. env 미설정 시 임베딩 호출이

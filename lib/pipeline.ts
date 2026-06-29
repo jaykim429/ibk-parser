@@ -68,6 +68,7 @@ export class CompliancePipeline {
       config.maxAnalyzeChars,
       config.llmTemperature,
       config.llmRetryTemperature,
+      config.pdfParser, // 파서별 캐시키 분리 — kordoc↔docling 토글/롤백 시 A/B 교차오염 차단(설계 §8-1)
     ].join("-");
     const key = `report-${config.cacheVersion}-${cfgSig}:${fileHash}`;
     const cached = getCached<PipelineResult>(key);
