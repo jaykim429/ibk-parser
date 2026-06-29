@@ -394,3 +394,19 @@ const cfgSig = [
 5. (4단계 확정) 통과 시 cacheVersion v56→v57 bump + 코드 기본값 docling 전환. 롤백은 항상 env 한 줄.
 
 관련 파일(절대경로): `c:\Users\admin1\Documents\Claude\Projects\IBK 프로젝트 테스트\services\doc-ai\app.py`, `...\kordoc\src\ocr\vlm-provider.ts`, `...\kordoc\src\ocr\provider.ts`, `...\kordoc\src\pdf\quality.ts`, `...\kordoc\src\pdf\parser.ts`, `...\lib\pdf-ocr-recover.ts`, `...\lib\parse-document.ts`, `...\lib\pdf-docling.ts`, `...\lib\pipeline.ts`, `...\lib\config.ts`, `...\services\doc-ai\requirements.txt`, `...\docker-compose.poc.yml`, `...\scratchpad\golden-baseline.json`.
+---
+
+## 부록 B: G3 사전검증 결과 (로컬 실측, Docling 배포 전)
+
+`scripts/g3-engine-scan.py`로 사이드카 pypdfium2 사전스캔 vs kordoc(pdfjs) needsOcr를 대조(베이스라인 OCR/timeout 16건).
+
+- **불일치 9/16**: pypdfium2가 kordoc OCR 문서 9건을 needsOcr로 미감지. **실제 텍스트 전수 확인 결과 깨짐=0, 깨끗한 한글**(K-OTC 시행세칙·의사국 의안·자금조달 법률안·보호한도 대통령령 등).
+- **결론: 발산은 전부 양성(benign)** — kordoc이 정상 디지털 PDF(자간 벌어진 의안표지 등)를 손상으로 **과잉 OCR 트리거**한 것. 이게 18~58s+타임아웃 7건의 느린 꼬리 정체.
+- 🎯 **Docling 이득 실증**: 발산 문서 중 `4.자금조달`·`3.보호한도`는 **신·구조문대비표(현행│개정)를 pypdfium2가 깨끗 추출** → Docling TableFormer로 구조화 시 amendPairs가 kordoc-OCR(비결정·0~23 산포)보다 **정확·결정적**. 주력 타깃 개선.
+- **일치 7/16**: 핀테크 가이드라인 등 진짜 스캔(pypdfium2 avg 28자) → 사이드카가 DGX VLM OCR(3단계).
+
+**설계 반영:**
+1. **성능**: Docling은 느린 꼬리(과잉 OCR)를 제거 → **개선**(회귀 아님).
+2. **G4 트랙분류 기준 정정**: kordoc usedOcr이 아니라 **Docling 실행의 usedOcr** 기준. 위 9건은 docling에선 디지털 트랙(엄격 회귀0 대상) — kordoc보다 amendPairs↑면 정밀도 향상으로 베이스라인 갱신.
+3. **`DOCLING_FALLBACK_ON_NEEDSOCR`**: 이들엔 불필요(pypdfium2 정상). 진짜 스캔·DGX 미도달 후퇴용으로만.
+4. **잔여 리스크**: pypdfium2 쓰레기-오추출 — 표본 7건 전부 깨끗(증거 없음). G4 전수 확인.
