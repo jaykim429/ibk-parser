@@ -131,6 +131,17 @@ export const config = {
   vlmRecoverEnabled: (env.VLM_RECOVER_ENABLED ?? "true") !== "false",
   vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 20), // 복구 페이지 상한(비용 제한)
 
+  // ── 과잉 OCR 가드: kordoc이 본문은 깨끗 추출하면서도 빈 표지/도표(0자) 페이지를 OCR 후보로 flag해 VLM OCR을
+  //    과트리거(낭비)하는 것을 차단. 실측(진단): 본문 garbled 0%, 빈 페이지만 후보. 진짜 스캔/손상 페이지는
+  //    전량 유지(무회귀 OR 트립와이어). 디지털·깨끗 판정 시 per-page ocrReason 으로 빈 표지(low_text)만 제외하고
+  //    손상사유(high_pua/control/replacement) 페이지는 유지(텍스트 복구 가치). 품질메트릭 기반 일반 판정 [[avoid-hardcoding-general-llm]].
+  ocrGuardEnabled: (env.OCR_GUARD_ENABLED ?? "true") !== "false", // 마스터 스위치(롤백)
+  ocrGuardScanLowTextFrac: num(env.OCR_GUARD_SCAN_LOWTEXT_FRAC, 0.7), // 저텍스트 페이지 비율 ≥ → 진짜 스캔(전량 유지)
+  ocrGuardScanCandFrac: num(env.OCR_GUARD_SCAN_CAND_FRAC, 0.5), // 후보 페이지 비율 ≥ → 진짜 스캔(전량 유지)
+  ocrGuardCleanPuaRatio: num(env.OCR_GUARD_CLEAN_PUA, 0.05), // 본문 PUA비율 ≥ → 글꼴손상(전량 유지)
+  ocrGuardCleanReplRatio: num(env.OCR_GUARD_CLEAN_REPL, 0.01), // 본문 치환문자비율 ≥ → 손상(전량 유지)
+  ocrGuardCleanCtrlRatio: num(env.OCR_GUARD_CLEAN_CTRL, 0.05), // 본문 제어문자비율 ≥ → 손상(전량 유지)
+
   // ── 캐시 (로직 변경 시 버전만 올리면 무효화) ──
   cacheVersion: env.REPORT_CACHE_VERSION || "v56",
   cacheMaxEntries: num(env.CACHE_MAX_ENTRIES, 50),

@@ -220,15 +220,52 @@ export async function parseDocument(
   const kordocNeedsOcr = !!qs?.needsOcr && !usedOcr;
   const recoveredBlocks: IRBlock[] = [];
   let recoveredOcr = false;
+  let ocrPagesCount = 0; // 가드 후 실제 OCR 대상 페이지 수(lowQuality 판정용 — 가드가 전량 제외 시 0)
   if (kordocNeedsOcr) {
     const cand = qs?.ocrCandidatePages ?? [];
+    // ── 과잉 OCR 가드: 진짜 스캔/글꼴손상은 전량 유지(무회귀), 디지털·깨끗이면 빈 표지(low_text)만 제외 ──
+    //    page-filter: 손상사유(high_*) 페이지는 OCR 유지(텍스트 복구 가치), 빈 표지/도표(low_text)만 제외(낭비 차단).
+    let ocrPages = cand;
+    if (config.ocrGuardEnabled && isPdf && qs && cand.length > 0) {
+      const totalPages = result.pageCount ?? 0;
+      const lenNoWs = markdown.replace(/\s+/g, "").length;
+      const docAvgCpp = totalPages > 0 ? lenNoWs / totalPages : Infinity; // 페이지당 본문 글자수
+      const candFrac = totalPages > 0 ? cand.length / totalPages : 1;
+      const lowTextFrac = totalPages > 0 ? (qs.lowTextPageCount ?? 0) / totalPages : 0;
+      const shortDoc = totalPages < 3; // 1~2p: 평균 신호 불안정 → 평균 미적용
+      // 게이트 D — 진짜 스캔(전량 OCR 유지). OR 3중 트립와이어: 하나만 맞아도 보호.
+      const isLikelyScan =
+        lowTextFrac >= config.ocrGuardScanLowTextFrac ||
+        candFrac >= config.ocrGuardScanCandFrac ||
+        (!shortDoc && docAvgCpp < config.ocrMinCharsPerPage);
+      // 본문 글꼴손상(진짜 손상 보호) — PUA/치환/제어문자 비율
+      const docCorrupt =
+        (qs.avgPuaRatio ?? 0) >= config.ocrGuardCleanPuaRatio ||
+        (qs.avgReplacementCharRatio ?? 0) >= config.ocrGuardCleanReplRatio ||
+        (qs.avgControlCharRatio ?? 0) >= config.ocrGuardCleanCtrlRatio;
+      if (isLikelyScan || docCorrupt) {
+        ocrPages = cand; // 스캔/손상 → 전량 유지(무회귀)
+      } else if (result.pageQuality && result.pageQuality.length > 0) {
+        // 디지털·깨끗 → 빈 표지/도표(low_text)만 제외, 손상사유(high_*)는 유지(텍스트 복구)
+        const byPage = new Map(result.pageQuality.map((p) => [p.page, p]));
+        ocrPages = cand.filter((pn) => {
+          const p = byPage.get(pn);
+          if (!p) return true; // per-page 메트릭 결손 → 유지(보수)
+          return p.ocrReason !== "low_text";
+        });
+        if (ocrPages.length < cand.length) {
+          console.log(`[PARSE] OCR 가드: ${filename} — 디지털·깨끗 판정, 빈 표지/도표 ${cand.length - ocrPages.length}p OCR 제외(${cand.length}→${ocrPages.length})`);
+        }
+      } // pageQuality 부재 → ocrPages=cand 유지(무회귀)
+    }
+    ocrPagesCount = ocrPages.length;
     const hangul = Math.round((qs?.avgHangulRatio ?? 0) * 100);
     // 에이전틱 복구: 손상 의심 페이지를 렌더→VLM OCR로 텍스트 복구(PDF·상한 내·활성화 시)
-    if (isPdf && config.vlmRecoverEnabled && recoverBuf && cand.length > 0 && cand.length <= config.vlmRecoverMaxPages) {
+    if (isPdf && config.vlmRecoverEnabled && recoverBuf && ocrPages.length > 0 && ocrPages.length <= config.vlmRecoverMaxPages) {
       try {
         const rec = await recoverLowQualityPages({
           buffer: recoverBuf,
-          pages: cand,
+          pages: ocrPages,
           ocr: ocr as unknown as OcrFn,
           maxPages: config.vlmRecoverMaxPages,
         });
@@ -250,8 +287,8 @@ export async function parseDocument(
         console.warn(`[PARSE] VLM 페이지 복구 실패: ${filename} — ${(e as Error).message}`);
       }
     }
-    if (!recoveredOcr) {
-      const msg = `텍스트 추출 품질 저하 — OCR 권장(품질 의심 ${cand.length}개 페이지, 한글 추출비율 ${hangul}%). 스캔본 또는 글꼴 매핑 손상 가능.`;
+    if (!recoveredOcr && ocrPages.length > 0) {
+      const msg = `텍스트 추출 품질 저하 — OCR 권장(품질 의심 ${ocrPages.length}개 페이지, 한글 추출비율 ${hangul}%). 스캔본 또는 글꼴 매핑 손상 가능.`;
       warnings.push(msg);
       console.warn(`[PARSE] 품질 신호: ${filename} — ${msg}`);
     }
@@ -281,7 +318,7 @@ export async function parseDocument(
     pageCount: result.pageCount,
     isImageBased: !!result.isImageBased,
     usedOcr: usedOcr || recoveredOcr,
-    lowQuality: q.lowQuality || (kordocNeedsOcr && !recoveredOcr),
+    lowQuality: q.lowQuality || (kordocNeedsOcr && ocrPagesCount > 0 && !recoveredOcr),
     blocks: normBlocks,
     outline: result.outline ?? [],
     title: pickTitle(result.metadata?.title, markdown, filename),
