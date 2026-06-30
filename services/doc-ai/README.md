@@ -68,3 +68,12 @@ POST /convert  (multipart file)            # law-core-ai 계약(평문) — 종�
 | `DOCAI_SCAN_MAX_CHARS_PER_PAGE` | 10 | 페이지당 이 미만 → 스캔/needsOcr 후보 |
 | `DOCAI_OCR_MIN_CHARS_PER_PAGE` | 80 | 이 미만 → lowQuality |
 | `DOCAI_DOCLING_DO_OCR` | false | ★ true 금지(CRAFT 라이선스). OCR은 DGX VLM |
+| `DOCAI_PDF_BACKEND` | default | `default`(docling-parse, **표 감지 우수**) \| `pypdfium2`(경량·비ASCII경로 안전). 프로덕션(Linux ASCII)은 default 권장 |
+
+## 검증 상태 (step A — 로컬 실가동, 2026-06-30)
+
+venv(Python 3.10, docling 2.107)로 사이드카를 실제 기동해 **코드 실가동 검증 완료**:
+
+- ✅ `/parse`·`/convert` 200, IRBlock 매핑(heading/paragraph/list)·title 추출·qualitySummary·표 dense-grid(ragged 0) 정상. `/convert`는 `{data:{text}}`(law-core-ai 계약) 동작.
+- 🐞 실가동이 잡은 실버그: **python-multipart 누락**(`/convert` 필수 → requirements 반영), docling-parse 글리프 리소스가 **비ASCII(한글) 경로**에서 실패 → `DOCAI_PDF_BACKEND=pypdfium2` 옵션 추가, requirements 한글주석 cp949(Windows 로컬 한정, `PYTHONUTF8=1`).
+- ⚠️ **미검증(프로덕션 G4 대상)**: **신구조문대비표(현행│개정)** 표 감지는 `default`(docling-parse) 백엔드 품질에 의존. 로컬은 한글경로 글리프 이슈로 `pypdfium2` 백엔드로 테스트했고, 이 백엔드는 신구조문대비표를 표가 아닌 텍스트로 추출함(amendPairs 이득 미확인). **Linux·ASCII·docling-parse 환경에서 G4 골든으로 확인 필요.**

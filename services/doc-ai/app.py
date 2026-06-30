@@ -43,6 +43,9 @@ class Settings(BaseSettings):
     docling_do_ocr: bool = False        # ★ EasyOCR/CRAFT(비상업 가중치) 배제 — OCR 은 DGX VLM 정본
     docling_table_structure: bool = True
     generate_picture_images: bool = True  # 이미지 복원용(restoredHtml)
+    # PDF 백엔드: "default"(docling-parse, C++ 글리프 리소스) | "pypdfium2"(순수 파이썬·경량).
+    #   비ASCII 경로(예: Windows 한글 경로)에서 docling-parse 글리프 로드 실패 시 pypdfium2 권장.
+    pdf_backend: str = "default"
 
     # ── 3단계 OCR(스캔/손상 페이지 → DGX VLM 직접). pdf-ocr-recover.ts + vlm-provider.ts 계약 재현 ──
     dgx_url: str = "http://172.23.80.102:8000"          # Node config.dgxSparkUrl 정합
@@ -83,7 +86,11 @@ def _build_converter() -> Any:
     opts.do_ocr = settings.docling_do_ocr           # False → 사이드카 Docling-OCR 미수행(라이선스). OCR 은 DGX VLM.
     opts.do_table_structure = settings.docling_table_structure
     opts.generate_picture_images = settings.generate_picture_images
-    return DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=opts)})
+    fmt_kwargs: dict[str, Any] = {"pipeline_options": opts}
+    if settings.pdf_backend == "pypdfium2":
+        from docling.backend.pypdfium2_backend import PyPdfiumDocumentBackend
+        fmt_kwargs["backend"] = PyPdfiumDocumentBackend
+    return DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(**fmt_kwargs)})
 
 
 @asynccontextmanager

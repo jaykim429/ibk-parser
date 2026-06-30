@@ -4,6 +4,7 @@ fastapi>=0.115.0
 uvicorn[standard]>=0.34.0
 pydantic>=2.10.0
 pydantic-settings>=2.7.0
+python-multipart>=0.0.9  # /convert 멀티파트 업로드(law-core-ai 계약)
 httpx>=0.27.0  # 3단계 OCR: DGX VLM(/v1/chat/completions) HTTP 호출
 
 # 문서-AI 엔진: Docling(코드 MIT / 가중치 ds4sd/docling-models = CDLA-Permissive-2.0 — 고지 동봉).
