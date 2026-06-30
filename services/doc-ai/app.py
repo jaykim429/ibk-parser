@@ -27,7 +27,7 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 import httpx
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -331,75 +331,95 @@ def _map_document(doc: Any) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]
     return blocks, outline
 
 
-@app.post("/parse")
-def parse(req: ParseReq) -> dict[str, Any]:
+def _run_parse(pdf_bytes: bytes, filename: str) -> dict[str, Any]:
+    """PDF → ParsedDoc dict (순수 파싱·OCR 흡수). 가드는 _guarded_parse. /parse·/convert 공용."""
+    scan = _page_text_scan(pdf_bytes)
+    warnings: list[str] = []
+
+    from docling.datamodel.base_models import DocumentStream
+
+    result = _converter.convert(DocumentStream(name=filename, stream=io.BytesIO(pdf_bytes)))
+    doc = result.document
+    markdown = doc.export_to_markdown() or ""
+    blocks, outline = _map_document(doc)
+
+    # ── 3단계: 스캔/손상 페이지 OCR 흡수(사이드카가 DGX VLM 직접) ──
+    needs_ocr = bool(scan["ocrCandidatePages"]) and not settings.docling_do_ocr
+    used_ocr = False
+    if needs_ocr and settings.dgx_url:
+        try:
+            recovered = _recover_pages(pdf_bytes, scan["ocrCandidatePages"])
+        except Exception as e:
+            recovered = {}
+            warnings.append(f"VLM OCR 복구 실패: {type(e).__name__}: {e}")
+        if recovered:
+            for p in sorted(recovered):
+                markdown += f"\n\n<!-- VLM 복구 페이지 {p} -->\n{recovered[p]}"
+                blocks.append({"type": "heading", "level": 3, "text": f"[복구 페이지 {p}]"})
+                for para in [s.strip() for s in re.split(r"\n{2,}", recovered[p]) if s.strip()]:
+                    blocks.append({"type": "paragraph", "text": para})
+            used_ocr = True
+            needs_ocr = False  # 복구 완료 → 신호 해소
+            warnings.append(
+                f"글꼴 손상/스캔 의심 {len(recovered)}개 페이지를 VLM OCR로 복구함(p.{', '.join(map(str, sorted(recovered)))})."
+            )
+
+    # lowQuality 재평가(설계 §1-c): OCR 복구 성공 시 해소(OCR-전 기준 잔존 방지)
+    low_quality = (bool(scan["isImageBased"]) or scan["avgCharsPerPage"] < settings.ocr_min_chars_per_page) and not used_ocr
+    if needs_ocr:
+        warnings.append(f"저텍스트/손상 페이지 {len(scan['ocrCandidatePages'])}개 — OCR 미복구(DGX 미도달 가능, 어댑터가 kordoc 폴백).")
+
+    title = None
+    try:
+        title = doc.name or None
+    except Exception:
+        title = None
+
+    return {
+        "markdown": markdown, "title": title, "blocks": blocks, "outline": outline,
+        "pageCount": scan["pageCount"], "isImageBased": scan["isImageBased"],
+        "usedOcr": used_ocr, "lowQuality": low_quality,
+        "qualitySummary": {
+            "needsOcr": needs_ocr,
+            "ocrCandidatePages": scan["ocrCandidatePages"],
+            "avgHangulRatio": round(scan["avgHangulRatio"], 4),
+        },
+        "warnings": warnings,
+    }
+
+
+def _guarded_parse(pdf_bytes: bytes, filename: str) -> dict[str, Any]:
+    """모델 준비·동시성 가드 + 폴백 계약(503/500). 포화/실패 시 throw → 클라가 kordoc 폴백."""
     if not _converter_ready:
         raise HTTPException(status_code=503, detail=f"model not ready: {_converter_err or 'loading'}")
-    if not _sema.acquire(blocking=False):  # 동시성 가드(설계 §9): 포화 시 503 → 어댑터가 kordoc 폴백
+    if not _sema.acquire(blocking=False):  # 동시성 가드(설계 §9): 포화 시 503
         raise HTTPException(status_code=503, detail="busy: max concurrency reached")
     try:
-        pdf_bytes = base64.b64decode(req.content_base64)
-        scan = _page_text_scan(pdf_bytes)
-        warnings: list[str] = []
-
-        from docling.datamodel.base_models import DocumentStream
-
-        result = _converter.convert(DocumentStream(name=req.filename, stream=io.BytesIO(pdf_bytes)))
-        doc = result.document
-        markdown = doc.export_to_markdown() or ""
-        blocks, outline = _map_document(doc)
-
-        # ── 3단계: 스캔/손상 페이지 OCR 흡수(사이드카가 DGX VLM 직접) ──
-        needs_ocr = bool(scan["ocrCandidatePages"]) and not settings.docling_do_ocr
-        used_ocr = False
-        if needs_ocr and settings.dgx_url:
-            try:
-                recovered = _recover_pages(pdf_bytes, scan["ocrCandidatePages"])
-            except Exception as e:
-                recovered = {}
-                warnings.append(f"VLM OCR 복구 실패: {type(e).__name__}: {e}")
-            if recovered:
-                for p in sorted(recovered):
-                    markdown += f"\n\n<!-- VLM 복구 페이지 {p} -->\n{recovered[p]}"
-                    blocks.append({"type": "heading", "level": 3, "text": f"[복구 페이지 {p}]"})
-                    for para in [s.strip() for s in re.split(r"\n{2,}", recovered[p]) if s.strip()]:
-                        blocks.append({"type": "paragraph", "text": para})
-                used_ocr = True
-                needs_ocr = False  # 복구 완료 → 신호 해소
-                warnings.append(
-                    f"글꼴 손상/스캔 의심 {len(recovered)}개 페이지를 VLM OCR로 복구함(p.{', '.join(map(str, sorted(recovered)))})."
-                )
-
-        # lowQuality 재평가(설계 §1-c): OCR 복구 성공 시 해소(OCR-전 기준 잔존 방지)
-        low_quality = (bool(scan["isImageBased"]) or scan["avgCharsPerPage"] < settings.ocr_min_chars_per_page) and not used_ocr
-        if needs_ocr:
-            warnings.append(f"저텍스트/손상 페이지 {len(scan['ocrCandidatePages'])}개 — OCR 미복구(DGX 미도달 가능, 어댑터가 kordoc 폴백).")
-
-        title = None
-        try:
-            title = doc.name or None
-        except Exception:
-            title = None
-
-        return {
-            "markdown": markdown,
-            "title": title,
-            "blocks": blocks,
-            "outline": outline,
-            "pageCount": scan["pageCount"],
-            "isImageBased": scan["isImageBased"],
-            "usedOcr": used_ocr,
-            "lowQuality": low_quality,
-            "qualitySummary": {
-                "needsOcr": needs_ocr,
-                "ocrCandidatePages": scan["ocrCandidatePages"],
-                "avgHangulRatio": round(scan["avgHangulRatio"], 4),
-            },
-            "warnings": warnings,
-        }
+        return _run_parse(pdf_bytes, filename)
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"docling parse 실패: {type(e).__name__}: {e}")
     finally:
         _sema.release()
+
+
+@app.post("/parse")
+def parse(req: ParseReq) -> dict[str, Any]:
+    """ibk-parser 계약(JSON base64 → 풍부한 ParsedDoc/IRBlock). lib/pdf-docling.ts 어댑터용."""
+    return _guarded_parse(base64.b64decode(req.content_base64), req.filename)
+
+
+@app.post("/convert")
+async def convert(file: UploadFile = File(...)) -> dict[str, Any]:
+    """law-core-ai 계약(multipart file → {data:{text}}) — 종국 통합용.
+    law-core-ai 가 converter_url=http://doc-ai:8900, use_local=False 로 연결하면 PyPDF2 대신 Docling 텍스트 사용
+    (G3에서 본 과잉OCR/복잡표 문서도 깨끗). PDF 외엔 415 → law-core-ai 가 local(_convert_local) 폴백.
+    구조(blocks)는 ibk-parser 전용 /parse 로, law-core-ai 는 평문 text 만 소비 → 단일 Docling 서비스로 변환 dedup."""
+    name = file.filename or "upload.pdf"
+    ext = name.lower().rsplit(".", 1)[-1] if "." in name else ""
+    if ext != "pdf":
+        raise HTTPException(status_code=415, detail="doc-ai /convert: PDF 전용(비PDF는 law-core-ai local 변환)")
+    content = await file.read()
+    r = _guarded_parse(content, name)
+    return {"data": {"text": r["markdown"]}}

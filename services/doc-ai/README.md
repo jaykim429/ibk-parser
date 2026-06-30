@@ -11,13 +11,26 @@ PDF를 **Docling**(파이썬 문서-AI)으로 파싱해 IBK 앱 계약(`ParsedDo
 `law-core-ai`가 **FastAPI · Python 3.11-slim · uv · pydantic v2**를 쓰므로, 이 사이드카도 **동일 컨벤션**으로
 지어 나중에 `law-core-ai`로 드롭-인 흡수 가능하게 한다. (현재 `law-core-ai`의 PDF는 PyPDF2(기본)뿐 — Docling 미사용.)
 
+### compliance 흡수 경로 (단일 변환 서비스)
+
+law-core-ai의 `DocumentConverter`(`src/services/conversion.py`)는 평문 text만 반환(`convert→str`)하고,
+**`_convert_remote`(POST `{converter_url}/convert`, multipart → `{data:{text}}`) + 실패 시 local 폴백**을 이미 보유.
+→ **doc-ai가 두 계약을 동시 서빙**해 단일 Docling 서비스로 변환을 통합한다:
+
+- `/parse`(JSON base64 → 풍부한 IRBlock) = **ibk-parser**(블록 소비: amendment-table·manual-chunk·render-blocks)
+- `/convert`(multipart → `{data:{text}}`) = **law-core-ai**(평문 소비). law-core-ai 설정: `converter_url=http://doc-ai:8900`, `use_local=False`.
+
+효과: law-core-ai가 PyPDF2 대신 **Docling 텍스트**(복잡표·과잉OCR 문서 품질↑), ibk-parser는 **구조 그대로**, PyPDF2는 폴백으로 격하. 변환 dedup·완전통합 정합. (law-core-ai 측은 비PDF를 local로, PDF만 remote로 라우팅하면 최적 — 그건 compliance repo 작업.)
+
 ## 계약 (HTTP)
 
 ```
-GET  /health → 200 {"status":"ok"}        # 모델 프리로드 완료 후에만 ok(로딩/실패 시 503)
-POST /parse  { filename, content_base64 }
+GET  /health → 200 {"status":"ok"}         # 모델 프리로드 완료 후에만 ok(로딩/실패 시 503)
+POST /parse  { filename, content_base64 }  # ibk-parser 계약(풍부한 blocks) — lib/pdf-docling.ts
   200 { markdown, title?, blocks[], outline[], pageCount, isImageBased, usedOcr,
         lowQuality, qualitySummary{needsOcr, ocrCandidatePages, avgHangulRatio}, warnings[] }
+POST /convert  (multipart file)            # law-core-ai 계약(평문) — 종국 통합용
+  200 { data: { text } }                   # Docling 텍스트. PDF 외 415 → law-core-ai local 폴백
 ```
 
 - `blocks`: kordoc **IRBlock 호환**. `image`는 `imageData.dataBase64`(base64)로 전송 → 어댑터가 `Uint8Array`로 디코드.
