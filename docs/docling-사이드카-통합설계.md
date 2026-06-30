@@ -1,5 +1,10 @@
 # 순수 Python doc-AI 사이드카(Docling) 통합 — 최종 설계 (ADR)
 
+> ⚠️ **갱신(2026-06-30)**: law-core-ai 와의 compliance-ibk 통합에서는 doc-ai(Docling)가 한글 신구조문대비표를
+> 표로 인식하지 못해(아래 한계) **kordoc(`/api/convert`)로 대체**되었다. doc-ai 는 `profiles:["docling"]`
+> **opt-in 폴백으로 강등**(기본 미기동). 통합 본설계·E2E 검증은 **[compliance-통합-kordoc.md](compliance-통합-kordoc.md)** 참조.
+> 본 문서는 doc-ai 사이드카 자체(ibk-poc 의 docling PDF 경로)의 설계 기록으로 유효하다.
+>
 > 대상: `lib/parse-document.ts` · `lib/pdf-docling.ts`(신규) · `services/doc-ai`(신규)
 > 원칙: 근본·최소수정 / 외부화 / 무중단(kordoc·`PDF_PARSER` 폴백 유지) / 과한 모듈·언어 이전 지양 / 폐쇄망
 > 산출 근거: 7개 서브시스템 심층분석 + 3개 적대적 비판 검토(다운스트림 계약·성능·배포/라이선스) + 코드 직접 재확인
