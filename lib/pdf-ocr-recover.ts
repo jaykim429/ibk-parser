@@ -9,6 +9,7 @@
  * - 렌더: pdfjs-dist + @napi-rs/canvas(프리빌트, 폐쇄망 친화). VLM 호출: kordoc createVlmOcrProvider 재사용.
  * - 라이브러리/모델 변경 시 이 파일만 손대면 됨(파이프라인 다른 부분 불변).
  */
+import { config } from "./config";
 
 // kordoc OcrProvider 시그니처: (pageImage, pageNumber, mimeType) => Promise<markdown>
 export type OcrFn = (pageImage: Uint8Array, pageNumber: number, mimeType: "image/png") => Promise<string>;
@@ -128,22 +129,34 @@ export async function recoverLowQualityPages(args: {
   const target = Array.from(new Set(args.pages)).slice(0, args.maxPages);
   if (target.length === 0) return [];
   const pngs = await renderPdfPagesToPng(args.buffer, target);
+  const pages = target.filter((p) => pngs.has(p));
   const out: RecoveredPage[] = [];
-  for (const page of target) {
-    const png = pngs.get(page);
-    if (!png) continue;
-    // VLM이 간헐적으로 빈 응답을 주므로 최대 2회 시도(빈응답 재시도)
-    for (let attempt = 0; attempt < 2; attempt++) {
-      try {
-        const text = await args.ocr(png, page, "image/png");
-        if (text && text.trim()) {
-          out.push({ page, text: text.trim() });
-          break;
+
+  // 페이지별 VLM OCR을 동시성 캡 내 병렬 처리 — 순차 대비 다페이지 문서 지연을 ~Nx 단축(슬로우테일·타임아웃 완화).
+  //  렌더는 위에서 일괄(pdfjs 워커 단일 → 순차 유지), 느린 건 VLM 네트워크 호출이라 그 부분만 병렬화.
+  //  페이지 순서는 마지막에 정렬로 결정적 유지(복구 markdown 병합 순서 안정). JS 단일스레드라 out.push 경합 없음.
+  async function worker(): Promise<void> {
+    while (true) {
+      const page = pages.shift();
+      if (page === undefined) break;
+      const png = pngs.get(page);
+      if (!png) continue;
+      // VLM이 간헐적으로 빈 응답을 주므로 최대 2회 시도(빈응답 재시도)
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const text = await args.ocr(png, page, "image/png");
+          if (text && text.trim()) {
+            out.push({ page, text: text.trim() });
+            break;
+          }
+        } catch {
+          /* 호출 실패 → 재시도 */
         }
-      } catch {
-        /* 호출 실패 → 재시도 */
       }
     }
   }
+  const conc = Math.max(1, config.vlmOcrConcurrency);
+  await Promise.all(Array.from({ length: Math.min(conc, pages.length) }, () => worker()));
+  out.sort((a, b) => a.page - b.page); // 결정적 페이지 순서
   return out;
 }

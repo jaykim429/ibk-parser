@@ -133,6 +133,10 @@ export const config = {
   //    글꼴(ToUnicode) 손상으로 텍스트층은 있으나 추출이 깨진 페이지를 렌더→VLM으로 복구.
   vlmRecoverEnabled: (env.VLM_RECOVER_ENABLED ?? "true") !== "false",
   vlmRecoverMaxPages: num(env.VLM_RECOVER_MAX_PAGES, 20), // 복구 페이지 상한(비용 제한)
+  // 페이지별 VLM OCR 동시 호출 상한. ⚠️ 기본 1(순차) — 실측상 현 DGX(단일 Gemma 모델)는 throughput 병목이라
+  //  동시 호출이 서버에서 경합/직렬화돼 conc=4는 오히려 총시간 악화(390→507s)·신규 타임아웃 유발했다.
+  //  진짜 OCR 이득은 과잉OCR 가드(호출 수 감축)이고, 이 노브는 '연속배칭 지원 VLM(vLLM 등)'로 교체 시에만 올린다.
+  vlmOcrConcurrency: num(env.VLM_OCR_CONCURRENCY, 1),
 
   // ── 과잉 OCR 가드: kordoc이 본문은 깨끗 추출하면서도 빈 표지/도표(0자) 페이지를 OCR 후보로 flag해 VLM OCR을
   //    과트리거(낭비)하는 것을 차단. 실측(진단): 본문 garbled 0%, 빈 페이지만 후보. 진짜 스캔/손상 페이지는
